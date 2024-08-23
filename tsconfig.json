@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ES2016",
+        "allowJs": true,
+        "checkJs": true,
+        "strict": true,
+        "outDir": "./dist",
+        "moduleResolution": "NodeNext",
+        "esModuleInterop": true,
+        "module": "NodeNext",
+        "types": ["vite/client"]
+    },
+
+    "exclude": [
+        "./dist/*",
+        "./public/build/**/*"
+    ],
+}
