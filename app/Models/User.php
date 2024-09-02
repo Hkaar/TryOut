@@ -19,8 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role_id',
+        'group_id',
+        'img',
     ];
 
     /**
@@ -34,6 +38,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['role'];
+
+    /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
@@ -42,4 +53,40 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Define relationship with roles
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    /**
+     * Define relationshipp with groups
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'user_groups');
+    }
+
+    /**
+     * Define relationship with exam results
+     */
+    public function exam_results()
+    {
+        return $this->hasMany(ExamResult::class, 'user_id', 'id');
+    }
+
+    /**
+     * Checks the level of permission a user has
+     */
+    public function checkPermission(string|array $name)
+    {
+        if (is_string($name)) {
+            return $this->role->name === $name;
+        }
+
+        return in_array($this->role->name, $name);
+    }
 }

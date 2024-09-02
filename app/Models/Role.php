@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class Role extends Model
 {
     use HasFactory;
 
@@ -19,10 +19,10 @@ class Subject extends Model
     ];
 
     /**
-     * Define relationship with packets
+     * Define relationship with users
      */
-    public function packets()
+    public function users()
     {
-        return $this->hasMany(Packet::class, 'subject_id', 'id');
+        return $this->hasMany(User::class, 'role_id', 'id');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class QuestionChoice extends Model
 {
     use HasFactory;
 
@@ -15,14 +15,16 @@ class Subject extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'question_id',
+        'content',
+        'correct',
     ];
 
     /**
-     * Define relationship with packets
+     * Define relationships with questions
      */
-    public function packets()
+    public function question()
     {
-        return $this->hasMany(Packet::class, 'subject_id', 'id');
+        return $this->belongsTo(Question::class, 'question_id', 'id');
     }
 }
