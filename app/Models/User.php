@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,7 +25,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'group_id',
         'img',
     ];
 
@@ -35,6 +36,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+     /**
+     * The default attributes for the model.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'role_id' => 1,
     ];
 
     /**
@@ -73,7 +83,7 @@ class User extends Authenticatable
     /**
      * Define relationship with exam results
      */
-    public function exam_results()
+    public function examResults()
     {
         return $this->hasMany(ExamResult::class, 'user_id', 'id');
     }
@@ -81,12 +91,29 @@ class User extends Authenticatable
     /**
      * Checks the level of permission a user has
      */
-    public function checkPermission(string|array $name)
+    public function checkRole(string|array $names)
     {
-        if (is_string($name)) {
-            return $this->role->name === $name;
+        if (is_string($names)) {
+            return $this->role->name === $names;
         }
 
-        return in_array($this->role->name, $name);
+        return in_array($this->role->name, $names);
+    }
+
+    /**
+     * Scope a query by a specific group name
+     */
+    public function scopeStrictByGroupName(Builder $query, string $name)
+    {
+        return $query->whereHas('groups', function (Builder $groupQuery) use ($name) {
+            $groupQuery->where('name', '=', $name);
+        });
+    }
+
+    public function scopeStrictByRole(Builder $query, string $role)
+    {
+        return $query->whereHas('role', function (Builder $roleQuery) use ($role) {
+            $roleQuery->where('name', '=', $role);
+        });
     }
 }

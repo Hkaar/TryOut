@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +25,13 @@ class Status extends Model
     public function results()
     {
         return $this->hasMany(QuestionResult::class, 'status_id', 'id');
+    }
+
+    /**
+     * Scope a query strictly by the given name
+     */
+    public function scopeStrictByName(Builder $query, string $name)
+    {
+        return $query->where('name', '=', $name);
     }
 }

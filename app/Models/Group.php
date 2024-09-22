@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,5 +41,13 @@ class Group extends Model
     public function exams()
     {
         return $this->hasMany(Exam::class, 'group_id', 'id');
+    }
+
+    /**
+     * Scope a query strictly by the given name
+     */
+    public function scopeStrictByName(Builder $query, string $name)
+    {
+        return $query->where('name', '=', $name);
     }
 }
