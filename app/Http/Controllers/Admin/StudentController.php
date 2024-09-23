@@ -2,26 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Traits\Modelor;
-use App\Traits\Uploader;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
-class UserController extends Controller
+class StudentController extends Controller
 {
-    use Uploader, Modelor;
-
+    use Modelor;
+     
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::paginate(20);
+        $students = User::StrictByRole('student')->paginate(20);
 
-        return view('admin.users.index', [
-            'users' => $users,
+        return view('admin.students.index', [
+            'students' => $students,
         ]);
     }
 
@@ -30,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.students.create');
     }
 
     /**
@@ -44,21 +43,23 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required|string|min:8',
-            'role_id' => 'required|numeric|exists:roles,id',
             'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        $user = new User;
-        $user->fill($validated);
+        $student = new User;
+        $student->fill($validated);
+
+        $role = Role::StrictByName('student')->first()->id;
+        $student->role_id = $role;
 
         if ($request->has('img')) {
            $filePath = $this->uploadImage($request->get('img'));
-           $user->img = $filePath;
+           $student->img = $filePath;
         }
 
-        $user->save();
+        $student->save();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.students.index');
     }
 
     /**
@@ -66,10 +67,10 @@ class UserController extends Controller
      */
     public function show(int $id)
     {
-        $user = User::findOrFail($id);
+        $student = User::findOrFail($id);
 
-        return view('admin.users.show', [
-            'user' => $user,
+        return view('admin.students.show', [
+            'student' => $student,
         ]);
     }
 
@@ -78,10 +79,10 @@ class UserController extends Controller
      */
     public function edit(int $id)
     {
-        $user = User::findOrFail($id);
+        $student = User::findOrFail($id);
 
-        return view('admin.users.edit', [
-            'user' => $user,
+        return view('admin.students.edit', [
+            'student' => $student,
         ]);
     }
 
@@ -90,7 +91,7 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $user = User::findOrFail($id);
+        $student = User::findOrFail($id);
 
         $validated = $request->validate([
             'username' => 'nullable|string|max:255|unique:users,username',
@@ -98,24 +99,19 @@ class UserController extends Controller
             'email' => 'nullable|string|email|max:255|unique:users',
             'password' => 'nullable|string|min:8|confirmed',
             'password_confirmation' => 'nullable|string|min:8',
-            'role_id' => 'required|numeric|exists:roles,id',
             'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        $this->updateModel($user, $validated, ['img']);
+        $this->updateModel($student, $validated, ['img']);
 
         if ($request->has('img')) {
-            if ($user->img) {
-                Storage::disk('public')->delete($user->img);
-            }
-
-            $filePath = $this->uploadImage($request->get('img'));
-            $user->img = $filePath;
+           $filePath = $this->uploadImage($request->get('img'));
+           $student->img = $filePath;
         }
 
-        $user->save();
+        $student->save();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.students.index');
     }
 
     /**
@@ -123,12 +119,12 @@ class UserController extends Controller
      */
     public function destroy(int $id)
     {
-        $user = User::findOrFail($id);
+        $student = User::findOrFail($id);
 
-        $user->groups()->detach();
-        $user->examResults()->delete();
+        $student->examResults()->delete();
+        $student->groups()->detach();
 
-        $user->delete();
+        $student->delete();
 
         return response(null);
     }
