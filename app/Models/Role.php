@@ -21,6 +21,8 @@ class Role extends Model
 
     /**
      * Define relationship with users
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<User>
      */
     public function users()
     {
@@ -29,6 +31,9 @@ class Role extends Model
 
     /**
      * Scope a query strictly by the given name
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder<Role> $query
+     * @return \Illuminate\Database\Eloquent\Builder<Role>
      */
     public function scopeStrictByName(Builder $query, string $name)
     {

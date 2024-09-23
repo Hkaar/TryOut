@@ -12,6 +12,8 @@ class SettingsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @return void
      */
     public function edit(string $id)
     {
@@ -20,6 +22,8 @@ class SettingsController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @return void
      */
     public function update(Request $request, string $id)
     {

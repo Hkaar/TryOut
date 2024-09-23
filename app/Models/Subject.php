@@ -21,6 +21,8 @@ class Subject extends Model
 
     /**
      * Define relationship with packets
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Packet>
      */
     public function packets()
     {
@@ -29,6 +31,9 @@ class Subject extends Model
 
     /**
      * Scope a query strictly by the given name
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder<Subject> $query
+     * @return \Illuminate\Database\Eloquent\Builder<Subject>
      */
     public function scopeStrictByName(Builder $query, string $name)
     {

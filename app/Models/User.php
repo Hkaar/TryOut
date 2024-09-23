@@ -41,7 +41,7 @@ class User extends Authenticatable
      /**
      * The default attributes for the model.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $attributes = [
         'role_id' => 1,
@@ -50,7 +50,7 @@ class User extends Authenticatable
     /**
      * The relationships that should always be loaded.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $with = ['role'];
 
@@ -66,6 +66,8 @@ class User extends Authenticatable
 
     /**
      * Define relationship with roles
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Role, User>
      */
     public function role()
     {
@@ -74,6 +76,8 @@ class User extends Authenticatable
 
     /**
      * Define relationshipp with groups
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Group>
      */
     public function groups()
     {
@@ -82,6 +86,8 @@ class User extends Authenticatable
 
     /**
      * Define relationship with exam results
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<ExamResult>
      */
     public function examResults()
     {
@@ -90,8 +96,10 @@ class User extends Authenticatable
 
     /**
      * Checks the level of permission a user has
+     * 
+     * @param string|array<string> $names
      */
-    public function checkRole(string|array $names)
+    public function checkRole(string|array $names): bool
     {
         if (is_string($names)) {
             return $this->role->name === $names;
@@ -102,6 +110,9 @@ class User extends Authenticatable
 
     /**
      * Scope a query by a specific group name
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder<User> $query
+     * @return \Illuminate\Database\Eloquent\Builder<User>
      */
     public function scopeStrictByGroupName(Builder $query, string $name)
     {
@@ -110,6 +121,12 @@ class User extends Authenticatable
         });
     }
 
+    /**
+     * Scope a query by a user's role
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder<User> $query
+     * @return \Illuminate\Database\Eloquent\Builder<User>
+     */
     public function scopeStrictByRole(Builder $query, string $role)
     {
         return $query->whereHas('role', function (Builder $roleQuery) use ($role) {
