@@ -6,8 +6,8 @@
   $title = 'soal';
 
   $columns = [
-    ['width' => 5, 'name' => 'ID'], 
-    'Nama Paket Soal', 
+    ['width' => 5, 'name' => 'ID'],
+    'Nama Paket Soal',
     'Jenis Soal',
     'Mata Pelajaran',
     ['width' => 18, 'name' => 'Actions']

@@ -21,7 +21,7 @@ class QuestionType extends Model
 
     /**
      * Define relationship with question types
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Question>
      */
     public function questions()
@@ -31,8 +31,8 @@ class QuestionType extends Model
 
     /**
      * Scope a query strictly by the given name
-     * 
-     * @param \Illuminate\Database\Eloquent\Builder<QuestionType> $query
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<QuestionType>  $query
      * @return \Illuminate\Database\Eloquent\Builder<QuestionType>
      */
     public function scopeStrictByName(Builder $query, string $name)

@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    use Uploader, Modelor;
+    use Modelor, Uploader;
 
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
@@ -29,7 +29,7 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
@@ -39,7 +39,7 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -58,8 +58,8 @@ class UserController extends Controller
         $user->fill($validated);
 
         if ($request->has('img')) {
-           $filePath = $this->uploadImage($request->get('img'));
-           $user->img = $filePath;
+            $filePath = $this->uploadImage($request->get('img'));
+            $user->img = $filePath;
         }
 
         $user->save();
@@ -69,7 +69,7 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(int $id)
@@ -83,7 +83,7 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(int $id)
@@ -97,7 +97,7 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, int $id)
@@ -132,7 +132,7 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function destroy(int $id)

@@ -21,7 +21,7 @@ class Group extends Model
 
     /**
      * Define relationship with users
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<User>
      */
     public function users()
@@ -31,7 +31,7 @@ class Group extends Model
 
     /**
      * Define relationship with packets
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Packet>
      */
     public function packets()
@@ -41,7 +41,7 @@ class Group extends Model
 
     /**
      * Define relationship with exams
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Exam>
      */
     public function exams()
@@ -51,8 +51,8 @@ class Group extends Model
 
     /**
      * Scope a query strictly by the given name
-     * 
-     * @param \Illuminate\Database\Eloquent\Builder<Group> $query
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<Group>  $query
      * @return \Illuminate\Database\Eloquent\Builder<Group>
      */
     public function scopeStrictByName(Builder $query, string $name)

@@ -26,7 +26,7 @@ class Exam extends Model
 
     /**
      * Define relationship with packets
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Packet, Exam>
      */
     public function packet()
@@ -36,7 +36,7 @@ class Exam extends Model
 
     /**
      * Define relationship with groups
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Group, Exam>
      */
     public function group()
@@ -46,7 +46,7 @@ class Exam extends Model
 
     /**
      * Define relationship with exam results
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<ExamResult>
      */
     public function examResults()

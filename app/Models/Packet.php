@@ -31,7 +31,7 @@ class Packet extends Model
 
     /**
      * Define relationship with groups
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Group, Packet>
      */
     public function group()
@@ -41,7 +41,7 @@ class Packet extends Model
 
     /**
      * Define relationship with subjects
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Subject, Packet>
      */
     public function subject()
@@ -51,7 +51,7 @@ class Packet extends Model
 
     /**
      * Define relationship with exams
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Exam>
      */
     public function exams()
@@ -61,7 +61,7 @@ class Packet extends Model
 
     /**
      * Define relationship with questions
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Question>
      */
     public function questions()

@@ -24,7 +24,7 @@ class ExamResult extends Model
 
     /**
      * Define relationship with exams
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Exam, ExamResult>
      */
     public function exam()
@@ -34,7 +34,7 @@ class ExamResult extends Model
 
     /**
      * Define relationship with users
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, ExamResult>
      */
     public function user()
@@ -44,7 +44,7 @@ class ExamResult extends Model
 
     /**
      * Define relationship with question results
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<QuestionResult>
      */
     public function questionResults()

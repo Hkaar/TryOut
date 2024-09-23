@@ -4,6 +4,6 @@
 
 @section('content')
   <x-dashboard-layout active="daftar ujian" :enableAdmin=false>
-    
+
   </x-dashboard-layout>
 @endsection

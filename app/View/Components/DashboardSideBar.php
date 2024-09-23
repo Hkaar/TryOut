@@ -12,7 +12,7 @@ class DashboardSideBar extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $active = "",
+        public string $active = '',
         public bool $enableAdmin = true,
     ) {}
 
@@ -22,7 +22,7 @@ class DashboardSideBar extends Component
     public function render(): View|Closure|string
     {
         return view('components.dashboard-side-bar', [
-            "active" => $this->active,
+            'active' => $this->active,
             'enableAdmin' => $this->enableAdmin,
         ]);
     }

@@ -6,8 +6,8 @@
   $title = 'group';
 
   $columns = [
-    ['width' => 5, 'name' => 'ID'], 
-    'Nama', 
+    ['width' => 5, 'name' => 'ID'],
+    'Nama',
     ['width' => 18, 'name' => 'Actions']
   ];
 

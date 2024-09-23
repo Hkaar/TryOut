@@ -6,8 +6,8 @@
   $title = 'paket soal';
 
   $columns = [
-    ['width' => 5, 'name' => 'ID'], 
-    'Nama', 
+    ['width' => 5, 'name' => 'ID'],
+    'Nama',
     'Kode',
     'Mata Pelajaran',
     ['width' => 18, 'name' => 'Actions']

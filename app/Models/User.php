@@ -38,7 +38,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-     /**
+    /**
      * The default attributes for the model.
      *
      * @var array<string, mixed>
@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     /**
      * Define relationship with roles
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Role, User>
      */
     public function role()
@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     /**
      * Define relationshipp with groups
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Group>
      */
     public function groups()
@@ -86,7 +86,7 @@ class User extends Authenticatable
 
     /**
      * Define relationship with exam results
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<ExamResult>
      */
     public function examResults()
@@ -96,8 +96,8 @@ class User extends Authenticatable
 
     /**
      * Checks the level of permission a user has
-     * 
-     * @param string|array<string> $names
+     *
+     * @param  string|array<string>  $names
      */
     public function checkRole(string|array $names): bool
     {
@@ -110,8 +110,8 @@ class User extends Authenticatable
 
     /**
      * Scope a query by a specific group name
-     * 
-     * @param \Illuminate\Database\Eloquent\Builder<User> $query
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<User>  $query
      * @return \Illuminate\Database\Eloquent\Builder<User>
      */
     public function scopeStrictByGroupName(Builder $query, string $name)
@@ -123,8 +123,8 @@ class User extends Authenticatable
 
     /**
      * Scope a query by a user's role
-     * 
-     * @param \Illuminate\Database\Eloquent\Builder<User> $query
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<User>  $query
      * @return \Illuminate\Database\Eloquent\Builder<User>
      */
     public function scopeStrictByRole(Builder $query, string $role)

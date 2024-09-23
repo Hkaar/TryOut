@@ -23,7 +23,7 @@ class QuestionResult extends Model
 
     /**
      * Define relationship with questions
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Question, QuestionResult>
      */
     public function question()
@@ -33,7 +33,7 @@ class QuestionResult extends Model
 
     /**
      * Define relationship with statuses
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Status, QuestionResult>
      */
     public function status()
@@ -43,7 +43,7 @@ class QuestionResult extends Model
 
     /**
      * Define relationship with exam results
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ExamResult, QuestionResult>
      */
     public function examResult()

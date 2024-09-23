@@ -23,7 +23,7 @@ class Question extends Model
 
     /**
      * Define relationship with packets
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Packet, Question>
      */
     public function packet()
@@ -33,7 +33,7 @@ class Question extends Model
 
     /**
      * Define relationship with question type
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<QuestionType, Question>
      */
     public function type()
@@ -43,7 +43,7 @@ class Question extends Model
 
     /**
      * Define relationship with question choices
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<QuestionChoice>
      */
     public function choices()
@@ -53,7 +53,7 @@ class Question extends Model
 
     /**
      * Define relationship with question results
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<QuestionResult>
      */
     public function results()

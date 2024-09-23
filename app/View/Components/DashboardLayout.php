@@ -21,7 +21,7 @@ class DashboardLayout extends Component
     public function render(): View|Closure|string
     {
         return view('components.dashboard-layout', [
-            "active" => $this->active,
+            'active' => $this->active,
         ]);
     }
 }

@@ -10,9 +10,9 @@ class DataTable extends Component
 {
     /**
      * Create a new component instance.
-     * 
-     * @param array<string> $columns
-     * @param array<string, string> $routes
+     *
+     * @param  array<string>  $columns
+     * @param  array<string, string>  $routes
      */
     public function __construct(
         public array $columns,

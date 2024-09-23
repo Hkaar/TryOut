@@ -13,7 +13,7 @@ class ExamHistoryController extends Controller
 
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
@@ -27,13 +27,13 @@ class ExamHistoryController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(int $id)
     {
         $result = ExamResult::findOrFail($id);
-        
+
         return view('admin.exam-results.show', [
             'result' => $result,
         ]);
@@ -41,13 +41,13 @@ class ExamHistoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(int $id)
     {
         $result = ExamResult::findOrFail($id);
-        
+
         return view('admin.exam-results.edit', [
             'result' => $result,
         ]);
@@ -55,7 +55,7 @@ class ExamHistoryController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, int $id)
@@ -77,7 +77,7 @@ class ExamHistoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function destroy(int $id)

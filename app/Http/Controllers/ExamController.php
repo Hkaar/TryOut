@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
-use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
@@ -23,7 +22,7 @@ class ExamController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(int $id)

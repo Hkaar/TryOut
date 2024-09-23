@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\User;
 use App\Traits\Modelor;
 use App\Traits\Uploader;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    use Uploader, Modelor;
-     
+    use Modelor, Uploader;
+
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
@@ -29,7 +29,7 @@ class StudentController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
@@ -39,7 +39,7 @@ class StudentController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -60,8 +60,8 @@ class StudentController extends Controller
         $student->role_id = $role;
 
         if ($request->has('img')) {
-           $filePath = $this->uploadImage($request->get('img'));
-           $student->img = $filePath;
+            $filePath = $this->uploadImage($request->get('img'));
+            $student->img = $filePath;
         }
 
         $student->save();
@@ -71,7 +71,7 @@ class StudentController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(int $id)
@@ -85,7 +85,7 @@ class StudentController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(int $id)
@@ -99,7 +99,7 @@ class StudentController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, int $id)
@@ -118,8 +118,8 @@ class StudentController extends Controller
         $this->updateModel($student, $validated, ['img']);
 
         if ($request->has('img')) {
-           $filePath = $this->uploadImage($request->get('img'));
-           $student->img = $filePath;
+            $filePath = $this->uploadImage($request->get('img'));
+            $student->img = $filePath;
         }
 
         $student->save();
@@ -129,7 +129,7 @@ class StudentController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function destroy(int $id)

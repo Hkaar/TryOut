@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     /**
      * Show the admin home page
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
