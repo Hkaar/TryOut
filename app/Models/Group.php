@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,8 @@ class Group extends Model
 
     /**
      * Define relationship with users
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<User>
      */
     public function users()
     {
@@ -28,6 +31,8 @@ class Group extends Model
 
     /**
      * Define relationship with packets
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Packet>
      */
     public function packets()
     {
@@ -36,9 +41,22 @@ class Group extends Model
 
     /**
      * Define relationship with exams
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Exam>
      */
     public function exams()
     {
         return $this->hasMany(Exam::class, 'group_id', 'id');
+    }
+
+    /**
+     * Scope a query strictly by the given name
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<Group>  $query
+     * @return \Illuminate\Database\Eloquent\Builder<Group>
+     */
+    public function scopeStrictByName(Builder $query, string $name)
+    {
+        return $query->where('name', '=', $name);
     }
 }

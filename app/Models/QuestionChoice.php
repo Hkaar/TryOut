@@ -22,6 +22,8 @@ class QuestionChoice extends Model
 
     /**
      * Define relationships with questions
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Question, QuestionChoice>
      */
     public function question()
     {
