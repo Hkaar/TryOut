@@ -31,6 +31,26 @@
     font-variation-settings: 'wght' 700;
   }
 
+  .font-xl {
+    font-size: 20px !important;
+  }
+
+  .font-2xl {
+    font-size: 24px !important;
+  }
+
+  .font-3xl {
+    font-size: 30px !important;
+  }
+
+  .font-4xl {
+    font-size: 36px !important;
+  }
+
+  .font-5xl {
+    font-size: 48px !important;
+  }
+
   .background-cover {
     background-size: cover;
   }
@@ -42,7 +62,7 @@
 
 @layer components {
   .btn {
-    @apply p-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent hover:scale-105 active:scale-95 active:opacity-60;
+    @apply p-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent active:scale-95 active:opacity-60;
   }
 
   .form-control {
