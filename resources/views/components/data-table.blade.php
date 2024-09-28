@@ -2,14 +2,20 @@
   <div class="-m-1.5 overflow-x-auto">
     <div class="p-1.5 min-w-full inline-block align-middle space-y-4">
       <div class="flex items-center justify-between">
-        <a href="{{ isset($routes['create']) ? $routes['create'] : '#' }}" class="btn bg-success text-white duration-200 ease-in-out transition-transform">
-          <i class="material-symbols-outlined font-var-light">add</i>
+        @if (isset($routes['create']))
+          <a href="{{ $routes['create'] }}" class="btn bg-success text-white duration-200 ease-in-out transition-transform">
+            <i class="material-symbols-outlined font-var-light">add</i>
 
-          Tambahkan {{ $title }}
-        </a>
+            Tambahkan {{ $title }}
+          </a>
+        @else
+          <span class="font-semibold text-xl">
+            {{ ucwords($title) }}
+          </span>
+        @endif
 
         @if ($filters->hasActualContent())
-          <x-filter-container>
+          <x-filter-container class="ms-auto">
             {{ $filters }}
           </x-filter-container>
         @endif
@@ -39,7 +45,9 @@
               {{ $slot }}
             @else
               <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
-                No data available to display
+                <div class="flex items-center gap-2">
+                  Tidak ada data yang tersedia ...
+                </div>
               </td>
             @endif
           </tbody>
