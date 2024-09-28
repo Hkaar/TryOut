@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Http\Controllers\Controller;
+use App\Models\Question;
+use Illuminate\Http\Request;
+
+class QuestionController extends Controller
+{
+    /**
+     * Get a listing of the resource
+     */
+    public function index(Request $request): string
+    {
+        if ($request->has('paket-soal')) {
+            $questions = Question::where('paket_soal_id', '=', (int) $request->get('paket_soal_id'))->get()->toJson();
+        } else {
+            $questions = Question::all()->toJson();
+        }
+
+        return $questions;
+    }
+
+    /**
+     * Destroy a resource
+     */
+    public function destroy(Request $request)
+    {
+        $question = Question::findOrFail($request->get('id'));
+
+        $question->choices()->delete();
+        $question->results()->delete();
+
+        $question->delete();
+
+        return response(null);
+    }
+}
