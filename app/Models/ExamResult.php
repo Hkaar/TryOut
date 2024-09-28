@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,5 +51,21 @@ class ExamResult extends Model
     public function questionResults()
     {
         return $this->hasMany(QuestionResult::class, 'exam_result_id', 'id');
+    }
+
+    /**
+     * Scope a query by an exam id
+     */
+    public function scopeByExamId(Builder $query, int $id)
+    {
+        return $query->where('exam_id', '=', $id);
+    }
+
+    /**
+     * Scope a query by a user id
+     */
+    public function scopeByUserId(Builder $query, int $id)
+    {
+        return $query->where('user_id', '=', $id);
     }
 }
