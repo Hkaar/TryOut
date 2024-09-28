@@ -20,7 +20,7 @@ class ExamHistoryController extends Controller
     {
         $results = ExamResult::paginate(20);
 
-        return view('admin.exam-results.index', [
+        return view('admin.exam-history.index', [
             'results' => $results,
         ]);
     }
@@ -34,7 +34,7 @@ class ExamHistoryController extends Controller
     {
         $result = ExamResult::findOrFail($id);
 
-        return view('admin.exam-results.show', [
+        return view('admin.exam-history.show', [
             'result' => $result,
         ]);
     }
@@ -48,7 +48,7 @@ class ExamHistoryController extends Controller
     {
         $result = ExamResult::findOrFail($id);
 
-        return view('admin.exam-results.edit', [
+        return view('admin.exam-history.edit', [
             'result' => $result,
         ]);
     }
