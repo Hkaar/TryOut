@@ -8,13 +8,11 @@
   $columns = [
     ['width' => 5, 'name' => 'ID'],
     'Nama',
-    'Kode',
-    'Mata Pelajaran',
     ['width' => 18, 'name' => 'Actions']
   ];
 
   $routes = [
-    'edit'
+    'create' => route('admin.subjects.create')
   ];
 @endphp
 

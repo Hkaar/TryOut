@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Traits\Modelor;
 use App\Traits\Uploader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -60,7 +61,7 @@ class StudentController extends Controller
         $student->role_id = $role;
 
         if ($request->has('img')) {
-            $filePath = $this->uploadImage($request->get('img'));
+            $filePath = $this->uploadImage($request->file('img'));
             $student->img = $filePath;
         }
 
@@ -118,7 +119,11 @@ class StudentController extends Controller
         $this->updateModel($student, $validated, ['img']);
 
         if ($request->has('img')) {
-            $filePath = $this->uploadImage($request->get('img'));
+            if ($student->img) {
+                Storage::disk('public')->delete($student->img);
+            }
+
+            $filePath = $this->uploadImage($request->file('img'));
             $student->img = $filePath;
         }
 
@@ -135,6 +140,10 @@ class StudentController extends Controller
     public function destroy(int $id)
     {
         $student = User::findOrFail($id);
+
+        if ($student->img) {
+            Storage::disk('public')->delete($student->img);
+        }
 
         $student->examResults()->delete();
         $student->groups()->detach();

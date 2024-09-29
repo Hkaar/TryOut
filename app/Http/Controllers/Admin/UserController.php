@@ -58,7 +58,7 @@ class UserController extends Controller
         $user->fill($validated);
 
         if ($request->has('img')) {
-            $filePath = $this->uploadImage($request->get('img'));
+            $filePath = $this->uploadImage($request->file('img'));
             $user->img = $filePath;
         }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
                 Storage::disk('public')->delete($user->img);
             }
 
-            $filePath = $this->uploadImage($request->get('img'));
+            $filePath = $this->uploadImage($request->file('img'));
             $user->img = $filePath;
         }
 
@@ -138,6 +138,10 @@ class UserController extends Controller
     public function destroy(int $id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->img) {
+            Storage::disk('public')->delete($user->img);
+        }
 
         $user->groups()->detach();
         $user->examResults()->delete();

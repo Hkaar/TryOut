@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'manage', 'namespace' => "App\Http\Controllers\API"], function () {
+    Route::group([], function () {
+        Route::get('pertanyaan', 'QuestionController@index')->name('api.admin.questions.index');
+        Route::delete('pertanyaan', 'QuestionController@destroy')->name('api.admin.questions.destroy');
+
+        Route::get('ujian/statistics', 'ExamController@getExamStatistics')->name('api.admin.exams.stats');
+    });
 });

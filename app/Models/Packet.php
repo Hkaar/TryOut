@@ -66,6 +66,6 @@ class Packet extends Model
      */
     public function questions()
     {
-        return $this->hasMany(Question::class, 'question_id', 'id');
+        return $this->hasMany(Question::class, 'packet_id', 'id');
     }
 }

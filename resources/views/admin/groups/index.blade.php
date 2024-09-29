@@ -12,7 +12,7 @@
   ];
 
   $routes = [
-    'edit'
+    'create' => route('admin.groups.create')
   ];
 @endphp
 

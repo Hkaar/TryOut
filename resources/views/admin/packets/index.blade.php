@@ -14,7 +14,7 @@
   ];
 
   $routes = [
-    'edit'
+    'create' => route('admin.packets.create'),
   ];
 @endphp
 

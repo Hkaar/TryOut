@@ -1,25 +1,31 @@
 <aside id="sideBar"
-  class="dark:bg-primary_dark dark:text-black min-w-16 fixed top-0 z-20 h-screen -translate-x-full overflow-y-auto bg-primary px-6 py-4 text-white shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen md:w-auto lg:relative lg:translate-x-0">
+  class="dark:bg-primary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto bg-primary px-6 py-4 text-white shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen md:w-auto lg:relative lg:translate-x-0">
 
   <!-- This div is here because of tailwind not registering classes properly -->
   <div class="lg:min-w-72 hidden h-screen min-w-full ps-3"></div>
 
   <div class="flex flex-col justify-center gap-4">
     <div class="flex items-center justify-between">
-      <span class="flex items-center gap-2">
+      <div class="flex items-center gap-2">
         @if (auth()->check() && auth()->user()->img)
-          <img src="{{ Storage::url(auth()->user()->img) }}" alt="Gambar tidak tersedia" class="size-12 rounded-full">
+          <img src="{{ Storage::url(auth()->user()->img) }}" alt="Gambar tidak dapat dimuatkan" class="size-12 rounded-full aspect-square object-cover">
         @else
-          <img src="{{ Vite::asset('resources/images/default-avatar.png') }}" alt="Gambar tidak tersedia"
+          <img src="{{ Vite::asset('resources/images/default-avatar.png') }}" alt="Gambar tidak dapat dimuatkan"
             class="size-12 rounded-full">
         @endif
 
-        @if (auth()->check())
+        @auth
           <a href="{{ route('/') }}" class="menu-text hidden">{{ auth()->user()->name }}</a>
+
+          @if (auth()->user()->checkRole('admin'))
+            <span class="rounded bg-tertiary p-1 menu-text hidden text-sm">
+              Admin
+            </span>
+          @endif
         @else
           <a href="{{ route('/') }}" class="menu-text hidden">User</a>
-        @endif
-      </span>
+        @endauth
+      </div>
 
       <button class="side-bar-toggle btn lg:hidden">
         <i class="material-symbols-outlined font-var-light">close</i>
@@ -83,7 +89,7 @@
             <span class="menu-text me-auto hidden">Daftar Ujian</span>
           </a>
 
-          <a href="{{ $active === 'riwayat ujian' ? '#' : '#' }}"
+          <a href="{{ $active === 'riwayat ujian' ? '#' : route('admin.exam-history.index') }}"
             class="side-nav-item {{ $active === 'riwayat ujian' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">history</i>
             <span class="menu-text me-auto hidden">Riwayat Ujian</span>
@@ -99,7 +105,7 @@
             <span class="menu-text me-auto hidden">Akun</span>
           </a>
 
-          <a href="{{ $active === 'pengaturan' ? '#' : '#' }}"
+          <a href="{{ $active === 'pengaturan' ? '#' : route('admin.settings') }}"
             class="side-nav-item {{ $active === 'pengaturan' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">settings</i>
             <span class="menu-text me-auto hidden">Pengaturan</span>
@@ -121,20 +127,10 @@
             <span class="menu-text me-auto hidden">Daftar Ujian</span>
           </a>
 
-          <a href="{{ $active === 'riwayat ujian' ? '#' : '#' }}"
+          <a href="{{ $active === 'riwayat ujian' ? '#' : route('exam-history.index') }}"
             class="side-nav-item {{ $active === 'riwayat ujian' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">history</i>
             <span class="menu-text me-auto hidden">Riwayat Ujian</span>
-          </a>
-        </div>
-
-        <div class="flex flex-col justify-center gap-2">
-          <span class="menu-text hidden font-medium">PENGATURAN</span>
-
-          <a href="{{ $active === 'pengaturan' ? '#' : '#' }}"
-            class="side-nav-item {{ $active === 'pengaturan' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">settings</i>
-            <span class="menu-text me-auto hidden">Pengaturan</span>
           </a>
         </div>
       @endif

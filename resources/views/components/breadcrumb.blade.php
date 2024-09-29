@@ -3,7 +3,7 @@
     'base' => request()->schemeAndHttpHost(),
 ])
 
-<nav aria-label="breadcrumb" class="flex items-center gap-2">
+<nav aria-label="breadcrumb" class="flex items-center gap-2 min-w-fit">
   @foreach ($paths as $i => $path)
     @php
       $url = $base . '/' . implode('/', array_slice($paths, 0, $i + 1));
@@ -12,7 +12,7 @@
     @if ($path === 'manage')
       <a href="{{ $i === count($paths)-1 ? '' : $url }}" class="no-underline {{ $i === count($paths)-1 ? 'font-semibold' : 'font-light' }}">Dashboard</a>
     @else
-      <a href="{{ $i === count($paths)-1 ? '' : $url }}" class="no-underline {{ $i === count($paths)-1 ? 'font-semibold' : 'font-light' }}">{{ ucfirst($path) }}</a>
+      <a href="{{ $i === count($paths)-1 ? '' : $url }}" class="no-underline {{ $i === count($paths)-1 ? 'font-semibold' : 'font-light' }}">{{ ucwords(str_replace('\n', '', str_replace('-', ' ', $path))) }}</a>
     @endif
 
     @if ($i < count($paths)-1)
