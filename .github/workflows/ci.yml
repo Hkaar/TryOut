@@ -127,10 +127,7 @@ jobs:
         run: php artisan storage:link
 
       - name: Clear cache
-        run: 
-          php artisan cache:clear
-          php artisan config:clear
-          php artisan view:clear
+        run: php artisan cache:clear && php artisan config:clear && php artisan view:clear
 
       - name: Generate key
         run: php artisan key:generate --env=testing
