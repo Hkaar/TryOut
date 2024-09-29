@@ -10,6 +10,8 @@ class QuestionController extends Controller
 {
     /**
      * Get a listing of the resource
+     * 
+     * @return string
      */
     public function index(Request $request): string
     {
@@ -24,10 +26,12 @@ class QuestionController extends Controller
 
     /**
      * Destroy a resource
+     * 
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function destroy(Request $request)
     {
-        $question = Question::findOrFail($request->get('id'));
+        $question = Question::findOrFail((int) $request->get('id'));
 
         $question->choices()->delete();
         $question->results()->delete();

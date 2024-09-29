@@ -55,6 +55,9 @@ class ExamResult extends Model
 
     /**
      * Scope a query by an exam id
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder<ExamResult> $query
+     * @return \Illuminate\Database\Eloquent\Builder<ExamResult>
      */
     public function scopeByExamId(Builder $query, int $id)
     {
@@ -63,6 +66,9 @@ class ExamResult extends Model
 
     /**
      * Scope a query by a user id
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder<ExamResult> $query
+     * @return \Illuminate\Database\Eloquent\Builder<ExamResult> 
      */
     public function scopeByUserId(Builder $query, int $id)
     {

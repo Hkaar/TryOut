@@ -60,23 +60,22 @@ class ExamController extends Controller
                 ]);
             }
 
-            $questionResults = QuestionResult::ByExamResultId($existing->id)
+            $questionResults = QuestionResult::ByExamResultId($examResult->id)
                 ->orderBy('id', 'asc')
                 ->get()
                 ->toArray();
         }
 
-        $question = $questions[0];
-
         return view('exams.show', [
             'exam' => $exam,
-            'question' => $question,
             'questions' => $questionResults,
         ]);
     }
 
     /**
      * Show the token guard page
+     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function tokenGuard(int $id)
     {
@@ -88,6 +87,9 @@ class ExamController extends Controller
         ]);
     }
 
+    /**
+     * @return void
+     */
     public function checkToken(Request $request, int $id)
     {
         // TOKEN NOT IMPLEMENTED YET!

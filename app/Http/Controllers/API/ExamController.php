@@ -10,6 +10,8 @@ class ExamController extends Controller
 {
     /**
      * Get the statistics of exams
+     * 
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getExamStatistics(Request $request)
     {
