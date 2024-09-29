@@ -4,59 +4,234 @@
 
 @section('content')
   <x-dashboard-layout active="home">
-    <x-data-table :columns="['ID', 'Name', 'Role', 'Actions']" :routes="['edit']" title="Home">
-      <x-slot name="filters">
-        heyhey
-      </x-slot>
+    <div class="flex items-center gap-4 w-full min-h-full">
+      <x-elevated-card class="flex-1 w-1/2">
+        <div class="hs-single-area-chart w-full"></div>
+      </x-elevated-card>
 
-      <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">John Brown</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">45</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">New York No. 1 Lake Park</td>
-        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-          <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-        </td>
-      </tr>
-
-      <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Jim Green</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">27</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">London No. 1 Lake Park</td>
-        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-          <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-        </td>
-      </tr>
-
-      <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Joe Black</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">31</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">Sidney No. 1 Lake Park</td>
-        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-          <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-        </td>
-      </tr>
-
-      <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Edward King</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">16</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">LA No. 1 Lake Park</td>
-        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-          <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-        </td>
-      </tr>
-
-      <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
-        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Jim Red</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">45</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">Melbourne No. 1 Lake Park</td>
-        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-          <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-        </td>
-      </tr>
-
-      <x-slot name="footer">
-        foot
-      </x-slot>
-    </x-data-table>
+      <x-elevated-card class="flex-1 w-1/2">
+        <div class="hs-single-area-chart2 w-full"></div>
+      </x-elevated-card>
+    </div>
   </x-dashboard-layout>
 @endsection
+
+@push('js')
+
+<script>
+  window.addEventListener('load', () => {
+    (() => {
+      buildChart('.hs-single-area-chart2', (mode) => ({
+        chart: {
+          height: 300,
+          type: 'area',
+          toolbar: {
+            show: false
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        series: [
+          {
+            name: 'Users',
+            data: [180, 51, 60, 38, 88, 50, 40, 52, 88, 80, 60, 70]
+          }
+        ],
+        legend: {
+          show: false
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight',
+          width: 2
+        },
+        grid: {
+          strokeDashArray: 2
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            type: 'vertical',
+            shadeIntensity: 1,
+            opacityFrom: 0.1,
+            opacityTo: 0.8
+          }
+        },
+        xaxis: {
+          type: 'category',
+          tickPlacement: 'on',
+          categories: [
+            '25 January 2023',
+            '26 January 2023',
+            '27 January 2023',
+            '28 January 2023',
+            '29 January 2023',
+            '30 January 2023',
+            '31 January 2023',
+            '1 February 2023',
+            '2 February 2023',
+            '3 February 2023',
+            '4 February 2023',
+            '5 February 2023'
+          ],
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          crosshairs: {
+            stroke: {
+              dashArray: 0
+            },
+            dropShadow: {
+              show: false
+            }
+          },
+          tooltip: {
+            enabled: false
+          },
+          labels: {
+            style: {
+              colors: '#9ca3af',
+              fontSize: '13px',
+              fontFamily: 'Inter, ui-sans-serif',
+              fontWeight: 400
+            },
+            formatter: (title) => {
+              let t = title;
+
+              if (t) {
+                const newT = t.split(' ');
+                t = `${newT[0]} ${newT[1].slice(0, 3)}`;
+              }
+
+              return t;
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            align: 'left',
+            minWidth: 0,
+            maxWidth: 140,
+            style: {
+              colors: '#9ca3af',
+              fontSize: '13px',
+              fontFamily: 'Inter, ui-sans-serif',
+              fontWeight: 400
+            },
+            formatter: (value) => value >= 1000 ? `${value / 1000}k` : value
+          }
+        },
+        tooltip: {
+          x: {
+            format: 'MMMM yyyy'
+          },
+          y: {
+            formatter: (value) => `${value >= 1000 ? `${value / 1000}k` : value}`
+          },
+          custom: function (props) {
+            const { categories } = props.ctx.opts.xaxis;
+            const { dataPointIndex } = props;
+            const title = categories[dataPointIndex].split(' ');
+            const newTitle = `${title[0]} ${title[1]}`;
+
+            return buildTooltip(props, {
+              title: newTitle,
+              mode,
+              valuePrefix: '',
+              hasTextLabel: true,
+              markerExtClasses: '!rounded-sm',
+              wrapperExtClasses: 'min-w-28'
+            });
+          }
+        },
+        responsive: [{
+          breakpoint: 568,
+          options: {
+            chart: {
+              height: 300
+            },
+            labels: {
+              style: {
+                colors: '#9ca3af',
+                fontSize: '11px',
+                fontFamily: 'Inter, ui-sans-serif',
+                fontWeight: 400
+              },
+              offsetX: -2,
+              formatter: (title) => title.slice(0, 3)
+            },
+            yaxis: {
+              labels: {
+                align: 'left',
+                minWidth: 0,
+                maxWidth: 140,
+                style: {
+                  colors: '#9ca3af',
+                  fontSize: '11px',
+                  fontFamily: 'Inter, ui-sans-serif',
+                  fontWeight: 400
+                },
+                formatter: (value) => value >= 1000 ? `${value / 1000}k` : value
+              }
+            },
+          },
+        }]
+      }), {
+        colors: ['#2563eb', '#9333ea'],
+        fill: {
+          gradient: {
+            stops: [0, 90, 100]
+          }
+        },
+        xaxis: {
+          labels: {
+            style: {
+              colors: '#9ca3af'
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            style: {
+              colors: '#9ca3af'
+            }
+          }
+        },
+        grid: {
+          borderColor: '#e5e7eb'
+        }
+      }, {
+        colors: ['#3b82f6', '#a855f7'],
+        fill: {
+          gradient: {
+            stops: [100, 90, 0]
+          }
+        },
+        xaxis: {
+          labels: {
+            style: {
+              colors: '#a3a3a3',
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            style: {
+              colors: '#a3a3a3'
+            }
+          }
+        },
+        grid: {
+          borderColor: '#404040'
+        }
+      });
+    })();
+  });
+</script>
+@endpush

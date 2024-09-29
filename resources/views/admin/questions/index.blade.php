@@ -14,7 +14,7 @@
   ];
 
   $routes = [
-    'edit'
+    'create' => route('admin.questions.create')
   ];
 @endphp
 
