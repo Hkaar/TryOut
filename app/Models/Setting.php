@@ -22,8 +22,8 @@ class Setting extends Model
 
     /**
      * Scope a query by a key name
-     * 
-     * @param \Illuminate\Database\Eloquent\Builder<Setting> $query
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<Setting>  $query
      * @return \Illuminate\Database\Eloquent\Builder<Setting>
      */
     public function scopeStrictByName(Builder $query, string $name)

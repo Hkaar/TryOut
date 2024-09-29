@@ -9,7 +9,7 @@
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
             <i class="material-symbols-outlined font-var-light font-4xl">event_note</i>
-            
+
             <span class="flex flex-col gap-1">
               <h3 class="text-xl font-semibold">Mengedit ujian</h3>
               <p class="text-gray-400">
@@ -26,9 +26,9 @@
               <div class="space-y-3 mb-5">
                 <div class="w-full">
                   <label for="name" class="block text-sm font-medium mb-2 dark:text-white">Nama Ujian</label>
-                  <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="{{ $exam->name }}" required>
-                  
+
                   @error('name')
                     <p>
                       {{ $message }}
@@ -44,7 +44,7 @@
                         <input class="w-full p-0 bg-transparent border-0 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white" style="-moz-appearance: textfield;" type="number" aria-roledescription="Number field" value="{{ $exam->duration }}" data-hs-input-number-input=""
                           name="duration">
                       </div>
-                      
+
                       <div class="flex justify-end items-center gap-x-1.5">
                         <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" tabindex="-1" aria-label="Decrease" data-hs-input-number-decrement="">
                           <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,7 +60,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   @error('duration')
                     <p>
                       {{ $message }}
@@ -110,9 +110,9 @@
 
                 <div class="w-full">
                   <label for="start_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Mulai Ujian</label>
-                  <input type="datetime-local" id="start_date" name="start_date" value="{{ $exam->start_date }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="datetime-local" id="start_date" name="start_date" value="{{ $exam->start_date }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Masukkan tanggal mulai pengerjaan ujian ..." required>
-                  
+
                   @error('start_date')
                     <p>
                       {{ $message }}
@@ -122,9 +122,9 @@
 
                 <div class="w-full">
                   <label for="end_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Berakhir Ujian</label>
-                  <input type="datetime-local" id="end_date" name="end_date" value="{{ $exam->end_date }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="datetime-local" id="end_date" name="end_date" value="{{ $exam->end_date }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Masukkan tanggal berakhir pengerjaan ujian ..." required>
-                  
+
                   @error('end_date')
                     <p>
                       {{ $message }}

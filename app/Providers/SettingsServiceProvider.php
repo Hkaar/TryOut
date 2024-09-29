@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Setting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Throwable;
 
 class SettingsServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,7 @@ class SettingsServiceProvider extends ServiceProvider
     {
         try {
             $settings = $this->extractNested(Setting::all(['name', 'value'])->toArray());
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $settings = [];
         }
 
@@ -32,8 +33,8 @@ class SettingsServiceProvider extends ServiceProvider
 
     /**
      * Extract the nested items of an array
-     * 
-     * @param array<array<string, string>> $items
+     *
+     * @param  array<array<string, string>>  $items
      * @return array<int|string, string|false>
      */
     private function extractNested(array $items): array

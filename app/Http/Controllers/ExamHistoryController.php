@@ -8,7 +8,7 @@ class ExamHistoryController extends Controller
 {
     /**
      * Show a list of the resource
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
@@ -17,13 +17,13 @@ class ExamHistoryController extends Controller
         $results = ExamResult::where('user_id', '=', $user->id)->paginate(20);
 
         return view('exam-history.index', [
-            "results" => $results,
+            'results' => $results,
         ]);
     }
 
     /**
      * Show a detailed view of the resource
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(int $id)

@@ -10,8 +10,8 @@ class DetailLayout extends Component
 {
     /**
      * Create a new component instance.
-     * 
-     * @param array<string> $routes
+     *
+     * @param  array<string>  $routes
      */
     public function __construct(
         public mixed $item,

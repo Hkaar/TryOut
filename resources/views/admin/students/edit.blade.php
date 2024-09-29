@@ -9,7 +9,7 @@
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
             <i class="material-symbols-outlined font-var-light font-4xl">group</i>
-            
+
             <span class="flex flex-col gap-1">
               <h3 class="text-xl font-semibold">Mengedit peserta</h3>
               <p class="text-gray-400">
@@ -36,21 +36,21 @@
 
                 <div class="w-full">
                   <label for="username" class="block text-sm font-medium mb-2 dark:text-white">Username Peserta</label>
-                  <input type="text" id="username" name="username" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="text" id="username" name="username" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="{{ $student->username }}">
-                  
+
                   @error('username')
                     <p>
                       {{ $message }}
                     </p>
                   @enderror
                 </div>
-                
+
                 <div class="w-full">
                   <label for="name" class="block text-sm font-medium mb-2 dark:text-white">Nama Peserta</label>
-                  <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="{{ $student->name }}">
-                  
+
                   @error('name')
                     <p>
                       {{ $message }}
@@ -60,9 +60,9 @@
 
                 <div class="w-full">
                   <label for="email" class="block text-sm font-medium mb-2 dark:text-white">Email Peserta</label>
-                  <input type="email" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="email" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="{{ $student->email }}">
-                  
+
                   @error('email')
                     <p>
                       {{ $message }}
@@ -72,9 +72,9 @@
 
                 <div class="w-full">
                   <label for="password" class="block text-sm font-medium mb-2 dark:text-white">Password Peserta</label>
-                  <input type="password" id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="password" id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Masukkan password peserta ...">
-                  
+
                   @error('password')
                     <p>
                       {{ $message }}
@@ -84,9 +84,9 @@
 
                 <div class="w-full">
                   <label for="password_confirmation" class="block text-sm font-medium mb-2 dark:text-white">Konfirmasi password</label>
-                  <input type="password" id="password_confirmation" name="password_confirmation" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="password" id="password_confirmation" name="password_confirmation" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Masukkan password lagi ...">
-                  
+
                   @error('password_confirmation')
                     <p>
                       {{ $message }}

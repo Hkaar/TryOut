@@ -7,7 +7,7 @@
     <div class="flex flex-col flex-1 gap-3">
       <div class="flex gap-4 items-center">
         <i class="material-symbols-outlined font-var-light font-4xl">library_books</i>
-        
+
         <span class="flex flex-col gap-1">
           <h3 class="text-xl font-semibold">Tambahkan soal baru</h3>
           <p class="text-gray-400">
@@ -15,7 +15,7 @@
           </p>
         </span>
       </div>
-  
+
       <div class="flex-1 flex gap-6">
         <div class="flex-1 flex flex-col gap-3 w-full">
           <x-elevated-card class="flex flex-col flex-1">
@@ -101,7 +101,7 @@
                 <a href="{{ route('admin.packets.index') }}" class="btn bg-danger text-white">
                   <i class="material-symbols-outlined font-var-light">logout</i>
                   Keluar
-                </a>  
+                </a>
               </div>
             </form>
           </x-elevated-card>
@@ -110,23 +110,23 @@
             <h6 class="font-semibold text-lg">Daftar Pertanyaan</h6>
 
             <div class="flex flex-col gap-2 max-h-52 overflow-y-auto" id="questionList"></div>
-          </x-elevated-card>        
+          </x-elevated-card>
         </div>
-  
+
         <div class="flex-1 flex flex-col justify-center items-center gap-3">
           <x-elevated-card class="grid place-items-center gap-2 flex-1 w-full" id="previewFoto">
             <img src="{{ Vite::asset('resources/images/photos.svg') }}" alt="Gambar tidak dapat dimuatkan" class="w-1/3 block aspect-square">
             <span class="text-gray-400">Foto soal akan muncul disini</span>
           </x-elevated-card>
-          
+
           <x-elevated-card class="flex flex-col flex-1 w-full gap-4">
             <button type="button" id="addChoice" class="btn bg-secondary text-white flex items-center gap-2 duration-150 ease-in-out hover:opacity-95 active:opacity-50 active:scale-95 disabled:hover:scale-100 disabled:active:scale-100 disabled:opacity-40" disabled>
               <i class="material-symbols-outlined font-var-light">add</i>
               Tambahkan pilihan jawaban
             </button>
-  
+
             <div id="choices" class="flex flex-col gap-2 max-h-80 overflow-y-auto"></div>
-          </x-elevated-card>   
+          </x-elevated-card>
         </div>
       </div>
     </div>

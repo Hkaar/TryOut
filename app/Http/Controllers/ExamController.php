@@ -44,9 +44,9 @@ class ExamController extends Controller
                 ->toArray();
         } else {
             $examResult = ExamResult::create([
-                "exam_id" => $exam->id,
-                "user_id" => $user->id,
-                "start_date" => now(),
+                'exam_id' => $exam->id,
+                'user_id' => $user->id,
+                'start_date' => now(),
             ]);
 
             $questions = Question::where('packet_id', '=', $exam->packet->id)->inRandomOrder()->get();
@@ -74,7 +74,7 @@ class ExamController extends Controller
 
     /**
      * Show the token guard page
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function tokenGuard(int $id)
@@ -82,7 +82,7 @@ class ExamController extends Controller
         // TOKEN NOT IMPLEMENTED YET!
         $exam = Exam::findOrFail($id);
 
-        return view("exams.guard", [
+        return view('exams.guard', [
             'exam' => $exam,
         ]);
     }

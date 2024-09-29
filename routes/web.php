@@ -48,7 +48,7 @@ Route::group(['namespace' => "App\Http\Controllers\Admin", 'prefix' => 'manage',
     Route::group(['middleware' => ['can:admin']], function () {
         Route::get('pengaturan', 'SettingsController@edit')->name('admin.settings');
         Route::put('pengaturan', 'SettingsController@update')->name('admin.settings.update');
-        
+
         Route::resource('ujian', 'ExamController')->names('admin.exams');
         Route::resource('riwayat-ujian', 'ExamHistoryController')->names('admin.exam-history');
         Route::resource('peserta', 'StudentController')->names('admin.students');

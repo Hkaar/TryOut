@@ -9,7 +9,7 @@
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
             <i class="material-symbols-outlined font-var-light font-4xl">collections_bookmark</i>
-            
+
             <span class="flex flex-col gap-1">
               <h3 class="text-xl font-semibold">Tambahkan paket soal baru</h3>
               <p class="text-gray-400">
@@ -25,9 +25,9 @@
               <div class="space-y-3 mb-5">
                 <div class="w-full">
                   <label for="name" class="block text-sm font-medium mb-2 dark:text-white">Nama Paket Soal</label>
-                  <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Masukkan nama paket soal ..." required>
-                  
+
                   @error('name')
                     <p>
                       {{ $message }}
@@ -37,9 +37,9 @@
 
                 <div class="w-full">
                   <label for="code" class="block text-sm font-medium mb-2 dark:text-white">Kode Paket Soal</label>
-                  <input type="text" id="code" name="code" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" 
+                  <input type="text" id="code" name="code" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Masukkan kode paket soal ..." required>
-                  
+
                   @error('code')
                     <p>
                       {{ $message }}
