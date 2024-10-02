@@ -17,7 +17,8 @@ class QuestionResult extends Model
      */
     protected $fillable = [
         'question_id',
-        'status_id',
+        'correct',
+        'not_sure',
         'exam_result_id',
         'answer',
     ];
@@ -30,16 +31,6 @@ class QuestionResult extends Model
     public function question()
     {
         return $this->belongsTo(Question::class, 'question_id', 'id');
-    }
-
-    /**
-     * Define relationship with statuses
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Status, QuestionResult>
-     */
-    public function status()
-    {
-        return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
     /**

@@ -20,7 +20,10 @@ class ExamResult extends Model
         'user_id',
         'start_date',
         'finish_date',
+        'last_date',
         'grade',
+        'duration',
+        'finished',
     ];
 
     /**
