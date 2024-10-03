@@ -11,6 +11,8 @@
     'Paket Soal',
     'Durasi',
     'Waktu Mulai',
+    'Waktu Tenggat',
+    'Token',
     ['width' => 18, 'name' => 'Actions']
   ];
 
@@ -60,10 +62,16 @@
             {{ $exam->packet->name }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
-            {{ $exam->duration }}
+            {{ $exam->duration }} menit
+          </td>
+          <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800" timezone-change>
+            {{ $exam->start_date }}
+          </td>
+          <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800" timezone-change>
+            {{ $exam->end_date }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
-            {{ $exam->start_date }}
+            {{ $exam->token ? $exam->token : '-' }}
           </td>
           <td class="whitespace-nowrap flex gap-2 px-6 py-4 text-end text-sm font-medium">
             <a href="{{ route('admin.exams.edit', $exam->id) }}" class="btn bg-caution text-white flex items-center gap-2">

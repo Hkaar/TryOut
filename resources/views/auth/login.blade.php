@@ -8,7 +8,7 @@
       <div class="container">
         <div class="flex h-full flex-col items-center gap-6">
           <h3 class="text-4xl font-bold">
-            Try Out
+            {{ $settings['org_name'] }}
           </h3>
 
           <form action="{{ route('login.post') }}" method="post"
@@ -29,7 +29,8 @@
                 </div>
 
                 @error('email')
-                  <p class="dark:text-neutral-500 mt-2 text-sm text-gray-500" id="hs-input-helper-text">{{ $message }}
+                  <p class="dark:text-neutral-500 mt-2 text-sm text-gray-500" id="hs-input-helper-text">
+                    {{ $message }}
                   </p>
                 @enderror
               </div>

@@ -67,10 +67,10 @@
               Hapus
             </button>
 
-            <a href="{{ route('admin.groups.show', $group->id) }}" class="btn bg-info text-white flex items-center gap-2">
+            {{-- <a href="{{ route('admin.groups.show', $group->id) }}" class="btn bg-info text-white flex items-center gap-2">
               <i class="material-symbols-outlined font-var-light">info</i>
               Info
-            </a>
+            </a> --}}
           </td>
         </tr>
       @endforeach

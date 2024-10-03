@@ -23,11 +23,13 @@
               @csrf
               @method('PUT')
 
+              <input type="hidden" name="timezone" value="UTC">
+
               <div class="space-y-3 mb-5">
                 <div class="w-full">
                   <label for="name" class="block text-sm font-medium mb-2 dark:text-white">Nama Ujian</label>
                   <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="{{ $exam->name }}" required>
+                    placeholder="{{ $exam->name }}">
 
                   @error('name')
                     <p>
@@ -74,7 +76,7 @@
                   </label>
 
                   <select class="py-3 px-4 pe-9 w-full block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    name="group_id" required>
+                    name="group_id">
                     <option selected disabled>{{ \App\Models\Group::count() <= 0 ? 'Tidak ada group' : 'Pilih salah satu ...' }}</option>
                     @foreach (\App\Models\Group::all(['name', 'id']) as $group)
                       <option value="{{ $group->id }}" {{ $group->id === $exam->group_id ? 'selected' : '' }}>{{ ucwords($group->name) }}</option>
@@ -94,7 +96,7 @@
                   </label>
 
                   <select class="py-3 px-4 pe-9 w-full block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    name="packet_id" required>
+                    name="packet_id">
                     <option selected disabled>{{ \App\Models\Packet::count() <= 0 ? 'Tidak ada packet soal' : 'Pilih salah satu ...' }}</option>
                     @foreach (\App\Models\Packet::all(['name', 'id']) as $packet)
                       <option value="{{ $packet->id }}" {{ $group->id === $exam->group_id ? 'selected' : '' }}>{{ ucwords($packet->name) }}</option>
@@ -110,8 +112,8 @@
 
                 <div class="w-full">
                   <label for="start_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Mulai Ujian</label>
-                  <input type="datetime-local" id="start_date" name="start_date" value="{{ $exam->start_date }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="Masukkan tanggal mulai pengerjaan ujian ..." required>
+                  <input type="datetime-local" id="start_date" name="start_date" value="{{ Carbon\Carbon::parse($exam->start_date)->format('Y-m-d\TH:i') }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Masukkan tanggal mulai pengerjaan ujian ..." timezone-change>
 
                   @error('start_date')
                     <p>
@@ -122,8 +124,8 @@
 
                 <div class="w-full">
                   <label for="end_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Berakhir Ujian</label>
-                  <input type="datetime-local" id="end_date" name="end_date" value="{{ $exam->end_date }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="Masukkan tanggal berakhir pengerjaan ujian ..." required>
+                  <input type="datetime-local" id="end_date" name="end_date" value="{{ Carbon\Carbon::parse($exam->end_date)->format('Y-m-d\TH:i') }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Masukkan tanggal berakhir pengerjaan ujian ..." timezone-change>
 
                   @error('end_date')
                     <p>
@@ -135,14 +137,20 @@
                 <div class="flex items-center gap-4">
                   <div class="flex">
                     <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="token"
-                      name="token">
+                      name="token" {{ $exam->token ? 'checked' : '' }}>
                     <label for="token" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Gunakan token</label>
                   </div>
 
                   <div class="flex">
-                    <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="show_results"
-                      name="show_results">
-                    <label for="show_results" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tunjukkan Hasil</label>
+                    <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="public_results"
+                      name="public_results" {{ $exam->public_results ? 'checked' : '' }}>
+                    <label for="public_results" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tunjukkan Hasil</label>
+                  </div>
+
+                  <div class="flex">
+                    <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="auto_grade"
+                      name="auto_grade" {{ $exam->auto_grade ? 'checked' : '' }}>
+                    <label for="auto_grade" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Otomatis Nilai</label>
                   </div>
                 </div>
 
