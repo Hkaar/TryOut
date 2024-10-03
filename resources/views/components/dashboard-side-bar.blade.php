@@ -1,5 +1,5 @@
 <aside id="sideBar"
-  class="dark:bg-primary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto bg-primary px-6 py-4 text-white shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen md:w-auto lg:relative lg:translate-x-0">
+  class="dark:bg-primary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto bg-primary px-6 py-4 text-white shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen lg:relative lg:translate-x-0">
 
   <!-- This div is here because of tailwind not registering classes properly -->
   <div class="lg:min-w-72 hidden h-screen min-w-full ps-3"></div>
@@ -112,11 +112,13 @@
           </a>
         </div>
       @else
-        <a href="{{ $active === 'home' ? '#' : route('home') }}"
-          class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
-          <i class="material-symbols-outlined font-var-light">home</i>
-          <span class="menu-text me-auto hidden">Beranda</span>
-        </a>
+        <div class="flex flex-col justify-center gap-2">
+          <a href="{{ $active === 'home' ? '#' : route('home') }}"
+            class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
+            <i class="material-symbols-outlined font-var-light">home</i>
+            <span class="menu-text me-auto hidden">Beranda</span>
+          </a>   
+        </div>
 
         <div class="flex flex-col justify-center gap-2">
           <span class="menu-text hidden font-medium">UJIAN</span>
