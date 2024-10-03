@@ -10,7 +10,6 @@ function setupAdminHomeCharts() {
     axios.get(`${examAPIRoute}/statistics`)
         .then(response => {
             const { daily_user_counts, dates } = response.data;
-            console.log(daily_user_counts, dates)
 
             SingleLineChart('.hs-single-area-chart', {
                 labels: dates,

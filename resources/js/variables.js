@@ -1,4 +1,4 @@
 export const questionSaveRoute = '/manage/pertanyaan';
-export const questionAPIRoute = '/api/manage/pertanyaan';
+export const questionAPIRoute = '/api/pertanyaan';
 
-export const examAPIRoute = '/api/manage/ujian';
+export const examAPIRoute = '/api/ujian';
