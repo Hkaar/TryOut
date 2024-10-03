@@ -39,7 +39,7 @@ class ExamController extends Controller
 
     /**
      * Get the question data in the form of json
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getQuestion(int $examResultId, int $questionId)
