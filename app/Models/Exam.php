@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -58,7 +57,7 @@ class Exam extends Model
     {
         return $this->hasMany(ExamResult::class, 'exam_id', 'id');
     }
-    
+
     /**
      * Check if an exam is valid to be worked on
      */
@@ -75,7 +74,7 @@ class Exam extends Model
     /**
      * Check if a user finished the exam
      */
-    public function checkFinished(int $userId): bool|null
+    public function checkFinished(int $userId): ?bool
     {
         $examResult = $this->examResults()->where('user_id', $userId)->first();
 

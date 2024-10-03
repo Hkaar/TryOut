@@ -111,7 +111,7 @@
     var examResult = {{ $examResult->id }};
     var csrf = "{{ csrf_token() }}";
 
-    var currentQuestionId = {{$question->id}};
+    var currentQuestionId = {{ $question->id }};
     var currentQuestionNumber = 1;
     var remainingTime = 0;
   </script>

@@ -117,7 +117,7 @@
             class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">home</i>
             <span class="menu-text me-auto hidden">Beranda</span>
-          </a>   
+          </a>
         </div>
 
         <div class="flex flex-col justify-center gap-2">

@@ -16,7 +16,7 @@ class HomeController extends Controller
         $exams = Exam::paginate(20);
 
         return view('home', [
-            "exams" => $exams,
+            'exams' => $exams,
         ]);
     }
 

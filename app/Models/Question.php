@@ -63,7 +63,7 @@ class Question extends Model
 
     /**
      * Get the right answer of the question
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function rightAnswer()

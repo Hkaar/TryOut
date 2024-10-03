@@ -67,7 +67,7 @@ class ExamController extends Controller
 
     /**
      * Get the next question from the current question id
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getNextQuestion(int $examResultId, int $questionId)
@@ -104,7 +104,7 @@ class ExamController extends Controller
 
     /**
      * Get the previous question from the current question id
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getPreviousQuestion(int $examResultId, int $questionId)
@@ -141,7 +141,7 @@ class ExamController extends Controller
 
     /**
      * Save a question into the database
-     * 
+     *
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function saveQuestion(Request $request, int $examResultId, int $questionId)
@@ -163,12 +163,13 @@ class ExamController extends Controller
         }
 
         $result->save();
+
         return response(null);
     }
 
     /**
      * Mark the question as not sure
-     * 
+     *
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function notSure(Request $request, int $examResultId, int $questionId)
@@ -190,7 +191,7 @@ class ExamController extends Controller
 
     /**
      * Mark the exam as done
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function finishExam(int $id)
@@ -201,13 +202,13 @@ class ExamController extends Controller
         $result->save();
 
         return response()->json([
-            "redirect" => route('exams.index'),
+            'redirect' => route('exams.index'),
         ]);
     }
 
     /**
      * Get the remaining exam time
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function remainingExamTime(Request $request, int $id)

@@ -38,7 +38,7 @@
           Edit <span class="hidden md:block lg:hidden xl:block">{{ strtolower($title) }}</span>
         </span>
       </a>
-    
+
       <a href="{{ isset($routes['create']) ? route($routes['create'], $item->id) : '#' }}" class="btn bg-success text-white duration-150 hover:scale-105 active:scale-95 ease-in-out hover:opacity-95 active:opacity-50 {{ isset($routes['create']) ? '' : 'bg-opacity-50' }}">
         <span class="flex gap-1 items-center">
           <i class="material-symbols-outlined font-var-light">add</i>

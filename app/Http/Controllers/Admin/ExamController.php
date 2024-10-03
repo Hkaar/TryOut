@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Traits\Modelor;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ExamController extends Controller
 {
@@ -56,13 +56,13 @@ class ExamController extends Controller
         ]);
 
         if ($request->has('token')) {
-            $validated["token"] = Str::random(8);
+            $validated['token'] = Str::random(8);
         }
 
         $validated = $this->setExamSettings($request, ['public_results', 'auto_grade'], $validated);
 
-        $validated["start_date"] = Carbon::parse($validated["start_date"], $validated["timezone"])->setTimezone("UTC");
-        $validated["end_date"] = Carbon::parse($validated["end_date"], $validated["timezone"])->setTimezone("UTC");
+        $validated['start_date'] = Carbon::parse($validated['start_date'], $validated['timezone'])->setTimezone('UTC');
+        $validated['end_date'] = Carbon::parse($validated['end_date'], $validated['timezone'])->setTimezone('UTC');
 
         $exam = new Exam;
         $exam->fill($validated)->save();
@@ -119,7 +119,7 @@ class ExamController extends Controller
         ]);
 
         if ($request->has('token')) {
-            $validated["token"] = Str::random(8);
+            $validated['token'] = Str::random(8);
         } else {
             $exam->token = null;
         }
@@ -127,11 +127,11 @@ class ExamController extends Controller
         $validated = $this->setExamSettings($request, ['public_results', 'auto_grade'], $validated);
 
         if ($request->has('start_date')) {
-            $validated["start_date"] = Carbon::parse($validated["start_date"], $validated["timezone"])->setTimezone("UTC");
+            $validated['start_date'] = Carbon::parse($validated['start_date'], $validated['timezone'])->setTimezone('UTC');
         }
 
         if ($request->has('end_date')) {
-            $validated["end_date"] = Carbon::parse($validated["end_date"], $validated["timezone"])->setTimezone("UTC");
+            $validated['end_date'] = Carbon::parse($validated['end_date'], $validated['timezone'])->setTimezone('UTC');
         }
 
         $this->updateModel($exam, $validated);
@@ -157,13 +157,13 @@ class ExamController extends Controller
 
     /**
      * Update an exam settings
-     * 
-     * @param array<string> $keys
-     * @param array<mixed> $data
+     *
+     * @param  array<string>  $keys
+     * @param  array<mixed>  $data
      * @return array<string, int>
      */
     private function setExamSettings(Request $request, array $keys, array $data)
-    {   
+    {
         foreach ($keys as $key) {
             if ($request->has($key)) {
                 $data[$key] = 1;

@@ -6,7 +6,6 @@ use App\Models\Exam;
 use App\Models\ExamResult;
 use App\Models\Question;
 use App\Models\QuestionResult;
-use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -42,7 +41,7 @@ class ExamController extends Controller
         $endDate = Carbon::parse($exam->end_date);
         $diff = $endDate->diffInSeconds($current);
 
-        if (($diff/60) <= 0) {
+        if (($diff / 60) <= 0) {
             return redirect()->route('exams.index');
         }
 
@@ -56,7 +55,7 @@ class ExamController extends Controller
             $questionResults = QuestionResult::ByExamResultId($existing->id)
                 ->orderBy('id', 'asc')
                 ->get();
-            
+
             $examResult = $existing;
         } else {
             $examResult = ExamResult::create([
@@ -104,7 +103,7 @@ class ExamController extends Controller
 
     /**
      * Check if the token is correct
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function checkToken(Request $request, int $id)
@@ -113,16 +112,16 @@ class ExamController extends Controller
 
         if ($exam->token) {
             $validated = $request->validate([
-                "token" => "required|string",
+                'token' => 'required|string',
             ]);
 
-            if (strtolower($validated["token"]) === strtolower($exam->token)) {
-                return redirect()->route("exams.show", ["id" => $exam->id, "token" => $validated["token"]]);
+            if (strtolower($validated['token']) === strtolower($exam->token)) {
+                return redirect()->route('exams.show', ['id' => $exam->id, 'token' => $validated['token']]);
             } else {
-                return redirect()->back()->withErrors(["token" => "Token salah!"]);
+                return redirect()->back()->withErrors(['token' => 'Token salah!']);
             }
         }
 
-        return redirect()->route("exams.show", ["id" => $exam->id]);
+        return redirect()->route('exams.show', ['id' => $exam->id]);
     }
 }
