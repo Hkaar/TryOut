@@ -39,6 +39,8 @@ class ExamController extends Controller
 
     /**
      * Get the question data in the form of json
+     * 
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getQuestion(int $examResultId, int $questionId)
     {
@@ -154,8 +156,8 @@ class ExamController extends Controller
 
         $question = $result->question;
 
-        if (strtolower($question->rightAnswer->answer) === strtolower($validated['answer'])) {
-            $result->answer = $question->rightAnswer->answer;
+        if (strtolower($question->rightAnswer->content) === strtolower($validated['answer'])) {
+            $result->answer = $question->rightAnswer->content;
             $result->correct = 1;
         } else {
             $result->answer = $validated['answer'];
@@ -170,7 +172,7 @@ class ExamController extends Controller
     /**
      * Mark the question as not sure
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\JsonResponse
      */
     public function notSure(Request $request, int $examResultId, int $questionId)
     {

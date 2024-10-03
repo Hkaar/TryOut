@@ -28,7 +28,7 @@ class ExamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(int $id)
     {

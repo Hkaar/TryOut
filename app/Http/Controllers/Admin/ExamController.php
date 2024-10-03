@@ -61,8 +61,8 @@ class ExamController extends Controller
 
         $validated = $this->setExamSettings($request, ['public_results', 'auto_grade'], $validated);
 
-        $validated['start_date'] = Carbon::parse($validated['start_date'], $validated['timezone'])->setTimezone('UTC');
-        $validated['end_date'] = Carbon::parse($validated['end_date'], $validated['timezone'])->setTimezone('UTC');
+        $validated['start_date'] = Carbon::parse((string) $validated['start_date'], (string) $validated['timezone'])->setTimezone('UTC');
+        $validated['end_date'] = Carbon::parse((string) $validated['end_date'], (string) $validated['timezone'])->setTimezone('UTC');
 
         $exam = new Exam;
         $exam->fill($validated)->save();
@@ -127,11 +127,11 @@ class ExamController extends Controller
         $validated = $this->setExamSettings($request, ['public_results', 'auto_grade'], $validated);
 
         if ($request->has('start_date')) {
-            $validated['start_date'] = Carbon::parse($validated['start_date'], $validated['timezone'])->setTimezone('UTC');
+            $validated['start_date'] = Carbon::parse((string) $validated['start_date'], (string) $validated['timezone'])->setTimezone('UTC');
         }
 
         if ($request->has('end_date')) {
-            $validated['end_date'] = Carbon::parse($validated['end_date'], $validated['timezone'])->setTimezone('UTC');
+            $validated['end_date'] = Carbon::parse((string) $validated['end_date'], (string) $validated['timezone'])->setTimezone('UTC');
         }
 
         $this->updateModel($exam, $validated);
