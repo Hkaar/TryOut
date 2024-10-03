@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,11 +20,16 @@ class ExamResult extends Model
         'user_id',
         'start_date',
         'finish_date',
+        'last_date',
         'grade',
+        'duration',
+        'finished',
     ];
 
     /**
      * Define relationship with exams
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Exam, ExamResult>
      */
     public function exam()
     {
@@ -32,6 +38,8 @@ class ExamResult extends Model
 
     /**
      * Define relationship with users
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, ExamResult>
      */
     public function user()
     {
@@ -40,9 +48,33 @@ class ExamResult extends Model
 
     /**
      * Define relationship with question results
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<QuestionResult>
      */
     public function questionResults()
     {
         return $this->hasMany(QuestionResult::class, 'exam_result_id', 'id');
+    }
+
+    /**
+     * Scope a query by an exam id
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<ExamResult>  $query
+     * @return \Illuminate\Database\Eloquent\Builder<ExamResult>
+     */
+    public function scopeByExamId(Builder $query, int $id)
+    {
+        return $query->where('exam_id', '=', $id);
+    }
+
+    /**
+     * Scope a query by a user id
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<ExamResult>  $query
+     * @return \Illuminate\Database\Eloquent\Builder<ExamResult>
+     */
+    public function scopeByUserId(Builder $query, int $id)
+    {
+        return $query->where('user_id', '=', $id);
     }
 }

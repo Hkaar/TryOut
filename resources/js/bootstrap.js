@@ -1,3 +1,23 @@
+import 'preline';
+import 'apexcharts/dist/apexcharts.css';
+import 'toastr/build/toastr.min.css';
+import 'material-symbols';
+import 'htmx.org';
+import 'toastr';
+
+import '../../node_modules/preline/dist/helper-apexcharts.js';
+
+import _ from 'lodash';
+import ApexCharts from 'apexcharts';
+
+import.meta.glob([
+    "../images/**/*"
+]);
+
+// @ts-ignore
+window.ApexCharts = ApexCharts;
+window._ = _;
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -5,8 +25,10 @@
  */
 
 import axios from 'axios';
+// @ts-ignore
 window.axios = axios;
 
+// @ts-ignore
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

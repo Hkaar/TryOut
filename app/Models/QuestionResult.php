@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,13 +17,16 @@ class QuestionResult extends Model
      */
     protected $fillable = [
         'question_id',
-        'status_id',
+        'correct',
+        'not_sure',
         'exam_result_id',
         'answer',
     ];
 
     /**
      * Define relationship with questions
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Question, QuestionResult>
      */
     public function question()
     {
@@ -30,18 +34,23 @@ class QuestionResult extends Model
     }
 
     /**
-     * Define relationship with statuses
+     * Define relationship with exam results
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ExamResult, QuestionResult>
      */
-    public function status()
+    public function examResult()
     {
-        return $this->belongsTo(Status::class, 'status_id', 'id');
+        return $this->belongsTo(ExamResult::class, 'exam_result_id', 'id');
     }
 
     /**
-     * Define relationship with exam results
+     * Scope a query by an exam result id
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<QuestionResult>  $query
+     * @return \Illuminate\Database\Eloquent\Builder<QuestionResult>
      */
-    public function exam_result()
+    public function scopeByExamResultId(Builder $query, int $id)
     {
-        return $this->belongsTo(ExamResult::class, 'exam_result_id', 'id');
+        return $query->where('exam_result_id', '=', $id);
     }
 }

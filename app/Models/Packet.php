@@ -25,12 +25,14 @@ class Packet extends Model
     /**
      * The relationships that should always be loaded.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $with = ['group', 'subject'];
 
     /**
      * Define relationship with groups
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Group, Packet>
      */
     public function group()
     {
@@ -39,6 +41,8 @@ class Packet extends Model
 
     /**
      * Define relationship with subjects
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Subject, Packet>
      */
     public function subject()
     {
@@ -47,6 +51,8 @@ class Packet extends Model
 
     /**
      * Define relationship with exams
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Exam>
      */
     public function exams()
     {
@@ -55,9 +61,11 @@ class Packet extends Model
 
     /**
      * Define relationship with questions
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Question>
      */
     public function questions()
     {
-        return $this->hasMany(Question::class, 'question_id', 'id');
+        return $this->hasMany(Question::class, 'packet_id', 'id');
     }
 }
