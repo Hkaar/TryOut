@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Traits\Modelor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ExamController extends Controller
 {
@@ -50,7 +52,17 @@ class ExamController extends Controller
             'desc' => 'nullable|string',
             'group_id' => 'required|numeric|exists:groups,id',
             'packet_id' => 'required|numeric|exists:packets,id',
+            'timezone' => 'required|timezone',
         ]);
+
+        if ($request->has('token')) {
+            $validated['token'] = Str::random(8);
+        }
+
+        $validated = $this->setExamSettings($request, ['public_results', 'auto_grade'], $validated);
+
+        $validated['start_date'] = Carbon::parse((string) $validated['start_date'], (string) $validated['timezone'])->setTimezone('UTC');
+        $validated['end_date'] = Carbon::parse((string) $validated['end_date'], (string) $validated['timezone'])->setTimezone('UTC');
 
         $exam = new Exam;
         $exam->fill($validated)->save();
@@ -103,7 +115,24 @@ class ExamController extends Controller
             'desc' => 'nullable|string',
             'group_id' => 'nullable|numeric|exists:groups,id',
             'packet_id' => 'nullable|numeric|exists:packets,id',
+            'timezone' => 'required|timezone',
         ]);
+
+        if ($request->has('token')) {
+            $validated['token'] = Str::random(8);
+        } else {
+            $exam->token = null;
+        }
+
+        $validated = $this->setExamSettings($request, ['public_results', 'auto_grade'], $validated);
+
+        if ($request->has('start_date')) {
+            $validated['start_date'] = Carbon::parse((string) $validated['start_date'], (string) $validated['timezone'])->setTimezone('UTC');
+        }
+
+        if ($request->has('end_date')) {
+            $validated['end_date'] = Carbon::parse((string) $validated['end_date'], (string) $validated['timezone'])->setTimezone('UTC');
+        }
 
         $this->updateModel($exam, $validated);
         $exam->save();
@@ -124,5 +153,25 @@ class ExamController extends Controller
         $exam->delete();
 
         return response(null);
+    }
+
+    /**
+     * Update an exam settings
+     *
+     * @param  array<string>  $keys
+     * @param  array<mixed>  $data
+     * @return array<string, int>
+     */
+    private function setExamSettings(Request $request, array $keys, array $data)
+    {
+        foreach ($keys as $key) {
+            if ($request->has($key)) {
+                $data[$key] = 1;
+            } else {
+                $data[$key] = 0;
+            }
+        }
+
+        return $data;
     }
 }

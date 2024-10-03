@@ -10,7 +10,7 @@
     'Nama Ujian',
     'Waktu Mulai',
     'Waktu Selesai',
-    ['width' => 18, 'name' => 'Actions']
+    ['width' => 8, 'name' => 'Actions']
   ];
 
   $routes = [];
@@ -60,10 +60,17 @@
             {{ $result->end_date }}
           </td>
           <td class="whitespace-nowrap flex gap-2 px-6 py-4 text-end text-sm font-medium">
-            <a href="{{ route('exam-history.show', $result->id) }}" class="btn bg-info text-white flex items-center gap-2">
-              <i class="material-symbols-outlined font-var-light">info</i>
-              Info
-            </a>
+            @if ($result->finished || !$result->exam->checkValid())
+              <a href="{{ route('exam-history.show', $result->id) }}" class="btn bg-info text-white flex items-center gap-2">
+                <i class="material-symbols-outlined font-var-light">info</i>
+                Info
+              </a>
+            @else
+              <a href="#" class="btn bg-info text-white flex items-center gap-2 bg-opacity-50">
+                <i class="material-symbols-outlined font-var-light">info</i>
+                Info
+              </a>
+            @endif
           </td>
         </tr>
       @endforeach

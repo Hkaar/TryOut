@@ -6,6 +6,8 @@ import { setupAutoTimezone } from "./utils.js";
 
 import setupQEditor from "./questionEditor.js";
 import setupAdminCharts from './charts/admin.js';
+import setupSlides from './slides/slide.js';
+import setupExam from './exam.js';
 
 /**
  * A function to toggle the side bar
@@ -16,9 +18,9 @@ function toggleSideBar() {
     const sideNavItems = sideBar?.querySelectorAll(".side-nav-item");
     const sideBarMenus = document.querySelectorAll(".menu-text");
 
-    if (sideBar?.classList.contains("-translate-x-full") || sideBar?.classList.contains("min-w-16")) {
+    if (sideBar?.classList.contains("-translate-x-full") || sideBar?.classList.contains("min-w-24")) {
         sideBar.classList.replace("-translate-x-full", "translate-x-0");
-        sideBar.classList.replace("min-w-16", "min-w-full");
+        sideBar.classList.replace("min-w-24", "w-full");
         sideBar.classList.add("lg:min-w-72");
 
         sideBarMenus.forEach((e) => {
@@ -32,7 +34,7 @@ function toggleSideBar() {
         document.body.classList.add("overflow-y-hidden", "md:overflow-y-auto");
     } else {
         sideBar?.classList.replace("translate-x-0", "-translate-x-full");
-        sideBar?.classList.replace("min-w-full", "min-w-16");
+        sideBar?.classList.replace("w-full", "min-w-24");
         sideBar?.classList.remove("lg:min-w-72");
 
         sideBarMenus.forEach((e) => {
@@ -172,7 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerModal(event);
     });
 
+    setupSlides();
     setupAutoTimezone();
     setupQEditor();
     setupAdminCharts();
+
+    setupExam();
 });

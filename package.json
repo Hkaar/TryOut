@@ -23,6 +23,7 @@
         "material-symbols": "^0.23.0",
         "preline": "^2.5.0",
         "sweetalert2": "^11.14.1",
+        "swiper": "^11.1.14",
         "toastr": "^2.1.4"
     }
 }

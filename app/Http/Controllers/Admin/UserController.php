@@ -51,6 +51,8 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required|string|min:8',
             'role_id' => 'required|numeric|exists:roles,id',
+            'phone' => 'required|string|max:64',
+            'address' => 'required|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
@@ -111,6 +113,8 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
             'password_confirmation' => 'nullable|string|min:8',
             'role_id' => 'required|numeric|exists:roles,id',
+            'phone' => 'nullable|string|max:64',
+            'address' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 

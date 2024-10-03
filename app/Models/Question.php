@@ -60,4 +60,14 @@ class Question extends Model
     {
         return $this->hasMany(QuestionResult::class, 'question_id', 'id');
     }
+
+    /**
+     * Get the right answer of the question
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<QuestionChoice>
+     */
+    public function rightAnswer()
+    {
+        return $this->hasOne(QuestionChoice::class, 'question_id', 'id')->where('correct', 1);
+    }
 }

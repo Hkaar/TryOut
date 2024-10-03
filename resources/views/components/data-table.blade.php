@@ -1,4 +1,4 @@
-<div class="flex flex-col flex-1 w-full shadow h-fit px-4 py-6">
+<div class="flex flex-col flex-1 min-w-full rounded-md shadow-md max-h-fit px-6 py-5">
   <div class="-m-1.5 overflow-x-auto">
     <div class="p-1.5 min-w-full inline-block align-middle space-y-4">
       <div class="flex items-center justify-between">
@@ -9,7 +9,7 @@
             Tambahkan {{ $title }}
           </a>
         @else
-          <span class="font-semibold text-xl">
+          <span class="font-semibold text-2xl">
             {{ ucwords($title) }}
           </span>
         @endif

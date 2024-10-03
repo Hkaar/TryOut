@@ -22,6 +22,8 @@
             <form action="{{ route('admin.exams.store') }}" method="post">
               @csrf
 
+              <input type="hidden" name="timezone" value="UTC">
+
               <div class="space-y-3 mb-5">
                 <div class="w-full">
                   <label for="name" class="block text-sm font-medium mb-2 dark:text-white">Nama Ujian</label>
@@ -110,7 +112,7 @@
                 <div class="w-full">
                   <label for="start_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Mulai Ujian</label>
                   <input type="datetime-local" id="start_date" name="start_date" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="Masukkan tanggal mulai pengerjaan ujian ..." required>
+                    placeholder="Masukkan tanggal mulai pengerjaan ujian ..." timezone-change required>
 
                   @error('start_date')
                     <p>
@@ -122,7 +124,7 @@
                 <div class="w-full">
                   <label for="end_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Berakhir Ujian</label>
                   <input type="datetime-local" id="end_date" name="end_date" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="Masukkan tanggal berakhir pengerjaan ujian ..." required>
+                    placeholder="Masukkan tanggal berakhir pengerjaan ujian ..." timezone-change required>
 
                   @error('end_date')
                     <p>
@@ -139,9 +141,15 @@
                   </div>
 
                   <div class="flex">
-                    <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="show_results"
-                      name="show_results">
-                    <label for="show_results" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tunjukkan Hasil</label>
+                    <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="public_results"
+                      name="public_results">
+                    <label for="public_results" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tunjukkan Hasil</label>
+                  </div>
+
+                  <div class="flex">
+                    <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="auto_grade"
+                      name="auto_grade">
+                    <label for="auto_grade" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Otomatis Nilai</label>
                   </div>
                 </div>
 

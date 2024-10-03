@@ -8,6 +8,7 @@
   $columns = [
     ['width' => 5, 'name' => 'ID'],
     'Nama',
+    'Group',
     'Kode',
     'Mata Pelajaran',
     ['width' => 18, 'name' => 'Actions']
@@ -53,6 +54,9 @@
             {{ $i + 1 }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
+            {{ $packet->group->name }}
+          </td>
+          <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
             {{ $packet->name }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
@@ -75,10 +79,10 @@
               Hapus
             </button>
 
-            <a href="{{ route('admin.packets.show', $packet->id) }}" class="btn bg-info text-white flex items-center gap-2">
+            {{-- <a href="{{ route('admin.packets.show', $packet->id) }}" class="btn bg-info text-white flex items-center gap-2">
               <i class="material-symbols-outlined font-var-light">info</i>
               Info
-            </a>
+            </a> --}}
           </td>
         </tr>
       @endforeach

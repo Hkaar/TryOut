@@ -62,10 +62,10 @@
             {{ $question->packet->subject->name }}
           </td>
           <td class="whitespace-nowrap flex gap-2 px-6 py-4 text-end text-sm font-medium">
-            <a href="{{ route('admin.questions.edit', $question->id) }}" class="btn bg-caution text-white flex items-center gap-2">
+            {{-- <a href="{{ route('admin.questions.edit', $question->id) }}" class="btn bg-caution text-white flex items-center gap-2">
               <i class="material-symbols-outlined font-var-light">edit</i>
               Edit
-            </a>
+            </a> --}}
 
             <button type="button" class="btn bg-danger text-white flex items-center gap-2"
               hx-confirm="soal" hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
