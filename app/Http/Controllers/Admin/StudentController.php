@@ -51,6 +51,8 @@ class StudentController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required|string|min:8',
+            'phone' => 'required|string|max:64',
+            'address' => 'required|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
@@ -113,6 +115,8 @@ class StudentController extends Controller
             'email' => 'nullable|string|email|max:255|unique:users',
             'password' => 'nullable|string|min:8|confirmed',
             'password_confirmation' => 'nullable|string|min:8',
+            'phone' => 'nullable|string|max:64',
+            'address' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 

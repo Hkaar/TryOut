@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam;
+
 class HomeController extends Controller
 {
     /**
@@ -11,16 +13,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $exams = Exam::paginate(20);
+
+        return view('home', [
+            "exams" => $exams,
+        ]);
     }
 
     /**
      * Show the landing / welcome page
      *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function welcome()
     {
-        return view('welcome');
+        return redirect()->route('home');
+        // return view('welcome');
     }
 }
