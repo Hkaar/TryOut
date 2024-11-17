@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $exams = Exam::paginate(20);
+        $exams = Exam::latest()->paginate(12);
 
         return view('home', [
             'exams' => $exams,
