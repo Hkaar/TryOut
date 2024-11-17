@@ -3,32 +3,39 @@
 @section('title', 'Login')
 
 @section('content')
-  <div class="min-h-screen">
+  <div class="min-h-screen bg-cover" style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
     <div class="grid min-h-screen place-items-center bg-white bg-opacity-20 drop-shadow-sm backdrop-blur-sm">
       <div class="container">
         <div class="flex h-full flex-col items-center gap-6">
-          <h3 class="text-4xl font-bold">
-            {{ $settings['org_name'] }}
-          </h3>
-
           <form action="{{ route('login.post') }}" method="post"
-            class="flex flex-col gap-6 rounded-lg border border-gray-200 bg-white px-6 py-7 shadow-md w-1/4">
+            class="relative flex flex-col items-center gap-6 rounded-3xl border border-gray-200 bg-white px-6 pb-9 pt-12 text-center shadow-lg md:w-1/2 lg:w-1/3">
             @csrf
 
-            <div class="flex flex-1 flex-col gap-3">
-              <div class="relative flex-1">
-                <input type="email" name="email" class="form-control peer ps-11 shadow-sm"
-                  placeholder="Masukkan email">
+            <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
+              class="size-20 absolute -top-10 left-1/2 -translate-x-1/2 rounded-full">
 
-                <div class="form-control-icon peer-disabled:pointer-events-none">
+            <div class="mt-1 flex flex-col items-center gap-1 text-center">
+              <h3 class="text-3xl font-black uppercase tracking-wide text-primary sm:text-4xl">
+                {{ $settings['org_name'] }}
+              </h3>
+
+              <span class="font-medium text-gray-500">Masukkan detail akun!</span>
+            </div>
+
+            <div class="flex w-full flex-1 flex-col gap-3">
+              <div class="relative flex-1">
+                <input type="text" name="username" class="form-control peer ps-11 shadow-sm focus:shadow focus:ring-accent focus:border-accent focus:shadow-primary"
+                  placeholder="Username">
+
+                <div class="form-control-icon peer-disabled:pointer-events-none stroke-gray-400">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-4">
+                    class="size-4 stroke-inherit">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                      d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                   </svg>
                 </div>
 
-                @error('email')
+                @error('username')
                   <p class="dark:text-neutral-500 mt-2 text-sm text-gray-500" id="hs-input-helper-text">
                     {{ $message }}
                   </p>
@@ -38,8 +45,8 @@
               <div class="w-full">
                 <div class="relative">
                   <input id="password" type="password"
-                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="Masukkan password" name="password" required>
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-accent focus:shadow focus:shadow-primary focus:ring-accent disabled:pointer-events-none disabled:opacity-50"
+                    placeholder="Password" name="password" required>
 
                   <button type="button"
                     data-hs-toggle-password='{
@@ -62,9 +69,9 @@
                     </svg>
                   </button>
 
-                  <div class="form-control-icon peer-disabled:pointer-events-none">
+                  <div class="form-control-icon peer-disabled:pointer-events-none stroke-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                      stroke="currentColor" class="size-4">
+                      class="size-4 stroke-inherit">
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
                     </svg>
@@ -80,7 +87,7 @@
             </div>
 
             <button type="submit"
-              class="btn flex flex-1 justify-center bg-primary text-white duration-200 ease-in-out hover:scale-105 hover:bg-tertiary active:scale-95 active:opacity-75 disabled:pointer-events-none disabled:opacity-50">
+              class="btn flex w-32 flex-1 justify-center bg-accent text-white duration-100 ease-in-out hover:scale-105 hover:bg-accent active:scale-95 active:opacity-75 disabled:pointer-events-none disabled:opacity-50">
               Masuk
             </button>
           </form>
