@@ -58,3 +58,5 @@ Route::group(['namespace' => "App\Http\Controllers\Admin", 'prefix' => 'manage',
         Route::resource('group', 'GroupController')->names('admin.groups');
     });
 });
+
+Route::redirect('manage', 'manage/home');
