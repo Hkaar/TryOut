@@ -20,7 +20,7 @@
                   <h3 class="text-xl font-bold line-clamp-1">
                     Soal 1
                   </h3>
-  
+
                   <div class="flex">
                     <input type="checkbox" name="not_sure"
                       class="dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
@@ -31,12 +31,12 @@
                 </div>
               </div>
             </x-slot>
-            
+
             <form id="questionContainer">
               <p class="text-xl font-medium mb-3">
                 {{ $question->question->content }}
               </p>
-  
+
               <div class="space-y-3">
                 @if ($question->question->type->name === 'multiple_choice')
                   @foreach ($question->question->choices as $i => $choice)
@@ -64,7 +64,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                   </svg>
-                  
+
                   Sebelumnya
                 </x-button>
 

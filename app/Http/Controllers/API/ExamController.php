@@ -223,7 +223,7 @@ class ExamController extends Controller
 
         $remainingTime = ($result->duration * 60) - $diff;
 
-        $result->duration = (int) $remainingTime/60;
+        $result->duration = (int) $remainingTime / 60;
         $result->last_date = Carbon::parse((string) now());
         $result->save();
 
