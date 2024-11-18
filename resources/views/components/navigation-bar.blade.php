@@ -1,5 +1,4 @@
-<header
-  class="dark:bg-neutral-800 sticky top-0 md:top-2 z-40 mx-auto md:mt-2 flex w-full flex-wrap border border-gray-200 bg-white py-3 text-sm shadow-md sm:flex-nowrap sm:justify-start md:w-10/12 md:rounded-full">
+<header {{ $attributes->twMerge(["class" => "dark:bg-neutral-800 sticky top-0 z-40 mx-auto flex w-full flex-wrap border border-gray-200 bg-white py-3 text-sm shadow-md sm:flex-nowrap sm:justify-start md:top-2 md:mt-2 md:w-10/12 max-w-[85rem] md:rounded-full"]) }}>
   <nav class="mx-auto flex w-full max-w-[85rem] items-center justify-between px-4">
     <div class="bg-gray flex flex-1 items-center justify-between">
       <a href="{{ route('/') }}">
@@ -39,7 +38,7 @@
             <span class="mb-2 flex items-center gap-2 px-3 py-2 text-lg">
               <a href="{{ route('/') }}" class="line-clamp-1">{{ auth()->user()->username }}</a>
 
-              <span class="rounded-xl bg-accent px-2 py-1 text-sm text-white font-bold">
+              <span class="rounded-xl bg-accent px-2 py-1 text-sm font-bold text-white">
                 {{ ucfirst(auth()->user()->role->name) }}
               </span>
             </span>
@@ -47,6 +46,17 @@
             <hr />
 
             <div class="mt-2 space-y-1">
+              <a class="dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                href="{{ route('home') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-4">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+
+                Beranda
+              </a>
+
               @if (auth()->user()->checkRole('admin'))
                 <a class="dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
                   href="{{ route('admin.home') }}">
@@ -58,6 +68,8 @@
                   Dashboard
                 </a>
               @endif
+
+              <hr />
 
               <a class="dark:text-danger dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-danger hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
                 href="{{ route('logout') }}">
