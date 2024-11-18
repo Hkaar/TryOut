@@ -8,6 +8,7 @@ import { examAPIRoute } from "./variables.js";
 
 import Question from "./components/exams/Question.js";
 import Swal from "sweetalert2";
+import QuestionTopBar from "./components/exams/QuestionTopBar.js";
 
 /**
  * Setup function for exams
@@ -58,6 +59,8 @@ export default async function setupExam() {
  */
 async function gotoQuestion(element) {
     const questionContainer = document.getElementById("questionContainer");
+    const questionHeader = document.getElementById("questionHeader");
+
     const questionId = element.getAttribute('question-id');
     const questionNumber = element.getAttribute('question-number');
 
@@ -66,7 +69,7 @@ async function gotoQuestion(element) {
         return;
     }
 
-    if (questionContainer === null) {
+    if (questionContainer === null || questionHeader === null) {
         console.error("Question container does not exist!");
         return;
     }
@@ -76,10 +79,14 @@ async function gotoQuestion(element) {
 
     switch (response.status) {
         case 200:
-            const questionBox = Question(toNumber(questionNumber), toNumber(questionId), response.data);
+            const questionBox = Question(response.data);
+            const header = QuestionTopBar(toNumber(questionNumber), toNumber(questionId), response.data);
 
             clearNodeTree(questionContainer);
+            clearNodeTree(questionHeader);
+
             questionContainer.appendChild(questionBox);
+            questionHeader.appendChild(header);
 
             toastr.success("Berhasil memperbarui soal!", "Status", {
                 timeOut: 3000,
@@ -118,8 +125,9 @@ async function gotoQuestion(element) {
  */
 async function nextQuestion() {
     const questionContainer = document.getElementById("questionContainer");
+    const questionHeader = document.getElementById("questionHeader");
 
-    if (questionContainer === null) {
+    if (questionContainer === null || questionHeader === null) {
         console.error("Question container does not exist!");
         return;
     }
@@ -135,10 +143,15 @@ async function nextQuestion() {
 
     switch (response.status) {
         case 200:
-            const questionBox = Question(toNumber(newQuestionNumber), toNumber(newQuestionId), response.data);
+            console.log(response.data)
+            const questionBox = Question(response.data);
+            const header = QuestionTopBar(toNumber(newQuestionNumber), toNumber(newQuestionId), response.data);
 
             clearNodeTree(questionContainer);
+            clearNodeTree(questionHeader);
+
             questionContainer.appendChild(questionBox);
+            questionHeader.appendChild(header);
 
             toastr.success("Berhasil memperbarui soal!", "Status", {
                 timeOut: 3000,
@@ -177,8 +190,9 @@ async function nextQuestion() {
  */
 async function prevQuestion() {
     const questionContainer = document.getElementById("questionContainer");
-
-    if (questionContainer === null) {
+    const questionHeader = document.getElementById("questionHeader");
+    
+    if (questionContainer === null || questionHeader === null) {
         console.error("Question container does not exist!");
         return;
     }
@@ -194,10 +208,14 @@ async function prevQuestion() {
 
     switch (response.status) {
         case 200:
-            const questionBox = Question(toNumber(newQuestionNumber), toNumber(newQuestionId), response.data);
+            const questionBox = Question(response.data);
+            const header = QuestionTopBar(toNumber(newQuestionNumber), toNumber(newQuestionId), response.data);
 
             clearNodeTree(questionContainer);
+            clearNodeTree(questionHeader);
+
             questionContainer.appendChild(questionBox);
+            questionHeader.appendChild(header);
 
             toastr.success("Berhasil memperbarui soal!", "Status", {
                 timeOut: 3000,
@@ -236,7 +254,7 @@ async function prevQuestion() {
  */
 async function saveQuestion() {
     const questionContainer = document.getElementById("questionContainer");
-
+    
     if (!(questionContainer instanceof HTMLFormElement)) {
         console.error("Question container does not exist!");
         return;
@@ -353,7 +371,7 @@ function updateExamTime(timer) {
 
     setInterval(() => {
         fetchExamTime(timer);
-    }, 5 * 60 * 1000);
+    }, 1 * 60 * 1000);
 }
 
 /**
