@@ -26,13 +26,13 @@
           <h4 class="text-lg font-medium text-gray-500">Sub Test yang tersedia untuk anda</h4>
         </div>
 
-        <div class="grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 mb-3">
           @foreach ($exams as $exam)
             <x-card
               class="transition-all duration-200 ease-in-out hover:-translate-y-3 hover:shadow-lg hover:shadow-accent">
               <x-slot name="header">
-                <div class="rounded-t-md bg-accent px-4 py-3 text-white">
-                  <h3 class="text-xl font-bold">
+                <div class="rounded-t-md bg-accent px-4 py-3 text-white line-clamp-1">
+                  <h3 class="text-xl font-bold line-clamp-1">
                     {{ $exam->name }}
                   </h3>
                 </div>
@@ -100,6 +100,10 @@
               </x-slot>
             </x-card>
           @endforeach
+        </div>
+
+        <div class="w-full flex items-center justify-center">
+          <x-paginate-links :links="$exams" />
         </div>
       </x-card>
     </div>
