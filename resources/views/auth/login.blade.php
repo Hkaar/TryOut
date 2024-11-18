@@ -25,7 +25,7 @@
             <div class="flex w-full flex-1 flex-col gap-3">
               <div class="relative flex-1">
                 <input type="text" name="username" class="form-control peer ps-11 shadow-sm focus:shadow focus:ring-accent focus:border-accent focus:shadow-primary"
-                  placeholder="Username">
+                  placeholder="Username atau Email">
 
                 <div class="form-control-icon peer-disabled:pointer-events-none stroke-gray-400">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
