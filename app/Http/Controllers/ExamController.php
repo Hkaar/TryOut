@@ -45,7 +45,7 @@ class ExamController extends Controller
             return redirect()->route('exams.index');
         }
 
-        if ($existing->finished === 1) {
+        if ($existing && $existing->finished === 1) {
             return redirect()->route('exams.index');
         }
 
