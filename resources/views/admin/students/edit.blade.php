@@ -4,10 +4,10 @@
 
 @section('content')
   <x-dashboard-layout active="peserta">
-    <div class="flex-1 flex">
-      <div class="flex-1 grid place-items-center">
-        <div class="flex flex-col gap-3 w-full">
-          <div class="flex gap-4 items-center">
+    <div class="grid flex-1 grid-cols-1 gap-y-5 lg:grid-cols-2">
+      <div class="grid flex-1 place-items-center">
+        <div class="flex w-full flex-col gap-3">
+          <div class="flex items-center gap-4">
             <i class="material-symbols-outlined font-var-light font-4xl">group</i>
 
             <span class="flex flex-col gap-1">
@@ -19,24 +19,23 @@
           </div>
 
           <x-elevated-card class="flex flex-col">
-            <form action="{{ route('admin.students.update', $student->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.students.update', $student->id) }}" method="post"
+              enctype="multipart/form-data">
               @csrf
               @method('PUT')
 
-              <div class="space-y-3 mb-5">
+              <div class="mb-5 space-y-3">
                 <div class="w-full">
                   <label for="img" class="sr-only">Pilih foto profil</label>
-                  <input type="file" name="img" id="img" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
-                    file:bg-gray-50 file:border-0
-                    file:me-4
-                    file:py-3 file:px-4
-                    dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                  <input type="file" name="img" id="img"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:file:bg-neutral-700 dark:file:text-neutral-400 block w-full rounded-lg border border-gray-200 text-sm shadow-sm file:me-4 file:border-0 file:bg-gray-50 file:px-4 file:py-3 focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                     preview-target="#previewFoto">
                 </div>
 
                 <div class="w-full">
-                  <label for="username" class="block text-sm font-medium mb-2 dark:text-white">Username Peserta</label>
-                  <input type="text" id="username" name="username" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  <label for="username" class="dark:text-white mb-2 block text-sm font-medium">Username Peserta</label>
+                  <input type="text" id="username" name="username"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                     placeholder="{{ $student->username }}">
 
                   @error('username')
@@ -47,8 +46,9 @@
                 </div>
 
                 <div class="w-full">
-                  <label for="name" class="block text-sm font-medium mb-2 dark:text-white">Nama Peserta</label>
-                  <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  <label for="name" class="dark:text-white mb-2 block text-sm font-medium">Nama Peserta</label>
+                  <input type="text" id="name" name="name"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                     placeholder="{{ $student->name }}">
 
                   @error('name')
@@ -59,8 +59,9 @@
                 </div>
 
                 <div class="w-full">
-                  <label for="email" class="block text-sm font-medium mb-2 dark:text-white">Email Peserta</label>
-                  <input type="email" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  <label for="email" class="dark:text-white mb-2 block text-sm font-medium">Email Peserta</label>
+                  <input type="email" id="email" name="email"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                     placeholder="{{ $student->email }}">
 
                   @error('email')
@@ -71,8 +72,9 @@
                 </div>
 
                 <div class="w-full">
-                  <label for="phone" class="block text-sm font-medium mb-2 dark:text-white">Telepon</label>
-                  <input type="text" id="phone" name="phone" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  <label for="phone" class="dark:text-white mb-2 block text-sm font-medium">Telepon</label>
+                  <input type="text" id="phone" name="phone"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                     placeholder="Masukkan nama akun ..." value="{{ $student->phone ? $student->phone : '' }}">
 
                   @error('phone')
@@ -83,14 +85,16 @@
                 </div>
 
                 <div class="max-w-full">
-                  <label for="address" class="block text-sm font-medium mb-2 dark:text-white">Alamat</label>
-                  <textarea id="address" name="address" rows="3" cols="10" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="3" placeholder="Masukkan alamat ..."
-                    >{{ $student->address ? $student->address : '' }}</textarea>
+                  <label for="address" class="dark:text-white mb-2 block text-sm font-medium">Alamat</label>
+                  <textarea id="address" name="address" rows="3" cols="10"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
+                    rows="3" placeholder="Masukkan alamat ...">{{ $student->address ? $student->address : '' }}</textarea>
                 </div>
 
                 <div class="w-full">
-                  <label for="password" class="block text-sm font-medium mb-2 dark:text-white">Password Peserta</label>
-                  <input type="password" id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  <label for="password" class="dark:text-white mb-2 block text-sm font-medium">Password Peserta</label>
+                  <input type="password" id="password" name="password"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                     placeholder="Masukkan password peserta ...">
 
                   @error('password')
@@ -101,8 +105,10 @@
                 </div>
 
                 <div class="w-full">
-                  <label for="password_confirmation" class="block text-sm font-medium mb-2 dark:text-white">Konfirmasi password</label>
-                  <input type="password" id="password_confirmation" name="password_confirmation" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  <label for="password_confirmation" class="dark:text-white mb-2 block text-sm font-medium">Konfirmasi
+                    password</label>
+                  <input type="password" id="password_confirmation" name="password_confirmation"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                     placeholder="Masukkan password lagi ...">
 
                   @error('password_confirmation')
@@ -113,26 +119,36 @@
                 </div>
               </div>
 
-              <div class="flex items-center gap-1">
-                <button type="submit" class="btn bg-primary text-white">
-                  Simpan
-                </button>
+              <div class="flex items-center gap-2">
+                <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">save</i>
 
-                <a href="{{ route('admin.students.index') }}" class="btn bg-danger text-white">
+                  Simpan
+                </x-button>
+
+                <x-link-button to="{{ route('admin.students.index') }}"
+                  class="border-danger hover:rounded-none hover:bg-danger hover:text-white hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">cancel</i>
                   Batalkan
-                </a>
+                </x-link-button>
               </div>
             </form>
           </x-elevated-card>
         </div>
       </div>
 
-      <div class="flex-1 grid place-items-center">
-        <div id="previewFoto" class="font-semibold grid place-items-center">
+      <div class="grid flex-1 place-items-center order-first lg:order-last">
+        <div id="previewFoto" class="grid place-items-center font-semibold">
           @if ($student->img)
-            <img src="{{ Storage::url($student->img) }}" alt="Foto tidak dapat dimuatkan" class="block w-2/3 aspect-square">
+            <img src="{{ Storage::url($student->img) }}" alt="Foto tidak dapat dimuatkan"
+              class="block aspect-square w-2/3">
           @else
-            Foto akan muncul disini
+            <div class="flex flex-col items-center justify-center gap-5">
+              <img src="{{ Vite::asset('resources/images/upload.svg') }}" alt="Gambar tidak dapat dimuatkan"
+                class="size-1/2">
+              <span class="rounded-md bg-accent px-3 py-2 font-semibold md:text-lg lg:text-xl">Gambar akan muncul
+                disini!</span>
+            </div>
           @endif
         </div>
       </div>

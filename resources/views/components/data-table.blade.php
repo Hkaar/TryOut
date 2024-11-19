@@ -1,13 +1,14 @@
-<div class="flex flex-col flex-1 min-w-full rounded-md shadow-md max-h-fit px-6 py-5">
+<div class="flex flex-col flex-1 min-w-full rounded-lg border border-gray-200 shadow-lg max-h-fit px-7 py-6">
   <div class="-m-1.5 overflow-x-auto">
     <div class="p-1.5 min-w-full inline-block align-middle space-y-4">
       <div class="flex items-center justify-between">
         @if (isset($routes['create']))
-          <a href="{{ $routes['create'] }}" class="btn bg-success text-white duration-200 ease-in-out transition-transform">
+
+          <x-link-button to="{{ $routes['create'] }}" class="border-success hover:bg-success hover:text-white">
             <i class="material-symbols-outlined font-var-light">add</i>
 
             Tambahkan {{ $title }}
-          </a>
+          </x-link-button>
         @else
           <span class="font-semibold text-2xl">
             {{ ucwords($title) }}
