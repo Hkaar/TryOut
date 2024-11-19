@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import toastr from 'toastr';
 
 /**
  * A function to make requests using axios with error handling
@@ -9,7 +9,7 @@ export function request(reqMethod) {
     try {
         reqMethod();
     } catch (error) {
-        /** @type {AxiosError} */
+        /** @type {import('axios').AxiosError} */
         // @ts-ignore
         const axiosError = error;
 

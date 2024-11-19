@@ -2,11 +2,10 @@ import './bootstrap';
 
 import Swal from 'sweetalert2';
 
-import { setupAutoTimezone } from "./utils.js";
+import { setupAutoTimezone } from "./utils/time.js";
 
 import setupQEditor from "./questionEditor.js";
 import setupAdminCharts from './charts/admin.js';
-import setupSlides from './slides/slide.js';
 import setupExam from './exam.js';
 
 /**
@@ -174,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerModal(event);
     });
 
-    setupSlides();
     setupAutoTimezone();
     setupQEditor();
     setupAdminCharts();
