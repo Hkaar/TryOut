@@ -38,7 +38,7 @@ export default function SimpleQuestionBox(parent, id, title) {
         }).then(response => {
             if (response.isConfirmed) {
                 axios.delete(questionAPIRoute, {data: {'id': id}})
-                    .then(message => {
+                    .then(() => {
                         toastr.success("Berhasil menghapus pertanyaan!", "Status", {
                             timeOut: 3000,
                             progressBar: true,

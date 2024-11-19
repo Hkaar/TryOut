@@ -1,10 +1,10 @@
 'use strict';
 
 import axios from "axios";
-import toastr, { error } from 'toastr';
+import toastr from 'toastr';
 
 import { questionSaveRoute, questionAPIRoute } from "./variables.js";
-import { clearNodeTree } from "./utils.js";
+import { clearNodeTree } from "./utils/common.js";
 
 import ChoiceBox from "./components/ChoiceBox.js";
 import EssayBox from "./components/EssayBox.js";
@@ -21,7 +21,7 @@ function addOption() {
         return;
     }
 
-    parent.appendChild(ChoiceBox(parent));
+    parent.appendChild(ChoiceBox());
 }
 
 /**
@@ -43,13 +43,13 @@ export function toggleChoiceBox(multipleChoice) {
     if (multipleChoice) {
         choiceBtn.disabled = false;
 
-        container.appendChild(ChoiceBox(container));
+        container.appendChild(ChoiceBox());
         choiceBtn.addEventListener("click", addOption)
     } else {
         choiceBtn.disabled = true;
         choiceBtn.removeEventListener("click", addOption, true);
 
-        container.appendChild(EssayBox(container));
+        container.appendChild(EssayBox());
     }
 }
 

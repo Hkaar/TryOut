@@ -1,21 +1,16 @@
-import axios from "axios";
-import toastr from "toastr";
-
-import { examAPIRoute } from "../../variables.js";
-import { uuid } from "../../utils.js";
+import { uuid } from "../../utils/common.js";
 
 /**
  * The question part of the exam ui
  * 
- * @param {number} questionNumber 
- * @param {number} questionId
  * @param {Questions.questionData} questionData  
  */
-export default function Question(questionNumber, questionId, questionData) {
+export default function Question(questionData) {
     const root = document.createElement("div");
     root.classList.add("flex", "flex-col", "gap-6");
 
     const questionContent = document.createElement("p");
+    questionContent.className = "text-xl font-medium";
     questionContent.textContent = questionData.content ? questionData.content : 'NULL';
 
     const choices = document.createElement("div");
@@ -59,94 +54,8 @@ export default function Question(questionNumber, questionId, questionData) {
         choices.appendChild(container);
     }
 
-    root.appendChild(TopBar(`Soal ${questionNumber}`, questionId, questionData));
     root.appendChild(questionContent);
     root.appendChild(choices);
 
     return root;
-}
-
-/**
- * Top bar of the question
- * 
- * @param {string} title 
- * @param {number} questionId 
- * @param {Questions.questionData} questionData 
- */
-function TopBar(title, questionId, questionData) {
-    const topBar = document.createElement("div");
-    topBar.classList.add("flex", "items-center", "justify-between");
-
-    const questionTitle = document.createElement("h6");
-    questionTitle.classList.add("text-xl", "font-semibold");
-    questionTitle.textContent = title;
-
-    const checkBoxContainer = document.createElement("div");
-    checkBoxContainer.classList.add("flex");
-
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.className = 'shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800';
-    checkbox.id = `status-${uuid()}`;
-    checkbox.checked = questionData.not_sure === 1 ? true : false;
-
-    const label = document.createElement('label');
-    label.htmlFor = `status-${uuid()}`;
-    label.className = 'text-sm text-gray-500 ms-3 dark:text-neutral-400';
-    label.textContent = 'Ragu-ragu';
-
-    checkbox.addEventListener("change", () => {
-        triggerCheckBox(checkbox, questionId);
-
-        const questionBox = document.querySelector(`[question-id="${questionId}"]`);
-
-        if (questionBox !== null) {
-            checkbox.checked 
-                ? questionBox.classList.add("bg-caution") 
-                : questionBox.classList.remove("bg-caution");
-        }
-    });
-
-    checkBoxContainer.appendChild(checkbox);
-    checkBoxContainer.appendChild(label);
-
-    topBar.appendChild(questionTitle);
-    topBar.appendChild(checkBoxContainer);
-
-    return topBar;
-}
-
-/**
- * Trigger the checkbox event
- * 
- * @param {HTMLInputElement} parent 
- * @param {number} questionId 
- */
-async function triggerCheckBox(parent, questionId) {
-    const response = await axios.put(`${examAPIRoute}/${examResult}/pertanyaan/${questionId}/not-sure`, {}, {
-        headers: {
-            'X-CSRF-TOKEN': csrf, 
-        }
-    });
-
-    switch (response.status) {
-        case 200:
-            toastr.success("Berhasil merubah status ragu soal", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
-            break;
-
-        case 400|500:
-            toastr.error("Gagal merubah status ragu soal", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
-
-            parent.checked = !parent.checked;
-
-        default:
-            console.warn(`Encountered unexpected status code from response ${response.status}\nData : ${response.data}`);
-            break;
-    }
 }

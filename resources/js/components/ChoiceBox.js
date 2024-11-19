@@ -1,14 +1,12 @@
-import { clearNodeTree, uuid } from "../utils.js";
+import { clearNodeTree, uuid } from "../utils/common.js";
 
 import Icon from "./Icon.js";
 import PhotoSVG from "./ImageAsset.js";
 
 /**
  * A choice box element for the question create & edit page
- * 
- * @param {Element} parent 
  */
-export default function ChoiceBox(parent) {
+export default function ChoiceBox() {
     const root = document.createElement("div");
     root.classList.add("answerBox", "flex", "flex-col", "py-2", "px-4", "rounded-md", "border-2", "shadow-sm", "gap-2");
 

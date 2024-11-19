@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// @ts-ignore
 export default {
   darkMode: "selector",
   mode: "jit",
@@ -14,16 +15,17 @@ export default {
         center: true
       },
       colors: {
-        primary: "#2A342E",
-        secondary: "#46564D",
-        tertiary: "#657A6E",
-        primary_dark: "#D5EFDF",
-        secondary_dark: "#A7C8B5",
-        tertiary_dark: "#85A091",
-        success: "#22c55e",
-        caution: "#eab308",
-        danger: "#ef4444",
-        info: "#60a5fa",
+        "primary": "#2A342E",
+        "secondary": "#46564D",
+        "tertiary": "#657A6E",
+        "accent": "#AAC8A7",
+        "primary-dark": "#D5EFDF",
+        "secondary-dark": "#A7C8B5",
+        "tertiary-dark": "#85A091",
+        "success": "#22c55e",
+        "caution": "#eab308",
+        "danger": "#ef4444",
+        "info": "#60a5fa",
       }
     },
   },

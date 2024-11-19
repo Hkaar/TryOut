@@ -1,9 +1,7 @@
 /**
  * An essay box element for the question create & edit page
- * 
- * @param {Element} parent 
  */
-export default function EssayBox(parent) {
+export default function EssayBox() {
     const root = document.createElement("div");
     root.classList.add("w-full", "space-y-3");
 

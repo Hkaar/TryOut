@@ -61,6 +61,14 @@
 }
 
 @layer components {
+  .container {
+    @apply max-w-[85rem]
+  }
+
+  .container-sm {
+    @apply container max-w-[75rem]
+  }
+  
   .btn {
     @apply p-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent active:scale-95 active:opacity-60;
   }

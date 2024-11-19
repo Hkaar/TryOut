@@ -3,6 +3,7 @@ import 'apexcharts/dist/apexcharts.css';
 import 'toastr/build/toastr.min.css';
 import 'material-symbols';
 import 'htmx.org';
+import '@popperjs/core';
 import 'toastr';
 
 import '../../node_modules/preline/dist/helper-apexcharts.js';
