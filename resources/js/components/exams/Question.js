@@ -1,4 +1,4 @@
-import { uuid } from "../../utils.js";
+import { uuid } from "../../utils/common.js";
 
 /**
  * The question part of the exam ui

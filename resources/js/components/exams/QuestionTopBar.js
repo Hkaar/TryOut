@@ -1,7 +1,7 @@
 import axios from "axios";
 import toastr from "toastr";
 
-import { uuid } from "../../utils.js";
+import { uuid } from "../../utils/common.js";
 import { examAPIRoute } from "../../variables.js";
 
 /**
@@ -83,6 +83,7 @@ async function triggerCheckBox(parent, questionId) {
             });
 
             parent.checked = !parent.checked;
+            break;
 
         default:
             console.warn(`Encountered unexpected status code from response ${response.status}\nData : ${response.data}`);
