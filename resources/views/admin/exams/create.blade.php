@@ -4,7 +4,7 @@
 
 @section('content')
   <x-dashboard-layout active="daftar ujian">
-    <div class="flex-1 flex">
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2">
       <div class="flex-1 grid place-items-center">
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
@@ -159,21 +159,25 @@
                 </div>
               </div>
 
-              <div class="flex items-center gap-1">
-                <button type="submit" class="btn bg-primary text-white">
-                  Simpan
-                </button>
+              <div class="flex items-center gap-2">
+                <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">save</i>
 
-                <a href="{{ route('admin.exams.index') }}" class="btn bg-danger text-white">
+                  Simpan
+                </x-button>
+
+                <x-link-button to="{{ route('admin.exams.index') }}"
+                  class="border-danger hover:rounded-none hover:bg-danger hover:text-white hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">cancel</i>
                   Batalkan
-                </a>
+                </x-link-button>
               </div>
             </form>
           </x-elevated-card>
         </div>
       </div>
 
-      <div class="flex-1 grid place-items-center">
+      <div class="flex-1 grid place-items-center order-first lg:order-last">
         <img src="{{ Vite::asset('resources/images/add.svg') }}" alt="Gambar tidak dapat dimuatkan" class="block w-2/3 aspect-square">
       </div>
     </div>

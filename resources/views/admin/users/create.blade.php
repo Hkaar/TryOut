@@ -4,7 +4,7 @@
 
 @section('content')
   <x-dashboard-layout active="akun">
-    <div class="flex-1 flex">
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-y-5">
       <div class="flex-1 grid place-items-center">
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
@@ -131,23 +131,29 @@
                 </div>
               </div>
 
-              <div class="flex items-center gap-1">
-                <button type="submit" class="btn bg-primary text-white">
-                  Simpan
-                </button>
+              <div class="flex items-center gap-2">
+                <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">save</i>
 
-                <a href="{{ route('admin.users.index') }}" class="btn bg-danger text-white">
+                  Simpan
+                </x-button>
+
+                <x-link-button to="{{ route('admin.users.index') }}" class="border-danger hover:bg-danger hover:text-white hover:rounded-none hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">cancel</i>
                   Batalkan
-                </a>
+                </x-link-button>
               </div>
             </form>
           </x-elevated-card>
         </div>
       </div>
 
-      <div class="flex-1 grid place-items-center">
+      <div class="flex-1 grid place-items-center order-first lg:order-last">
         <div id="previewFoto" class="font-semibold grid place-items-center">
-          Foto akan muncul disini
+          <div class="flex items-center justify-center flex-col gap-5">
+            <img src="{{ Vite::asset('resources/images/upload.svg') }}" alt="Gambar tidak dapat dimuatkan" class="size-1/2">
+            <span class="md:text-lg lg:text-xl font-semibold px-3 py-2 bg-accent rounded-md">Gambar akan muncul disini!</span>
+          </div>
         </div>
       </div>
     </div>
