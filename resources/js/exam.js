@@ -416,7 +416,7 @@ function updateExamTime(timer) {
 
     setInterval(() => {
         fetchExamTime(timer);
-    }, 1 * 60 * 1000);
+    }, 0.5 * 60 * 1000);
 }
 
 /**
