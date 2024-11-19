@@ -1,4 +1,3 @@
-import { times } from "lodash";
 import { buildChart, buildTooltip } from "preline/dist/helper-apexcharts.js";
 
 /**
