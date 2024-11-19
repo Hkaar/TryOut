@@ -204,7 +204,7 @@ class ExamController extends Controller
         $result->save();
 
         return response()->json([
-            'redirect' => route('exams.index'),
+            'redirect' => route(name: 'home'),
         ]);
     }
 
