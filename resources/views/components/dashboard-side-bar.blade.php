@@ -17,11 +17,9 @@
         @auth
           <a href="{{ route('/') }}" class="menu-text hidden">{{ auth()->user()->name }}</a>
 
-          @if (auth()->user()->checkRole('admin'))
-            <span class="rounded bg-tertiary p-1 menu-text hidden text-sm">
-              Admin
-            </span>
-          @endif
+          <span class="rounded-xl bg-accent px-2 py-1 text-sm font-bold menu-text hidden text-black">
+            {{ ucfirst(auth()->user()->role->name) }}
+          </span>
         @else
           <a href="{{ route('/') }}" class="menu-text hidden">User</a>
         @endauth

@@ -1,7 +1,7 @@
 <footer class="w-full px-4 py-4 shadow border-t-2 bg-white border-gray-200">
   <div class="flex justify-between container">
     <span class="font-semibold" copyright-check>
-      Copyright &#169; 2024 Hkaar. All rights reserved.
+      Copyright &#169; 2024 {{ $settings['org_name'] }}. All rights reserved.
     </span>
 
     <div class="flex items-center gap-2">
