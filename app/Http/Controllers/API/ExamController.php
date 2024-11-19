@@ -204,7 +204,7 @@ class ExamController extends Controller
         $result->save();
 
         return response()->json([
-            'redirect' => route('exams.index'),
+            'redirect' => route(name: 'home'),
         ]);
     }
 
@@ -216,12 +216,16 @@ class ExamController extends Controller
     public function remainingExamTime(Request $request, int $id)
     {
         $result = ExamResult::findOrFail($id);
-        $current = Carbon::now();
+        $current = Carbon::parse((string) now());
 
         $startTime = Carbon::parse($result->last_date);
         $diff = $startTime->diffInSeconds($current);
 
         $remainingTime = ($result->duration * 60) - $diff;
+
+        $result->duration = (int) $remainingTime / 60;
+        $result->last_date = Carbon::parse((string) now());
+        $result->save();
 
         if ($remainingTime > 0) {
             return response()->json([

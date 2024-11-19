@@ -1,5 +1,5 @@
 <aside id="sideBar"
-  class="dark:bg-primary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto bg-primary px-6 py-4 text-white shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen lg:relative lg:translate-x-0">
+  class="dark:bg-secondary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto bg-secondary px-6 py-4 text-white shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen lg:relative lg:translate-x-0">
 
   <!-- This div is here because of tailwind not registering classes properly -->
   <div class="lg:min-w-72 hidden h-screen min-w-full ps-3"></div>
@@ -17,11 +17,9 @@
         @auth
           <a href="{{ route('/') }}" class="menu-text hidden">{{ auth()->user()->name }}</a>
 
-          @if (auth()->user()->checkRole('admin'))
-            <span class="rounded bg-tertiary p-1 menu-text hidden text-sm">
-              Admin
-            </span>
-          @endif
+          <span class="rounded-xl bg-accent px-2 py-1 text-sm font-bold menu-text hidden text-black">
+            {{ ucfirst(auth()->user()->role->name) }}
+          </span>
         @else
           <a href="{{ route('/') }}" class="menu-text hidden">User</a>
         @endauth

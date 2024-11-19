@@ -20,7 +20,7 @@ class ExamController extends Controller
     {
         $exams = Exam::paginate(20);
 
-        return view('exams.index', [
+        return view('home', [
             'exams' => $exams,
         ]);
     }
@@ -42,15 +42,16 @@ class ExamController extends Controller
         $diff = $endDate->diffInSeconds($current);
 
         if (($diff / 60) <= 0) {
-            return redirect()->route('exams.index');
+            return redirect()->route('home');
         }
 
-        if ($existing->finished === 1) {
-            return redirect()->route('exams.index');
+        if ($existing && $existing->finished === 1) {
+            return redirect()->route('home');
         }
 
         if ($existing) {
             $existing->last_date = $current;
+            $existing->save();
 
             $questionResults = QuestionResult::ByExamResultId($existing->id)
                 ->orderBy('id', 'asc')
