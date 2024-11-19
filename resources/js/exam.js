@@ -3,38 +3,39 @@ import toastr from "toastr";
 
 import { toNumber } from "lodash";
 
-import { clearNodeTree } from "./utils.js";
+import { clearNodeTree } from "./utils/common.js";
 import { examAPIRoute } from "./variables.js";
 
 import Question from "./components/exams/Question.js";
 import Swal from "sweetalert2";
 import QuestionTopBar from "./components/exams/QuestionTopBar.js";
+import { request } from "./utils/network.js";
 
 /**
  * Setup function for exams
  */
-export default async function setupExam() {
+export default function setupExam() {
     const nextBtn = document.getElementById("nextQuestion");
     const prevBtn = document.getElementById("previousQuestion");
 
     const finishBtn = document.getElementById("finishExam");
-    
+
     const questionBoxes = document.querySelectorAll("[question-id]");
 
-    questionBoxes.forEach(element => {
+    questionBoxes.forEach((element) => {
         element.addEventListener("click", () => {
             gotoQuestion(element);
-        })
+        });
     });
 
     if (nextBtn === null || prevBtn === null) {
-        console.error("Next and/or previous button for exams does not exist!")
+        console.error("Next and/or previous button for exams does not exist!");
         return;
     }
 
     nextBtn.addEventListener("click", () => {
         nextQuestion();
-    })
+    });
 
     prevBtn.addEventListener("click", () => {
         prevQuestion();
@@ -47,25 +48,27 @@ export default async function setupExam() {
 
     finishBtn.addEventListener("click", () => {
         endExam();
-    })
+    });
 
     updateExamTime("#examTimer");
 }
 
 /**
  * Fetches the specified question
- * 
- * @param {Element} element 
+ *
+ * @param {Element} element
  */
-async function gotoQuestion(element) {
+function gotoQuestion(element) {
     const questionContainer = document.getElementById("questionContainer");
     const questionHeader = document.getElementById("questionHeader");
 
-    const questionId = element.getAttribute('question-id');
-    const questionNumber = element.getAttribute('question-number');
+    const questionId = element.getAttribute("question-id");
+    const questionNumber = element.getAttribute("question-number");
 
     if (questionId === null || questionNumber === null) {
-        console.error(`Question id and/or number is not defined in ${element}!`);
+        console.error(
+            `Question id and/or number is not defined in ${element}!`
+        );
         return;
     }
 
@@ -74,56 +77,66 @@ async function gotoQuestion(element) {
         return;
     }
 
-    const response = await axios.get(`${examAPIRoute}/${examResult}/pertanyaan/${questionId}`);
-    saveQuestion();
+    request(async () => {
+        const response = await axios.get(
+            `${examAPIRoute}/${examResult}/pertanyaan/${questionId}`
+        );
+        saveQuestion();
 
-    switch (response.status) {
-        case 200:
-            const questionBox = Question(response.data);
-            const header = QuestionTopBar(toNumber(questionNumber), toNumber(questionId), response.data);
+        const questionBox = Question(response.data);
+        const header = QuestionTopBar(
+            toNumber(questionNumber),
+            toNumber(questionId),
+            response.data
+        );
 
-            clearNodeTree(questionContainer);
-            clearNodeTree(questionHeader);
+        switch (response.status) {
+            case 200:
+                clearNodeTree(questionContainer);
+                clearNodeTree(questionHeader);
 
-            questionContainer.appendChild(questionBox);
-            questionHeader.appendChild(header);
+                questionContainer.appendChild(questionBox);
+                questionHeader.appendChild(header);
 
-            toastr.success("Berhasil memperbarui soal!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+                toastr.success("Berhasil memperbarui soal!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            currentQuestionId = toNumber(questionId);
-            currentQuestionNumber = toNumber(questionNumber);
+                currentQuestionId = toNumber(questionId);
+                currentQuestionNumber = toNumber(questionNumber);
 
-            break;
+                break;
 
-        case 404:
-            toastr.error("Maaf tidak ada soal lagi :(", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            case 404:
+                toastr.error("Maaf tidak ada soal lagi :(", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            break;
+                break;
 
-        case 400|500:
-            toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            case 400 | 500:
+                toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            break;
-    
-        default:
-            console.warn(`Encountered unexpected status code from response ${response.status}\nData : ${response.data}`);
-            break;
-    }
+                break;
+
+            default:
+                console.warn(
+                    `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
+                );
+                break;
+        }
+    });
 }
 
 /**
  * Go to the next question
  */
-async function nextQuestion() {
+function nextQuestion() {
     const questionContainer = document.getElementById("questionContainer");
     const questionHeader = document.getElementById("questionHeader");
 
@@ -132,129 +145,148 @@ async function nextQuestion() {
         return;
     }
 
-    const response = await axios.get(`${examAPIRoute}/${examResult}/pertanyaan/${currentQuestionId}/next`);
-    /** @type {Questions.questionData} */
-    const data = response.data;
+    request(async () => {
+        const response = await axios.get(
+            `${examAPIRoute}/${examResult}/pertanyaan/${currentQuestionId}/next`
+        );
+        /** @type {Questions.questionData} */
+        const data = response.data;
 
-    saveQuestion();
+        saveQuestion();
 
-    const newQuestionId = data.id;
-    const newQuestionNumber = currentQuestionNumber+1;
+        const newQuestionId = data.id;
+        const newQuestionNumber = currentQuestionNumber + 1;
 
-    switch (response.status) {
-        case 200:
-            console.log(response.data)
-            const questionBox = Question(response.data);
-            const header = QuestionTopBar(toNumber(newQuestionNumber), toNumber(newQuestionId), response.data);
+        const questionBox = Question(response.data);
+        const header = QuestionTopBar(
+            toNumber(newQuestionNumber),
+            toNumber(newQuestionId),
+            response.data
+        );
 
-            clearNodeTree(questionContainer);
-            clearNodeTree(questionHeader);
+        switch (response.status) {
+            case 200:
+                clearNodeTree(questionContainer);
+                clearNodeTree(questionHeader);
 
-            questionContainer.appendChild(questionBox);
-            questionHeader.appendChild(header);
+                questionContainer.appendChild(questionBox);
+                questionHeader.appendChild(header);
 
-            toastr.success("Berhasil memperbarui soal!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+                toastr.success("Berhasil memperbarui soal!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            currentQuestionId = toNumber(newQuestionId);
-            currentQuestionNumber = newQuestionNumber;
+                currentQuestionId = toNumber(newQuestionId);
+                currentQuestionNumber = newQuestionNumber;
 
-            break;
+                break;
 
-        case 404:
-            toastr.error("Maaf tidak ada soal lagi :(", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            case 404:
+                toastr.error("Maaf tidak ada soal lagi :(", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            break;
+                break;
 
-        case 400|500:
-            toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            case 400 | 500:
+                toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            break;
-    
-        default:
-            console.warn(`Encountered unexpected status code from response ${response.status}\nData : ${response.data}`);
-            break;
-    }
+                break;
+
+            default:
+                console.warn(
+                    `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
+                );
+                break;
+        }
+    });
 }
 
 /**
  * Go to the previous question
  */
-async function prevQuestion() {
+function prevQuestion() {
     const questionContainer = document.getElementById("questionContainer");
     const questionHeader = document.getElementById("questionHeader");
-    
+
     if (questionContainer === null || questionHeader === null) {
         console.error("Question container does not exist!");
         return;
     }
 
-    const response = await axios.get(`${examAPIRoute}/${examResult}/pertanyaan/${currentQuestionId}/previous`);
-    /** @type {Questions.questionData} */
-    const data = response.data;
+    request(async () => {
+        const response = await axios.get(
+            `${examAPIRoute}/${examResult}/pertanyaan/${currentQuestionId}/previous`
+        );
+        /** @type {Questions.questionData} */
+        const data = response.data;
 
-    saveQuestion();
+        saveQuestion();
 
-    const newQuestionId = data.id;
-    const newQuestionNumber = currentQuestionNumber-1;
+        const newQuestionId = data.id;
+        const newQuestionNumber = currentQuestionNumber - 1;
 
-    switch (response.status) {
-        case 200:
-            const questionBox = Question(response.data);
-            const header = QuestionTopBar(toNumber(newQuestionNumber), toNumber(newQuestionId), response.data);
+        const questionBox = Question(response.data);
+        const header = QuestionTopBar(
+            toNumber(newQuestionNumber),
+            toNumber(newQuestionId),
+            response.data
+        );
 
-            clearNodeTree(questionContainer);
-            clearNodeTree(questionHeader);
+        switch (response.status) {
+            case 200:
+                clearNodeTree(questionContainer);
+                clearNodeTree(questionHeader);
 
-            questionContainer.appendChild(questionBox);
-            questionHeader.appendChild(header);
+                questionContainer.appendChild(questionBox);
+                questionHeader.appendChild(header);
 
-            toastr.success("Berhasil memperbarui soal!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+                toastr.success("Berhasil memperbarui soal!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            currentQuestionId = toNumber(newQuestionId);
-            currentQuestionNumber = newQuestionNumber;
+                currentQuestionId = toNumber(newQuestionId);
+                currentQuestionNumber = newQuestionNumber;
 
-            break;
+                break;
 
-        case 404:
-            toastr.error("Maaf tidak ada soal lagi :(", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            case 404:
+                toastr.error("Maaf tidak ada soal lagi :(", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            break;
+                break;
 
-        case 400|500:
-            toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            case 400 | 500:
+                toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
 
-            break;
-    
-        default:
-            console.warn(`Encountered unexpected status code from response ${response.status}\nData : ${response.data}`);
-            break;
-    }
+                break;
+
+            default:
+                console.warn(
+                    `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
+                );
+                break;
+        }
+    });
 }
 
 /**
  * Save the current question
  */
-async function saveQuestion() {
+function saveQuestion() {
     const questionContainer = document.getElementById("questionContainer");
-    
+
     if (!(questionContainer instanceof HTMLFormElement)) {
         console.error("Question container does not exist!");
         return;
@@ -263,38 +295,46 @@ async function saveQuestion() {
     const formData = new FormData(questionContainer);
     /** @type {Object<string|File, string>} */
     const data = {};
-   
+
     for (const [key, value] of formData.entries()) {
         data[key] = value;
     }
 
-    const response = await axios.put(`${examAPIRoute}/${examResult}/pertanyaan/${currentQuestionId}/save`, data, {
-        headers: {
-            'X-CSRF-TOKEN': csrf,
+    request(async () => {
+        const response = await axios.put(
+            `${examAPIRoute}/${examResult}/pertanyaan/${currentQuestionId}/save`,
+            data,
+            {
+                headers: {
+                    "X-CSRF-TOKEN": csrf,
+                },
+            }
+        );
+
+        switch (response.status) {
+            case 200:
+                toastr.success("Berhasil menyimpan jawaban!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
+                break;
+
+            case 400:
+            case 404:
+            case 500:
+                toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
+                break;
+
+            default:
+                console.warn(
+                    `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
+                );
+                break;
         }
-    })
-
-    switch (response.status) {
-        case 200:
-            toastr.success("Berhasil menyimpan jawaban!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
-
-            break;
-
-        case 400|404|500:
-            toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
-
-            break;
-    
-        default:
-            console.warn(`Encountered unexpected status code from response ${response.status}\nData : ${response.data}`);
-            break;
-    }
+    });
 }
 
 /**
@@ -313,45 +353,50 @@ function endExam() {
         cancelButtonColor: "#ef4444",
         backdrop: true,
         allowOutsideClick: false,
-    })
-    .then(async (modalResponse) => {
+    }).then((modalResponse) => {
         if (modalResponse.isConfirmed) {
-            const response = await axios.put(`${examAPIRoute}/${examResult}/finish`);
-            
-            switch (response.status) {
-                case 200:
-                    window.location.assign(response.data.redirect);
+            request(async () => {
+                const response = await axios.put(
+                    `${examAPIRoute}/${examResult}/finish`
+                );
 
-                    Swal.fire({
-                        title: "Status",
-                        text: "Berhasil mengakhiri ujian!",
-                        icon: "success",
-                        timer: 5000,
-                        timerProgressBar: true,
-                    })
-                    break;
+                switch (response.status) {
+                    case 200:
+                        window.location.assign(response.data.redirect);
 
-                case 400|404|500:
-                    Swal.fire({
-                        title: "Status",
-                        text: "Gagal mengakhiri ujian!",
-                        timer: 5000,
-                        timerProgressBar: true,
-                    })
-        
-                    break;
-            
-                default:
-                    console.warn(`Encountered unexpected status code from response ${response.status}\nData : ${response.data}`);
-                    break;
-            }
+                        Swal.fire({
+                            title: "Status",
+                            text: "Berhasil mengakhiri ujian!",
+                            icon: "success",
+                            timer: 5000,
+                            timerProgressBar: true,
+                        });
+                        break;
+
+                    case 400 | 404 | 500:
+                        Swal.fire({
+                            title: "Status",
+                            text: "Gagal mengakhiri ujian!",
+                            timer: 5000,
+                            timerProgressBar: true,
+                        });
+
+                        break;
+
+                    default:
+                        console.warn(
+                            `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
+                        );
+                        break;
+                }
+            });
         }
-    })
+    });
 }
 
 /**
  * Updates the exam timer and checks accuracy every 5 minutes
- * 
+ *
  * @param {string} timer - The element where the timer will be displayed
  */
 function updateExamTime(timer) {
@@ -359,7 +404,7 @@ function updateExamTime(timer) {
 
     let triggered = false;
 
-    const intervalId = setInterval(() => {
+    setInterval(() => {
         if (remainingTime > 0) {
             remainingTime--;
             updateTimerDisplay(timer, remainingTime);
@@ -376,18 +421,19 @@ function updateExamTime(timer) {
 
 /**
  * Fetches the remaining exam time from the server
- * 
- * @param {string} timer 
+ *
+ * @param {string} timer
  */
 function fetchExamTime(timer) {
-    axios.get(`${examAPIRoute}/${examResult}/remaining`)
+    axios
+        .get(`${examAPIRoute}/${examResult}/remaining`)
         .then((response) => {
             if (!response.data.valid) {
                 Swal.fire({
                     title: "Waktu ujian sudah habis",
                     allowOutsideClick: false,
                     backdrop: true,
-                    icon: "warning"
+                    icon: "warning",
                 }).then(() => {
                     window.location.replace("/");
                 });
@@ -396,7 +442,7 @@ function fetchExamTime(timer) {
 
             let offset = remainingTime - response.data.remaining;
 
-            if (Math.abs(offset) > 10000) { 
+            if (Math.abs(offset) > 10000) {
                 Swal.fire({
                     title: "Terdeteksi gangguan",
                     text: "Terdeteksi gangguan saat mengerjakan ujian",
@@ -419,20 +465,23 @@ function fetchExamTime(timer) {
 
 /**
  * Updates the timer display
- * 
+ *
  * @param {string} timer - The element where the timer will be displayed
  * @param {number} remainingSeconds - Remaining time in seconds
  */
 function updateTimerDisplay(timer, remainingSeconds) {
-    const hours = String(Math.floor(remainingSeconds / 3600)).padStart(2, '0');
-    const mins = String(Math.floor((remainingSeconds % 3600) / 60)).padStart(2, '0');
-    const secs = String(remainingSeconds % 60).padStart(2, '0');
+    const hours = String(Math.floor(remainingSeconds / 3600)).padStart(2, "0");
+    const mins = String(Math.floor((remainingSeconds % 3600) / 60)).padStart(
+        2,
+        "0"
+    );
+    const secs = String(remainingSeconds % 60).padStart(2, "0");
 
     const timerElement = document.querySelector(timer);
 
     if (timerElement) {
         timerElement.textContent = `${hours}:${mins}:${secs}`;
     } else {
-        console.error('Timer element is undefined or null.');
+        console.error("Timer element is undefined or null.");
     }
 }
