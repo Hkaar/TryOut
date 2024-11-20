@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ExamResult;
 use App\Models\QuestionResult;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExamController extends Controller
 {
