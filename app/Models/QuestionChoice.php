@@ -18,6 +18,7 @@ class QuestionChoice extends Model
         'question_id',
         'content',
         'correct',
+        'is_image',
     ];
 
     /**
