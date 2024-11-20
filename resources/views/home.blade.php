@@ -3,7 +3,7 @@
 @section('title', 'Beranda')
 
 @section('content')
-  <x-navigation-bar />
+  <x-navigation-bar active="home" />
 
   <section class="min-h-screen">
     <div class="container-sm space-y-5 py-4">
