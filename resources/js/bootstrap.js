@@ -1,3 +1,6 @@
+/// <reference path="../types/app.d.ts" />
+/// <reference path="../types/questions.d.ts" />
+
 import 'preline';
 import 'apexcharts/dist/apexcharts.css';
 import 'toastr/build/toastr.min.css';
