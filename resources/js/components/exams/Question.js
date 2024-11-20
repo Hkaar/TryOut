@@ -1,4 +1,5 @@
 import { uuid } from "../../utils/common.js";
+import { updateQuestionBox } from "../../utils/exam.js";
 
 /**
  * The question part of the exam ui
@@ -8,6 +9,18 @@ import { uuid } from "../../utils/common.js";
 export default function Question(questionData) {
     const root = document.createElement("div");
     root.classList.add("flex", "flex-col", "gap-6");
+
+    const topContent = document.createElement("div");
+    topContent.className = "space-y-2 w-full";
+
+    if (questionData.img) {
+        const cover = document.createElement("img");
+        cover.src = questionData.img;
+        cover.alt = "Gambar tidak dapat dimuatkan";
+        cover.className = "h-48 object-cover rounded-md border-gray-200 border";
+
+        topContent.appendChild(cover);
+    }
 
     const questionContent = document.createElement("p");
     questionContent.className = "text-xl font-medium";
@@ -19,7 +32,7 @@ export default function Question(questionData) {
     if (questionData.type === 'multiple_choice') {
         questionData.choices.forEach(choice => {
             const container = document.createElement('div');
-            container.className = 'flex';
+            container.className = 'flex items-center gap-2';
 
             const radioInput = document.createElement('input');
             radioInput.type = 'radio';
@@ -29,13 +42,31 @@ export default function Question(questionData) {
             radioInput.id = `choice-${uuid()}`;
             radioInput.checked = questionData.answer === choice.content ? true : false;
 
-            const label = document.createElement('label');
-            label.htmlFor = radioInput.id;
-            label.className = 'text-sm text-gray-500 ms-2 dark:text-neutral-400';
-            label.textContent = choice.content;
+            radioInput.addEventListener("change", () => {
+                if (radioInput.checked) {
+                    updateQuestionBox(questionData.id, "active");
+                    return;
+                }
+
+                updateQuestionBox(questionData.id, "prev");
+            })
+
+            let choiceLabel;
+
+            if (choice.is_image) {
+                choiceLabel = document.createElement('img');
+                choiceLabel.src = choice.content;
+                choiceLabel.alt = "Gambar tidak dapat dimuatkan";
+                choiceLabel.className = "h-20 rounded-md border-gray-200 border";
+            } else {
+                choiceLabel = document.createElement('label');
+                choiceLabel.htmlFor = radioInput.id;
+                choiceLabel.className = 'text-sm text-gray-500 ms-2 dark:text-neutral-400';
+                choiceLabel.textContent = choice.content;   
+            }
 
             container.appendChild(radioInput);
-            container.appendChild(label);
+            container.appendChild(choiceLabel);
             
             choices.appendChild(container);
         });
@@ -50,11 +81,26 @@ export default function Question(questionData) {
         answerTextArea.placeholder = "Masukkan jawaban ...";
         answerTextArea.textContent = questionData.answer ? questionData.answer : '';
 
+        if (answerTextArea.value.length > 0) {
+            updateQuestionBox(questionData.id, "active");
+        }
+
+        answerTextArea.addEventListener("change", () => {
+            if (answerTextArea.value.length > 0) {
+                updateQuestionBox(questionData.id, "active");
+                return;
+            }
+
+            updateQuestionBox(questionData.id, "prev");
+        })
+
         container.appendChild(answerTextArea);
         choices.appendChild(container);
     }
 
-    root.appendChild(questionContent);
+    topContent.appendChild(questionContent);
+
+    root.appendChild(topContent);
     root.appendChild(choices);
 
     return root;
