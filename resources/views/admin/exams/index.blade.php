@@ -85,7 +85,7 @@
             </x-link-button>
 
             <x-button type="button" class="border-danger hover:bg-danger hover:text-white" hx-confirm="ujian"
-              hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
+              hxHeaders='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
               hx-delete="{{ route('admin.exams.destroy', $exam->id) }}" hx-target="closest tr" hx-swap="outerHTML"
               delete-confirmation>
               <i class="material-symbols-outlined font-var-light">delete</i>

@@ -5,16 +5,10 @@
 @php
   $title = 'user';
 
-  $columns = [
-    ['width' => 5, 'name' => 'ID'],
-    'Name',
-    'Email',
-    'Role',
-    ['width' => 18, 'name' => 'Actions']
-  ];
+  $columns = [['width' => 5, 'name' => 'ID'], 'Name', 'Email', 'Role', ['width' => 18, 'name' => 'Actions']];
 
   $routes = [
-    'create' => route('admin.users.create'),
+      'create' => route('admin.users.create'),
   ];
 @endphp
 
@@ -65,21 +59,23 @@
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
             {{ $user->role->name }}
           </td>
-          <td class="whitespace-nowrap flex gap-2 px-6 py-4 text-end text-sm font-medium">
-            <x-link-button to="{{ route('admin.users.edit', $user->id) }}" class="border-caution hover:bg-caution hover:text-white">
+          <td class="flex gap-2 whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
+            <x-link-button to="{{ route('admin.users.edit', $user->id) }}"
+              class="border-caution hover:bg-caution hover:text-white">
               <i class="material-symbols-outlined font-var-light">edit</i>
               Edit
             </x-link-button>
 
             <x-button type="button" class="border-danger hover:bg-danger hover:text-white"
-            hx-confirm="user" hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
-            hx-delete="{{ route('admin.users.destroy', $user->id) }}" hx-target="closest tr" hx-swap="outerHTML"
-            delete-confirmation>
+              hxHeaders='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
+              hx-delete="{{ route('admin.users.destroy', $user->id) }}" hx-target="closest tr" hx-swap="outerHTML"
+              delete-confirmation>
               <i class="material-symbols-outlined font-var-light">delete</i>
               Hapus
             </x-button>
 
-            <x-link-button to="{{ route('admin.users.show', $user->id) }}" class="border-info hover:bg-info hover:text-white">
+            <x-link-button to="{{ route('admin.users.show', $user->id) }}"
+              class="border-info hover:bg-info hover:text-white">
               <i class="material-symbols-outlined font-var-light">info</i>
               Info
             </x-link-button>
