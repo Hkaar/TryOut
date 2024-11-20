@@ -2,6 +2,10 @@
 
 @section('title', 'Ujian')
 
+@section('meta')
+  <meta name="plugins" content="exam">
+@endsection
+
 @props([
     'question' => $questions[0],
 ])
@@ -33,20 +37,32 @@
             </x-slot>
 
             <form id="questionContainer">
-              <p class="mb-3 text-xl font-medium">
-                {{ $question->question->content }}
-              </p>
+              <div class="space-y-2 w-full">
+                @if ($question->question->img)
+                  <img src="{{ Storage::url($question->question->img) }}" alt="Gambar tidak dapat dimuatkan"
+                    class="h-48 rounded-md border border-gray-200 object-cover" />
+                @endif
+
+                <p class="mb-3 text-xl font-medium">
+                  {{ $question->question->content }}
+                </p>
+              </div>
 
               <div class="space-y-3">
                 @if ($question->question->type->name === 'multiple_choice')
                   @foreach ($question->question->choices as $i => $choice)
-                    <div class="flex">
+                    <div class="flex items-center gap-2">
                       <input type="radio" name="answer"
                         class="dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 mt-0.5 shrink-0 rounded-full border-gray-200 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                         id="choice-{{ $i }}" value="{{ $choice->content }}"
                         {{ $question->answer === $choice->content ? 'checked' : '' }}>
-                      <label for="choice-{{ $i }}"
-                        class="dark:text-neutral-400 ms-2 text-sm text-gray-500">{{ $choice->content }}</label>
+
+                      @if ($choice->is_image)
+                        <img src="{{ $choice->content }}" alt="Gambar tidak dapat dimuatkan" class="h-20 rounded-md">
+                      @else
+                        <label for="choice-{{ $i }}"
+                          class="dark:text-neutral-400 ms-2 text-sm text-gray-500">{{ $choice->content }}</label>
+                      @endif
                     </div>
                   @endforeach
                 @else
@@ -86,7 +102,7 @@
         </div>
 
         <div class="flex w-full flex-col gap-4 md:col-span-1">
-          <x-card class="shadow-lg min-h-96">
+          <x-card class="min-h-96 shadow-lg">
             <x-slot name="header">
               <div
                 class="line-clamp-1 flex items-center justify-between gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
@@ -102,19 +118,22 @@
 
             <div class="flex max-w-full flex-wrap gap-3">
               @foreach ($questions as $i => $item)
-                <btn type="button" question-number="{{ $i + 1 }}" question-id="{{ $item->id }}"
-                  class="btn flex w-fit items-center gap-2 border-primary px-4 py-2 duration-150 ease-in-out hover:scale-105 hover:bg-transparent active:scale-95 active:opacity-50 disabled:opacity-40 disabled:hover:scale-100 disabled:active:scale-100">
+                <x-button type="button" question-number="{{ $i + 1 }}" question-id="{{ $item->id }}" data-prev-state="idle" data-state="idle"
+                  class="border-gray-200 px-4 py-2 hover:rounded-none
+                    {{ $item->not_sure ? 'bg-caution' : ($item->answer ? 'bg-primary text-white' : 'bg-gray-100') }}">
                   {{ $i + 1 }}
-                </btn>
+                </x-button>
               @endforeach
             </div>
 
             <x-slot name="footer">
               <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
-                <x-button type="button" id="finishExam" class="flex-1 bg-danger text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <x-button type="button" id="finishExam"
+                  class="flex-1 bg-danger text-white hover:scale-[103%] hover:rounded-none hover:opacity-90">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>                  
+                  </svg>
                   Akhiri Ujian
                 </x-button>
               </div>
