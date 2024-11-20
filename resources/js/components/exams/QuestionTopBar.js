@@ -3,6 +3,7 @@ import toastr from "toastr";
 
 import { uuid } from "../../utils/common.js";
 import { examAPIRoute } from "../../variables.js";
+import { updateQuestionBox } from "../../utils/exam.js";
 
 /**
  * The question top bar of the container
@@ -36,15 +37,15 @@ export default function QuestionTopBar(questionNumber, questionId, questionData)
 
     checkbox.addEventListener("change", () => {
         triggerCheckBox(checkbox, questionId);
-
-        const questionBox = document.querySelector(`[question-id="${questionId}"]`);
-
-        if (questionBox !== null) {
-            checkbox.checked 
-                ? questionBox.classList.add("bg-caution") 
-                : questionBox.classList.remove("bg-caution");
-        }
     });
+
+    checkbox.addEventListener("click", () => {
+        if (checkbox.checked) {
+            updateQuestionBox(questionData.id, "indertiminate");
+        } else {
+            updateQuestionBox(questionData.id, "prev");
+        }
+    })
 
     checkBoxContainer.appendChild(checkbox);
     checkBoxContainer.appendChild(label);

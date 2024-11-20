@@ -4,12 +4,13 @@ import toastr from "toastr";
 import { toNumber } from "lodash";
 
 import { clearNodeTree } from "./utils/common.js";
+import { request } from "./utils/network.js";
+
 import { examAPIRoute } from "./variables.js";
 
 import Question from "./components/exams/Question.js";
 import Swal from "sweetalert2";
 import QuestionTopBar from "./components/exams/QuestionTopBar.js";
-import { request } from "./utils/network.js";
 
 /**
  * Setup function for exams
@@ -416,7 +417,7 @@ function updateExamTime(timer) {
 
     setInterval(() => {
         fetchExamTime(timer);
-    }, 0.5 * 60 * 1000);
+    }, 1 * 60 * 1000);
 }
 
 /**

@@ -7,6 +7,7 @@ import { setupAutoTimezone } from "./utils/time.js";
 import setupQEditor from "./questionEditor.js";
 import setupAdminCharts from './charts/admin.js';
 import setupExam from './exam.js';
+import { runPlugin } from './utils/plugin.js';
 
 /**
  * A function to toggle the side bar
@@ -173,9 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerModal(event);
     });
 
-    setupAutoTimezone();
-    setupQEditor();
-    setupAdminCharts();
+    runPlugin(['exam'], setupExam);
+    runPlugin(['question-editor'], setupQEditor);
+    runPlugin(['admin-charts'], setupAdminCharts);
 
-    setupExam();
+    setupAutoTimezone();
 });

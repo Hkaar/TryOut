@@ -7,6 +7,7 @@ use App\Models\ExamResult;
 use App\Models\QuestionResult;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExamController extends Controller
 {
@@ -53,15 +54,16 @@ class ExamController extends Controller
             'not_sure' => $questionResult->not_sure,
             'exam_result_id' => $questionResult->exam_result_id,
             'answer' => $questionResult->answer,
-            'type' => $questionResult->question->type->name ?? '', // Assuming type has a 'name' attribute
+            'type' => $questionResult->question->type->name ?? '',
             'content' => $questionResult->question->content,
             'choices' => $questionResult->question->choices->map(function ($choice) {
                 return [
                     'id' => $choice->id,
-                    'content' => $choice->content,
+                    'content' => $choice->is_image === 1 ? Storage::url($choice->content) : $choice->content,
+                    'is_image' => $choice->is_image,
                 ];
             }),
-            'img' => $questionResult->question->img,
+            'img' => $questionResult->question->img ? Storage::url($questionResult->question->img) : null,
         ];
 
         return response()->json($response);
@@ -92,10 +94,11 @@ class ExamController extends Controller
                 'choices' => $nextQuestion->question->choices->map(function ($choice) {
                     return [
                         'id' => $choice->id,
-                        'content' => $choice->content,
+                        'content' => $choice->is_image === 1 ? Storage::url($choice->content) : $choice->content,
+                        'is_image' => $choice->is_image,
                     ];
                 }),
-                'img' => $nextQuestion->question->img,
+                'img' => $nextQuestion->question->img ? Storage::url($nextQuestion->question->img) : null,
             ];
 
             return response()->json($response);
@@ -124,15 +127,16 @@ class ExamController extends Controller
                 'not_sure' => $previousQuestion->not_sure,
                 'exam_result_id' => $previousQuestion->exam_result_id,
                 'answer' => $previousQuestion->answer,
-                'type' => $previousQuestion->question->type->name ?? '', // Assuming type has a 'name' attribute
+                'type' => $previousQuestion->question->type->name ?? '',
                 'content' => $previousQuestion->question->content,
                 'choices' => $previousQuestion->question->choices->map(function ($choice) {
                     return [
                         'id' => $choice->id,
-                        'content' => $choice->content,
+                        'content' => $choice->is_image === 1 ? Storage::url($choice->content) : $choice->content,
+                        'is_image' => $choice->is_image,
                     ];
                 }),
-                'img' => $previousQuestion->question->img,
+                'img' => $previousQuestion->question->img ? Storage::url($previousQuestion->question->img) : null,
             ];
 
             return response()->json($response);
@@ -156,7 +160,7 @@ class ExamController extends Controller
 
         $question = $result->question;
 
-        if (strtolower($question->rightAnswer->content) === strtolower($validated['answer'])) {
+        if ($validated['answer'] && strtolower($question->rightAnswer->content) === strtolower($validated['answer'])) {
             $result->answer = $question->rightAnswer->content;
             $result->correct = 1;
         } else {
@@ -201,6 +205,7 @@ class ExamController extends Controller
         $result = ExamResult::findOrFail($id);
 
         $result->finished = 1;
+        $result->finish_date = Carbon::parse((string) now());
         $result->save();
 
         return response()->json([
