@@ -6,12 +6,13 @@
   $title = 'riwayat ujian';
 
   $columns = [
-    ['width' => 5, 'name' => 'ID'],
-    'Nama Peserta',
-    'Nama Ujian',
-    'Waktu Mulai',
-    'Waktu Selesai',
-    ['width' => 7, 'name' => 'Actions']
+      ['width' => 5, 'name' => 'ID'],
+      'Nama Peserta',
+      'Nama Ujian',
+      'Waktu Mulai',
+      'Waktu Selesai',
+      'Status',
+      ['width' => 7, 'name' => 'Actions'],
   ];
 
   $routes = [];
@@ -62,13 +63,29 @@
             {{ $result->exam->name }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
-            {{ $result->start_date }}
+            {{ Carbon\Carbon::parse($result->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s T') }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
-            {{ $result->end_date }}
+            {{ $result->finish_date? Carbon\Carbon::parse($result->finish_date)->locale('id')->translatedFormat('l, j F Y H:i:s T'): '-' }}
           </td>
-          <td class="whitespace-nowrap flex gap-2 px-6 py-4 text-end text-sm font-medium">
-            <x-link-button to="{{ route('admin.exam-history.show', $result->id) }}" class="border-info hover:bg-info hover:text-white">
+          <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
+            @if ($result->finished)
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            @else
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            @endif
+          </td>
+          <td class="flex gap-2 whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
+            <x-link-button to="{{ route('admin.exam-history.show', $result->id) }}"
+              class="border-info hover:bg-info hover:text-white">
               <i class="material-symbols-outlined font-var-light">info</i>
               Info
             </x-link-button>

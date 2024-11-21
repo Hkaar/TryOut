@@ -84,10 +84,10 @@
               Hapus
             </x-button>
 
-            {{-- <a href="{{ route('admin.packets.show', $packet->id) }}" class="btn bg-info text-white flex items-center gap-2">
+            <x-link-button to="{{ route('admin.packets.show', $packet->id) }}" class="border-info hover:bg-info hover:text-white">
               <i class="material-symbols-outlined font-var-light">info</i>
               Info
-            </a> --}}
+            </x-link-button>
           </td>
         </tr>
       @endforeach
