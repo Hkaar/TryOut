@@ -5,9 +5,9 @@ import Swal from 'sweetalert2';
 import { setupAutoTimezone } from "./utils/time.js";
 
 import setupQEditor from "./questionEditor.js";
-import setupAdminCharts from './charts/admin.js';
 import setupExam from './exam.js';
 import { runPlugin } from './utils/plugin.js';
+import { setupHomeCharts } from './admin.js';
 
 /**
  * A function to toggle the side bar
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     runPlugin(['exam'], setupExam);
     runPlugin(['question-editor'], setupQEditor);
-    runPlugin(['admin-charts'], setupAdminCharts);
+    runPlugin(['admin-charts-home'], setupHomeCharts);
 
     setupAutoTimezone();
 });

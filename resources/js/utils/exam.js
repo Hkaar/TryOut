@@ -24,7 +24,8 @@ export function updateQuestionBox(questionId, state) {
             updateQuestionBoxState(box, "idle");
             state = "idle";
         } else {
-            state = prevState;
+            const prev = /** @type {"idle"|"active"|"indertiminate"} */ (prevState)
+            state = prev;
         }
     }
 

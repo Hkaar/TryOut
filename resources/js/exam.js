@@ -396,7 +396,7 @@ function endExam() {
 }
 
 /**
- * Updates the exam timer and checks accuracy every 5 minutes
+ * Updates the exam timer and checks accuracy every minute
  *
  * @param {string} timer - The element where the timer will be displayed
  */
