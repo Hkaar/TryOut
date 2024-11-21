@@ -24,17 +24,17 @@ class ExamController extends Controller
         $finished = [];
         $examAmount = [];
 
-        for ($date = $startOfWeek; $date->lte($endOfWeek) ; $date->addDay()) { 
-            $finishedAmount = ExamResult::whereDate("created_at","=", $date->toDateString())->where("finished", "=", 1)->count();
+        for ($date = $startOfWeek; $date->lte($endOfWeek); $date->addDay()) {
+            $finishedAmount = ExamResult::whereDate('created_at', '=', $date->toDateString())->where('finished', '=', 1)->count();
             $finished[] = $finishedAmount;
 
-            $amount = ExamResult::whereDate("created_at","=", $date->toDateString())->count();
+            $amount = ExamResult::whereDate('created_at', '=', $date->toDateString())->count();
             $examAmount[] = $amount;
         }
 
         return response()->json([
-            "finished" => $finished,
-            "examAmount" => $examAmount,
+            'finished' => $finished,
+            'examAmount' => $examAmount,
         ]);
     }
 
@@ -48,6 +48,7 @@ class ExamController extends Controller
         $questionResult = QuestionResult::with(['question.choices'])->findOrFail($questionId);
 
         $response = $this->buildQuestionResponse($questionResult);
+
         return response()->json($response);
     }
 
@@ -65,6 +66,7 @@ class ExamController extends Controller
 
         if ($nextQuestion) {
             $response = $this->buildQuestionResponse($nextQuestion);
+
             return response()->json($response);
         }
 
@@ -85,6 +87,7 @@ class ExamController extends Controller
 
         if ($previousQuestion) {
             $response = $this->buildQuestionResponse($previousQuestion);
+
             return response()->json($response);
         }
 
@@ -195,9 +198,8 @@ class ExamController extends Controller
 
     /**
      * Build a JSON API response for the question result model
-     * 
-     * @param \App\Models\QuestionResult $questionResult
-     * @return array
+     *
+     * @return array<string, mixed>
      */
     protected function buildQuestionResponse(QuestionResult $questionResult)
     {

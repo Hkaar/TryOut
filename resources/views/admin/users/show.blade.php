@@ -19,7 +19,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
               </svg>
-              
+
               <h3 class="font-semibold text-lg">Info akun</h3>
             </div>
           </x-slot>
@@ -33,7 +33,7 @@
                 {{ ucwords($user->name) }}
               </div>
             </div>
-  
+
             <div class="grid grid-cols-3">
               <div class="col-span-1 border rounded-s border-b-gray-300 px-4 py-3 flex bg-gray-100 font-semibold">
                 Username
@@ -42,7 +42,7 @@
                 {{ ucwords($user->username) }}
               </div>
             </div>
-  
+
             <div class="grid grid-cols-3">
               <div class="col-span-1 border rounded-s border-b-gray-300 px-4 py-3 flex bg-gray-100 font-semibold">
                 Email
@@ -51,7 +51,7 @@
                 {{ ucwords($user->email) }}
               </div>
             </div>
-  
+
             <div class="grid grid-cols-3">
               <div class="col-span-1 border rounded-s border-b-gray-300 px-4 py-3 flex bg-gray-100 font-semibold">
                 Peran
@@ -60,7 +60,7 @@
                 {{ ucwords($user->role->name) }}
               </div>
             </div>
-  
+
             <div class="grid grid-cols-3">
               <div class="col-span-1 border rounded-s border-b-gray-300 px-4 py-3 flex bg-gray-100 font-semibold">
                 Telepon
@@ -69,7 +69,7 @@
                 {{ ucwords($user->phone ? $user->phone : '-') }}
               </div>
             </div>
-  
+
             <div class="grid grid-cols-3">
               <div class="col-span-1 border rounded-s border-b-gray-300 px-4 py-3 flex bg-gray-100 font-semibold">
                 Alamat
@@ -87,7 +87,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
               </svg>
-              
+
               <h3 class="font-semibold text-lg">Foto akun</h3>
             </div>
           </x-slot>
