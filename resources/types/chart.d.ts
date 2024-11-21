@@ -1,8 +1,10 @@
 declare namespace Chart {
-    type SingleLineChartConfig = {
-        chartTitle: string,
-        labels: Array<string>
-        data: Array<string|number>
-        toolTipFormatX: string
+    type ChartConfig = {
+        labels: string[]
+    }
+
+    type ChartData = {
+        name: string
+        data: number[]
     }
 }

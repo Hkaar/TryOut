@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class ExamController extends Controller
 {
     /**
-     * Get the statistics of exams
+     * Get the current week statistics of student exam participation
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -21,20 +21,20 @@ class ExamController extends Controller
         $startOfWeek = now()->startOfWeek();
         $endOfWeek = now()->endOfWeek();
 
-        $weeklyData = [];
-        $dates = [];
+        $finished = [];
+        $examAmount = [];
 
         for ($date = $startOfWeek; $date->lte($endOfWeek); $date->addDay()) {
-            $formattedDate = $date->toDateString();
-            $dates[] = $formattedDate;
+            $finishedAmount = ExamResult::whereDate('created_at', '=', $date->toDateString())->where('finished', '=', 1)->count();
+            $finished[] = $finishedAmount;
 
-            $dailyUserCount = ExamResult::whereDate('created_at', $formattedDate)->distinct('user_id')->count();
-            $weeklyData[] = $dailyUserCount;
+            $amount = ExamResult::whereDate('created_at', '=', $date->toDateString())->count();
+            $examAmount[] = $amount;
         }
 
         return response()->json([
-            'daily_user_counts' => $weeklyData,
-            'dates' => $dates,
+            'finished' => $finished,
+            'examAmount' => $examAmount,
         ]);
     }
 
@@ -47,24 +47,7 @@ class ExamController extends Controller
     {
         $questionResult = QuestionResult::with(['question.choices'])->findOrFail($questionId);
 
-        $response = [
-            'id' => $questionResult->id,
-            'question_id' => $questionResult->question_id,
-            'correct' => $questionResult->correct,
-            'not_sure' => $questionResult->not_sure,
-            'exam_result_id' => $questionResult->exam_result_id,
-            'answer' => $questionResult->answer,
-            'type' => $questionResult->question->type->name ?? '',
-            'content' => $questionResult->question->content,
-            'choices' => $questionResult->question->choices->map(function ($choice) {
-                return [
-                    'id' => $choice->id,
-                    'content' => $choice->is_image === 1 ? Storage::url($choice->content) : $choice->content,
-                    'is_image' => $choice->is_image,
-                ];
-            }),
-            'img' => $questionResult->question->img ? Storage::url($questionResult->question->img) : null,
-        ];
+        $response = $this->buildQuestionResponse($questionResult);
 
         return response()->json($response);
     }
@@ -82,24 +65,7 @@ class ExamController extends Controller
             ->first();
 
         if ($nextQuestion) {
-            $response = [
-                'id' => $nextQuestion->id,
-                'question_id' => $nextQuestion->question_id,
-                'correct' => $nextQuestion->correct,
-                'not_sure' => $nextQuestion->not_sure,
-                'exam_result_id' => $nextQuestion->exam_result_id,
-                'answer' => $nextQuestion->answer,
-                'type' => $nextQuestion->question->type->name ?? '',
-                'content' => $nextQuestion->question->content,
-                'choices' => $nextQuestion->question->choices->map(function ($choice) {
-                    return [
-                        'id' => $choice->id,
-                        'content' => $choice->is_image === 1 ? Storage::url($choice->content) : $choice->content,
-                        'is_image' => $choice->is_image,
-                    ];
-                }),
-                'img' => $nextQuestion->question->img ? Storage::url($nextQuestion->question->img) : null,
-            ];
+            $response = $this->buildQuestionResponse($nextQuestion);
 
             return response()->json($response);
         }
@@ -120,24 +86,7 @@ class ExamController extends Controller
             ->first();
 
         if ($previousQuestion) {
-            $response = [
-                'id' => $previousQuestion->id,
-                'question_id' => $previousQuestion->question_id,
-                'correct' => $previousQuestion->correct,
-                'not_sure' => $previousQuestion->not_sure,
-                'exam_result_id' => $previousQuestion->exam_result_id,
-                'answer' => $previousQuestion->answer,
-                'type' => $previousQuestion->question->type->name ?? '',
-                'content' => $previousQuestion->question->content,
-                'choices' => $previousQuestion->question->choices->map(function ($choice) {
-                    return [
-                        'id' => $choice->id,
-                        'content' => $choice->is_image === 1 ? Storage::url($choice->content) : $choice->content,
-                        'is_image' => $choice->is_image,
-                    ];
-                }),
-                'img' => $previousQuestion->question->img ? Storage::url($previousQuestion->question->img) : null,
-            ];
+            $response = $this->buildQuestionResponse($previousQuestion);
 
             return response()->json($response);
         }
@@ -245,5 +194,32 @@ class ExamController extends Controller
             'valid' => false,
             'remaining' => 0,
         ]);
+    }
+
+    /**
+     * Build a JSON API response for the question result model
+     *
+     * @return array<string, mixed>
+     */
+    protected function buildQuestionResponse(QuestionResult $questionResult)
+    {
+        return [
+            'id' => $questionResult->id,
+            'question_id' => $questionResult->question_id,
+            'correct' => $questionResult->correct,
+            'not_sure' => $questionResult->not_sure,
+            'exam_result_id' => $questionResult->exam_result_id,
+            'answer' => $questionResult->answer,
+            'type' => $questionResult->question->type->name ?? '',
+            'content' => $questionResult->question->content,
+            'choices' => $questionResult->question->choices->map(function ($choice) {
+                return [
+                    'id' => $choice->id,
+                    'content' => $choice->is_image === 1 ? Storage::url($choice->content) : $choice->content,
+                    'is_image' => $choice->is_image,
+                ];
+            }),
+            'img' => $questionResult->question->img ? Storage::url($questionResult->question->img) : null,
+        ];
     }
 }

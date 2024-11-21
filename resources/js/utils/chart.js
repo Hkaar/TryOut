@@ -1,15 +1,18 @@
-import { buildChart, buildTooltip } from "preline/dist/helper-apexcharts.js";
+import { buildChart } from "preline/dist/helper-apexcharts.js";
 
 /**
- * Create a single line chart
- * 
- * @param {string} id 
- * @param {Chart.SingleLineChartConfig} config
+ * Create a line chart and attach it to an element
+ *
+ * @param {string} element - The element query for the chart to be attached on
+ * @param {Chart.ChartData[]} data - The data to be used in the chart
+ * @param {Chart.ChartConfig} config - The desired configuration for the chart
+ * @returns void
  */
-export default function SingleLineChart(id, config) {
+export function CreateLineChart(element, data, config) {
     buildChart(
-        id,
-        (/** @type {any} */ mode) => ({
+        element,
+        // (/** @type {"dark"|"light"}  */ _mode) => ({
+        () => ({
             chart: {
                 height: 300,
                 type: "area",
@@ -21,10 +24,7 @@ export default function SingleLineChart(id, config) {
                 },
             },
             series: [
-                {
-                    name: config.chartTitle,
-                    data: config.data,
-                },
+                ...data
             ],
             legend: {
                 show: false,
@@ -33,7 +33,7 @@ export default function SingleLineChart(id, config) {
                 enabled: false,
             },
             stroke: {
-                curve: "straight",
+                curve: "smooth", // Change curve to smooth for better aesthetics
                 width: 2,
             },
             grid: {
@@ -51,7 +51,9 @@ export default function SingleLineChart(id, config) {
             xaxis: {
                 type: "category",
                 tickPlacement: "on",
-                categories: config.labels,
+                categories: [
+                    ...config.labels
+                ],
                 axisBorder: {
                     show: false,
                 },
@@ -71,18 +73,9 @@ export default function SingleLineChart(id, config) {
                 },
                 labels: {
                     style: {
-                        colors: "#9ca3af",
                         fontSize: "13px",
                         fontFamily: "Inter, ui-sans-serif",
                         fontWeight: 400,
-                    },
-                    formatter: (/** @type {string} */ title) => {
-                        let t = title;
-
-                        if (!title) return "";
-
-                        const newT = t.split("-");
-                        t = `${newT[0]} ${newT[1].slice(0, 3)}`;
                     },
                 },
             },
@@ -92,52 +85,14 @@ export default function SingleLineChart(id, config) {
                     minWidth: 0,
                     maxWidth: 140,
                     style: {
-                        colors: "#9ca3af",
                         fontSize: "13px",
                         fontFamily: "Inter, ui-sans-serif",
                         fontWeight: 400,
                     },
-                    formatter: (/** @type {number} */ value) =>
-                        value >= 1000 ? `${value / 1000}k` : value,
-                },
-            },
-            tooltip: {
-                x: {
-                    format: config.toolTipFormatX,
-                },
-                y: {
-                    formatter: (/** @type {number} */ value) =>
-                        `${value >= 1000 ? `${value / 1000}k` : value}`,
-                },
-                custom: function (/** @type {import("preline/dist/helper-apexcharts.js").IChartProps} */ props) {
-                    // @ts-ignore
-                    const { categories } = props.ctx.opts.xaxis;
-                    const { dataPointIndex } = props;
-                    const title = categories[dataPointIndex].split(" ");
-                    const newTitle = `${title[0]} ${title[1]}`;
-
-                    return buildTooltip(props, {
-                        title: newTitle,
-                        mode,
-                        valuePrefix: "",
-                        hasTextLabel: true,
-                        markerExtClasses: "!rounded-sm",
-                        wrapperExtClasses: "min-w-28",
-                        isValueDivided: false,
-                        valuePostfix: "",
-                        invertGroup: false,
-                        labelDivider: "",
-                        wrapperClasses: "",
-                        seriesClasses: "",
-                        seriesExtClasses: "",
-                        titleClasses: "",
-                        titleExtClasses: "",
-                        markerClasses: "",
-                        valueClasses: "",
-                        valueExtClasses: "",
-                        labelClasses: "",
-                        labelExtClasses: ""
-                    });
+                    formatter: (/** @type {number} */ value) => {
+                        // Format the y-axis labels to be more readable
+                        return value >= 1000 ? `${value / 1000}k` : value;
+                    },
                 },
             },
             responsive: [
@@ -155,7 +110,7 @@ export default function SingleLineChart(id, config) {
                                 fontWeight: 400,
                             },
                             offsetX: -2,
-                            formatter: (/** @type {string | any[]} */ title) => title.slice(0, 3),
+                            formatter: (/** @type {string} */ title) => title.slice(0, 3), // Shorten labels on small screens
                         },
                         yaxis: {
                             labels: {
@@ -176,8 +131,7 @@ export default function SingleLineChart(id, config) {
                 },
             ],
         }),
-        // @ts-ignore
-        {
+        `{
             colors: ["#2563eb", "#9333ea"],
             fill: {
                 gradient: {
@@ -201,8 +155,8 @@ export default function SingleLineChart(id, config) {
             grid: {
                 borderColor: "#e5e7eb",
             },
-        },
-        {
+        }`,
+        `{
             colors: ["#3b82f6", "#a855f7"],
             fill: {
                 gradient: {
@@ -226,6 +180,6 @@ export default function SingleLineChart(id, config) {
             grid: {
                 borderColor: "#404040",
             },
-        }
+        }`
     );
 }

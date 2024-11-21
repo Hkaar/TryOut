@@ -8,13 +8,8 @@
         "moduleResolution": "NodeNext",
         "esModuleInterop": true,
         "module": "NodeNext",
-        "types": ["vite/client", "./resources/types/app.d.ts"]
+        "types": ["vite/client"]
     },
-
-    "include": [
-        "resources/types/**/*.ts",
-        "resources/types/**/*.d.ts"
-    ],
 
     "exclude": [
         "./dist/*",

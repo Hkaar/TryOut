@@ -8,17 +8,18 @@ export function runPlugin(plugins, setupPlugin) {
     const pluginsMeta = document.querySelector(`meta[name="plugins"]`);
 
     if (!(pluginsMeta instanceof HTMLMetaElement)) {
-        console.warn("Plugin meta tag is not present!");
+        console.warn("Plugin meta tag is missing! Please ensure that the <meta name='plugins'> tag is included in the page.");
         return;
     }
-
-    const loadedPlugins = pluginsMeta.content.replace(' ', '').split('|');
-    const loaded = plugins.every(plugin => loadedPlugins.includes(plugin))
+    
+    const loadedPlugins = pluginsMeta.content.replace(/\s+/g, '').split('|');
+    const loaded = plugins.every(plugin => loadedPlugins.includes(plugin));
 
     if (loaded) {
         setupPlugin();
         return;
     }
 
-    console.debug(`Plugin not loaded due to missing full set of ${plugins}!`);
+    const missingPlugins = plugins.filter(plugin => !loadedPlugins.includes(plugin));
+    console.debug(`Missing plugins: ${missingPlugins.join(', ')}. Required plugins: ${plugins.join(', ')}. Loaded plugins: ${loadedPlugins.join(', ')}. Plugin setup was not executed.`);
 }

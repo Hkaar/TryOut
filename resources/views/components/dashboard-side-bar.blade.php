@@ -1,5 +1,5 @@
 <aside id="sideBar"
-  class="dark:bg-secondary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen lg:relative lg:translate-x-0">
+  class="dark:bg-secondary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen lg:relative lg:translate-x-0 max-h-screen lg:max-h-none">
 
   <!-- This div is here because of tailwind not registering classes properly -->
   <div class="lg:min-w-72 hidden h-screen min-w-full ps-3"></div>

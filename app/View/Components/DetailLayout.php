@@ -15,8 +15,8 @@ class DetailLayout extends Component
      */
     public function __construct(
         public mixed $item,
-        public array $routes,
         public string $title,
+        public ?array $routes = null,
     ) {}
 
     /**

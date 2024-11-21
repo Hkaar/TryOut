@@ -2,6 +2,10 @@
 
 @section('title', 'Beranda')
 
+@section('meta')
+  <meta name="plugins" content="admin-charts-home">
+@endsection
+
 @section('content')
   <x-dashboard-layout active="home">
     <main class="grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -22,7 +26,7 @@
 
         <div class="grid place-items-center">
           <h4 class="text-5xl font-bold">
-            36
+            {{ App\Models\Exam::count() }}
           </h4>
         </div>
       </x-card>
@@ -44,12 +48,12 @@
 
         <div class="grid place-items-center">
           <h4 class="text-5xl font-bold">
-            36
+            {{ App\Models\User::StrictByRole('student')->count() }}
           </h4>
         </div>
       </x-card>
 
-      <x-card class="col-span-2 shadow-md">
+      <x-card class="xl:col-span-2 shadow-md">
         <x-slot name="header">
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -93,7 +97,7 @@
         </div>
       </x-card>
 
-      <x-card class="col-span-3 shadow-md">
+      <x-card class="lg:col-span-2 xl:col-span-3 shadow-md">
         <div class="mb-3 flex items-center justify-center gap-x-4 sm:mb-6 sm:justify-end">
           <div class="inline-flex items-center">
             <span class="size-2.5 me-2 inline-block rounded-sm bg-blue-600"></span>
@@ -109,7 +113,7 @@
           </div>
         </div>
 
-        <div id="exam-chart"></div>
+        <div id="examParticipationChart"></div>
       </x-card>
 
       <x-card class="shadow-md">
@@ -117,7 +121,7 @@
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-            </svg>            
+            </svg>
 
             <h3 class="text-xl font-semibold">
               Rasio
@@ -126,12 +130,12 @@
         </x-slot>
       </x-card>
 
-      <x-card class="col-span-2 shadow-md">
+      <x-card class="xl:col-span-2 shadow-md">
         <x-slot name="header">
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-            </svg>            
+            </svg>
 
             <h3 class="text-xl font-semibold">
               Paket soal
@@ -140,12 +144,12 @@
         </x-slot>
       </x-card>
 
-      <x-card class="col-span-2 shadow-md">
+      <x-card class="xl:col-span-2 shadow-md">
         <x-slot name="header">
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-            </svg>            
+            </svg>
 
             <h3 class="text-xl font-semibold">
               Mata pelajaran
@@ -156,209 +160,3 @@
     </main>
   </x-dashboard-layout>
 @endsection
-
-@pushOnce('js')
-  <script>
-    window.addEventListener('load', () => {
-      (function() {
-        buildChart('#exam-chart', (mode) => ({
-          chart: {
-            height: 300,
-            type: 'area',
-            toolbar: {
-              show: false
-            },
-            zoom: {
-              enabled: false
-            }
-          },
-          series: [{
-              name: 'Jumlah pengerjaan',
-              data: [500, 1500, 2000, 1200, 3000, 2500, 2200] // New Y values
-            },
-            {
-              name: 'Jumlah penyelesaian',
-              data: [1600, 1800, 2400, 1500, 3200, 2600, 2300] // New Y values
-            }
-          ],
-          legend: {
-            show: false
-          },
-          dataLabels: {
-            enabled: false
-          },
-          stroke: {
-            curve: 'smooth', // Change curve to smooth for better aesthetics
-            width: 2
-          },
-          grid: {
-            strokeDashArray: 2
-          },
-          fill: {
-            type: 'gradient',
-            gradient: {
-              type: 'vertical',
-              shadeIntensity: 1,
-              opacityFrom: 0.1,
-              opacityTo: 0.8
-            }
-          },
-          xaxis: {
-            type: 'category',
-            tickPlacement: 'on',
-            categories: [
-              'Senin',
-              'Selasa',
-              'Rabu',
-              'Kamis',
-              'Jumat',
-              'Sabtu',
-              'Minggu',
-            ],
-            axisBorder: {
-              show: false
-            },
-            axisTicks: {
-              show: false
-            },
-            crosshairs: {
-              stroke: {
-                dashArray: 0
-              },
-              dropShadow: {
-                show: false
-              }
-            },
-            tooltip: {
-              enabled: false
-            },
-            labels: {
-              style: {
-                fontSize: '13px',
-                fontFamily: 'Inter, ui-sans-serif',
-                fontWeight: 400
-              }
-            }
-          },
-          yaxis: {
-            labels: {
-              align: 'left',
-              minWidth: 0,
-              maxWidth: 140,
-              style: {
-                fontSize: '13px',
-                fontFamily: 'Inter, ui-sans-serif',
-                fontWeight: 400
-              },
-              formatter: (value) => {
-                // Format the y-axis labels to be more readable
-                return value >= 1000 ? `${value / 1000}k` : value;
-              }
-            }
-          },
-          tooltip: {
-            x: {
-              format: 'MMMM' // Show only the month name
-            },
-            y: {
-              formatter: (value) => {
-                // Custom format for the Y-axis tooltip
-                return `$${value >= 1000 ? `${value / 1000}k` : value}`; // Format as currency with "k" suffix
-              }
-            },
-            custom: function(props) {
-              return buildTooltipCompareTwo(props, {
-                title: 'Perbandingan ujian',
-                mode,
-                hasTextLabel: true,
-                wrapperExtClasses: 'min-w-48',
-                markerExtClasses: '!rounded-sm'
-              });
-            }
-          },
-          responsive: [{
-            breakpoint: 568,
-            options: {
-              chart: {
-                height: 300
-              },
-              labels: {
-                style: {
-                  colors: '#9ca3af',
-                  fontSize: '11px',
-                  fontFamily: 'Inter, ui-sans-serif',
-                  fontWeight: 400
-                },
-                offsetX: -2,
-                formatter: (title) => title.slice(0, 3) // Shorten labels on small screens
-              },
-              yaxis: {
-                labels: {
-                  align: 'left',
-                  minWidth: 0,
-                  maxWidth: 140,
-                  style: {
-                    colors: '#9ca3af',
-                    fontSize: '11px',
-                    fontFamily: 'Inter, ui-sans-serif',
-                    fontWeight: 400
-                  },
-                  formatter: (value) => value >= 1000 ? `${value / 1000}k` : value
-                }
-              },
-            },
-          }]
-        }), {
-          colors: ['#2563eb', '#9333ea'],
-          fill: {
-            gradient: {
-              stops: [0, 90, 100]
-            }
-          },
-          xaxis: {
-            labels: {
-              style: {
-                colors: '#9ca3af'
-              }
-            }
-          },
-          yaxis: {
-            labels: {
-              style: {
-                colors: '#9ca3af'
-              }
-            }
-          },
-          grid: {
-            borderColor: '#e5e7eb'
-          }
-        }, {
-          colors: ['#3b82f6', '#a855f7'],
-          fill: {
-            gradient: {
-              stops: [100, 90, 0]
-            }
-          },
-          xaxis: {
-            labels: {
-              style: {
-                colors: '#a3a3a3',
-              }
-            }
-          },
-          yaxis: {
-            labels: {
-              style: {
-                colors: '#a3a3a3'
-              }
-            }
-          },
-          grid: {
-            borderColor: '#404040'
-          }
-        });
-      })
-      ();
-    });
-  </script>
-@endPushOnce

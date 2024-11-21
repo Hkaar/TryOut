@@ -118,7 +118,7 @@
 
             <div class="flex max-w-full flex-wrap gap-3">
               @foreach ($questions as $i => $item)
-                <x-button type="button" question-number="{{ $i + 1 }}" question-id="{{ $item->id }}" data-prev-state="idle" data-state="idle"
+                <x-button type="button" question-number="{{ $i + 1 }}" question-id="{{ $item->id }}" data-prev-state="{{ $item->not_sure ? 'indertiminate' : ($item->answer ? 'active' : 'idle') }}" data-state="{{ $item->not_sure ? 'indertiminate' : ($item->answer ? 'active' : 'idle') }}"
                   class="border-gray-200 px-4 py-2 hover:rounded-none
                     {{ $item->not_sure ? 'bg-caution' : ($item->answer ? 'bg-primary text-white' : 'bg-gray-100') }}">
                   {{ $i + 1 }}
