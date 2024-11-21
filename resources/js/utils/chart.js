@@ -11,7 +11,8 @@ import { buildChart } from "preline/dist/helper-apexcharts.js";
 export function CreateLineChart(element, data, config) {
     buildChart(
         element,
-        (/** @type {"dark"|"light"}  */ mode) => ({
+        // (/** @type {"dark"|"light"}  */ _mode) => ({
+        () => ({
             chart: {
                 height: 300,
                 type: "area",
@@ -51,7 +52,7 @@ export function CreateLineChart(element, data, config) {
                 type: "category",
                 tickPlacement: "on",
                 categories: [
-                    ...config?.labels
+                    ...config.labels
                 ],
                 axisBorder: {
                     show: false,

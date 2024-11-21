@@ -1,4 +1,5 @@
 import axios from "axios";
+import toastr from "toastr";
 
 import { CreateLineChart } from "./utils/chart.js";
 import { request } from "./utils/network.js";
