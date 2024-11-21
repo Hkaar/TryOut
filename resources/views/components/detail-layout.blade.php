@@ -1,51 +1,57 @@
-<div class="flex flex-col w-full">
-  <div class="flex items-center gap-3 mb-3">
-    <a href="{{ url()->previous() }}" class="btn bg-primary text-white duration-150 hover:scale-105 active:scale-95 ease-in-out hover:opacity-95 active:opacity-50">
+<div class="flex w-full flex-col">
+  <div class="mb-3 flex items-center gap-3">
+    <x-link-button to="{{ url()->previous() }}" class="bg-primary text-white hover:rounded-none">
       <i class="material-symbols-outlined font-var-light">arrow_back</i>
       Balik
-    </a>
+    </x-link-button>
 
-    <h1 class="text-xl">Tentang {{ ucfirst($title) }}</h1>
+    <h1 class="text-3xl font-bold">Tentang {{ ucfirst($title) }}</h1>
   </div>
 
-  <div class="flex gap-3 items-center justify-between mb-3">
-    <div class="items-center gap-2 hidden lg:flex">
-      <div class="flex items-center gap-2 shadow rounded">
-        <span class="fw-medium bg-secondary p-3 text-white rounded-l">
+  <div class="flex items-center justify-between gap-3">
+    <div class="hidden items-center gap-2 lg:flex">
+      <div class="flex items-center gap-2 rounded-md border border-gray-200 shadow">
+        <span class="fw-medium rounded-l-md bg-secondary p-3 text-white">
           Dibuat pada
         </span>
 
         <span class="p-3">
-          {{ $item->created_at }}
+          {{ Carbon\Carbon::parse($item->created_at)->locale('id')->translatedFormat('l, j F Y') }}
         </span>
       </div>
 
-      <div class="flex items-center gap-2 shadow rounded">
-        <span class="fw-medium bg-secondary text-white p-3 rounded-l">
+      <div class="flex items-center gap-2 rounded-md border border-gray-200 shadow">
+        <span class="fw-medium rounded-l-md bg-secondary p-3 text-white">
           Terakhir diperbarui
         </span>
 
         <span class="p-3">
-          {{ $item->updated_at }}
+          {{ Carbon\Carbon::parse($item->updated_at)->locale('id')->translatedFormat('l, j F Y') }}
         </span>
       </div>
     </div>
 
-    <div class="flex items-center gap-2">
-      <a href="{{ isset($routes['edit']) ? route($routes['edit'], $item->id) : '#' }}" class="btn bg-caution text-white duration-150 hover:scale-105 active:scale-95 ease-in-out hover:opacity-95 active:opacity-50 {{ isset($routes['edit']) ? '' : 'bg-opacity-50' }}">
-        <span class="flex gap-1 items-center">
+    @if (isset($routes))
+      <div class="flex items-center gap-2">
+        <x-link-button to="{{ isset($routes['edit']) ? route($routes['edit'], $item->id) : '#' }}"
+          class="border-caution hover:rounded-none hover:bg-caution hover:text-white">
           <i class="material-symbols-outlined font-var-light">edit</i>
-          Edit <span class="hidden md:block lg:hidden xl:block">{{ strtolower($title) }}</span>
-        </span>
-      </a>
+          <span class="md:hidden lg:block xl:hidden">
+            Edit
+          </span>
+          <span class="hidden md:block lg:hidden xl:block">Edit {{ strtolower($title) }}</span>
+        </x-link-button>
 
-      <a href="{{ isset($routes['create']) ? route($routes['create'], $item->id) : '#' }}" class="btn bg-success text-white duration-150 hover:scale-105 active:scale-95 ease-in-out hover:opacity-95 active:opacity-50 {{ isset($routes['create']) ? '' : 'bg-opacity-50' }}">
-        <span class="flex gap-1 items-center">
+        <x-link-button to="{{ isset($routes['create']) ? route($routes['create'], $item->id) : '#' }}"
+          class="border-success hover:rounded-none hover:bg-success hover:text-white">
           <i class="material-symbols-outlined font-var-light">add</i>
-          Tambahkan <span class="hidden md:block lg:hidden xl:block">{{ strtolower($title) }}</span>
-        </span>
-      </a>
-    </div>
+          <span class="md:hidden lg:block xl:hidden">
+            Tambahkan
+          </span>
+          <span class="hidden md:block lg:hidden xl:block">Tambahkan {{ strtolower($title) }}</span>
+        </x-link-button>
+      </div>
+    @endif
   </div>
 </div>
 
