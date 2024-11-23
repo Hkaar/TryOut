@@ -109,7 +109,7 @@ class ExamController extends Controller
 
         $question = $result->question;
 
-        if (!isset($validated['answer'])) {
+        if (! isset($validated['answer'])) {
             return response(null);
         }
 

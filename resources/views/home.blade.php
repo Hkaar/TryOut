@@ -5,14 +5,14 @@
 @section('content')
   <section class="min-h-screen bg-cover" style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
     <x-navigation-bar active="home" />
-    
+
     <div class="container-sm space-y-5 py-4">
       <x-card class="bg-tertiary text-white shadow-md">
         <article class="space-y-3">
-          <span class="flex items-center gap-2">    
+          <span class="flex items-center gap-2">
             <h1 class="text-xl font-bold md:text-2xl">Peraturan</h1>
           </span>
-  
+
           <ol class="list-decimal space-y-1 ps-8 font-semibold md:text-lg">
             <li>Jika soal belum muncul silahkan refresh saat sudah jam dimulai.</li>
             <li>Untuk nilai ujian di sistem tidak dimunculkan, karena untuk nilai nanti akan dibagikan oleh guru mata

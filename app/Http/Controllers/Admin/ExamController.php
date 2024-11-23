@@ -166,7 +166,7 @@ class ExamController extends Controller
     private function setExamSettings(Request $request, array $keys, array $data)
     {
         foreach ($keys as $key) {
-            $request->has($key) 
+            $request->has($key)
                 ? $data[$key] = 1
                 : $data[$key] = 0;
         }
