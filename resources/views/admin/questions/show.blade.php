@@ -4,7 +4,6 @@
 
 @php
   $routes = [
-      'edit' => 'admin.questions.edit',
       'create' => 'admin.questions.create',
   ];
 @endphp

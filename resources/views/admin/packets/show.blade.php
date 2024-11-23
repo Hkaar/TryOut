@@ -91,8 +91,8 @@
             @foreach ($packet->questions as $i => $question)
               <x-card class="shadow-md">
                 <x-slot name="header">
-                  <div class="flex items-center justify-between gap-2 rounded-t-lg bg-accent px-4 py-3">
-                    <h3 class="text-lg font-semibold">Soal {{ $i + 1 }}</h3>
+                  <div class="flex items-center justify-between gap-2 rounded-t-lg bg-accent px-4 py-2">
+                    <h3 class="text-lg font-bold">Soal {{ $i + 1 }}</h3>
 
                     <x-link-button to="{{ route('admin.questions.show', $question->id) }}" class="hover:bg-info hover:text-white">
                       <i class="material-symbols-outlined font-var-light">info</i>
@@ -106,7 +106,7 @@
                       class="block w-1/4 rounded-md" />
                   @endif
 
-                  <p class="font-medium text-lg">
+                  <p class="text-lg">
                     {{ ucfirst($question->content) }}
                   </p>
                 </div>
