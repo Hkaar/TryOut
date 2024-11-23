@@ -33,23 +33,27 @@
 
     @if (isset($routes))
       <div class="flex items-center gap-2">
-        <x-link-button to="{{ isset($routes['edit']) ? route($routes['edit'], $item->id) : '#' }}"
-          class="border-caution hover:rounded-none hover:bg-caution hover:text-white">
-          <i class="material-symbols-outlined font-var-light">edit</i>
-          <span class="md:hidden lg:block xl:hidden">
-            Edit
-          </span>
-          <span class="hidden md:block lg:hidden xl:block">Edit {{ strtolower($title) }}</span>
-        </x-link-button>
+        @if (isset($routes['edit']))
+          <x-link-button to="{{ route($routes['edit'], $item->id) }}"
+            class="border-caution hover:rounded-none hover:bg-caution hover:text-white">
+            <i class="material-symbols-outlined font-var-light">edit</i>
+            <span class="md:hidden lg:block xl:hidden">
+              Edit
+            </span>
+            <span class="hidden md:block lg:hidden xl:block">Edit {{ strtolower($title) }}</span>
+          </x-link-button>
+        @endif
 
-        <x-link-button to="{{ isset($routes['create']) ? route($routes['create'], $item->id) : '#' }}"
-          class="border-success hover:rounded-none hover:bg-success hover:text-white">
-          <i class="material-symbols-outlined font-var-light">add</i>
-          <span class="md:hidden lg:block xl:hidden">
-            Tambahkan
-          </span>
-          <span class="hidden md:block lg:hidden xl:block">Tambahkan {{ strtolower($title) }}</span>
-        </x-link-button>
+        @if (isset($routes['create']))
+          <x-link-button to="{{ route($routes['create'], $item->id) }}"
+            class="border-success hover:rounded-none hover:bg-success hover:text-white">
+            <i class="material-symbols-outlined font-var-light">add</i>
+            <span class="md:hidden lg:block xl:hidden">
+              Tambahkan
+            </span>
+            <span class="hidden md:block lg:hidden xl:block">Tambahkan {{ strtolower($title) }}</span>
+          </x-link-button>
+        @endif
       </div>
     @endif
   </div>
