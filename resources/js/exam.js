@@ -25,11 +25,13 @@ export default function setupExam() {
 
     questionBoxes.forEach((element) => {
         element.addEventListener("click", () => {
-            gotoQuestion(element);
+            gotoQuestion({
+                element: element,
+            });
         });
     });
 
-    if (nextBtn === null || prevBtn === null) {
+    if (!nextBtn || !prevBtn) {
         console.error("Next and/or previous button for exams does not exist!");
         return;
     }
@@ -42,7 +44,7 @@ export default function setupExam() {
         prevQuestion();
     });
 
-    if (finishBtn === null) {
+    if (!finishBtn) {
         console.error("Finish exam button doesn't exist!");
         return;
     }
@@ -51,32 +53,56 @@ export default function setupExam() {
         endExam();
     });
 
+    gotoQuestion({
+        questionId: currentQuestionId,
+        questionNumber: currentQuestionNumber,
+    });
+
     updateExamTime("#examTimer");
 }
 
 /**
  * Fetches the specified question
  *
- * @param {Element} element
+ * @param {Questions.questionGotoConfig} config
  */
-function gotoQuestion(element) {
+function gotoQuestion(config) {
     const questionContainer = document.getElementById("questionContainer");
     const questionHeader = document.getElementById("questionHeader");
 
-    const questionId = element.getAttribute("question-id");
-    const questionNumber = element.getAttribute("question-number");
+    let questionId = currentQuestionId;
+    let questionNumber = currentQuestionNumber;
 
-    if (questionId === null || questionNumber === null) {
-        console.error(
-            `Question id and/or number is not defined in ${element}!`
-        );
+    if (config.element) {
+        const tempId = config.element.getAttribute("question-id");
+        const tempNumber = config.element.getAttribute("question-number");
+
+        if (!tempId || !tempNumber) {
+            console.error(`Error: Missing question id and/or question number in the element attributes. 
+                Ensure the element has 'question-id' and 'question-number' attributes.`);
+            return;
+        }
+
+        questionId = toNumber(tempId);
+        questionNumber = toNumber(tempNumber);
+    } else if (config.questionId && config.questionNumber) {
+        questionId = config.questionId;
+        questionNumber = config.questionNumber;
+    } else {
+        console.error(`Error: Config object is incorrectly defined. It must either contain 'element' with 
+            'question-id' and 'question-number', or directly contain 'questionId' and 'questionNumber'.`);
         return;
     }
 
-    if (questionContainer === null || questionHeader === null) {
-        console.error("Question container does not exist!");
+    if (!questionContainer || !questionHeader) {
+        console.error(`Error: 'questionContainer' or 'questionHeader' DOM elements are missing. Ensure that 
+            these elements exist in the document.`);
         return;
     }
+
+    console.debug(
+        `Navigating to Question ID: ${questionId}, Question Number: ${questionNumber}`
+    );
 
     request(async () => {
         const response = await axios.get(
@@ -86,8 +112,8 @@ function gotoQuestion(element) {
 
         const questionBox = Question(response.data);
         const header = QuestionTopBar(
-            toNumber(questionNumber),
-            toNumber(questionId),
+            questionNumber,
+            questionId,
             response.data
         );
 
@@ -109,21 +135,10 @@ function gotoQuestion(element) {
 
                 break;
 
-            case 404:
-                toastr.error("Maaf tidak ada soal lagi :(", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
-
-                break;
-
-            case 400 | 500:
-                toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
-
-                break;
+            case 204:
+            case 400:
+            case 500:
+                handleStatusResponse(response.status);
 
             default:
                 console.warn(
@@ -141,7 +156,7 @@ function nextQuestion() {
     const questionContainer = document.getElementById("questionContainer");
     const questionHeader = document.getElementById("questionHeader");
 
-    if (questionContainer === null || questionHeader === null) {
+    if (!questionContainer || !questionHeader) {
         console.error("Question container does not exist!");
         return;
     }
@@ -183,21 +198,10 @@ function nextQuestion() {
 
                 break;
 
-            case 404:
-                toastr.error("Maaf tidak ada soal lagi :(", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
-
-                break;
-
-            case 400 | 500:
-                toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
-
-                break;
+            case 204:
+            case 400:
+            case 500:
+                handleStatusResponse(response.status);
 
             default:
                 console.warn(
@@ -215,7 +219,7 @@ function prevQuestion() {
     const questionContainer = document.getElementById("questionContainer");
     const questionHeader = document.getElementById("questionHeader");
 
-    if (questionContainer === null || questionHeader === null) {
+    if (!questionContainer || !questionHeader) {
         console.error("Question container does not exist!");
         return;
     }
@@ -257,21 +261,10 @@ function prevQuestion() {
 
                 break;
 
-            case 404:
-                toastr.error("Maaf tidak ada soal lagi :(", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
-
-                break;
-
-            case 400 | 500:
-                toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
-
-                break;
+            case 204:
+            case 400:
+            case 500:
+                handleStatusResponse(response.status);
 
             default:
                 console.warn(
@@ -280,6 +273,38 @@ function prevQuestion() {
                 break;
         }
     });
+}
+
+/**
+ * Handle the status responses other than 200 for question fetching
+ *
+ * @param {number} statusCode
+ */
+function handleStatusResponse(statusCode) {
+    switch (statusCode) {
+        case 204:
+            if (currentQuestionNumber > 1) {
+                endExam();
+                return;
+            }
+
+            toastr.error("Maaf tidak ada soal lagi :(", "Status", {
+                timeOut: 3000,
+                progressBar: true,
+            });
+            break;
+
+        case 400:
+        case 500:
+            toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
+                timeOut: 3000,
+                progressBar: true,
+            });
+            break;
+
+        default:
+            break;
+    }
 }
 
 /**
@@ -320,8 +345,8 @@ function saveQuestion() {
                 });
                 break;
 
+            case 204:
             case 400:
-            case 404:
             case 500:
                 toastr.error("Owh.. ternyatanya ada kesalahan!", "Status", {
                     timeOut: 3000,
@@ -443,7 +468,9 @@ function fetchExamTime(timer) {
 
             let offset = remainingTime - response.data.remaining;
 
-            if (Math.abs(offset) > 10000) {
+            console.log(offset)
+
+            if (Math.abs(offset) > 8000) {
                 Swal.fire({
                     title: "Terdeteksi gangguan",
                     text: "Terdeteksi gangguan saat mengerjakan ujian",
@@ -451,7 +478,7 @@ function fetchExamTime(timer) {
                     backdrop: true,
                     icon: "error",
                 }).then(() => {
-                    window.location.replace("/");
+                    window.location.replace("/logout");
                 });
                 return;
             }
