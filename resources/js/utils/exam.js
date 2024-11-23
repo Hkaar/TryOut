@@ -72,13 +72,6 @@ export function updateQuestionBoxState(questionBox, state) {
         return;
     }
 
-    if (prev === current) {
-        console.log(state)
-        questionBox.setAttribute("data-prev-state", current);
-        questionBox.setAttribute("data-state", state);
-        return;
-    }
-
-    questionBox.setAttribute("data-prev-state", state);
+    questionBox.setAttribute("data-prev-state", current);
     questionBox.setAttribute("data-state", state);
 }
