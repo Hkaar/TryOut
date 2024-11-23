@@ -35,7 +35,7 @@
                   <label for="username" class="dark:text-white mb-2 block text-sm font-medium">Username</label>
                   <input type="text" id="username" name="username"
                     class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="{{ $user->username }}">
+                    placeholder="Masukkan username akun ..." value="{{ $user->username }}">
 
                   @error('username')
                     <p>
@@ -61,7 +61,7 @@
                   <label for="email" class="dark:text-white mb-2 block text-sm font-medium">Email</label>
                   <input type="email" id="email" name="email"
                     class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="{{ $user->email }}">
+                    placeholder="Masukkan email akun ..." value="{{ $user->email }}">
 
                   @error('email')
                     <p>
@@ -163,7 +163,7 @@
         <div id="previewFoto" class="grid place-items-center font-semibold">
           @if ($user->img)
             <img src="{{ Storage::url($user->img) }}" alt="Foto tidak dapat dimuatkan"
-              class="block aspect-square w-2/3">
+              class="block aspect-square w-2/3 rounded-full">
           @else
             <div class="flex flex-col items-center justify-center gap-5">
               <img src="{{ Vite::asset('resources/images/upload.svg') }}" alt="Gambar tidak dapat dimuatkan"

@@ -36,7 +36,7 @@
                   <label for="username" class="dark:text-white mb-2 block text-sm font-medium">Username Peserta</label>
                   <input type="text" id="username" name="username"
                     class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="{{ $student->username }}">
+                    placeholder="Masukkan username peserta ..." value="{{ $student->username }}">
 
                   @error('username')
                     <p>
@@ -49,7 +49,7 @@
                   <label for="name" class="dark:text-white mb-2 block text-sm font-medium">Nama Peserta</label>
                   <input type="text" id="name" name="name"
                     class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="{{ $student->name }}">
+                    placeholder="Masukkan nama peserta" value="{{ $student->name }}">
 
                   @error('name')
                     <p>
@@ -62,7 +62,7 @@
                   <label for="email" class="dark:text-white mb-2 block text-sm font-medium">Email Peserta</label>
                   <input type="email" id="email" name="email"
                     class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="{{ $student->email }}">
+                    placeholder="Masukkan email peserta ..." value="{{ $student->email }}">
 
                   @error('email')
                     <p>

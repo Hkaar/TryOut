@@ -112,7 +112,7 @@
                 <div class="w-full">
                   <label for="start_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Mulai Ujian</label>
                   <input type="datetime-local" id="start_date" name="start_date" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="Masukkan tanggal mulai pengerjaan ujian ..." timezone-change required>
+                    placeholder="Masukkan tanggal mulai pengerjaan ujian ..." min="{{ now()->format('Y-m-d\TH:i') }}" timezone-change required>
 
                   @error('start_date')
                     <p>
@@ -124,7 +124,7 @@
                 <div class="w-full">
                   <label for="end_date" class="block text-sm font-medium mb-2 dark:text-white">Tanggal Berakhir Ujian</label>
                   <input type="datetime-local" id="end_date" name="end_date" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="Masukkan tanggal berakhir pengerjaan ujian ..." timezone-change required>
+                    placeholder="Masukkan tanggal berakhir pengerjaan ujian ..." min="{{ now()->format('Y-m-d\TH:i') }}" timezone-change required>
 
                   @error('end_date')
                     <p>

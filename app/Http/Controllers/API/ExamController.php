@@ -25,10 +25,10 @@ class ExamController extends Controller
         $examAmount = [];
 
         for ($date = $startOfWeek; $date->lte($endOfWeek); $date->addDay()) {
-            $finishedAmount = ExamResult::whereDate('created_at', '=', $date->toDateString())->where('finished', '=', 1)->count();
+            $finishedAmount = ExamResult::whereDate('last_date', '=', $date->toDateString())->where('finished', '=', 1)->count();
             $finished[] = $finishedAmount;
 
-            $amount = ExamResult::whereDate('created_at', '=', $date->toDateString())->count();
+            $amount = ExamResult::whereDate('start_date', '=', $date->toDateString())->count();
             $examAmount[] = $amount;
         }
 
@@ -70,7 +70,7 @@ class ExamController extends Controller
             return response()->json($response);
         }
 
-        return response()->json(['message' => 'No more questions'], 404);
+        return response()->json(null, 204);
     }
 
     /**
@@ -91,7 +91,7 @@ class ExamController extends Controller
             return response()->json($response);
         }
 
-        return response()->json(['message' => 'No previous questions'], 404);
+        return response()->json(null, 204);
     }
 
     /**
@@ -109,7 +109,11 @@ class ExamController extends Controller
 
         $question = $result->question;
 
-        if ($validated['answer'] && strtolower($question->rightAnswer->content) === strtolower($validated['answer'])) {
+        if (! isset($validated['answer'])) {
+            return response(null);
+        }
+
+        if (strtolower($question->rightAnswer->content) === strtolower($validated['answer'])) {
             $result->answer = $question->rightAnswer->content;
             $result->correct = 1;
         } else {

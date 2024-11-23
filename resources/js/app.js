@@ -174,9 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerModal(event);
     });
 
-    runPlugin(['exam'], setupExam);
-    runPlugin(['question-editor'], setupQEditor);
-    runPlugin(['admin-charts-home'], setupHomeCharts);
+    runPlugin('exam', setupExam);
+    runPlugin('question-editor', setupQEditor);
+    runPlugin('admin-charts-home', setupHomeCharts);
 
     setupAutoTimezone();
 });

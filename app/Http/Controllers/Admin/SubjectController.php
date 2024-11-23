@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use App\Traits\Modelor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SubjectController extends Controller
 {
@@ -90,7 +91,7 @@ class SubjectController extends Controller
         $subject = Subject::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:subjects,name',
+            'name' => ['nullable', 'string', 'max:255', Rule::unique('subjects', 'name')->ignore($subject->id)],
         ]);
 
         $this->updateModel($subject, $validated);

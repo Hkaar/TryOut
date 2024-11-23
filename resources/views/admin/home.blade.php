@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Beranda')
+@section('title', 'Beranda - Dashboard')
 
 @section('meta')
   <meta name="plugins" content="admin-charts-home">
@@ -12,8 +12,8 @@
       <x-card class="shadow-md">
         <x-slot name="header">
           <div class="flex items-center gap-3 rounded-t-lg bg-tertiary px-4 py-3 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-              class="size-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
             </svg>
@@ -53,7 +53,7 @@
         </div>
       </x-card>
 
-      <x-card class="xl:col-span-2 shadow-md">
+      <x-card class="shadow-md md:col-span-2 order-first lg:col-span-1 lg:order-none xl:col-span-2">
         <x-slot name="header">
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -89,7 +89,7 @@
             </div>
           </div>
 
-          <div class="grid content-center justify-end">
+          <div class="content-center justify-end hidden sm:grid lg:hidden xl:grid">
             <span class="rounded-md bg-primary px-3 py-2 text-sm font-bold text-white">
               {{ ucfirst(auth()->user()->role->name) }}
             </span>
@@ -97,7 +97,7 @@
         </div>
       </x-card>
 
-      <x-card class="lg:col-span-2 xl:col-span-3 shadow-md">
+      <x-card class="shadow-md md:col-span-2 lg:col-span-2 xl:col-span-3">
         <div class="mb-3 flex items-center justify-center gap-x-4 sm:mb-6 sm:justify-end">
           <div class="inline-flex items-center">
             <span class="size-2.5 me-2 inline-block rounded-sm bg-blue-600"></span>
@@ -116,46 +116,133 @@
         <div id="examParticipationChart"></div>
       </x-card>
 
-      <x-card class="shadow-md">
+      <x-card class="shadow-md md:col-span-2 lg:col-span-1">
         <x-slot name="header">
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
             </svg>
 
             <h3 class="text-xl font-semibold">
-              Rasio
+              Status ujian
             </h3>
           </div>
         </x-slot>
+
+        <div class="grid grid-cols-1 gap-5 h-full">
+          <article class="flex flex-col items-center gap-2 text-center bg-gray-50 px-4 py-3 rounded-md">
+            <h6 class="text-6xl font-bold">
+              {{ App\Models\ExamResult::whereDate('start_date', '>=', now()->startOfWeek())->whereDate('start_date', '<=', now()->endOfWeek())->count() }}
+            </h6>
+
+            <span class="text-gray-500">
+              Peserta yang mengerjakan ujian minggu ini
+            </span>
+          </article>
+
+          <article class="flex flex-col items-center gap-2 text-center bg-gray-50 px-4 py-3 rounded-md">
+            <h6 class="text-6xl font-bold">
+              {{ App\Models\ExamResult::whereDate('start_date', '>=', now()->startOfWeek())->whereDate('start_date', '<=', now()->endOfWeek())->where('finished', '=', 1)->count() }}
+            </h6>
+            <span class="text-gray-500">
+              Peserta yang menyelesaikan ujian minggu ini
+            </span>
+          </article>
+        </div>
       </x-card>
 
-      <x-card class="xl:col-span-2 shadow-md">
+      <x-card class="shadow-md md:col-span-2 lg:col-span-3 xl:col-span-2">
         <x-slot name="header">
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
             </svg>
 
             <h3 class="text-xl font-semibold">
-              Paket soal
+              Pengerjaan Terbaru
             </h3>
           </div>
         </x-slot>
+
+        <div class="space-y-3 h-[32rem] overflow-y-auto px-2">
+          @foreach (App\Models\ExamResult::limit(10)->latest()->get() as $item)
+            <x-card>
+              <x-slot name="header">
+                <div class="flex items-center gap-2 rounded-t-lg bg-accent px-3 py-2 text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                  </svg>
+
+                  <h3 class="text-xl font-semibold">
+                    {{ $item->exam->name }}
+                  </h3>
+                </div>
+              </x-slot>
+
+              <span class="font-medium">
+                Dikerjakan oleh {{ ucfirst($item->user->name ? $item->user->name : $item->user->username) }}
+              </span>
+
+              <x-slot name="footer">
+                <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
+                  <span class="text-gray-500">
+                    Waktu mulai : {{ Carbon\Carbon::parse($item->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }}
+                  </span>
+                </div>
+              </x-slot>
+            </x-card>
+          @endforeach
+        </div>
       </x-card>
 
-      <x-card class="xl:col-span-2 shadow-md">
+      <x-card class="shadow-md md:col-span-2 lg:col-span-3 xl:col-span-2">
         <x-slot name="header">
           <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
             </svg>
 
             <h3 class="text-xl font-semibold">
-              Mata pelajaran
+              Penyelesaian Terbaru
             </h3>
           </div>
         </x-slot>
+
+        <div class="space-y-3 h-[32rem] overflow-y-auto px-2">
+          @foreach (App\Models\ExamResult::where('finished', '=', 1)->limit(10)->latest()->get() as $item)
+            <x-card>
+              <x-slot name="header">
+                <div class="flex items-center gap-2 rounded-t-lg bg-accent px-3 py-2 text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                  </svg>
+
+                  <h3 class="text-xl font-semibold">
+                    {{ $item->exam->name }}
+                  </h3>
+                </div>
+              </x-slot>
+
+              <span class="font-medium">
+                Dikerjakan oleh {{ ucfirst($item->user->name ? $item->user->name : $item->user->username) }}
+              </span>
+
+              <x-slot name="footer">
+                <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
+                  <span class="text-gray-500">
+                    Waktu selesai : {{ $item->finish_date ? Carbon\Carbon::parse($item->finish_date)->locale('id')->translatedFormat('l, j F Y H:i:s') : Carbon\Carbon::parse($item->last_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }}
+                  </span>
+                </div>
+              </x-slot>
+            </x-card>
+          @endforeach
+        </div>
       </x-card>
     </main>
   </x-dashboard-layout>
