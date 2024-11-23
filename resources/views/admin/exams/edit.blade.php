@@ -4,7 +4,7 @@
 
 @section('content')
   <x-dashboard-layout active="daftar ujian">
-    <div class="flex flex-1">
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2">
       <div class="grid flex-1 place-items-center">
         <div class="flex w-full flex-col gap-3">
           <div class="flex items-center gap-4">
@@ -30,7 +30,7 @@
                   <label for="name" class="dark:text-white mb-2 block text-sm font-medium">Nama Ujian</label>
                   <input type="text" id="name" name="name"
                     class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="{{ $exam->name }}">
+                    placeholder="Masukkan nama ujian ..." value="{{ $exam->name }}">
 
                   @error('name')
                     <p>
@@ -189,21 +189,25 @@
                 </div>
               </div>
 
-              <div class="flex items-center gap-1">
-                <button type="submit" class="btn bg-primary text-white">
-                  Simpan
-                </button>
+              <div class="flex items-center gap-2">
+                <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">save</i>
 
-                <a href="{{ route('admin.exams.index') }}" class="btn bg-danger text-white">
+                  Simpan
+                </x-button>
+
+                <x-link-button to="{{ route('admin.exams.index') }}"
+                  class="border-danger hover:rounded-none hover:bg-danger hover:text-white hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">cancel</i>
                   Batalkan
-                </a>
+                </x-link-button>
               </div>
             </form>
           </x-elevated-card>
         </div>
       </div>
 
-      <div class="grid flex-1 place-items-center">
+      <div class="grid flex-1 place-items-center order-first lg:order-last">
         <img src="{{ Vite::asset('resources/images/add.svg') }}" alt="Gambar tidak dapat dimuatkan"
           class="block aspect-square w-2/3">
       </div>

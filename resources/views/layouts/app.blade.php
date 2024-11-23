@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
 
+  @yield('meta')
+
   @vite(['resources/css/app.css'])
   @stack('css')
 </head>

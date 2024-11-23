@@ -57,8 +57,8 @@ class QuestionController extends Controller
         $question = new Question;
         $question->fill($validated);
 
-        if ($request->has('img')) {
-            $filePath = $this->uploadImage($request->get('img'));
+        if ($request->hasFile('img')) {
+            $filePath = $this->uploadImage($request->file('img'));
             $question->img = $filePath;
         }
 
@@ -81,6 +81,7 @@ class QuestionController extends Controller
                 if (in_array('image', array_keys($choice))) {
                     $filePath = $this->uploadImage($choice['image']);
                     $questionChoice->content = $filePath;
+                    $questionChoice->is_image = 1;
                 } else {
                     $questionChoice->content = $choice['answer'];
                 }

@@ -4,7 +4,7 @@
 
 @section('content')
   <x-dashboard-layout active="group">
-    <div class="flex-1 flex">
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-y-5">
       <div class="flex-1 grid place-items-center">
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
@@ -18,7 +18,7 @@
             </span>
           </div>
 
-          <div class="flex flex-col h-fit border rounded p-4">
+          <div class="flex flex-col h-fit border rounded-md p-4 shadow-md">
             <form action="{{ route('admin.groups.update', $group->id) }}" method="post">
               @csrf
               @method('PUT')
@@ -26,7 +26,7 @@
               <div class="w-full mb-5">
                 <label for="name" class="block text-sm font-medium mb-2 dark:text-white">Nama Group</label>
                 <input type="text" id="name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                  placeholder="{{ $group->name }}">
+                  placeholder="Masukkan nama group ..." value="{{ $group->name }}">
 
                 @error('name')
                   <p>
@@ -35,21 +35,25 @@
                 @enderror
               </div>
 
-              <div class="flex items-center gap-1">
-                <button type="submit" class="btn bg-primary text-white">
-                  Simpan
-                </button>
+              <div class="flex items-center gap-2">
+                <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">save</i>
 
-                <a href="{{ route('admin.groups.index') }}" class="btn bg-danger text-white">
+                  Simpan
+                </x-button>
+
+                <x-link-button to="{{ route('admin.groups.index') }}"
+                  class="border-danger hover:rounded-none hover:bg-danger hover:text-white hover:shadow-lg">
+                  <i class="material-symbols-outlined font-var-light">cancel</i>
                   Batalkan
-                </a>
+                </x-link-button>
               </div>
             </form>
           </div>
         </div>
       </div>
 
-      <div class="flex-1 grid place-items-center">
+      <div class="flex-1 grid place-items-center order-first lg:order-last">
         <img src="{{ Vite::asset('resources/images/add.svg') }}" alt="Gambar tidak dapat dimuatkan" class="block w-2/3 aspect-square">
       </div>
     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Group;
 use App\Traits\Modelor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class GroupController extends Controller
 {
@@ -90,7 +91,7 @@ class GroupController extends Controller
         $group = Group::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'nullable|string|max:255|unique:groups,name',
+            'name' => ['nullable', 'string', 'max:255', Rule::unique('groups', 'name')->ignore($group->id)],
         ]);
 
         $this->updateModel($group, $validated);

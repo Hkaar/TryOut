@@ -3,21 +3,25 @@
 @section('title', 'Beranda')
 
 @section('content')
-  <x-navigation-bar />
+  <section class="min-h-screen bg-cover" style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
+    <x-navigation-bar active="home" />
 
-  <section class="min-h-screen">
     <div class="container-sm space-y-5 py-4">
       <x-card class="bg-tertiary text-white shadow-md">
-        <h1 class="mb-3 text-xl font-bold md:text-2xl">Peraturan</h1>
+        <article class="space-y-3">
+          <span class="flex items-center gap-2">
+            <h1 class="text-xl font-bold md:text-2xl">Peraturan</h1>
+          </span>
 
-        <ol class="list-decimal space-y-1 ps-8 font-semibold md:text-lg">
-          <li>Jika soal belum muncul silahkan refresh saat sudah jam dimulai.</li>
-          <li>Untuk nilai ujian di sistem tidak dimunculkan, karena untuk nilai nanti akan dibagikan oleh guru mata
-            pelajaran masing-masing.</li>
-          <li>Soal ujian otomatis menghilang selesai waktu ujian berakhir. Silahkan tunggu soal ujian berikutnya sesuai
-            waktu pada jadwal.</li>
-          <li>Kerjakan soal Ujian sesuai instruksi dari guru mapel masing-masing</li>
-        </ol>
+          <ol class="list-decimal space-y-1 ps-8 font-semibold md:text-lg">
+            <li>Jika soal belum muncul silahkan refresh saat sudah jam dimulai.</li>
+            <li>Untuk nilai ujian di sistem tidak dimunculkan, karena untuk nilai nanti akan dibagikan oleh guru mata
+              pelajaran masing-masing.</li>
+            <li>Soal ujian otomatis menghilang selesai waktu ujian berakhir. Silahkan tunggu soal ujian berikutnya sesuai
+              waktu pada jadwal.</li>
+            <li>Kerjakan soal Ujian sesuai instruksi dari guru mapel masing-masing</li>
+          </ol>
+        </article>
       </x-card>
 
       <x-card class="items-center shadow-md">

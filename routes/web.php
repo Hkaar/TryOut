@@ -42,6 +42,7 @@ Route::group(['namespace' => "App\Http\Controllers\Auth"], function () {
 
 Route::group(['namespace' => "App\Http\Controllers\Admin", 'prefix' => 'manage', 'middleware' => ['auth', 'can:access-dashboard']], function () {
     Route::get('home', 'HomeController@index')->name('admin.home');
+    Route::get('help', 'HomeController@help')->name('admin.help');
 
     Route::resource('paket-soal', 'PacketController')->names('admin.packets');
     Route::resource('pertanyaan', 'QuestionController')->names('admin.questions');

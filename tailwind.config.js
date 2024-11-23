@@ -1,5 +1,7 @@
+import formsPlugin from '@tailwindcss/forms';
+import prelinePlugin from 'preline/plugin.js';
+
 /** @type {import('tailwindcss').Config} */
-// @ts-ignore
 export default {
   darkMode: "selector",
   mode: "jit",
@@ -30,7 +32,6 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/forms'),
-    require('preline/plugin'),
+    formsPlugin, prelinePlugin
   ],
 }

@@ -8,6 +8,7 @@ use App\Traits\Modelor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class ExamController extends Controller
 {
@@ -108,7 +109,7 @@ class ExamController extends Controller
         $exam = Exam::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'nullable|string|max:255|unique:exams,name',
+            'name' => ['nullable', 'string', 'max:255', Rule::unique('exams', 'name')->ignore($exam->id)],
             'duration' => 'nullable|numeric',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
@@ -165,11 +166,9 @@ class ExamController extends Controller
     private function setExamSettings(Request $request, array $keys, array $data)
     {
         foreach ($keys as $key) {
-            if ($request->has($key)) {
-                $data[$key] = 1;
-            } else {
-                $data[$key] = 0;
-            }
+            $request->has($key)
+                ? $data[$key] = 1
+                : $data[$key] = 0;
         }
 
         return $data;

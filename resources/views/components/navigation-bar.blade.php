@@ -1,4 +1,4 @@
-<header {{ $attributes->twMerge(["class" => "dark:bg-neutral-800 sticky top-0 z-40 mx-auto flex w-full flex-wrap border border-gray-200 bg-white py-3 text-sm shadow-md sm:flex-nowrap sm:justify-start md:top-2 md:mt-2 md:w-10/12 max-w-[85rem] md:rounded-full"]) }}>
+<header {{ $attributes->twMerge(["class" => "dark:bg-neutral-800 sticky top-0 z-40 mx-auto flex w-full flex-wrap border border-gray-200 bg-white py-3 text-sm shadow-md sm:flex-nowrap sm:justify-start md:top-2 md:w-[98%] xl:w-10/12 max-w-[85rem] md:rounded-full"]) }}>
   <nav class="mx-auto flex w-full max-w-[85rem] items-center justify-between px-4">
     <div class="bg-gray flex flex-1 items-center justify-between">
       <a href="{{ route('/') }}">
@@ -46,8 +46,8 @@
             <hr />
 
             <div class="mt-2 space-y-1">
-              <a class="dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-                href="{{ route('home') }}">
+              <a class="dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm focus:outline-none {{ isset($active) && $active === 'home' ? 'bg-gray-100 text-neutral-400' : 'hover:bg-gray-100 focus:bg-gray-100 text-gray-800' }}"
+                href="{{ isset($active) && $active === 'home' ? '' : route('home') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="size-4">
                   <path stroke-linecap="round" stroke-linejoin="round"

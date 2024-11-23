@@ -186,4 +186,17 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    /*
+    |--------------------------------------------------------------------------
+    | App Metadata
+    |--------------------------------------------------------------------------
+    |
+    | The metadata listed here, will be used for identifying
+    | information related to the application.
+    |
+    */
+
+    'version' => env('APP_VERSION', '1.0'),
+    'author' => env('APP_AUTHOR', 'unknown'),
+
 ];

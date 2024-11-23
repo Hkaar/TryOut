@@ -1,14 +1,15 @@
 <aside id="sideBar"
-  class="dark:bg-secondary_dark dark:text-black min-w-16 fixed top-0 z-20 min-h-screen -translate-x-full overflow-y-auto bg-secondary px-6 py-4 text-white shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen lg:relative lg:translate-x-0">
+  class="dark:bg-secondary_dark dark:text-black min-w-16 fixed top-0 z-20 max-h-screen min-h-screen -translate-x-full overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen lg:relative lg:max-h-none lg:translate-x-0">
 
   <!-- This div is here because of tailwind not registering classes properly -->
   <div class="lg:min-w-72 hidden h-screen min-w-full ps-3"></div>
 
-  <div class="flex flex-col justify-center gap-4">
+  <div class="flex flex-col justify-center gap-4 h-full">
     <div class="flex items-center justify-between">
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-3">
         @if (auth()->check() && auth()->user()->img)
-          <img src="{{ Storage::url(auth()->user()->img) }}" alt="Gambar tidak dapat dimuatkan" class="size-12 rounded-full aspect-square object-cover">
+          <img src="{{ Storage::url(auth()->user()->img) }}" alt="Gambar tidak dapat dimuatkan"
+            class="size-12 aspect-square rounded-full object-cover">
         @else
           <img src="{{ Vite::asset('resources/images/default-avatar.png') }}" alt="Gambar tidak dapat dimuatkan"
             class="size-12 rounded-full">
@@ -17,7 +18,7 @@
         @auth
           <a href="{{ route('/') }}" class="menu-text hidden">{{ auth()->user()->name }}</a>
 
-          <span class="rounded-xl bg-accent px-2 py-1 text-sm font-bold menu-text hidden text-black">
+          <span class="menu-text hidden rounded-xl bg-tertiary px-2 py-1 text-sm font-bold text-white">
             {{ ucfirst(auth()->user()->role->name) }}
           </span>
         @else
@@ -32,17 +33,17 @@
 
     <hr>
 
-    <div class="space-y-8">
-      @if (Gate::allows('access-dashboard') && $enableAdmin)
-        <a href="{{ $active === 'home' ? '#' : route('admin.home') }}"
-          class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
-          <i class="material-symbols-outlined font-var-light">home</i>
-          <span class="menu-text me-auto hidden">Beranda</span>
-        </a>
+    <div class="space-y-5 flex-1">
+      <a href="{{ $active === 'home' ? '#' : route('admin.home') }}"
+        class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
+        <i class="material-symbols-outlined font-var-light">home</i>
+        <span class="menu-text me-auto hidden">Beranda</span>
+      </a>
 
-        <div class="flex flex-col justify-center gap-2">
-          <span class="menu-text hidden font-medium">DATA MASTER</span>
+      <div class="flex flex-col justify-center gap-2">
+        <span class="menu-text hidden font-medium">DATA MASTER</span>
 
+        <div class="space-y-1">
           <a href="{{ $active === 'group' ? '#' : route('admin.groups.index') }}"
             class="side-nav-item {{ $active === 'group' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">grid_view</i>
@@ -61,10 +62,12 @@
             <span class="menu-text me-auto hidden">Mata Pelajaran</span>
           </a>
         </div>
+      </div>
 
-        <div class="flex flex-col justify-center gap-2">
-          <span class="menu-text hidden font-medium">BANK SOAL</span>
+      <div class="flex flex-col justify-center gap-2">
+        <span class="menu-text hidden font-medium">BANK SOAL</span>
 
+        <div class="space-y-1">
           <a href="{{ $active === 'paket soal' ? '#' : route('admin.packets.index') }}"
             class="side-nav-item {{ $active === 'paket soal' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">collections_bookmark</i>
@@ -77,10 +80,12 @@
             <span class="menu-text me-auto hidden">Daftar Soal</span>
           </a>
         </div>
+      </div>
 
-        <div class="flex flex-col justify-center gap-2">
-          <span class="menu-text hidden font-medium">UJIAN</span>
+      <div class="flex flex-col justify-center gap-2">
+        <span class="menu-text hidden font-medium">UJIAN</span>
 
+        <div class="space-y-1">
           <a href="{{ $active === 'daftar ujian' ? '#' : route('admin.exams.index') }}"
             class="side-nav-item {{ $active === 'daftar ujian' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">event_note</i>
@@ -93,10 +98,12 @@
             <span class="menu-text me-auto hidden">Riwayat Ujian</span>
           </a>
         </div>
+      </div>
 
-        <div class="flex flex-col justify-center gap-2">
-          <span class="menu-text hidden font-medium">PENGATURAN</span>
+      <div class="flex flex-col justify-center gap-2">
+        <span class="menu-text hidden font-medium">PENGATURAN</span>
 
+        <div class="space-y-1">
           <a href="{{ $active === 'akun' ? '#' : route('admin.users.index') }}"
             class="side-nav-item {{ $active === 'akun' ? 'active' : '' }}">
             <i class="material-symbols-outlined font-var-light">people</i>
@@ -109,31 +116,15 @@
             <span class="menu-text me-auto hidden">Pengaturan</span>
           </a>
         </div>
-      @else
-        <div class="flex flex-col justify-center gap-2">
-          <a href="{{ $active === 'home' ? '#' : route('home') }}"
-            class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">home</i>
-            <span class="menu-text me-auto hidden">Beranda</span>
-          </a>
-        </div>
-
-        <div class="flex flex-col justify-center gap-2">
-          <span class="menu-text hidden font-medium">UJIAN</span>
-
-          <a href="{{ $active === 'daftar ujian' ? '#' : route('exams.index') }}"
-            class="side-nav-item {{ $active === 'daftar ujian' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">event_note</i>
-            <span class="menu-text me-auto hidden">Daftar Ujian</span>
-          </a>
-
-          <a href="{{ $active === 'riwayat ujian' ? '#' : route('exam-history.index') }}"
-            class="side-nav-item {{ $active === 'riwayat ujian' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">history</i>
-            <span class="menu-text me-auto hidden">Riwayat Ujian</span>
-          </a>
-        </div>
-      @endif
+      </div>
     </div>
+
+    {{-- <div class="space-y-3">
+      <a href="{{ $active === 'help' ? '#' : route('admin.help') }}"
+        class="side-nav-item {{ $active === 'help' ? 'active' : '' }}">
+        <i class="material-symbols-outlined font-var-light">help</i>
+        <span class="menu-text me-auto hidden">Help</span>
+      </a>
+    </div> --}}
   </div>
 </aside>
