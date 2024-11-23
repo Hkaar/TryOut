@@ -15,4 +15,14 @@ class HomeController extends Controller
     {
         return view('admin.home');
     }
+
+    /**
+     * Show the help page
+     * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function help()
+    {
+        return view('admin.help');
+    }
 }
