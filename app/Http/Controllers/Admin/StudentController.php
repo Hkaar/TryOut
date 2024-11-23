@@ -9,6 +9,7 @@ use App\Traits\Modelor;
 use App\Traits\Uploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -110,9 +111,9 @@ class StudentController extends Controller
         $student = User::findOrFail($id);
 
         $validated = $request->validate([
-            'username' => 'nullable|string|max:255|unique:users,username',
+            'username' => ['nullable', 'string', 'max:255', Rule::unique('users', 'username')->ignore($student->id)],
             'name' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users',
+            'email' => ['nullable', 'email', Rule::unique('users', 'email')->ignore($student->id)],
             'password' => 'nullable|string|min:8|confirmed',
             'password_confirmation' => 'nullable|string|min:8',
             'phone' => 'nullable|string|max:64',

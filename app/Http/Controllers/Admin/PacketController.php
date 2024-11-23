@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Packet;
 use App\Traits\Modelor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PacketController extends Controller
 {
@@ -94,9 +95,9 @@ class PacketController extends Controller
         $packet = Packet::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'nullable|string|max:255|unique:packets,name',
+            'name' => ['nullable', 'string', 'max:255', Rule::unique('packets', 'name')->ignore($packet->id)],
             'group_id' => 'nullable|numeric|exists:groups,id',
-            'code' => 'nullable|string|max:255|unique:packets,code',
+            'code' => ['nullable', 'string', 'max:255', Rule::unique('packets', 'code')->ignore($packet->id)],
             'subject_id' => 'nullable|numeric|exists:subjects,id',
             'desc' => 'nullable|string',
         ]);

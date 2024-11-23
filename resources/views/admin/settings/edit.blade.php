@@ -83,7 +83,7 @@
               </div>
 
               <div class="flex items-center gap-1">
-                <x-button type="submit" class="bg-primary hover:text-white hover:rounded-none hover:shadow-lg">
+                <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
                   <i class="material-symbols-outlined font-var-light">save</i>
 
                   Simpan
