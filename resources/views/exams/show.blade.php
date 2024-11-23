@@ -11,7 +11,7 @@
 ])
 
 @section('content')
-  <div class="flex min-h-screen max-w-full flex-col">
+  <div class="flex min-h-screen max-w-full flex-col bg-cover" style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
     <x-navigation-bar />
 
     <div class="flex flex-1 justify-center">
