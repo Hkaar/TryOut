@@ -139,6 +139,7 @@ function gotoQuestion(config) {
             case 400:
             case 500:
                 handleStatusResponse(response.status);
+                break;
 
             default:
                 console.warn(
@@ -202,6 +203,7 @@ function nextQuestion() {
             case 400:
             case 500:
                 handleStatusResponse(response.status);
+                break;
 
             default:
                 console.warn(
@@ -265,6 +267,7 @@ function prevQuestion() {
             case 400:
             case 500:
                 handleStatusResponse(response.status);
+                break;
 
             default:
                 console.warn(
