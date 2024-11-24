@@ -4,14 +4,13 @@
         <ul align="center" style="list-style: none;">
             <summary>
                 <h1>Try Out</h1>
+                <p align="center" style="font-size: 1.25rem; margin-bottom: 1.25rem;">
+                    A website to do online exams for Dimensi Pelajar
+                </p>
             </summary>
         </ul>
     </div>
 </div>
-
-<p align="center" style="font-size: 1.25rem; margin-bottom: 1.25rem;">
-    A website to do online exams for Dimensi Pelajar
-</p>
 
 <div align="center">
     <div style="display: flex; justify-content: center; gap: 10px;">
