@@ -35,10 +35,4 @@ declare namespace Questions {
         choices: Array<multiChoiceData>
         img?: string
     }
-
-    type questionGotoConfig = {
-        element?: Element
-        questionId?: number
-        questionNumber?: number
-    }
 }

@@ -1,5 +1,5 @@
 import { uuid } from "../../utils/common.js";
-import { updateQuestionBox } from "../../utils/exam.js";
+import { getQuestionBoxState, updateQuestionBox } from "../../utils/exam.js";
 
 /**
  * The question part of the exam ui
@@ -43,7 +43,7 @@ export default function Question(questionData) {
             radioInput.checked = questionData.answer === choice.content ? true : false;
 
             radioInput.addEventListener("change", () => {
-                if (radioInput.checked) {
+                if (radioInput.checked && getQuestionBoxState(questionData.question_id, "current") !== "indertiminate") {
                     updateQuestionBox(questionData.id, "active");
                     return;
                 }
@@ -81,7 +81,7 @@ export default function Question(questionData) {
         answerTextArea.placeholder = "Masukkan jawaban ...";
         answerTextArea.textContent = questionData.answer ? questionData.answer : '';
 
-        if (answerTextArea.value.length > 0) {
+        if (answerTextArea.value.length > 0 && getQuestionBoxState(questionData.id, "current") !== "indertiminate") {
             updateQuestionBox(questionData.id, "active");
         }
 

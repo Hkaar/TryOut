@@ -3,7 +3,7 @@
     <div class="bg-gray flex flex-1 items-center justify-between">
       <a href="{{ route('/') }}">
         <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
-          class="size-12 rounded-full">
+            class="size-12 aspect-square rounded-full object-cover">
       </a>
     </div>
 
@@ -22,7 +22,7 @@
             class="hs-dropdown-toggle dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 inline-flex items-center gap-x-2 rounded-lg bg-transparent text-sm font-medium text-gray-800 shadow-sm focus:outline-none disabled:pointer-events-none disabled:opacity-50"
             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
             <img
-              src="{{ auth()->user()->profile_photo ? Storage::url(auth()->user()->profile_photo) : Vite::asset('resources/images/default-avatar.png') }}"
+              src="{{ auth()->user()->img ? Storage::url(auth()->user()->img) : Vite::asset('resources/images/default-avatar.png') }}"
               alt="Gambar tidak dapat dimuatkan" class="size-10 aspect-square rounded-full object-cover">
 
             <svg class="size-4 hs-dropdown-open:rotate-180" xmlns="http://www.w3.org/2000/svg" width="24"

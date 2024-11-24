@@ -15,7 +15,7 @@
     <x-navigation-bar />
 
     <div class="flex flex-1 justify-center">
-      <div class="container grid max-w-[85rem] flex-1 justify-items-center gap-x-12 gap-y-6 py-6 md:grid-cols-3">
+      <div class="container grid max-w-[85rem] flex-1 justify-items-center gap-x-8 gap-y-6 py-6 md:grid-cols-3">
         <div class="flex w-full flex-col gap-6 md:col-span-2">
           <x-card class="shadow-lg">
             <x-slot name="header">
@@ -26,12 +26,9 @@
                     Soal 1
                   </h3>
 
-                  <div class="flex">
-                    <input type="checkbox" name="not_sure"
-                      class="dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                      id="hs-default-checkbox">
-                    <label for="hs-default-checkbox" class="ms-3 text-sm">Ragu-ragu</label>
-                  </div>
+                  <span class="font-semibold px-2 py-1 rounded-lg bg-gray-100 text-black w-20 text-center" id="examTimer">
+                    00:00:00
+                  </span>
                 </div>
               </div>
             </x-slot>
@@ -58,7 +55,7 @@
                         {{ $question->answer === $choice->content ? 'checked' : '' }}>
 
                       @if ($choice->is_image)
-                        <img src="{{ $choice->content }}" alt="Gambar tidak dapat dimuatkan" class="h-20 rounded-md">
+                        <img src="{{ Storage::url($choice->content) }}" alt="Gambar tidak dapat dimuatkan" class="h-20 rounded-md">
                       @else
                         <label for="choice-{{ $i }}"
                           class="dark:text-neutral-400 ms-2 text-sm text-gray-500">{{ $choice->content }}</label>
@@ -76,20 +73,30 @@
             </form>
 
             <x-slot name="footer">
-              <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
+              <div class="flex items-center justify-between gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
                 <x-button type="button" id="previousQuestion"
-                  class="w-fit border-danger text-danger hover:bg-danger hover:text-white">
+                  class="w-fit border-danger bg-danger text-white lg:text-black lg:bg-transparent lg:hover:bg-danger hover:text-white hover:rounded-none">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                   </svg>
 
-                  Sebelumnya
+                  <span class="hidden md:block">Sebelumnya</span>
+                </x-button>
+
+                <x-button typpe="button" id="ragu" class="w-fit border-caution bg-caution text-white lg:text-black lg:bg-transparent lg:hover:bg-caution hover:text-white hover:rounded-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                  </svg>
+
+                  Ragu-ragu
                 </x-button>
 
                 <x-button type="button" id="nextQuestion"
-                  class="w-fit border-success text-success hover:bg-success hover:text-white">
-                  Selanjutnya
+                  class="w-fit border-success bg-success text-white lg:text-black lg:bg-transparent lg:hover:bg-success hover:text-white hover:rounded-none">
+                  <span class="hidden md:block">
+                    Selanjutnya
+                  </span>
 
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-4">
@@ -109,16 +116,12 @@
                 <h3 class="text-xl font-semibold">
                   Daftar Pertanyaan
                 </h3>
-
-                <span class="font-semibold" id="examTimer">
-                  00:00:00
-                </span>
               </div>
             </x-slot>
 
             <div class="flex max-w-full flex-wrap gap-3">
               @foreach ($questions as $i => $item)
-                <x-button type="button" question-number="{{ $i + 1 }}" question-id="{{ $item->id }}" data-prev-state="{{ $item->not_sure ? 'indertiminate' : ($item->answer ? 'active' : 'idle') }}" data-state="{{ $item->not_sure ? 'indertiminate' : ($item->answer ? 'active' : 'idle') }}"
+                <x-button type="button" question-number="{{ $i + 1 }}" question-id="{{ $item->id }}" data-prev-state="{{ $item->answer ? 'active' : ($item->not_sure ? 'indertiminate' : 'idle') }}" data-state="{{ $item->not_sure ? 'indertiminate' : ($item->answer ? 'active' : 'idle') }}"
                   class="border-gray-200 px-4 py-2 hover:rounded-none
                     {{ $item->not_sure ? 'bg-caution' : ($item->answer ? 'bg-primary text-white' : 'bg-gray-100') }}">
                   {{ $i + 1 }}

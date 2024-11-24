@@ -13,12 +13,27 @@ export function uuid() {
 /**
  * Clears the node tree of an element
  * 
- * @param {Element} element 
+ * @param {...Element} elements 
  */
-export function clearNodeTree(element) {
-    while (element.firstChild) {
-        element.removeChild(element.firstChild);
+export function clearNodeTree(...elements) {
+    const clearElement = (/** @type {Element} */ el) => {
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
+    };
+
+    if (!elements) {
+        console.error("clearNodeTree call param elements was not defined!");
+        return;
     }
+
+    elements.forEach(element => {
+        if (element instanceof Element) {
+            clearElement(element);
+        } else {
+            console.error('Invalid input: Expected a DOM element');
+        }
+    });
 
     return true;
 }

@@ -12,20 +12,6 @@ use Illuminate\Http\Request;
 class ExamController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function index()
-    {
-        $exams = Exam::paginate(20);
-
-        return view('home', [
-            'exams' => $exams,
-        ]);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
