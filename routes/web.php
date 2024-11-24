@@ -19,13 +19,9 @@ Route::group(['namespace' => "App\Http\Controllers"], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('home', 'HomeController@index')->name('home');
 
-        Route::get('ujian', 'ExamController@index')->name('exams.index');
         Route::get('ujian/{id}', 'ExamController@show')->name('exams.show');
         Route::get('ujian/{id}/guard', 'ExamController@guard')->name('exams.guard');
         Route::post('ujian/{id}/check', 'ExamController@checkToken')->name('exams.check');
-
-        Route::get('riwayat-ujian', 'ExamHistoryController@index')->name('exam-history.index');
-        Route::get('riwayat-ujian/{id}', 'ExamHistoryController@show')->name('exam-history.show');
     });
 });
 
@@ -61,3 +57,4 @@ Route::group(['namespace' => "App\Http\Controllers\Admin", 'prefix' => 'manage',
 });
 
 Route::redirect('manage', 'manage/home');
+Route::redirect('ujian', 'home');
