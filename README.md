@@ -1,11 +1,23 @@
-# TryOut
+<div align="center">
+    <img src="https://github.com/Hkaar/TryOut/blob/dev/.github/images/cover.png?raw=true" alt="Cover image" width="1280" height="640" /> 
+    <h1 style="margin: 0.25rem; border: none; font-weight: 700;">Try Out</h1>
+</div>
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![Workflow Status](https://github.com/Hkaar/TryOut/workflows/CI/badge.svg)
-![GitHub deployments](https://img.shields.io/github/deployments/Hkaar/TryOut/production)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+<p align="center" style="font-size: 1.25rem; margin-bottom: 1.25rem;">
+    A website to do online exams for Dimensi Pelajar
+</p>
 
-A try out exam webapp
+<div align="center">
+    <div style="display: flex; justify-content: center; gap: 10px;">
+        <a href="https://opensource.org/licenses/Apache-2.0">
+            <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License">
+        </a>
+        <img src="https://github.com/Hkaar/TryOut/workflows/CI/badge.svg" alt="Workflow Status">
+        <a href="https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity">
+            <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance">
+        </a>
+    </div>
+</div>
 
 ## Requirements
 
@@ -13,9 +25,7 @@ A try out exam webapp
 - Composer
 - Node.js
 
-## How do i use this?
-
-This is a guide or how to for anyone wanting to use this web app locally
+## User Guide
 
 Clone the repo
 
@@ -49,7 +59,7 @@ mv .env.example .env && cp .env .env.example
 Rename-Item .\.env.example .\.env ; Copy-Item .\.env .\.env.example
 ```
 
-Install npm dependecy
+Install the npm dependecies
 
 ```bash
 npm install
