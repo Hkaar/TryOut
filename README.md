@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/Hkaar/TryOut/blob/dev/.github/images/cover.png?raw=true" alt="Cover image" width="640" height="320" style="background-size: cover;" /> 
+    <img src="https://github.com/Hkaar/TryOut/blob/dev/.github/images/cover.png?raw=true" alt="Cover image" width="640" height="340" style="background-size: cover;" /> 
     <h1 style="margin: 0.25rem; border: none; font-weight: 700;">Try Out</h1>
 </div>
 
