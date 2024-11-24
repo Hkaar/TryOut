@@ -7,7 +7,7 @@
 export function updateQuestionBox(questionId, state) {
     const box = document.querySelector(`[question-id="${questionId}"]`);
 
-    if (box === null) {
+    if (!box) {
         console.error(`Question box with the id of ${questionId} does not exist!`);
         return;
     }
@@ -74,4 +74,34 @@ export function updateQuestionBoxState(questionBox, state) {
 
     questionBox.setAttribute("data-prev-state", current);
     questionBox.setAttribute("data-state", state);
+}
+
+/**
+ * Gets the selected question box's state
+ * 
+ * @param {number} questionId 
+ * @param {"current"|"prev"} type 
+ */
+export function getQuestionBoxState(questionId, type) {
+    const box = document.querySelector(`[question-id="${questionId}"]`);
+
+    if (!box) {
+        console.error(`Question box with the id of ${questionId} does not exist!`);
+        return;
+    }
+
+    let state;
+
+    if (type === "current") {
+        state = box.getAttribute("data-state");
+    } else {
+        state =  box.getAttribute("data-prev-state");
+    }
+
+    if (!state || !["active", "indertiminate", "idle"].includes(state)) {
+        console.error(`Invalid state: ${state} was fetched from the question box of id: ${questionId}!`);
+        return;
+    }
+
+    return state;
 }
