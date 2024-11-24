@@ -106,7 +106,7 @@
           @endforeach
         </div>
 
-        <div class="w-full flex items-center justify-center">
+        <div class="w-full flex items-center justify-center max-w-full overflow-x-auto py-1">
           <x-paginate-links :links="$exams" />
         </div>
       </x-card>

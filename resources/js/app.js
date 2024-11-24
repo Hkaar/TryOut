@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { setupAutoTimezone } from "./utils/time.js";
 
 import setupQEditor from "./questionEditor.js";
-import setupExam from './exam.js';
+import setupExam from './exams/index.js';
 import { runPlugin } from './utils/plugin.js';
 import { setupHomeCharts } from './admin.js';
 
