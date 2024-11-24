@@ -61,8 +61,6 @@ export function gotoQuestion(config) {
         const display = Question(response.data);
         const header = QuestionTopBar(
             questionNumber,
-            questionId,
-            response.data
         );
 
         switch (response.status) {
@@ -122,7 +120,7 @@ export function nextQuestion() {
         const newQuestionNumber = currentQuestionNumber + 1;
 
         const display = Question(data);
-        const header = QuestionTopBar(newQuestionNumber, newQuestionId, data);
+        const header = QuestionTopBar(newQuestionNumber);
 
         switch (response.status) {
             case 200:
@@ -179,7 +177,7 @@ export function previousQuestion() {
         const newQuestionNumber = currentQuestionNumber - 1;
 
         const display = Question(data);
-        const header = QuestionTopBar(newQuestionNumber, newQuestionId, data);
+        const header = QuestionTopBar(newQuestionNumber);
 
         switch (response.status) {
             case 200:
