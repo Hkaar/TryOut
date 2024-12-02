@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Updates the corresponding question box to the given state
  * 

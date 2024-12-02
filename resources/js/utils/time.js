@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Get the local system timezone
  */
