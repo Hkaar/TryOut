@@ -155,6 +155,7 @@
   <script>
     var examResult = {{ $examResult->id }};
     var csrf = "{{ csrf_token() }}";
+    var detectedSwitched = false;
 
     var currentQuestionId = {{ $question->id }};
     var currentQuestionNumber = 1;

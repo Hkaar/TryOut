@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Generates a random hexadecimal uuid using the crypto api
  */

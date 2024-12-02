@@ -2,8 +2,9 @@ import formsPlugin from '@tailwindcss/forms';
 import prelinePlugin from 'preline/plugin.js';
 
 /** @type {import('tailwindcss').Config} */
+// @ts-ignore
 export default {
-  darkMode: "selector",
+  darkMode: "class",
   mode: "jit",
   content: [
     "./resources/**/*.blade.php",
@@ -33,5 +34,8 @@ export default {
   },
   plugins: [
     formsPlugin, prelinePlugin
+  ],
+  safelist: [
+    "bg-cover",
   ],
 }
