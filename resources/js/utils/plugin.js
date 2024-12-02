@@ -2,9 +2,9 @@
  * Runs the setup function if the given set of plugins is present in the page
  * 
  * @param {string[]|string} plugins - The list of plugins to be checked from the `<meta name="plugins">` tag
- * @param {CallableFunction} setupPlugin - The setup function for the plugin
+ * @param {CallableFunction} module - The setup function for the plugin
  */
-export function runPlugin(plugins, setupPlugin) {
+export function importPlugin(plugins, module) {
     const pluginsMeta = document.querySelector(`meta[name="plugins"]`);
 
     if (!(pluginsMeta instanceof HTMLMetaElement)) {
@@ -22,7 +22,7 @@ export function runPlugin(plugins, setupPlugin) {
     }
 
     if (loaded) {
-        setupPlugin();
+        module();
         return;
     }
 

@@ -1,17 +1,20 @@
 'use strict';
 
 import axios from "axios";
-import toastr from 'toastr';
+import toastr from "toastr";
 
-import { questionSaveRoute, questionAPIRoute } from "./variables.js";
-import { clearNodeTree } from "./utils/common.js";
+import { clearNodeTree } from "../utils/common.js";
+import { request } from "../utils/network.js";
+import { questionAPIRoute, questionSaveRoute } from "../variables.js";
 
-import ChoiceBox from "./components/ChoiceBox.js";
-import EssayBox from "./components/EssayBox.js";
-import SimpleQuestionBox from "./components/SimpleQuestionBox.js";
+import ChoiceBox from "../components/ChoiceBox.js";
+import EssayBox from "../components/EssayBox.js";
+import SimpleQuestionBox from "../components/SimpleQuestionBox.js";
 
 /**
- * Add a option to the container
+ * Add an option choice box to the choices container
+ * 
+ * @returns void
  */
 function addOption() {
     const parent = document.getElementById("choices");
@@ -25,22 +28,23 @@ function addOption() {
 }
 
 /**
- * Toggles the question box
+ * Toggles the choices box to essay mode or multiple choice mode
  * 
- * @param {boolean} multipleChoice 
+ * @param {boolean} isMultipleChoice 
+ * @returns void
  */
-export function toggleChoiceBox(multipleChoice) {
+export function toggleChoiceBox(isMultipleChoice) {
     const choiceBtn = document.getElementById("addChoice");
     const container = document.getElementById("choices");
 
     if (!(choiceBtn instanceof HTMLButtonElement) || container === null) {
-        console.error("choiceButton and answer container doesnt exist!");
+        console.error("add choice button and/or choices container doesnt exist!");
         return;
     }
 
     clearNodeTree(container);
 
-    if (multipleChoice) {
+    if (isMultipleChoice) {
         choiceBtn.disabled = false;
 
         container.appendChild(ChoiceBox());
@@ -54,16 +58,16 @@ export function toggleChoiceBox(multipleChoice) {
 }
 
 /**
- * Extract the essay answer from the page
+ * Extract the answer for the essay question
  * 
  * @param {Element} container 
  * @returns {Questions.answerBoxData|null}
  */
-export function extractEssay(container) {
+function extractEssay(container) {
     const answer = container.querySelector(".answerBox");
 
     if (!(answer instanceof HTMLTextAreaElement)) {
-        console.error("Text area was not registered!");
+        console.error("Answer box element does not exist!");
         return null;
     }
 
@@ -78,12 +82,12 @@ export function extractEssay(container) {
 }
 
 /**
- * Extract the multiple choice elements in a page
+ * Extract the choices for the multiple choice question
  * 
  * @param {Element} container 
  * @returns {Questions.choicesBoxData|null}
  */
-export function extractChoices(container) {
+function extractChoices(container) {
     const answers = container.querySelectorAll(".answerBox");
 
     /** @type {Questions.choicesBoxData} */
@@ -129,12 +133,12 @@ export function extractChoices(container) {
 }
 
 /**
- * Submits both forms to save a qustion and it's answers
+ * Saves the question to the server
  * 
  * @param {SubmitEvent} event 
  * @param {HTMLFormElement} questionForm 
  */
-export function saveQuestion(event, questionForm) {
+export function save(event, questionForm) {
     event.preventDefault();
 
     const choiceBtn = document.getElementById("addChoice");
@@ -213,64 +217,25 @@ export function saveQuestion(event, questionForm) {
 }
 
 /**
- * Updates the question list with a set of questions
+ * Updates the question list with a set of questions fetched from the server
  * 
  * @param {Element} container 
  */
-export async function updateQuestionList(container)
-{
-    const questions = await axios.get(questionAPIRoute);
+export function updateQuestionList(container) {
+    request(async () => {
+        const response = await axios.get(questionAPIRoute);
+        /** @type {Questions.Question[]} */
+        const questions = response.data;
 
-    if (questions === null) {
-        console.error("No data was available to update questions!");
-        return;
-    }
-
-    clearNodeTree(container);
-
-    questions.data.forEach((/** @type {Questions.Question} */ val) => {
-        container.appendChild(SimpleQuestionBox(container, val.id, val.content));
-    });
-} 
-
-/**
- * Convinient setup function for the question editor
- */
-export default function setupQEditor()
-{
-    const typeSelect = document.querySelector('select[name="question_type_id"]');
-    const questionForm = document.getElementById('questionForm');
-    const questionList = document.getElementById('questionList');
-
-    if (!(typeSelect instanceof HTMLSelectElement)) {
-        console.error("Select element with the name question_type_id doesn't exist!");
-        return;
-    }
-
-    if (!(questionForm instanceof HTMLFormElement)) {
-        console.error("question form must be a form element!");
-        return;
-    }
-
-    if (questionList === null) {
-        console.error("question list does not exist!");
-        return;
-    }
-
-    typeSelect.addEventListener("change", () => {
-        const selected = typeSelect.options[typeSelect.selectedIndex];
-
-        if (selected.text.toLowerCase() === 'multiple_choice' ) {
-            toggleChoiceBox(true);
-        } else {
-            toggleChoiceBox(false);
+        if (!questions) {
+            console.error("No data was available to update questions!");
+            return;
         }
-    });
 
-    questionForm.addEventListener("submit", function (e) {
-        saveQuestion(e, this);
-        updateQuestionList(questionList);
-    });
+        clearNodeTree(container);
 
-    updateQuestionList(questionList);
+        questions.forEach(question => container.appendChild(
+            SimpleQuestionBox(container, question.id, question.content)
+        ));
+    })
 }

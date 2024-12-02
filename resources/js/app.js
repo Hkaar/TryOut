@@ -4,9 +4,11 @@ import Swal from 'sweetalert2';
 
 import { setupAutoTimezone } from "./utils/time.js";
 
-import setupQEditor from "./questionEditor.js";
+import setupQuestionEditor from "./questionEditor/index.js";
 import setupExam from './exams/index.js';
-import { runPlugin } from './utils/plugin.js';
+import { setupPreviewImage } from './utils/forms.js';
+
+import { importPlugin } from './utils/plugin.js';
 import { setupHomeCharts } from './admin.js';
 
 /**
@@ -46,59 +48,6 @@ function toggleSideBar() {
         });
 
         document.body.classList.remove("overflow-y-hidden", "md:overflow-y-auto");
-    }
-}
-
-/**
- * Updates the preview image based on the image input
- * 
- * @param {HTMLInputElement} element - The form input for images
- */
-function updatePreviewImage(element) {
-    let file = element.files ? element.files[0] : null;
-    const previewTarget = element.getAttribute('preview-target');
-    const previewClasses = element.getAttribute('preview-classes');
-
-    if (previewTarget === null) {
-        console.error(`Input element doesn't have a valid preview target!`);
-        return;
-    }
-
-    let preview = document.querySelector(previewTarget);
-
-    if (preview === null) {
-        console.error(`Preview element ${previewTarget} doesn't exist!`);
-        return;
-    }
-
-    if (file && preview) {
-        let reader = new FileReader();
-        
-        reader.onload = (e) => {
-            let result = e.target?.result;
-
-            if (result && file.type.startsWith("image") && typeof result === "string") {
-                let img = document.createElement("img");
-                img.setAttribute("src", result);
-                img.classList.add("block", "w-2/3", "aspect-square");
-
-                if (previewClasses !== null) {
-                    previewClasses.split(' ').forEach(styleClass => {
-                        img.classList.add(styleClass);
-                    });
-                }
-            
-                while (preview.firstChild) {
-                    preview.removeChild(preview.firstChild);
-                }
-            
-                preview.appendChild(img);
-            } else {
-                preview.textContent = "Gambar tidak tersedia";
-            }
-        }
-
-        reader.readAsDataURL(file);
     }
 }
 
@@ -152,31 +101,17 @@ document.addEventListener("DOMContentLoaded", () => {
         e.addEventListener("click", toggleSideBar);
     });
 
-    document.addEventListener("change", (event) => {
-        if (!(event.target instanceof Element)) {
-            console.error(`Element target of event change ${event} doesnt exist!`);
-            return;
-        }
-
-        if (event.target.matches("[preview-target]")) {
-            if (!(event.target instanceof HTMLInputElement)) {
-                console.error("Element forpreview input must be a input element!");
-                return;
-            }
-            
-            updatePreviewImage(event.target);
-        }
-    });
-
     document.addEventListener("htmx:confirm", function(e) {
         const event = /** @type {CustomEvent<any>} */ (e);
 
         triggerModal(event);
     });
 
-    runPlugin('exam', setupExam);
-    runPlugin('question-editor', setupQEditor);
-    runPlugin('admin-charts-home', setupHomeCharts);
+    setupPreviewImage();
+
+    importPlugin('exam', setupExam);
+    importPlugin('question-editor', setupQuestionEditor);
+    importPlugin('admin-charts-home', setupHomeCharts);
 
     setupAutoTimezone();
 });
