@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 
@@ -32,6 +33,7 @@ trait Uploader
             return null;
         }
 
+        ImageOptimizer::optimize(storage_path('app/public/' . $path));
         return $path;
     }
 }
