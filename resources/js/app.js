@@ -3,12 +3,11 @@ import './bootstrap';
 import Swal from 'sweetalert2';
 
 import { setupAutoTimezone } from "./utils/time.js";
+import { importPlugin } from './utils/plugin.js';
 
 import setupQuestionEditor from "./questionEditor/index.js";
 import setupExam from './exams/index.js';
 import { setupPreviewImage } from './utils/forms.js';
-
-import { importPlugin } from './utils/plugin.js';
 import { setupHomeCharts } from './admin.js';
 
 /**
@@ -107,11 +106,10 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerModal(event);
     });
 
-    setupPreviewImage();
-
     importPlugin('exam', setupExam);
     importPlugin('question-editor', setupQuestionEditor);
     importPlugin('admin-charts-home', setupHomeCharts);
 
+    setupPreviewImage();
     setupAutoTimezone();
 });
