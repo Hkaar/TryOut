@@ -14,6 +14,7 @@ export default [
                 currentQuestionId: "writable",
                 currentQuestionNumber: "writable",
                 remainingTime: "writable",
+                detectedSwitched: "writable",
             },
         },
     },
