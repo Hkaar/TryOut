@@ -83,14 +83,14 @@ jobs:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./  
-          server-dir: /home/user/my-laravel-app/
-          
+          local-dir: ./ 
+          server-dir: /tryout/
+
       - name: Deploy public directory to public_html
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./public_html
-          server-dir: /home/user/public_html/
+          local-dir: ./public_html 
+          server-dir: /public_html/
