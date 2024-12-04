@@ -163,7 +163,7 @@
             </svg>
 
             <h3 class="text-xl font-semibold">
-              Pengerjaan Terbaru
+              Pengerjaan terbaru
             </h3>
           </div>
         </x-slot>
@@ -209,7 +209,7 @@
             </svg>
 
             <h3 class="text-xl font-semibold">
-              Penyelesaian Terbaru
+              Penyelesaian terbaru
             </h3>
           </div>
         </x-slot>
