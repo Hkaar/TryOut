@@ -1,0 +1,83 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+    paths-ignore:
+      - '**.md'
+      - './.github/images'
+
+  workflow_run:
+    workflows: ["CI"]
+    
+    types:
+      - completed
+
+jobs:
+  deployment:
+    name: Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            composer-
+
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+
+      - name: Cache npm modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            !~/.npm/_logs
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-
+
+      - name: Run npm install
+        run: npm install
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Generate the .env
+        run: cp .env.example .env
+
+      - name: Generate the app key
+        run: php artisan key:generate
+
+      - name: Set directory permissions
+        run: chmod -R 777 storage bootstrap/cache
+
+      - name: Cache Configurations
+        run: php artisan config:cache
+
+      - name: Cache Routes
+        run: php artisan route:cache
+
+      - name: Cache Views
+        run: php artisan view:cache
+      
+      - name: Upload project
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER_URL }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
