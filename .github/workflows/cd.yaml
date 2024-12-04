@@ -51,9 +51,9 @@ jobs:
 
       - name: Modify public/index.php for external paths
         run: |
-          sed -i "s|__DIR__ . '/../storage/framework/maintenance.php'|__DIR__ . '/../tryout/storage/framework/maintenance.php'|" /public/index.php
-          sed -i "s|__DIR__ . '/../vendor/autoload.php'|__DIR__ . '/../tryout/vendor/autoload.php'|" /public/index.php
-          sed -i "s|__DIR__ . '/../bootstrap/app.php'|__DIR__ . '/../tryout/bootstrap/app.php'|" /public/index.php
+          sed -i "s|__DIR__ . '/../storage/framework/maintenance.php'|__DIR__ . '/../tryout/storage/framework/maintenance.php'|" ./public/index.php
+          sed -i "s|__DIR__ . '/../vendor/autoload.php'|__DIR__ . '/../tryout/vendor/autoload.php'|" ./public/index.php
+          sed -i "s|__DIR__ . '/../bootstrap/app.php'|__DIR__ . '/../tryout/bootstrap/app.php'|" ./public/index.php
 
       - name: Prepare public directory for deployment
         run: |
