@@ -83,15 +83,14 @@ jobs:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./   # Deploy the entire app except public to the hosting server
-          server-dir: /home/user/my-laravel-app  # Path where Laravel should be placed (outside public_html)
-
-      # Deploy the public directory to public_html
+          local-dir: ./  
+          server-dir: /home/user/my-laravel-app/
+          
       - name: Deploy public directory to public_html
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./public_html   # Only the public folder contents
-          server-dir: /home/user/public_html  # The public_html folder
+          local-dir: ./public_html
+          server-dir: /home/user/public_html/
