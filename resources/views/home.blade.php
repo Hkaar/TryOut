@@ -19,7 +19,6 @@
               pelajaran masing-masing.</li>
             <li>Soal ujian otomatis menghilang selesai waktu ujian berakhir. Silahkan tunggu soal ujian berikutnya sesuai
               waktu pada jadwal.</li>
-            <li>Kerjakan soal Ujian sesuai instruksi dari guru mapel masing-masing</li>
           </ol>
         </article>
       </x-card>

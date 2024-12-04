@@ -30,9 +30,6 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
-      - name: Install Composer dependencies
-        run: composer install --no-dev --optimize-autoloader
-
       - name: Cache npm modules
         uses: actions/cache@v4
         with:
@@ -66,16 +63,17 @@ jobs:
 
       - name: Cache Views
         run: php artisan view:cache
-      
+
+      - name: Modify public/index.php for external paths
+        run: |
+          sed -i 's|__DIR__ . \'/../storage/framework/maintenance.php\'|__DIR__ . \'/../tryout/storage/framework/maintenance.php\'|' /public/index.php
+          sed -i 's|__DIR__ . \'/../vendor/autoload.php\'|__DIR__ . \'/../tryout/vendor/autoload.php\'|' /public/index.php
+          sed -i 's|__DIR__ . \'/../bootstrap/app.php\'|__DIR__ . \'/../tryout/bootstrap/app.php\'|' /public/index.php
+
       - name: Prepare public directory for deployment
         run: |
           mkdir -p public_html
           cp -R public/* public_html/
-
-      - name: Modify public/index.php for external Laravel app path
-        run: |
-          sed -i 's@require __DIR__ . "/../vendor/autoload.php"@require __DIR__ . "/../../my-laravel-app/vendor/autoload.php"@' public_html/index.php
-          sed -i 's@$app = require_once __DIR__ . "/../bootstrap/app.php";@app = require_once __DIR__ . "/../../my-laravel-app/bootstrap/app.php";@' public_html/index.php
 
       - name: Deploy Laravel app excluding public folder
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
@@ -84,7 +82,13 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./ 
-          server-dir: /tryout/
+          exclude: |
+            .github/**/*       
+            /resources/js/**/* 
+            /resources/css/**/* 
+            .vscode             
+            ./vendor     
+          server-dir: ./tryout/
 
       - name: Deploy public directory to public_html
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
@@ -92,5 +96,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./public_html 
-          server-dir: /public_html/
+          local-dir: ./public_html/ 
+          server-dir: ./public_html/
