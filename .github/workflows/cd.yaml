@@ -30,16 +30,8 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            composer-
-
-      - name: Run composer install
-        run: composer install -n --prefer-dist
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Cache npm modules
         uses: actions/cache@v4
@@ -75,10 +67,31 @@ jobs:
       - name: Cache Views
         run: php artisan view:cache
       
-      - name: Upload project
+      - name: Prepare public directory for deployment
+        run: |
+          mkdir -p public_html
+          cp -R public/* public_html/
+
+      - name: Modify public/index.php for external Laravel app path
+        run: |
+          sed -i 's@require __DIR__ . "/../vendor/autoload.php"@require __DIR__ . "/../../my-laravel-app/vendor/autoload.php"@' public_html/index.php
+          sed -i 's@$app = require_once __DIR__ . "/../bootstrap/app.php";@app = require_once __DIR__ . "/../../my-laravel-app/bootstrap/app.php";@' public_html/index.php
+
+      - name: Deploy Laravel app excluding public folder
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./   # Deploy the entire app except public to the hosting server
+          server-dir: /home/user/my-laravel-app  # Path where Laravel should be placed (outside public_html)
+
+      # Deploy the public directory to public_html
+      - name: Deploy public directory to public_html
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER_URL }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public_html   # Only the public folder contents
+          server-dir: /home/user/public_html  # The public_html folder
