@@ -46,23 +46,8 @@ jobs:
       - name: Build assets
         run: npm run build
 
-      - name: Generate the .env
-        run: cp .env.example .env
-
-      - name: Generate the app key
-        run: php artisan key:generate
-
       - name: Set directory permissions
         run: chmod -R 777 storage bootstrap/cache
-
-      - name: Cache Configurations
-        run: php artisan config:cache
-
-      - name: Cache Routes
-        run: php artisan route:cache
-
-      - name: Cache Views
-        run: php artisan view:cache
 
       - name: Modify public/index.php for external paths
         run: |
