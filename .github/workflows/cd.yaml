@@ -84,7 +84,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./ 
-          exclude: '[.git, .git*, .git/**/*, .github/**/*, resources/js/**/*, resources/css/**/*, node_modules, node_modules/**/*, .vscode, ./vendor]'
+          exclude: '[.git, .git*, .git/**/*, .github/**/*, resources/js/**/*, resources/css/**/*, node_modules, node_modules/**/*, .vscode, vendor, vendor/**/*]'
           server-dir: ./../tryout/
 
       - name: Deploy public directory to public_html
