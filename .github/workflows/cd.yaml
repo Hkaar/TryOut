@@ -30,6 +30,23 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            composer-
+
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+
+      - name: Cache views
+        run: php artisan view:cache
+
+      - name: Cache config
+        run: php artisan config:cache
+
       - name: Cache npm modules
         uses: actions/cache@v4
         with:
@@ -41,7 +58,7 @@ jobs:
             npm-
 
       - name: Run npm install
-        run: npm install
+        run: npm install 
 
       - name: Build assets
         run: npm run build
@@ -67,13 +84,8 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./ 
-          exclude: |
-            .github/**/*       
-            /resources/js/**/* 
-            /resources/css/**/* 
-            .vscode             
-            ./vendor     
-          server-dir: ./tryout/
+          exclude: '[.github/**/*, ./resources/js/**/*, ./resources/css/**/*, ./node_modules, .git/**/*, .vscode, ./vendor]'
+          server-dir: ./../tryout/
 
       - name: Deploy public directory to public_html
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
@@ -82,4 +94,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public_html/ 
-          server-dir: ./public_html/
+          exclude: '[.github/**/*, ./resources/js/**/*, ./resources/css/**/*, ./node_modules, .git/**/*, .vscode, ./vendor]'
+          server-dir: ./
