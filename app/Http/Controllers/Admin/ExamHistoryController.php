@@ -18,7 +18,7 @@ class ExamHistoryController extends Controller
      */
     public function index()
     {
-        $results = ExamResult::paginate(20);
+        $results = ExamResult::with(['exam', 'user'])->paginate(20);
 
         return view('admin.exam-history.index', [
             'results' => $results,

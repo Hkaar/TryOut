@@ -19,7 +19,7 @@ class PacketController extends Controller
      */
     public function index()
     {
-        $packets = Packet::paginate(20);
+        $packets = Packet::with(['subject', 'group'])->paginate(20);
 
         return view('admin.packets.index', [
             'packets' => $packets,
@@ -64,7 +64,7 @@ class PacketController extends Controller
      */
     public function show(int $id)
     {
-        $packet = Packet::findOrFail($id);
+        $packet = Packet::with('questions.type')->findOrFail($id);
 
         return view('admin.packets.show', [
             'packet' => $packet,

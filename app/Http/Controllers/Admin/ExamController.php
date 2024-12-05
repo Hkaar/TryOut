@@ -21,7 +21,7 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams = Exam::paginate(20);
+        $exams = Exam::with(['packet', 'group'])->paginate(20);
 
         return view('admin.exams.index', [
             'exams' => $exams,
