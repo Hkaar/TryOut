@@ -8,13 +8,6 @@ on:
     paths-ignore:
       - '**.md'
       - './.github/images'
-
-  workflow_run:
-    workflows: ["CI"]
-    
-    types:
-      - completed
-
 jobs:
   deployment:
     name: Deployment
