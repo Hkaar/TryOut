@@ -1,5 +1,14 @@
 name: Deployment
 
+# --------------------------------------------------
+# INFO NOTICE
+# --------------------------------------------------
+#
+# This workflow is designed to deploy laravel web apps or websites
+# on shared hosting providers with access to ftp, with the need to
+# upload your own .env file and install composer deps on the server
+# with ssh.
+
 on:
   push:
     branches:
@@ -8,6 +17,7 @@ on:
     paths-ignore:
       - '**.md'
       - './.github/images'
+
 jobs:
   deployment:
     name: Deployment
