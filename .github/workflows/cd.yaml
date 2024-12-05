@@ -94,5 +94,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public_html/ 
-          exclude: '[.git, .git*, .git/**/*, .github/**/*, resources/js/**/*, resources/css/**/*, node_modules, node_modules/**/*, .vscode, ./vendor]'
           server-dir: ./
