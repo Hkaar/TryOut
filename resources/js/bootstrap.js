@@ -1,13 +1,10 @@
 import 'preline';
 import 'apexcharts/dist/apexcharts.css';
 import 'htmx.org';
-import '@popperjs/core';
 import 'toastr';
 
 import 'toastr/build/toastr.min.css';
 import 'material-symbols/outlined.css';
-
-import '../../node_modules/preline/dist/helper-apexcharts.js';
 
 import _ from 'lodash';
 import ApexCharts from 'apexcharts';
