@@ -22,7 +22,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::paginate(20);
+        $questions = Question::with(['packet', 'type'])->paginate(20);
 
         return view('admin.questions.index', [
             'questions' => $questions,

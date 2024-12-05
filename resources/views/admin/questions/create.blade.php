@@ -3,7 +3,7 @@
 @section('title', 'Daftar Soal - Dashboard')
 
 @section('meta')
-  <meta name="plugins" content="question-editor">
+  <meta name="plugins" content="question-editor | image-preview">
 @endsection
 
 @section('content')

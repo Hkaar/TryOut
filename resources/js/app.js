@@ -2,13 +2,8 @@ import './bootstrap';
 
 import Swal from 'sweetalert2';
 
-import { setupAutoTimezone } from "./utils/time.js";
 import { importPlugin } from './utils/plugin.js';
-
-import setupQuestionEditor from "./questionEditor/index.js";
-import setupExam from './exams/index.js';
-import { setupPreviewImage } from './utils/forms.js';
-import { setupHomeCharts } from './admin.js';
+import { setupAutoTimezone } from "./utils/time.js";
 
 /**
  * A function to toggle the side bar
@@ -106,10 +101,30 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerModal(event);
     });
 
-    importPlugin('exam', setupExam);
-    importPlugin('question-editor', setupQuestionEditor);
-    importPlugin('admin-charts-home', setupHomeCharts);
+    importPlugin('exam', async () => {
+        const mod = await import('./exams/index.js')
+        mod.default();
+    });
+    
+    importPlugin('question-editor', async () => {
+        const mod = await import('./questionEditor/index.js');
+        mod.default();
+    });
 
-    setupPreviewImage();
+    importPlugin('admin-charts-home', async () => {
+        const mod = await import('./admin.js');
+        mod.setupHomeCharts();
+    });
+    
+    importPlugin('tabs', async () => {
+        const mod = await import('./utils/tabs.js');
+        mod.default();
+    });
+
+    importPlugin('image-preview', async () => {
+        const mod = await import('./utils/forms.js');
+        mod.setupPreviewImage();
+    });
+
     setupAutoTimezone();
 });
