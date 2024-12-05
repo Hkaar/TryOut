@@ -2,6 +2,10 @@
 
 @section('title', 'Peserta - Dashboard')
 
+@section('meta')
+  <meta name="plugins" content="image-preview">
+@endsection
+
 @section('content')
   <x-dashboard-layout active="peserta">
     <div class="grid flex-1 grid-cols-1 gap-y-5 lg:grid-cols-2">
