@@ -21,7 +21,7 @@
             <x-slot name="header">
               <div id="questionHeader">
                 <div
-                  class="line-clamp-1 flex items-center justify-between gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+                  class="line-clamp-1 flex items-center justify-between gap-2 rounded-t-lg bg-gradient-to-r from-accent to-secondary px-4 py-3 text-white">
                   <h3 class="line-clamp-1 text-xl font-bold">
                     Soal 1
                   </h3>
@@ -112,7 +112,7 @@
           <x-card class="min-h-96 shadow-lg">
             <x-slot name="header">
               <div
-                class="line-clamp-1 flex items-center justify-between gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+                class="line-clamp-1 flex items-center justify-between gap-2 rounded-t-lg bg-gradient-to-r from-accent to-secondary px-4 py-3 text-white">
                 <h3 class="text-xl font-semibold">
                   Daftar Pertanyaan
                 </h3>

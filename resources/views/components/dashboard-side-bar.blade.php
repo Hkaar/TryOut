@@ -18,7 +18,7 @@
         @auth
           <a href="{{ route('/') }}" class="menu-text hidden">{{ auth()->user()->name }}</a>
 
-          <span class="menu-text hidden rounded-xl bg-tertiary px-2 py-1 text-sm font-bold text-white">
+          <span class="menu-text hidden rounded-xl bg-primary px-2 py-1 text-sm font-bold text-white">
             {{ ucfirst(auth()->user()->role->name) }}
           </span>
         @else
