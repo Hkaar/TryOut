@@ -8,6 +8,7 @@ name: Deployment
 # on shared hosting providers with access to ftp, with the need to
 # upload your own .env file and install composer deps on the server
 # with ssh.
+#
 
 on:
   push:
