@@ -44,7 +44,7 @@
             @enderror
           </div>
 
-          <x-button type="submit" class="bg-tertiary px-3 py-2 text-white hover:rounded-none">
+          <x-button type="submit" class="bg-secondary px-3 py-2 text-white hover:rounded-none">
             Terapkan
           </x-button>
         </form>

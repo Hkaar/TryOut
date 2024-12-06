@@ -60,7 +60,7 @@
             {{ $question->packet->name }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
-            {{ $question->type->name }}
+            {{ $question->type->name === 'essay' ? 'Essay' : 'Pilihan Ganda' }}
           </td>
           <td class="dark:text-neutral-200 whitespace-nowrap px-6 py-4 text-sm text-gray-800">
             {{ $question->packet->subject->name }}
