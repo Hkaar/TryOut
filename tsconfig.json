@@ -8,7 +8,7 @@
         "moduleResolution": "NodeNext",
         "esModuleInterop": true,
         "module": "NodeNext",
-        "types": ["vite/client"]
+        "types": ["vite/client"],
     },
 
     "exclude": [
