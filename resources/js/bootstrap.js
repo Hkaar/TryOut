@@ -1,4 +1,9 @@
-import 'preline';
+import 'preline/dist/toggle-password.mjs';
+import 'preline/dist/collapse.mjs';
+import 'preline/dist/input-number.mjs';
+import 'preline/dist/dropdown.mjs';
+import 'preline/dist/accordion.mjs';
+
 import 'apexcharts/dist/apexcharts.css';
 import 'htmx.org';
 import 'toastr';
