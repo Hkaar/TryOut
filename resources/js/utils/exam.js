@@ -1,5 +1,11 @@
 'use strict';
 
+import axios from "axios";
+import toastr from "toastr";
+
+import { examAPIRoute } from "../variables.js";
+import { request } from "./network.js";
+
 /**
  * Updates the corresponding question box to the given state
  * 
@@ -106,4 +112,50 @@ export function getQuestionBoxState(questionId, type) {
     }
 
     return state;
+}
+
+/**
+ * Saves the current question to the server
+ */
+export function saveQuestion() {
+    const questionContainer = document.getElementById("questionContainer");
+
+    if (!(questionContainer instanceof HTMLFormElement)) {
+        console.error("Question container does not exist!");
+        return;
+    }
+
+    const formData = new FormData(questionContainer);
+
+    /** @type {Object<string|File, string>} */
+    const data = {};
+
+    for (const [key, value] of formData.entries()) {
+        data[key] = value;
+    }
+
+    request(async () => {
+        const url = `${examAPIRoute}/${examResult}/pertanyaan/${currentQuestionId}/save`;
+
+        const response = await axios.put(url, data, {
+            headers: {
+                "X-CSRF-TOKEN": csrf,
+            },
+        });
+
+        switch (response.status) {
+            case 200:
+                toastr.success("Berhasil menyimpan jawaban!", "Status", {
+                    timeOut: 3000,
+                    progressBar: true,
+                });
+                break;
+        
+            default:
+                console.warn(
+                    `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
+                );
+                break;
+        }
+    });
 }
