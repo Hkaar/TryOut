@@ -48,6 +48,8 @@ Route::group(['namespace' => "App\Http\Controllers\Admin", 'prefix' => 'manage',
         Route::get('pengaturan', 'SettingsController@edit')->name('admin.settings');
         Route::put('pengaturan', 'SettingsController@update')->name('admin.settings.update');
 
+        Route::get('riwayat-ujian/download', 'ExamHistoryController@downloadResults')->name('admin.exam-history.download');
+
         Route::resource('ujian', 'ExamController')->names('admin.exams');
         Route::resource('riwayat-ujian', 'ExamHistoryController')->names('admin.exam-history');
         Route::resource('peserta', 'StudentController')->names('admin.students');
