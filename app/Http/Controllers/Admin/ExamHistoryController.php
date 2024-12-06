@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ExamResultExport;
 use App\Http\Controllers\Controller;
 use App\Models\ExamResult;
 use App\Traits\Modelor;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExamHistoryController extends Controller
 {
@@ -88,5 +90,18 @@ class ExamHistoryController extends Controller
         $result->delete();
 
         return response(null);
+    }
+
+    /**
+     * Download the exam results in excel
+     * 
+     * @param \Illuminate\Http\Request $request
+     */
+    public function downloadResults(Request $request) {
+        return Excel::download(new ExamResultExport(
+            $request->input('exam_id'),
+            $request->input('group_id'),
+            $request->input('user_id')
+        ), 'results.xlsx');
     }
 }
