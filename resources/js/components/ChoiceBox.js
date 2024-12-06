@@ -1,4 +1,6 @@
 import { clearNodeTree, uuid } from "../utils/common.js";
+import { Label, RadioInput, TextArea } from "./ui/form.js";
+import { Button } from "./ui/index.js";
 
 import Icon from "./Icon.js";
 import PhotoSVG from "./ImageAsset.js";
@@ -33,15 +35,12 @@ function TopBar(parent) {
     const radioContainer = document.createElement("div");
     radioContainer.classList.add("flex", "items-center");
 
-    const radio = document.createElement("input");
-    radio.classList.add("shrink-0", "mt-0.5", "border-gray-200", "rounded-full", "text-blue-600", "focus:ring-blue-500", "disabled:opacity-50", "disabled:pointer-events-none", "dark:bg-neutral-800", "dark:border-neutral-700", "dark:checked:bg-blue-500", "dark:checked:border-blue-500", "dark:focus:ring-offset-gray-800");
-    radio.id = `status ${uuid()}`;
-    radio.type = "radio";
-    radio.name = "status";
+    const radio = RadioInput({
+        id: `status ${uuid()}`,
+        name: "status",
+    });
 
-    const radioLabel = document.createElement("label");
-    radioLabel.classList.add("text-sm", "text-gray-500", "ms-2", "dark:text-neutral-400");
-    radioLabel.setAttribute("for", radio.id);
+    const radioLabel = Label({ htmlFor: radio.id });
     radioLabel.textContent = "Pilihan";
     
     radioContainer.appendChild(radio);
@@ -50,24 +49,24 @@ function TopBar(parent) {
     const actionContainer = document.createElement("div");
     actionContainer.classList.add("flex", "items-center", "gap-1");
 
-    const changeToTextBtn = document.createElement("button");
-    changeToTextBtn.type = "button";
-    changeToTextBtn.classList.add("textChange", "bg-gray-100", "btn", "text-info", "ease-in-out", "duration-100", "hover:opacity-95", "active:opacity-50");
+    const changeToTextBtn = Button({
+        className: "textChange bg-gray-100 text-info duration-100 hover:opacity-95 active:opacity-50"
+    });
     changeToTextBtn.appendChild(Icon("message"));
 
-    const changeToImageBtn = document.createElement("button");
-    changeToImageBtn.type = "button";
-    changeToImageBtn.classList.add("imageChange", "btn", "text-info", "ease-in-out", "duration-100", "hover:opacity-95", "active:opacity-50");
+    const changeToImageBtn = Button({
+        className: "imageChange bg-gray-100 text-info duration-100 hover:opacity-95 active:opacity-50"
+    });
     changeToImageBtn.appendChild(Icon("image"));
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.type = "button";
-    deleteBtn.classList.add("btn", "text-danger", "ease-in-out", "duration-100", "hover:opacity-95", "active:opacity-50");
+    const deleteBtn = Button({
+        className: "text-danger duration-100 hover:opacity-95 active:opacity-50"
+    });
     deleteBtn.appendChild(Icon("delete"));
 
-    changeToTextBtn.addEventListener("click", () => {switchContent(parent, "text")});
-    changeToImageBtn.addEventListener("click", () => {switchContent(parent, "image")});
-    deleteBtn.addEventListener("click", () => {parent.parentElement?.removeChild(parent)});
+    changeToTextBtn.addEventListener("click", () => switchContent(parent, "text"));
+    changeToImageBtn.addEventListener("click", () => switchContent(parent, "image"));
+    deleteBtn.addEventListener("click", () => parent.parentElement?.removeChild(parent));
 
     actionContainer.appendChild(changeToTextBtn);
     actionContainer.appendChild(changeToImageBtn);
@@ -86,10 +85,10 @@ function AnswerTextBox() {
     const root = document.createElement("div");
     root.classList.add("w-full", "space-y-3");
 
-    const answerTextArea = document.createElement("textarea");
-    answerTextArea.classList.add("py-3", "px-4", "block", "w-full", "border-gray-200", "rounded-lg", "text-sm", "focus:border-blue-500", "focus:ring-blue-500", "disabled:opacity-50", "disabled:pointer-events-none", "dark:bg-neutral-900", "dark:border-neutral-700", "dark:text-neutral-400", "dark:placeholder-neutral-500", "dark:focus:ring-neutral-600");
-    answerTextArea.rows = 3;
-    answerTextArea.placeholder = "Masukkan jawaban ...";
+    const answerTextArea = TextArea({
+        name: `answerBox-${uuid()}`,
+        placeholder: "Masukkan jawaban ...",
+    });
 
     root.appendChild(answerTextArea);
 

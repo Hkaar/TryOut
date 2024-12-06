@@ -3,6 +3,7 @@ import { questionAPIRoute } from "../variables.js";
 import Icon from "./Icon.js";
 import Swal from "sweetalert2";
 import toastr from "toastr";
+import { Button } from "./ui/index.js";
 
 /**
  * A simple question box with only one action
@@ -19,9 +20,7 @@ export default function SimpleQuestionBox(parent, id, title) {
     boxTitle.classList.add("text-lg", "font-semibold");
     boxTitle.textContent = title;
 
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.classList.add("btn", "text-danger", "hover:opacity-95", "hover:scale-110", "active:opacity-30", "active:scale-95", "duration-150", "ease-in-out");
+    const btn = Button({ className: "text-danger" });
     btn.appendChild(Icon("delete"));
 
     btn.addEventListener("click", () => {

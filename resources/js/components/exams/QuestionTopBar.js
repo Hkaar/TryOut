@@ -7,7 +7,7 @@ import ExamTimer from "./ExamTimer.js";
  */
 export default function QuestionTopBar(questionNumber) {
     const root = document.createElement("div");
-    root.className = "rounded-t-lg bg-tertiary px-4 py-3 text-white line-clamp-1 flex items-center justify-between gap-2";
+    root.className = "rounded-t-lg bg-gradient-to-r from-accent to-secondary px-4 py-3 text-white line-clamp-1 flex items-center justify-between gap-2";
 
     const titleElement = document.createElement("h3");
     titleElement.className = "text-xl font-bold line-clamp-1";
