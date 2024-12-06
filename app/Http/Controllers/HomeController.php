@@ -18,7 +18,7 @@ class HomeController extends Controller
         $exams = Exam::with([
             'examResults' => function ($query) use ($userId) {
                 $query->byUserId($userId);
-            }
+            },
         ])->latest()->paginate(6, ['id', 'name', 'duration', 'start_date', 'end_date']);
 
         return view('home', [

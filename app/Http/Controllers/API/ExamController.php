@@ -203,10 +203,8 @@ class ExamController extends Controller
 
     /**
      * Calculate the grade of the students exam
-     * 
-     * @return int
      */
-    protected function grade(int $examResultId): int
+    protected function grade(int $examResultId): int|float
     {
         $examResult = ExamResult::findOrFail($examResultId);
         $results = $examResult->questionResults;
@@ -214,7 +212,7 @@ class ExamController extends Controller
         $correct = 0;
 
         foreach ($results as $result) {
-            $result->status === 1 ?? $correct++;
+            $result->correct === 1 ? $correct++ : null;
         }
 
         $grade = ($correct / count($results)) * 100;

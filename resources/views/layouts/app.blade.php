@@ -14,7 +14,7 @@
   <meta property="og:description" content="Website ujian online untuk Dimensi Pelajar">
   <meta property="og:image" content="https://github.com/Hkaar/TryOut/blob/dev/.github/images/cover.png?raw=true">
   <meta property="og:url" content="https://dimensipelajar.com">
-  <meta property="og:type" content="website"> 
+  <meta property="og:type" content="website">
 
   @yield('meta')
 

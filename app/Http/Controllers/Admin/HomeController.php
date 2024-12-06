@@ -22,9 +22,9 @@ class HomeController extends Controller
 
         return view('admin.home', [
             'weekTotalWorks' => $weekTotalWorks,
-            'weekTotalFinishes'=> $weekTotalFinishes,
-            'latestWorks'=> $latestWorks,
-            'latestFinishes'=> $latestFinishes
+            'weekTotalFinishes' => $weekTotalFinishes,
+            'latestWorks' => $latestWorks,
+            'latestFinishes' => $latestFinishes,
         ]);
     }
 
