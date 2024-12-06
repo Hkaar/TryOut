@@ -13,7 +13,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $exams = Exam::latest()->paginate(6, ['id', 'name', 'duration', 'start_date', 'end_date']);
+        $userId = auth()->id();
+
+        $exams = Exam::with([
+            'examResults' => function ($query) use ($userId) {
+                $query->byUserId($userId);
+            }
+        ])->latest()->paginate(6, ['id', 'name', 'duration', 'start_date', 'end_date']);
 
         return view('home', [
             'exams' => $exams,
