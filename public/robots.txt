@@ -1,2 +1,13 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /manage
+Disallow: /api
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: DataBot
+Disallow: /
+
+User-agent: DataCha
+Disallow: /
