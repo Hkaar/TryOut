@@ -17,7 +17,7 @@ function toggleSideBar() {
     if (sideBar?.classList.contains("-translate-x-full") || sideBar?.classList.contains("min-w-24")) {
         sideBar.classList.replace("-translate-x-full", "translate-x-0");
         sideBar.classList.replace("min-w-24", "w-full");
-        sideBar.classList.add("lg:min-w-72");
+        sideBar.classList.add("xl:min-w-72");
 
         sideBarMenus.forEach((e) => {
             e.classList.remove("hidden");
@@ -31,7 +31,7 @@ function toggleSideBar() {
     } else {
         sideBar?.classList.replace("translate-x-0", "-translate-x-full");
         sideBar?.classList.replace("w-full", "min-w-24");
-        sideBar?.classList.remove("lg:min-w-72");
+        sideBar?.classList.remove("xl:min-w-72");
 
         sideBarMenus.forEach((e) => {
             e.classList.add("hidden");
