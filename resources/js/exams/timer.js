@@ -13,6 +13,7 @@ import { examAPIRoute } from "../variables.js";
  */
 export default function setupExamTimer(timer) {
     let triggered = false;
+    const randomDelay = Math.floor(Math.random() * (120 - 10 + 1)) + 10
 
     fetchExamTime(timer);
 
@@ -28,7 +29,7 @@ export default function setupExamTimer(timer) {
 
     setInterval(() => {
         fetchExamTime(timer);
-    }, 1 * 60 * 1000);
+    }, ((1 * 60) + randomDelay) * 1000);
 }
 
 /**

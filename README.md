@@ -17,7 +17,8 @@
         <a href="https://opensource.org/licenses/Apache-2.0">
             <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License">
         </a>
-        <img src="https://github.com/Hkaar/TryOut/workflows/CI/badge.svg" alt="Workflow Status">
+        <img src="https://github.com/Hkaar/TryOut/workflows/CI/badge.svg" alt="CI Status">
+        <img src="https://github.com/Hkaar/TryOut/workflows/Deployment/badge.svg" alt="Deployment Status">
         <a href="https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity">
             <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance">
         </a>

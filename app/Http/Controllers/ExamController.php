@@ -82,9 +82,11 @@ class ExamController extends Controller
     public function guard(int $id)
     {
         $exam = Exam::findOrFail($id);
+        $examResults = ExamResult::byExamId($exam->id)->first();
 
         return view('exams.guard', [
             'exam' => $exam,
+            'result' => $examResults,
         ]);
     }
 

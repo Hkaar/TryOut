@@ -18,9 +18,9 @@ export default {
         center: true
       },
       colors: {
-        "primary": "#2A342E",
-        "secondary": "#46564D",
-        "tertiary": "#657A6E",
+        "primary": "#435334",
+        "secondary": "#9EB384",
+        "tertiary": "#F6FFDE",
         "accent": "#AAC8A7",
         "primary-dark": "#D5EFDF",
         "secondary-dark": "#A7C8B5",

@@ -8,8 +8,8 @@ on:
       
     paths-ignore:
       - '**.md'
-      - './.github/images'
-      - './.github/cd.yaml'
+      - '.github/images/**/*'
+      - '.github/workflows/cd.yaml'
 
 jobs:
   js-lint:

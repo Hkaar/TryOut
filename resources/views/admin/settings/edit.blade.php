@@ -2,6 +2,10 @@
 
 @section('title', 'Pengaturan - Dashboard')
 
+@section('meta')
+  <meta name="plugins" content="image-preview">
+@endsection
+
 @section('content')
   <x-dashboard-layout active="pengaturan">
     <div class="flex-1 flex">

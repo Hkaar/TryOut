@@ -20,8 +20,8 @@
           <div class="relative flex-1">
             <div class="relative">
               <input type="text"
-                class="dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                name="search" placeholder="Cari sebuah mata pelajaran">
+                class="dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 peer block w-full rounded-lg border-gray-200 px-3 py-2 ps-11 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
+                name="search" placeholder="Cari sebuah mata pelajaran" value="{{ request()->has('search') ? request()->input('search') : '' }}">
               <div
                 class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -38,7 +38,7 @@
             @enderror
           </div>
 
-          <x-button type="submit" class="bg-tertiary px-3 py-2 text-white hover:rounded-none">
+          <x-button type="submit" class="bg-secondary px-3 py-2 text-white hover:rounded-none">
             Terapkan
           </x-button>
         </form>

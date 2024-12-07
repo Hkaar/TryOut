@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\FilterService;
 use App\Traits\Modelor;
 use App\Traits\Uploader;
 use Illuminate\Http\Request;
@@ -14,14 +15,28 @@ class UserController extends Controller
 {
     use Modelor, Uploader;
 
+    public function __construct(
+        protected FilterService $filterService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(20);
+        $users = User::query();
+
+        if ($request->has('search') && $request->input('search')) {
+            $this->filterService->search($users, 'name', $request->input('search'));
+        }
+
+        if ($request->has('order')) {
+            $this->filterService->order($users, $request->input('order') === 'latest' ? false : true);
+        }
+
+        $users = $users->paginate(20);
 
         return view('admin.users.index', [
             'users' => $users,

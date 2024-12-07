@@ -2,13 +2,8 @@ import './bootstrap';
 
 import Swal from 'sweetalert2';
 
-import { setupAutoTimezone } from "./utils/time.js";
 import { importPlugin } from './utils/plugin.js';
-
-import setupQuestionEditor from "./questionEditor/index.js";
-import setupExam from './exams/index.js';
-import { setupPreviewImage } from './utils/forms.js';
-import { setupHomeCharts } from './admin.js';
+import { setupAutoTimezone } from "./utils/time.js";
 
 /**
  * A function to toggle the side bar
@@ -22,7 +17,7 @@ function toggleSideBar() {
     if (sideBar?.classList.contains("-translate-x-full") || sideBar?.classList.contains("min-w-24")) {
         sideBar.classList.replace("-translate-x-full", "translate-x-0");
         sideBar.classList.replace("min-w-24", "w-full");
-        sideBar.classList.add("lg:min-w-72");
+        sideBar.classList.add("xl:min-w-72");
 
         sideBarMenus.forEach((e) => {
             e.classList.remove("hidden");
@@ -36,7 +31,7 @@ function toggleSideBar() {
     } else {
         sideBar?.classList.replace("translate-x-0", "-translate-x-full");
         sideBar?.classList.replace("w-full", "min-w-24");
-        sideBar?.classList.remove("lg:min-w-72");
+        sideBar?.classList.remove("xl:min-w-72");
 
         sideBarMenus.forEach((e) => {
             e.classList.add("hidden");
@@ -106,10 +101,30 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerModal(event);
     });
 
-    importPlugin('exam', setupExam);
-    importPlugin('question-editor', setupQuestionEditor);
-    importPlugin('admin-charts-home', setupHomeCharts);
+    importPlugin('exam', async () => {
+        const mod = await import('./exams/index.js')
+        mod.default();
+    });
+    
+    importPlugin('question-editor', async () => {
+        const mod = await import('./questionEditor/index.js');
+        mod.default();
+    });
 
-    setupPreviewImage();
+    importPlugin('admin-charts-home', async () => {
+        const mod = await import('./admin.js');
+        mod.setupHomeCharts();
+    });
+    
+    importPlugin('tabs', async () => {
+        const mod = await import('./utils/tabs.js');
+        mod.default();
+    });
+
+    importPlugin('image-preview', async () => {
+        const mod = await import('./utils/forms.js');
+        mod.setupPreviewImage();
+    });
+
     setupAutoTimezone();
 });

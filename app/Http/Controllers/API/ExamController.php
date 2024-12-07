@@ -25,10 +25,10 @@ class ExamController extends Controller
         $examAmount = [];
 
         for ($date = $startOfWeek; $date->lte($endOfWeek); $date->addDay()) {
-            $finishedAmount = ExamResult::whereDate('last_date', '=', $date->toDateString())->where('finished', '=', 1)->count();
+            $finishedAmount = ExamResult::whereDate('last_date', $date->toDateString())->where('finished', 1)->count();
             $finished[] = $finishedAmount;
 
-            $amount = ExamResult::whereDate('start_date', '=', $date->toDateString())->count();
+            $amount = ExamResult::whereDate('start_date', $date->toDateString())->count();
             $examAmount[] = $amount;
         }
 
@@ -122,6 +122,7 @@ class ExamController extends Controller
         }
 
         $result->save();
+        $this->grade($examResultId);
 
         return response(null);
     }
@@ -135,11 +136,9 @@ class ExamController extends Controller
     {
         $result = QuestionResult::findOrFail($questionId);
 
-        if ($result->not_sure === 0) {
-            $result->not_sure = 1;
-        } else {
-            $result->not_sure = 0;
-        }
+        $result->not_sure === 0
+            ? $result->not_sure = 1
+            : $result->not_sure = 0;
 
         $result->save();
 
@@ -160,6 +159,8 @@ class ExamController extends Controller
         $result->finished = 1;
         $result->finish_date = Carbon::parse((string) now());
         $result->save();
+
+        $this->grade($id);
 
         return response()->json([
             'redirect' => route(name: 'home'),
@@ -198,6 +199,28 @@ class ExamController extends Controller
             'valid' => false,
             'remaining' => 0,
         ]);
+    }
+
+    /**
+     * Calculate the grade of the students exam
+     */
+    protected function grade(int $examResultId): int|float
+    {
+        $examResult = ExamResult::findOrFail($examResultId);
+        $results = $examResult->questionResults;
+
+        $correct = 0;
+
+        foreach ($results as $result) {
+            $result->correct === 1 ? $correct++ : null;
+        }
+
+        $grade = ($correct / count($results)) * 100;
+
+        $examResult->grade = $grade;
+        $examResult->save();
+
+        return $grade;
     }
 
     /**

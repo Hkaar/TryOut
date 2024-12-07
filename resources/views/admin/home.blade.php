@@ -11,7 +11,7 @@
     <main class="grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <x-card class="shadow-md">
         <x-slot name="header">
-          <div class="flex items-center gap-3 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+          <div class="flex items-center gap-3 rounded-t-lg bg-secondary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -33,7 +33,7 @@
 
       <x-card class="shadow-md">
         <x-slot name="header">
-          <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+          <div class="flex items-center gap-2 rounded-t-lg bg-secondary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -55,7 +55,7 @@
 
       <x-card class="shadow-md md:col-span-2 order-first lg:col-span-1 lg:order-none xl:col-span-2">
         <x-slot name="header">
-          <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+          <div class="flex items-center gap-2 rounded-t-lg bg-secondary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -118,7 +118,7 @@
 
       <x-card class="shadow-md md:col-span-2 lg:col-span-1">
         <x-slot name="header">
-          <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+          <div class="flex items-center gap-2 rounded-t-lg bg-secondary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -134,7 +134,7 @@
         <div class="grid grid-cols-1 gap-5 h-full">
           <article class="flex flex-col items-center gap-2 text-center bg-gray-50 px-4 py-3 rounded-md">
             <h6 class="text-6xl font-bold">
-              {{ App\Models\ExamResult::whereDate('start_date', '>=', now()->startOfWeek())->whereDate('start_date', '<=', now()->endOfWeek())->count() }}
+              {{ $weekTotalWorks }}
             </h6>
 
             <span class="text-gray-500">
@@ -144,7 +144,7 @@
 
           <article class="flex flex-col items-center gap-2 text-center bg-gray-50 px-4 py-3 rounded-md">
             <h6 class="text-6xl font-bold">
-              {{ App\Models\ExamResult::whereDate('start_date', '>=', now()->startOfWeek())->whereDate('start_date', '<=', now()->endOfWeek())->where('finished', '=', 1)->count() }}
+              {{ $weekTotalFinishes }}
             </h6>
             <span class="text-gray-500">
               Peserta yang menyelesaikan ujian minggu ini
@@ -155,7 +155,7 @@
 
       <x-card class="shadow-md md:col-span-2 lg:col-span-3 xl:col-span-2">
         <x-slot name="header">
-          <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+          <div class="flex items-center gap-2 rounded-t-lg bg-secondary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -169,7 +169,7 @@
         </x-slot>
 
         <div class="space-y-3 h-[32rem] overflow-y-auto px-2">
-          @foreach (App\Models\ExamResult::limit(10)->latest()->get() as $item)
+          @foreach ($latestWorks as $item)
             <x-card>
               <x-slot name="header">
                 <div class="flex items-center gap-2 rounded-t-lg bg-accent px-3 py-2 text-white">
@@ -201,7 +201,7 @@
 
       <x-card class="shadow-md md:col-span-2 lg:col-span-3 xl:col-span-2">
         <x-slot name="header">
-          <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+          <div class="flex items-center gap-2 rounded-t-lg bg-secondary px-4 py-3 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -215,7 +215,7 @@
         </x-slot>
 
         <div class="space-y-3 h-[32rem] overflow-y-auto px-2">
-          @foreach (App\Models\ExamResult::where('finished', '=', 1)->limit(10)->latest()->get() as $item)
+          @foreach ($latestFinishes as $item)
             <x-card>
               <x-slot name="header">
                 <div class="flex items-center gap-2 rounded-t-lg bg-accent px-3 py-2 text-white">
