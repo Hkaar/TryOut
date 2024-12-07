@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Services\FilterService;
 use App\Traits\Modelor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,14 +15,28 @@ class ExamController extends Controller
 {
     use Modelor;
 
+    public function __construct(
+        protected FilterService $filterService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function index(Request $request)
     {
-        $exams = Exam::with(['packet', 'group'])->paginate(20);
+        $exams = Exam::with(['packet', 'group']);
+
+        if ($request->has('search') && $request->input('search')) {
+            $this->filterService->search($exams, 'name', $request->input('search'));
+        }
+
+        if ($request->has('order')) {
+            $this->filterService->order($exams, $request->input('order') === 'latest' ? false : true);
+        }
+
+        $exams = $exams->paginate(20);
 
         return view('admin.exams.index', [
             'exams' => $exams,
