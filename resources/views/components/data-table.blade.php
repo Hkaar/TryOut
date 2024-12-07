@@ -1,7 +1,7 @@
 <div class="flex max-h-fit min-w-full flex-1 flex-col rounded-xl border border-gray-200 px-7 py-6 shadow-lg">
   <div class="mb-3 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
     @if (isset($routes['create']))
-      <x-link-button to="{{ $routes['create'] }}" class="border-success hover:bg-success hover:text-white">
+      <x-link-button to="{{ $routes['create'] }}" class="border-success hover:bg-success hover:text-white px-3 py-2">
         <i class="material-symbols-outlined font-var-light">add</i>
 
         Tambahkan {{ $title }}
