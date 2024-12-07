@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\QuestionChoice;
 use App\Models\QuestionType;
+use App\Services\FilterService;
 use App\Traits\Modelor;
 use App\Traits\Uploader;
 use Illuminate\Http\Request;
@@ -15,14 +16,28 @@ class QuestionController extends Controller
 {
     use Modelor, Uploader;
 
+    public function __construct(
+        protected FilterService $filterService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function index(Request $request)
     {
-        $questions = Question::with(['packet', 'type'])->paginate(20);
+        $questions = Question::with(['packet', 'type']);
+
+        if ($request->has('search') && $request->input('search')) {
+            $this->filterService->search($questions, 'content', $request->input('search'));
+        }
+
+        if ($request->has('order')) {
+            $this->filterService->order($questions, $request->input('order') === 'latest' ? false : true);
+        } 
+
+        $questions = $questions->paginate(20);
 
         return view('admin.questions.index', [
             'questions' => $questions,

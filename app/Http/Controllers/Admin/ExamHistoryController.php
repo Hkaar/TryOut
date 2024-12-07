@@ -27,8 +27,7 @@ class ExamHistoryController extends Controller
      */
     public function index(Request $request)
     {
-        $results = ExamResult::query();
-        $results->with(['exam', 'user']);
+        $results = ExamResult::with(['exam', 'user']);
 
         if ($request->has('search') && $request->input('search')) {
             $this->filterService->search($results, 'exam.name', $request->input('search'));

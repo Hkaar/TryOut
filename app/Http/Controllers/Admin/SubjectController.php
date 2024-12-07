@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Subject;
+use App\Services\FilterService;
 use App\Traits\Modelor;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,14 +13,28 @@ class SubjectController extends Controller
 {
     use Modelor;
 
+    public function __construct(
+        protected FilterService $filterService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::paginate(20);
+        $subjects = Subject::query();
+
+        if ($request->has('search') && $request->input('search')) {
+            $this->filterService->search($subjects, 'name', $request->input('search'));
+        }
+
+        if ($request->has('order')) {
+            $this->filterService->order($subjects, $request->input('order') === 'latest' ? false : true);
+        } 
+
+        $subjects = $subjects->paginate(20);
 
         return view('admin.subjects.index', [
             'subjects' => $subjects,

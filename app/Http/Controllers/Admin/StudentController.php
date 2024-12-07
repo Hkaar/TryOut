@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\FilterService;
 use App\Traits\Modelor;
 use App\Traits\Uploader;
 use Illuminate\Http\Request;
@@ -15,14 +16,29 @@ class StudentController extends Controller
 {
     use Modelor, Uploader;
 
+    public function __construct(
+        protected FilterService $filterService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = User::StrictByRole('student')->paginate(20);
+        $students = User::query();
+        $students->strictByRole('student');
+
+        if ($request->has('search') && $request->input('search')) {
+            $this->filterService->search($students, 'name', $request->input('search'));
+        }
+
+        if ($request->has('order')) {
+            $this->filterService->order($students, $request->input('order') === 'latest' ? false : true);
+        } 
+
+        $students = $students->paginate(20);
 
         return view('admin.students.index', [
             'students' => $students,
