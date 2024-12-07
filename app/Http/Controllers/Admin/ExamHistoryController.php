@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\ExamResultExport;
 use App\Http\Controllers\Controller;
+use App\Models\Exam;
 use App\Models\ExamResult;
+use App\Models\Group;
+use App\Services\FilterService;
 use App\Traits\Modelor;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,17 +16,45 @@ class ExamHistoryController extends Controller
 {
     use Modelor;
 
+    public function __construct(
+        protected FilterService $filterService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = ExamResult::with(['exam', 'user'])->paginate(20);
+        $results = ExamResult::query();
+        $results->with(['exam', 'user']);
+
+        if ($request->has('search') && $request->input('search')) {
+            $this->filterService->search($results, 'exam.name', $request->input('search'));
+        }
+
+        if ($request->has('group') && $request->input('group') !== 'all') {
+            $results->byGroupId((int) $request->input('group'));
+        }
+
+        if ($request->has('exam') && $request->input('exam') !== 'all') {
+            $results->byExamId((int) $request->input('exam'));
+        }
+
+        if ($request->has('order')) {
+            $this->filterService->order($results, $request->input('order') === 'latest' ? false : true);
+        } 
+
+        $results = $results->paginate(20);
+
+        $exams = Exam::all(['id', 'name']);
+        $groups = Group::all(['id','name']);
 
         return view('admin.exam-history.index', [
             'results' => $results,
+            'groups' => $groups,
+            'exams' => $exams,
         ]);
     }
 
@@ -98,10 +129,18 @@ class ExamHistoryController extends Controller
      * @param \Illuminate\Http\Request $request
      */
     public function downloadResults(Request $request) {
+        $examFilter = $request->input('exam') !== 'all' || !$request->input('exam')
+            ? (int) $request->input('exam')
+            : null;
+
+        $groupFilter = $request->input('group') !== 'all' || !$request->input('group')
+            ? (int) $request->input('group')
+            : null;
+
         return Excel::download(new ExamResultExport(
-            $request->input('exam_id'),
-            $request->input('group_id'),
-            $request->input('user_id')
+            $examFilter,
+            $groupFilter,
+            $request->input('user')
         ), 'results.xlsx');
     }
 }
