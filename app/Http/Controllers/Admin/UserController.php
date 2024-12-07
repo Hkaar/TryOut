@@ -34,7 +34,7 @@ class UserController extends Controller
 
         if ($request->has('order')) {
             $this->filterService->order($users, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $users = $users->paginate(20);
 

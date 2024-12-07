@@ -29,10 +29,10 @@ class GroupController extends Controller
         if ($request->has('search') && $request->input('search')) {
             $this->filterService->search($groups, 'name', $request->input('search'));
         }
-        
+
         if ($request->has('order')) {
             $this->filterService->order($groups, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $groups = $groups->paginate(20);
 

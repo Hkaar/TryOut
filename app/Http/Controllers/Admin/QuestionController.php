@@ -35,7 +35,7 @@ class QuestionController extends Controller
 
         if ($request->has('order')) {
             $this->filterService->order($questions, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $questions = $questions->paginate(20);
 

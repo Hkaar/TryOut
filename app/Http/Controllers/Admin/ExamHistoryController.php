@@ -11,6 +11,7 @@ use App\Services\FilterService;
 use App\Traits\Modelor;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExamHistoryController extends Controller
 {
@@ -43,12 +44,12 @@ class ExamHistoryController extends Controller
 
         if ($request->has('order')) {
             $this->filterService->order($results, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $results = $results->paginate(20);
 
         $exams = Exam::all(['id', 'name']);
-        $groups = Group::all(['id','name']);
+        $groups = Group::all(['id', 'name']);
 
         return view('admin.exam-history.index', [
             'results' => $results,
@@ -124,15 +125,14 @@ class ExamHistoryController extends Controller
 
     /**
      * Download the exam results in excel
-     * 
-     * @param \Illuminate\Http\Request $request
      */
-    public function downloadResults(Request $request) {
-        $examFilter = $request->input('exam') !== 'all' || !$request->input('exam')
+    public function downloadResults(Request $request): BinaryFileResponse
+    {
+        $examFilter = $request->input('exam') && $request->input('exam') !== 'all'
             ? (int) $request->input('exam')
             : null;
 
-        $groupFilter = $request->input('group') !== 'all' || !$request->input('group')
+        $groupFilter = $request->input('group') && $request->input('group') !== 'all'
             ? (int) $request->input('group')
             : null;
 

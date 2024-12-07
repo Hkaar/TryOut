@@ -32,7 +32,7 @@ class SubjectController extends Controller
 
         if ($request->has('order')) {
             $this->filterService->order($subjects, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $subjects = $subjects->paginate(20);
 

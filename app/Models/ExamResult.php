@@ -80,11 +80,12 @@ class ExamResult extends Model
 
     /**
      * Scope a query by a group
-     * 
-     * @param  \Illuminate\Database\Eloquent\Builder<ExamResult> $query
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<ExamResult>  $query
      * @return \Illuminate\Database\Eloquent\Builder<ExamResult>
      */
-    public function scopeByGroupId(Builder $query, int $groupId) {
+    public function scopeByGroupId(Builder $query, int $groupId)
+    {
         return $query->whereHas('exam', function (Builder $query) use ($groupId) {
             return $query->where('group_id', $groupId);
         });

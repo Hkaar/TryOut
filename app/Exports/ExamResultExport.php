@@ -4,28 +4,27 @@ namespace App\Exports;
 
 use App\Models\ExamResult;
 use Carbon\Carbon;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ExamResultExport implements FromCollection, WithHeadings, ShouldAutoSize, WithColumnWidths, WithColumnFormatting, WithStyles
+class ExamResultExport implements FromCollection, ShouldAutoSize, WithColumnFormatting, WithColumnWidths, WithHeadings, WithStyles
 {
     public function __construct(
         private ?int $examId = null,
         private ?int $groupId = null,
         private ?int $userId = null,
-    ) {
-    }
+    ) {}
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection<int, mixed>
      */
     public function collection()
     {
@@ -59,7 +58,9 @@ class ExamResultExport implements FromCollection, WithHeadings, ShouldAutoSize, 
     }
 
     /**
-     * @return array
+     * The config for spreadsheet headings
+     *
+     * @return array<int, string>
      */
     public function headings(): array
     {
@@ -74,6 +75,11 @@ class ExamResultExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         ];
     }
 
+    /**
+     * The config for setting column widths in the spreadsheet
+     *
+     * @return array<string, int>
+     */
     public function columnWidths(): array
     {
         return [
@@ -83,6 +89,11 @@ class ExamResultExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         ];
     }
 
+    /**
+     * The configuration for column & row formats in the spreadsheet
+     *
+     * @return array<string, mixed>
+     */
     public function columnFormats(): array
     {
         return [
@@ -91,6 +102,11 @@ class ExamResultExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         ];
     }
 
+    /**
+     * The configuration for styles in the spreadsheet
+     *
+     * @return array<int|string, mixed>
+     */
     public function styles(Worksheet $sheet)
     {
         return [
@@ -98,56 +114,56 @@ class ExamResultExport implements FromCollection, WithHeadings, ShouldAutoSize, 
                 'font' => ['bold' => true],
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
-                    'vertical' => Alignment::VERTICAL_CENTER
+                    'vertical' => Alignment::VERTICAL_CENTER,
                 ],
                 'protection' => [
                     'locked' => true,
-                ]
+                ],
             ],
             'A' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
                     'vertical' => Alignment::VERTICAL_CENTER,
-                ]
+                ],
             ],
             'B' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
                     'vertical' => Alignment::VERTICAL_CENTER,
-                    'wrapText' => true
-                ]
+                    'wrapText' => true,
+                ],
             ],
             'C' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
                     'vertical' => Alignment::VERTICAL_CENTER,
-                    'wrapText' => true
-                ]
+                    'wrapText' => true,
+                ],
             ],
             'D' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
                     'vertical' => Alignment::VERTICAL_CENTER,
-                ]
+                ],
             ],
             'E' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
                     'vertical' => Alignment::VERTICAL_CENTER,
-                ]
+                ],
             ],
             'F' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
                     'vertical' => Alignment::VERTICAL_CENTER,
-                ]
+                ],
             ],
             'G' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_LEFT,
                     'vertical' => Alignment::VERTICAL_CENTER,
-                ]
-            ]
+                ],
+            ],
         ];
     }
 }

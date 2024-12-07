@@ -32,7 +32,7 @@ class PacketController extends Controller
 
         if ($request->has('order')) {
             $this->filterService->order($packets, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $packets = $packets->paginate(20);
 

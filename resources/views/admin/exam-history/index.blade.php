@@ -47,7 +47,7 @@
           <select class="py-2 px-3 pe-9 block w-32 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" name="group">
             <option selected disabled>Pilih group</option>
             <option value="all" {{ request()->input('group') === 'all' ? 'selected' : '' }}>Semua group</option>
-            
+
             @foreach ($groups as $group)
               <option value="{{ $group->id }}" {{ $group->id === ((int) request()->input('group')) ? 'selected' : '' }}>{{ ucfirst( $group->name ) }}</option>
             @endforeach
@@ -56,7 +56,7 @@
           <select class="py-2 px-3 pe-9 block w-32 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" name="exam">
             <option selected disabled>Pilih ujian</option>
             <option value="all" {{ request()->input('exam') === 'all' ? 'selected' : '' }}>Semua ujian</option>
-            
+
             @foreach ($exams as $exam)
               <option value="{{ $exam->id }}" {{ $exam->id === ((int) request()->input('exam')) ? 'selected' : '' }}>{{ ucfirst( $exam->name ) }}</option>
             @endforeach

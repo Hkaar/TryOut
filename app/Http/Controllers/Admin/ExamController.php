@@ -34,7 +34,7 @@ class ExamController extends Controller
 
         if ($request->has('order')) {
             $this->filterService->order($exams, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $exams = $exams->paginate(20);
 

@@ -36,7 +36,7 @@ class StudentController extends Controller
 
         if ($request->has('order')) {
             $this->filterService->order($students, $request->input('order') === 'latest' ? false : true);
-        } 
+        }
 
         $students = $students->paginate(20);
 
