@@ -1,11 +1,11 @@
 <aside id="sideBar"
-  class="dark:bg-secondary_dark dark:text-black min-w-24 fixed top-0 z-20 max-h-screen min-h-screen -translate-x-full overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen xl:relative xl:max-h-none xl:translate-x-0">
+  class="dark:bg-secondary_dark dark:text-black min-w-24 md:max-w-fit fixed top-0 z-20 max-h-screen min-h-screen -translate-x-full overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen xl:relative xl:max-h-none xl:translate-x-0">
 
   <!-- This div is here because of tailwind not registering classes properly -->
   <div class="xl:min-w-72 hidden h-screen min-w-full ps-3"></div>
 
   <div class="flex flex-col justify-center gap-4 h-full">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between gap-5">
       <div class="flex items-center gap-3">
         @if (auth()->check() && auth()->user()->img)
           <img src="{{ Storage::url(auth()->user()->img) }}" alt="Gambar tidak dapat dimuatkan"
