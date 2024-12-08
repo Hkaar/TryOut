@@ -1,7 +1,8 @@
 import axios from "axios";
-
-import Icon from "./Icon.js";
 import Swal from "sweetalert2";
+
+import { createElement, Trash2 } from "lucide";
+
 import { Button } from "./ui/index.js";
 
 import { questionAPIRoute } from "../variables.js";
@@ -22,8 +23,11 @@ export default function SimpleQuestionBox(parent, id, title) {
     boxTitle.classList.add("text-lg", "font-semibold");
     boxTitle.textContent = title;
 
+    const trashIcon = createElement(Trash2);
+    trashIcon.setAttribute("class", "size-5 stroke-[1.5]");
+
     const btn = Button({ className: "text-danger" });
-    btn.appendChild(Icon("delete"));
+    btn.appendChild(trashIcon);
 
     btn.addEventListener("click", () => {
         Swal.fire({
