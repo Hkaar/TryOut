@@ -8,7 +8,7 @@
       <div class="my-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
         <x-card class="shadow-lg">
           <x-slot name="header">
-            <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+            <div class="flex items-center gap-2 rounded-t-lg bg-accent px-4 py-3 text-white">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -111,7 +111,7 @@
 
         <x-card class="shadow-lg">
           <x-slot name="header">
-            <div class="flex items-center gap-2 rounded-t-lg bg-tertiary px-4 py-3 text-white">
+            <div class="flex items-center gap-2 rounded-t-lg bg-accent px-4 py-3 text-white">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
