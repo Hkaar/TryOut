@@ -3,54 +3,6 @@
 @tailwind utilities;
 
 @layer utilities {
-  .font-var-thin {
-    font-variation-settings: 'wght' 100;
-  }
-
-  .font-var-extralight {
-    font-variation-settings: 'wght' 200;
-  }
-
-  .font-var-light {
-    font-variation-settings: 'wght' 300;
-  }
-
-  .font-var-normal {
-    font-variation-settings: 'wght' 400;
-  }
-
-  .font-var-medium {
-    font-variation-settings: 'wght' 500;
-  }
-
-  .font-var-semibold {
-    font-variation-settings: 'wght' 600;
-  }
-
-  .font-var-bold {
-    font-variation-settings: 'wght' 700;
-  }
-
-  .font-xl {
-    font-size: 20px !important;
-  }
-
-  .font-2xl {
-    font-size: 24px !important;
-  }
-
-  .font-3xl {
-    font-size: 30px !important;
-  }
-
-  .font-4xl {
-    font-size: 36px !important;
-  }
-
-  .font-5xl {
-    font-size: 48px !important;
-  }
-
   .background-cover {
     background-size: cover;
   }
