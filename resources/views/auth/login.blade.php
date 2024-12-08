@@ -45,7 +45,7 @@
               <div class="w-full">
                 <div class="relative">
                   <input id="password" type="password"
-                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-accent focus:shadow focus:shadow-primary focus:ring-accent disabled:pointer-events-none disabled:opacity-50"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-accent focus:shadow focus:shadow-primary focus:ring-accent disabled:pointer-events-none disabled:opacity-50" autocomplete="current-password"
                     placeholder="Password" name="password" required>
 
                   <button type="button"
