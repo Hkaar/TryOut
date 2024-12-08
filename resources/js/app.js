@@ -3,7 +3,6 @@ import './bootstrap';
 import Swal from 'sweetalert2';
 
 import { importPlugin } from './utils/plugin.js';
-import { setupAutoTimezone } from "./utils/time.js";
 
 /**
  * A function to toggle the side bar
@@ -126,5 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
         mod.setupPreviewImage();
     });
 
-    setupAutoTimezone();
+    importPlugin('timezone', async () => {
+        const mod = await import('./utils/time.js');
+        mod.setupAutoTimezone();
+    });
 });
