@@ -38,6 +38,7 @@ import {
     LayoutPanelLeft,
     LogOut,
     History,
+    X
 } from "lucide";
 
 createIcons({
@@ -71,6 +72,7 @@ createIcons({
         LayoutPanelLeft,
         LogOut,
         History,
+        X
     },
 });
 
