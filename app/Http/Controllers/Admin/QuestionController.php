@@ -37,7 +37,7 @@ class QuestionController extends Controller
             $this->filterService->order($questions, $request->input('order') === 'latest' ? false : true);
         }
 
-        $questions = $questions->paginate(20);
+        $questions = $questions->paginate(15);
 
         return view('admin.questions.index', [
             'questions' => $questions,

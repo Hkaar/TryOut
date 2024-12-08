@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import Swal from "sweetalert2";
-import toastr from "toastr";
 
 import Question from "../components/exams/Question.js";
 import QuestionTopBar from "../components/exams/QuestionTopBar.js";
@@ -12,6 +11,7 @@ import { saveQuestion } from "../utils/exam.js";
 import { request } from "../utils/network.js";
 import { clearNodeTree } from "../utils/common.js";
 import { examAPIRoute } from "../variables.js";
+import notify from "../utils/toast.js";
 
 /**
  * Goes to the given question by the id or question box
@@ -74,10 +74,7 @@ export function gotoQuestion(config) {
                 questionContainer.appendChild(display);
                 questionHeader.appendChild(header);
 
-                toastr.success("Berhasil memperbarui soal!", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
+                notify("success", "Berhasil memperbarui soal!", 3000);
 
                 currentQuestionId = Number(questionId);
                 currentQuestionNumber = Number(questionNumber);
@@ -133,10 +130,7 @@ export function nextQuestion() {
                 questionContainer.appendChild(display);
                 questionHeader.appendChild(header);
 
-                toastr.success("Berhasil memperbarui soal!", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
+                notify("success", "Berhasil memperbarui soal!", 3000);
 
                 currentQuestionId = Number(newQuestionId);
                 currentQuestionNumber = newQuestionNumber;
@@ -190,10 +184,7 @@ export function previousQuestion() {
                 questionContainer.appendChild(display);
                 questionHeader.appendChild(header);
 
-                toastr.success("Berhasil memperbarui soal!", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
+                notify("success", "Berhasil memperbarui soal!", 3000);
 
                 currentQuestionId = Number(newQuestionId);
                 currentQuestionNumber = newQuestionNumber;
@@ -229,10 +220,7 @@ export function saveAsIndertiminate() {
 
         switch (response.status) {
             case 200:
-                toastr.success("Berhasil merubah status ragu soal", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
+                notify("success", "Berhasil merubah status ragu soal!", 3000);
                 break;
 
             default:
@@ -306,11 +294,8 @@ export function handleStatusResponse(statusCode) {
                 endExam();
                 return;
             }
-
-            toastr.error("Maaf tidak ada soal lagi :(", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            
+            notify("error", "Maaf tidak ada soal lagi :(", 3000);
             break;
     
         default:

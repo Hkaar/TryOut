@@ -56,7 +56,7 @@
                   name="question_type_id" required>
                   <option selected disabled>{{ \App\Models\QuestionType::count() <= 0 ? 'Tidak ada jenis soal' : 'Pilih salah satu ...' }}</option>
                   @foreach (\App\Models\QuestionType::all(['name', 'id']) as $type)
-                    <option value="{{ $type->id }}">{{ ucwords($type->name) }}</option>
+                    <option value="{{ $type->id }}">{{ $type->name === "essay" ? 'Essay' : 'Pilihan Ganda' }}</option>
                   @endforeach
                 </select>
 

@@ -55,7 +55,7 @@ function TopBar(parent) {
     changeToTextBtn.appendChild(Icon("message"));
 
     const changeToImageBtn = Button({
-        className: "imageChange bg-gray-100 text-info duration-100 hover:opacity-95 active:opacity-50"
+        className: "imageChange text-info duration-100 hover:opacity-95 active:opacity-50"
     });
     changeToImageBtn.appendChild(Icon("image"));
 

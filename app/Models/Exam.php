@@ -76,8 +76,8 @@ class Exam extends Model
      */
     public function checkFinished(int $userId): ?int
     {
-        $examResult = $this->examResults()->where('user_id', $userId)->first();
+        $examResult = $this->examResults->firstWhere('user_id', $userId);
 
-        return $examResult !== null ? $examResult->finished : null;
+        return $examResult ? $examResult->finished : null;
     }
 }

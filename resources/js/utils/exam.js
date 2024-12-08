@@ -1,10 +1,10 @@
 'use strict';
 
 import axios from "axios";
-import toastr from "toastr";
 
 import { examAPIRoute } from "../variables.js";
 import { request } from "./network.js";
+import notify from "./toast.js";
 
 /**
  * Updates the corresponding question box to the given state
@@ -145,10 +145,7 @@ export function saveQuestion() {
 
         switch (response.status) {
             case 200:
-                toastr.success("Berhasil menyimpan jawaban!", "Status", {
-                    timeOut: 3000,
-                    progressBar: true,
-                });
+                notify("success", "Berhasil menyimpan jawaban!", 3000)
                 break;
         
             default:

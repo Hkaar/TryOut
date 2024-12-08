@@ -1,26 +1,14 @@
 import 'preline/dist/toggle-password.mjs';
-import 'preline/dist/collapse.mjs';
 import 'preline/dist/input-number.mjs';
 import 'preline/dist/dropdown.mjs';
 import 'preline/dist/accordion.mjs';
-
-import 'apexcharts/dist/apexcharts.css';
 import 'htmx.org';
-import 'toastr';
 
-import 'toastr/build/toastr.min.css';
 import 'material-symbols/outlined.css';
-
-import _ from 'lodash';
-import ApexCharts from 'apexcharts';
 
 import.meta.glob([
     "../images/**/*"
 ]);
-
-// @ts-ignore
-window.ApexCharts = ApexCharts;
-window._ = _;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

@@ -32,7 +32,7 @@ Route::group(['namespace' => "App\Http\Controllers\Auth"], function () {
     });
 
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('logout', 'LogoutController@perform')->name('logout');
+        Route::post('logout', 'LogoutController@perform')->name('logout');
     });
 });
 

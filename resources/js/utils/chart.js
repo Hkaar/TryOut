@@ -1,3 +1,12 @@
+import _ from 'lodash';
+import ApexCharts from 'apexcharts';
+
+import 'apexcharts/dist/apexcharts.css';
+
+// @ts-ignore
+window.ApexCharts = ApexCharts;
+window._ = _;
+
 import { buildChart } from "preline/dist/helper-apexcharts.js";
 
 /**

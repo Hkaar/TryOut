@@ -36,7 +36,7 @@ class ExamController extends Controller
             $this->filterService->order($exams, $request->input('order') === 'latest' ? false : true);
         }
 
-        $exams = $exams->paginate(20);
+        $exams = $exams->paginate(15);
 
         return view('admin.exams.index', [
             'exams' => $exams,
