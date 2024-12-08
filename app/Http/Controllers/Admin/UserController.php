@@ -36,7 +36,7 @@ class UserController extends Controller
             $this->filterService->order($users, $request->input('order') === 'latest' ? false : true);
         }
 
-        $users = $users->paginate(20);
+        $users = $users->paginate(15);
 
         return view('admin.users.index', [
             'users' => $users,

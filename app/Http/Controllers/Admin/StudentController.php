@@ -27,7 +27,7 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $students = User::query();
+        $students = User::with('role');
         $students->strictByRole('student');
 
         if ($request->has('search') && $request->input('search')) {
@@ -38,7 +38,7 @@ class StudentController extends Controller
             $this->filterService->order($students, $request->input('order') === 'latest' ? false : true);
         }
 
-        $students = $students->paginate(20);
+        $students = $students->paginate(15, ['id', 'name', 'email']);
 
         return view('admin.students.index', [
             'students' => $students,

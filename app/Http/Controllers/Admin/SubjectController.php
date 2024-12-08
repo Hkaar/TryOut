@@ -34,7 +34,7 @@ class SubjectController extends Controller
             $this->filterService->order($subjects, $request->input('order') === 'latest' ? false : true);
         }
 
-        $subjects = $subjects->paginate(20);
+        $subjects = $subjects->paginate(15, ['id', 'name']);
 
         return view('admin.subjects.index', [
             'subjects' => $subjects,
