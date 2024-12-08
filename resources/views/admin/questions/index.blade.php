@@ -72,21 +72,16 @@
             {{ $question->packet->subject->name }}
           </td>
           <td class="flex gap-2 whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
-            {{-- <a href="{{ route('admin.questions.edit', $question->id) }}" class="btn bg-caution text-white flex items-center gap-2">
-              <i class="material-symbols-outlined font-var-light">edit</i>
-              Edit
-            </a> --}}
-
             <x-button type="button" class="border-danger hover:bg-danger hover:text-white" hx-confirm="soal"
               hxHeaders='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
               hx-delete="{{ route('admin.questions.destroy', $question->id) }}" hx-target="closest tr" hx-swap="outerHTML"
               delete-confirmation>
-              <i class="material-symbols-outlined font-var-light">delete</i>
+              <i data-lucide="trash-2" class="size-5 stroke-[1.5]"></i>
               Hapus
             </x-button>
 
             <x-link-button to="{{ route('admin.questions.show', $question->id) }}" class="border-info hover:bg-info hover:text-white">
-              <i class="material-symbols-outlined font-var-light">info</i>
+              <i data-lucide="info" class="size-5 stroke-[1.5]"></i>
               Info
             </x-link-button>
           </td>

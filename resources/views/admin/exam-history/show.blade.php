@@ -122,7 +122,8 @@
             </div>
           </x-slot>
 
-          <div class="h-[33rem] space-y-2 overflow-y-auto px-2">
+          <div
+            class="h-[33rem] space-y-2 overflow-y-auto px-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 [&::-webkit-scrollbar]:w-2">
             @foreach ($result->questionResults as $i => $item)
               <x-card class="shadow-md">
                 <x-slot name="header">
@@ -136,7 +137,8 @@
                   </p>
 
                   <div class="grid grid-cols-3">
-                    <div class="col-span-1 flex items-center rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
+                    <div
+                      class="col-span-1 flex items-center rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
                       Jawaban
                     </div>
                     <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
@@ -156,16 +158,16 @@
                 <x-slot name="footer">
                   <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
                     @if ($item->correct == 1)
-                      <i class="material-symbols-outlined font-var-light">check</i>
+                      <i data-lucide="circle-check" class="size-5 stroke-success stroke-[1.5]"></i>
                       <span class="font-bold">Benar</span>
                     @elseif ($item->correct == 0 && $item->not_sure == 0 && $item->answer && $item->answer != '')
-                      <i class="material-symbols-outlined font-var-light">cancel</i>
+                      <i data-lucide="circle-x" class="size-5 stroke-danger stroke-[1.5]"></i>
                       <span class="font-bold">Salah</span>
                     @elseif ($item->not_sure == 1)
-                      <i class="material-symbols-outlined font-var-light">circle</i>
+                      <i data-lucide="circle-alert" class="size-5 stroke-caution stroke-[1.5]"></i>
                       <span class="font-bold">Ragu</span>
                     @else
-                      <i class="material-symbols-outlined font-var-light">circle</i>
+                      <i data-lucide="circle" class="size-5 stroke-[1.5]"></i>
                       <span class="font-bold">Belum dijawab</span>
                     @endif
                   </div>

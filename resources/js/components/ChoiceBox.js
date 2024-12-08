@@ -2,8 +2,9 @@ import { clearNodeTree, uuid } from "../utils/common.js";
 import { Label, RadioInput, TextArea } from "./ui/form.js";
 import { Button } from "./ui/index.js";
 
-import Icon from "./Icon.js";
 import PhotoSVG from "./ImageAsset.js";
+
+import { MessageSquareText, Image, Trash2, createElement } from "lucide";
 
 /**
  * A choice box element for the question create & edit page
@@ -49,20 +50,29 @@ function TopBar(parent) {
     const actionContainer = document.createElement("div");
     actionContainer.classList.add("flex", "items-center", "gap-1");
 
+    const textIcon = createElement(MessageSquareText);
+    textIcon.setAttribute("class", "size-5 stroke-[1.5]");
+
+    const imageIcon = createElement(Image);
+    imageIcon.setAttribute("class", "size-5 stroke-[1.5]");
+
+    const trashIcon = createElement(Trash2);
+    trashIcon.setAttribute("class", "size-5 stroke-[1.5]");
+
     const changeToTextBtn = Button({
         className: "textChange bg-gray-100 text-info duration-100 hover:opacity-95 active:opacity-50"
     });
-    changeToTextBtn.appendChild(Icon("message"));
+    changeToTextBtn.appendChild(textIcon);
 
     const changeToImageBtn = Button({
         className: "imageChange text-info duration-100 hover:opacity-95 active:opacity-50"
     });
-    changeToImageBtn.appendChild(Icon("image"));
+    changeToImageBtn.appendChild(imageIcon);
 
     const deleteBtn = Button({
         className: "text-danger duration-100 hover:opacity-95 active:opacity-50"
     });
-    deleteBtn.appendChild(Icon("delete"));
+    deleteBtn.appendChild(trashIcon);
 
     changeToTextBtn.addEventListener("click", () => switchContent(parent, "text"));
     changeToImageBtn.addEventListener("click", () => switchContent(parent, "image"));

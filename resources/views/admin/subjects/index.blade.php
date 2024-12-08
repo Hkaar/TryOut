@@ -62,7 +62,7 @@
           <td class="flex gap-2 whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
             <x-link-button to="{{ route('admin.subjects.edit', $subject->id) }}"
               class="border-caution hover:bg-caution hover:text-white">
-              <i class="material-symbols-outlined font-var-light">edit</i>
+              <i data-lucide="edit" class="size-5 stroke-[1.5]"></i>
               Edit
             </x-link-button>
 
@@ -70,14 +70,9 @@
               hxHeaders='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
               hx-delete="{{ route('admin.subjects.destroy', $subject->id) }}" hx-target="closest tr" hx-swap="outerHTML"
               delete-confirmation>
-              <i class="material-symbols-outlined font-var-light">delete</i>
+              <i data-lucide="trash-2" class="size-5 stroke-[1.5]"></i>
               Hapus
             </x-button>
-
-            {{-- <a href="{{ route('admin.subjects.show', $subject->id) }}" class="btn bg-info text-white flex items-center gap-2">
-              <i class="material-symbols-outlined font-var-light">info</i>
-              Info
-            </a> --}}
           </td>
         </tr>
       @endforeach

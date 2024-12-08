@@ -1,14 +1,78 @@
-import 'preline/dist/toggle-password.mjs';
-import 'preline/dist/input-number.mjs';
-import 'preline/dist/dropdown.mjs';
-import 'preline/dist/accordion.mjs';
-import 'htmx.org';
+import "preline/dist/toggle-password.mjs";
+import "preline/dist/input-number.mjs";
+import "preline/dist/collapse.mjs";
+import "preline/dist/dropdown.mjs";
+import "preline/dist/accordion.mjs";
+import "htmx.org";
 
-import 'material-symbols/outlined.css';
+import.meta.glob(["../images/**/*"]);
 
-import.meta.glob([
-    "../images/**/*"
-]);
+import {
+    createIcons,
+    Trash2,
+    Edit,
+    Plus,
+    Info,
+    CircleCheck,
+    CircleX,
+    CircleAlert,
+    Circle,
+    CalendarRange,
+    Save,
+    LayoutGrid,
+    LayoutList,
+    User,
+    Users,
+    ChartNoAxesCombined,
+    Package,
+    Text,
+    List,
+    ArrowRight,
+    ArrowLeft,
+    Settings,
+    LibraryBig,
+    PanelLeftClose,
+    PanelLeftOpen,
+    EllipsisVertical,
+    House,
+    LayoutPanelLeft,
+    LogOut,
+    History,
+} from "lucide";
+
+createIcons({
+    icons: {
+        Trash2,
+        Edit,
+        Plus,
+        Info,
+        CircleCheck,
+        CircleX,
+        CircleAlert,
+        Circle,
+        CalendarRange,
+        Save,
+        LayoutGrid,
+        LayoutList,
+        User,
+        Users,
+        ChartNoAxesCombined,
+        Package,
+        Text,
+        List,
+        ArrowRight,
+        ArrowLeft,
+        Settings,
+        LibraryBig,
+        PanelLeftClose,
+        PanelLeftOpen,
+        EllipsisVertical,
+        House,
+        LayoutPanelLeft,
+        LogOut,
+        History,
+    },
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -16,12 +80,12 @@ import.meta.glob([
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-import axios from 'axios';
+import axios from "axios";
 // @ts-ignore
 window.axios = axios;
 
 // @ts-ignore
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

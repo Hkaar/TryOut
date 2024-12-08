@@ -105,12 +105,13 @@
               </div>
             </div>
           @else
-            <div class="max-h-[32rem] space-y-3 overflow-y-auto px-2">
+            <div
+              class="max-h-[32rem] space-y-3 overflow-y-auto px-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 [&::-webkit-scrollbar]:w-2">
               @foreach ($question->choices as $i => $choice)
                 <x-card class="shadow-md">
                   <x-slot name="header">
                     <div class="flex items-center gap-2 rounded-t-lg bg-accent px-4 py-3">
-                      <h3 class="text-lg font-semibold">Pilihan {{ $i + 1 }}</h3>
+                      <h3 class="font-semibold">Pilihan {{ $i + 1 }}</h3>
                     </div>
                   </x-slot>
 
@@ -131,11 +132,11 @@
                   <x-slot name="footer">
                     <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
                       @if ($choice->correct == 1)
-                        <i class="material-symbols-outlined font-var-light text-success">check</i>
-                        <span class="font-bold text-success">Benar</span>
+                        <i data-lucide="circle-check" class="size-5 stroke-success stroke-[1.5]"></i>
+                        <span class="text-sm font-medium text-success">Benar</span>
                       @else
-                        <i class="material-symbols-outlined font-var-light text-danger">cancel</i>
-                        <span class="font-bold text-danger">Salah</span>
+                        <i data-lucide="circle-x" class="size-5 stroke-danger stroke-[1.5]"></i>
+                        <span class="text-sm font-medium text-danger">Salah</span>
                       @endif
                     </div>
                   </x-slot>

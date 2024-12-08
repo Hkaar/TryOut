@@ -26,6 +26,9 @@ function toggleSideBar() {
             e.classList.add("ps-3");
         });
 
+        document.querySelectorAll(".sideOpenIcon").forEach(icon => icon.classList.add("hidden"));
+        document.querySelectorAll(".sideCloseIcon").forEach(icon => icon.classList.remove("hidden"));
+
         document.body.classList.add("overflow-y-hidden", "md:overflow-y-auto");
     } else {
         sideBar?.classList.replace("translate-x-0", "-translate-x-full");
@@ -39,6 +42,9 @@ function toggleSideBar() {
         sideNavItems?.forEach((e) => {
             e.classList.remove("ps-3");
         });
+
+        document.querySelectorAll(".sideOpenIcon").forEach(icon => icon.classList.remove("hidden"));
+        document.querySelectorAll(".sideCloseIcon").forEach(icon => icon.classList.add("hidden"));
 
         document.body.classList.remove("overflow-y-hidden", "md:overflow-y-auto");
     }
