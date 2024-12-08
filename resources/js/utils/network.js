@@ -1,6 +1,6 @@
 'use strict';
 
-import toastr from 'toastr';
+import notify from './toast.js';
 
 /**
  * A function to make requests using axios with error handling
@@ -20,33 +20,16 @@ export function request(reqMethod) {
                 `Server Error: ${axiosError.response.status}`,
                 axiosError.response.data
             );
-            toastr.error("Terjadi kesalahan pada server!", "Status", {
-                timeOut: 3000,
-                progressBar: true,
-            });
+            notify("error", "Terjadi kesalahan pada server!", 3000);
         } else if (axiosError.request) {
             console.error(
                 "Network Error: No response received",
                 axiosError.request
             );
-            toastr.error(
-                "Tidak ada respons dari server, coba lagi!",
-                "Status",
-                {
-                    timeOut: 3000,
-                    progressBar: true,
-                }
-            );
+            notify("error", "Tidak ada respons dari server, coba lagi!", 3000);
         } else {
             console.error("Request Error:", axiosError.message);
-            toastr.error(
-                "Terjadi kesalahan saat mengirim permintaan!",
-                "Status",
-                {
-                    timeOut: 3000,
-                    progressBar: true,
-                }
-            );
+            notify("error", "Terjadi kesalahan saat mengirim permintaan!", 3000);
         }
     }
 }

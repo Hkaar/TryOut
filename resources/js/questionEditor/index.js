@@ -25,7 +25,7 @@ export default function setupQuestionEditor() {
     typeSelect.addEventListener("change", () => {
         const selected = typeSelect.options[typeSelect.selectedIndex];
 
-        if (selected.text.toLowerCase() === 'multiple_choice' ) {
+        if (selected.text.toLowerCase() === 'pilihan ganda' ) {
             toggleChoiceBox(true);
         } else {
             toggleChoiceBox(false);

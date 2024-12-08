@@ -1,9 +1,11 @@
 import axios from "axios";
-import { questionAPIRoute } from "../variables.js";
+
 import Icon from "./Icon.js";
 import Swal from "sweetalert2";
-import toastr from "toastr";
 import { Button } from "./ui/index.js";
+
+import { questionAPIRoute } from "../variables.js";
+import notify from "../utils/toast.js";
 
 /**
  * A simple question box with only one action
@@ -38,20 +40,12 @@ export default function SimpleQuestionBox(parent, id, title) {
             if (response.isConfirmed) {
                 axios.delete(questionAPIRoute, {data: {'id': id}})
                     .then(() => {
-                        toastr.success("Berhasil menghapus pertanyaan!", "Status", {
-                            timeOut: 3000,
-                            progressBar: true,
-                        });
-
+                        notify("success", "Berhasil menghapus pertanyaan!", 3000);
                         parent.removeChild(root);
                     })
                     .catch(error => {
                         console.error(error);
-
-                        toastr.error("Gagal menghapus pertanyaan!", "Status", {
-                            timeOut: 3000,
-                            progressBar: true,
-                        });
+                        notify("error", "Gagal menghapus pertanyaan!", 3000)
                     });
             }
         })
