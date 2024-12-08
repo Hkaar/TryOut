@@ -8,11 +8,11 @@
 
 @section('content')
   <x-dashboard-layout active="pengaturan">
-    <div class="flex-1 flex">
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2">
       <div class="flex-1 grid place-items-center">
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
-            <i class="material-symbols-outlined font-var-light font-4xl">settings</i>
+            <i data-lucide="settings" class="size-8 stroke-[1.5]"></i>
 
             <span class="flex flex-col gap-1">
               <h3 class="text-xl font-semibold">Pengaturan Aplikasi</h3>
@@ -88,7 +88,7 @@
 
               <div class="flex items-center gap-1">
                 <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
-                  <i class="material-symbols-outlined font-var-light">save</i>
+                  <i data-lucide="save" class="size-5 stroke-[1.5]"></i>
 
                   Simpan
                 </x-button>
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <div class="flex-1 flex">
+      <div class="flex-1 flex order-first lg:order-last">
         <div id="previewFoto" class="grid place-items-center flex-1">
           @if (isset($settings['org_img']))
             <img src="{{ Storage::url($settings['org_img']) }}" alt="Gambar tidak dapat dimuatkan" class="block w-2/3 aspect-square">

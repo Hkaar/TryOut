@@ -10,7 +10,7 @@
 @endphp
 
 @section('content')
-  <x-dashboard-layout active="paket Soal">
+  <x-dashboard-layout active="paket soal">
     <x-detail-layout title="Paket Soal" :item="$packet" :routes="$routes">
       <div class="my-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
         <x-card class="shadow-lg">
@@ -87,15 +87,17 @@
             </div>
           </x-slot>
 
-          <div class="max-h-[32rem] space-y-3 overflow-y-auto px-2">
+          <div
+            class="max-h-[32rem] space-y-3 overflow-y-auto px-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 [&::-webkit-scrollbar]:w-2">
             @foreach ($packet->questions as $i => $question)
               <x-card class="shadow-md">
                 <x-slot name="header">
                   <div class="flex items-center justify-between gap-2 rounded-t-lg bg-accent px-4 py-2">
-                    <h3 class="text-lg font-bold">Soal {{ $i + 1 }}</h3>
+                    <h3 class="font-bold">Soal {{ $i + 1 }}</h3>
 
-                    <x-link-button to="{{ route('admin.questions.show', $question->id) }}" class="hover:bg-info hover:text-white">
-                      <i class="material-symbols-outlined font-var-light">info</i>
+                    <x-link-button to="{{ route('admin.questions.show', $question->id) }}"
+                      class="hover:bg-info hover:text-white">
+                      <i data-lucide="info" class="size-5 stroke-current stroke-[1.5]"></i>
                     </x-link-button>
                   </div>
                 </x-slot>
@@ -114,11 +116,11 @@
                 <x-slot name="footer">
                   <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
                     @if ($question->type->name === 'essay')
-                      <i class="material-symbols-outlined font-var-light">view_headline</i>
-                      <span class="font-bold">Essay</span>
+                      <i data-lucide="text" class="size-5 stroke-[1.5]"></i>
+                      <span class="text-sm font-medium">Essay</span>
                     @else
-                      <i class="material-symbols-outlined font-var-light">list</i>
-                      <span class="font-bold">Pilihan Ganda</span>
+                      <i data-lucide="list" class="size-5 stroke-[1.5]"></i>
+                      <span class="text-sm font-medium">Pilihan Ganda</span>
                     @endif
                   </div>
                 </x-slot>

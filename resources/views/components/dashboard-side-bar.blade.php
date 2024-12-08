@@ -27,7 +27,7 @@
       </div>
 
       <button class="side-bar-toggle btn xl:hidden">
-        <i class="material-symbols-outlined font-var-light">close</i>
+        <i data-lucide="x" class="size-5 stroke-[1.5]"></i>
       </button>
     </div>
 
@@ -36,8 +36,8 @@
     <div class="space-y-5 flex-1">
       <a href="{{ $active === 'home' ? '#' : route('admin.home') }}"
         class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
-        <i class="material-symbols-outlined font-var-light">home</i>
-        <span class="menu-text me-auto hidden">Beranda</span>
+        <i data-lucide="layout-panel-left" class="size-5 stroke-[1.5]"></i>
+        <span class="menu-text me-auto hidden">Dashboard</span>
       </a>
 
       <div class="flex flex-col justify-center gap-2">
@@ -46,19 +46,19 @@
         <div class="space-y-1">
           <a href="{{ $active === 'group' ? '#' : route('admin.groups.index') }}"
             class="side-nav-item {{ $active === 'group' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">grid_view</i>
+            <i data-lucide="layout-grid" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Group</span>
           </a>
 
           <a href="{{ $active === 'peserta' ? '#' : route('admin.students.index') }}"
             class="side-nav-item {{ $active === 'peserta' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">people</i>
+            <i data-lucide="users" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Peserta</span>
           </a>
 
           <a href="{{ $active === 'mapel' ? '#' : route('admin.subjects.index') }}"
             class="side-nav-item {{ $active === 'mapel' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">note_stack</i>
+            <i data-lucide="library-big" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Mata Pelajaran</span>
           </a>
         </div>
@@ -70,13 +70,13 @@
         <div class="space-y-1">
           <a href="{{ $active === 'paket soal' ? '#' : route('admin.packets.index') }}"
             class="side-nav-item {{ $active === 'paket soal' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">collections_bookmark</i>
+            <i data-lucide="package" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Paket Soal</span>
           </a>
 
           <a href="{{ $active === 'daftar soal' ? '#' : route('admin.questions.index') }}"
             class="side-nav-item {{ $active === 'daftar soal' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">library_books</i>
+            <i data-lucide="layout-list" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Daftar Soal</span>
           </a>
         </div>
@@ -88,13 +88,13 @@
         <div class="space-y-1">
           <a href="{{ $active === 'daftar ujian' ? '#' : route('admin.exams.index') }}"
             class="side-nav-item {{ $active === 'daftar ujian' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">event_note</i>
+            <i data-lucide="calendar-range" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Daftar Ujian</span>
           </a>
 
           <a href="{{ $active === 'riwayat ujian' ? '#' : route('admin.exam-history.index') }}"
             class="side-nav-item {{ $active === 'riwayat ujian' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">history</i>
+            <i data-lucide="history" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Riwayat Ujian</span>
           </a>
         </div>
@@ -106,13 +106,13 @@
         <div class="space-y-1">
           <a href="{{ $active === 'akun' ? '#' : route('admin.users.index') }}"
             class="side-nav-item {{ $active === 'akun' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">people</i>
+            <i data-lucide="users" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Akun</span>
           </a>
 
           <a href="{{ $active === 'pengaturan' ? '#' : route('admin.settings') }}"
             class="side-nav-item {{ $active === 'pengaturan' ? 'active' : '' }}">
-            <i class="material-symbols-outlined font-var-light">settings</i>
+            <i data-lucide="settings" class="size-5 stroke-[1.5]"></i>
             <span class="menu-text me-auto hidden">Pengaturan</span>
           </a>
         </div>
@@ -122,7 +122,7 @@
     {{-- <div class="space-y-3">
       <a href="{{ $active === 'help' ? '#' : route('admin.help') }}"
         class="side-nav-item {{ $active === 'help' ? 'active' : '' }}">
-        <i class="material-symbols-outlined font-var-light">help</i>
+        <i data-lucide="help" class="size-5 stroke-[1.5]"></i>
         <span class="menu-text me-auto hidden">Help</span>
       </a>
     </div> --}}

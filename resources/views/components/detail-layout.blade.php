@@ -1,7 +1,7 @@
 <div class="flex w-full flex-col">
   <div class="mb-3 flex items-center gap-3">
     <x-link-button to="{{ url()->previous() }}" class="bg-primary text-white hover:rounded-none">
-      <i class="material-symbols-outlined font-var-light">arrow_back</i>
+      <i data-lucide="arrow-left" class="size-5 stroke-[1.5]"></i>
       Balik
     </x-link-button>
 
@@ -36,7 +36,7 @@
         @if (isset($routes['edit']))
           <x-link-button to="{{ route($routes['edit'], $item->id) }}"
             class="border-caution hover:rounded-none hover:bg-caution hover:text-white">
-            <i class="material-symbols-outlined font-var-light">edit</i>
+            <i data-lucide="edit" class="size-5 stroke-[1.5]"></i>
             <span class="md:hidden lg:block xl:hidden">
               Edit
             </span>
@@ -47,7 +47,7 @@
         @if (isset($routes['create']))
           <x-link-button to="{{ route($routes['create'], $item->id) }}"
             class="border-success hover:rounded-none hover:bg-success hover:text-white">
-            <i class="material-symbols-outlined font-var-light">add</i>
+            <i data-lucide="plus" class="size-5 stroke-[1.5]"></i>
             <span class="md:hidden lg:block xl:hidden">
               Tambahkan
             </span>
