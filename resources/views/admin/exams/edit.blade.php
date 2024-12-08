@@ -2,6 +2,10 @@
 
 @section('title', 'Ujian - Dashboard')
 
+@section('meta')
+  <meta name="plugins" content="timezone">
+@endsection
+
 @section('content')
   <x-dashboard-layout active="daftar ujian">
     <div class="flex-1 grid grid-cols-1 lg:grid-cols-2">
