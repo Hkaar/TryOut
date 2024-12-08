@@ -12,7 +12,7 @@
       <div class="flex-1 grid place-items-center">
         <div class="flex flex-col gap-3 w-full">
           <div class="flex gap-4 items-center">
-            <i class="material-symbols-outlined font-var-light font-4xl">group</i>
+            <i data-lucide="users" class="size-8 stroke-[1.5]"></i>
 
             <span class="flex flex-col gap-1">
               <h3 class="text-xl font-semibold">Tambahkan akun baru</h3>
@@ -137,13 +137,14 @@
 
               <div class="flex items-center gap-2">
                 <x-button type="submit" class="bg-primary text-white hover:rounded-none hover:shadow-lg">
-                  <i class="material-symbols-outlined font-var-light">save</i>
+                  <i data-lucide="save" class="size-5 stroke-[1.5]"></i>
 
                   Simpan
                 </x-button>
 
                 <x-link-button to="{{ route('admin.users.index') }}" class="border-danger hover:bg-danger hover:text-white hover:rounded-none hover:shadow-lg">
-                  <i class="material-symbols-outlined font-var-light">cancel</i>
+                  <i data-lucide="circle-x" class="size-5 stroke-[1.5]"></i>
+                  
                   Batalkan
                 </x-link-button>
               </div>

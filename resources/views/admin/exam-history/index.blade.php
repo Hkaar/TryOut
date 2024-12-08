@@ -132,7 +132,8 @@
           <td class="flex gap-2 whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
             <x-link-button to="{{ route('admin.exam-history.show', $result->id) }}"
               class="border-info hover:bg-info hover:text-white">
-              <i class="material-symbols-outlined font-var-light">info</i>
+              <i data-lucide="info" class="size-5 stroke-[1.5]"></i>
+              
               Info
             </x-link-button>
           </td>
