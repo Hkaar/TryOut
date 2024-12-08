@@ -10,7 +10,7 @@
         "@eslint/js": "^9.15.0",
         "@tailwindcss/forms": "^0.5.9",
         "@types/lodash": "^4.17.9",
-        "@types/toastr": "^2.1.43",
+        "@types/toastify-js": "^1.12.3",
         "autoprefixer": "^10.4.20",
         "axios": "^1.6.4",
         "eslint": "^9.15.0",
@@ -31,6 +31,6 @@
         "sweetalert2": "^11.14.1",
         "swiper": "^11.1.14",
         "tailwind-merge": "^2.5.5",
-        "toastr": "^2.1.4"
+        "toastify-js": "^1.12.0"
     }
 }

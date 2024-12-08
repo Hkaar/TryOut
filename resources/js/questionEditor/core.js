@@ -1,7 +1,6 @@
 'use strict';
 
 import axios from "axios";
-import toastr from "toastr";
 
 import { clearNodeTree } from "../utils/common.js";
 import { request } from "../utils/network.js";
@@ -10,6 +9,7 @@ import { questionAPIRoute, questionSaveRoute } from "../variables.js";
 import ChoiceBox from "../components/ChoiceBox.js";
 import EssayBox from "../components/EssayBox.js";
 import SimpleQuestionBox from "../components/SimpleQuestionBox.js";
+import notify from "../utils/toast.js";
 
 /**
  * Add an option choice box to the choices container
@@ -161,11 +161,7 @@ export function save(event, questionForm) {
         const data = extractChoices(container);
 
         if (data === null) {
-            toastr.error("Tolong siapkan minimal 1 jawaban", "Status", {
-                timeOut: 3000,
-                closeButton: true
-            })
-            
+            notify("error", "Tolong siapkan minimal 1 jawaban", 3000);
             return;
         }
 
@@ -183,11 +179,7 @@ export function save(event, questionForm) {
         const data = extractEssay(container);
 
         if (data === null) {
-            toastr.error("Tolong siapkan minimal 1 jawaban", "Status", {
-                timeOut: 3000,
-                closeButton: true
-            })
-            
+            notify("error", "Tolong siapkan minimal 1 jawaban", 3000);
             return;
         }
 
@@ -199,20 +191,12 @@ export function save(event, questionForm) {
         .then((message) => {
             console.info(message);
 
-            toastr.success("Berhasil menyimpan soal!", "Status", {
-                timeOut: 3000,
-                closeButton: true
-            });
-
+            notify("success", "Berhasil menyimpan soal!", 3000);
             clearNodeTree(container);
         })
         .catch((message) => {
             console.error(message);
-
-            toastr.error("Gagal menyimpan soal", "Status", {
-                timeOut: 3000,
-                closeButton: true
-            });
+            notify("error", "Gagal menyimpan soal", 3000);
         });
 }
 

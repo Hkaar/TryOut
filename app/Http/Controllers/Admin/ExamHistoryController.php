@@ -46,7 +46,7 @@ class ExamHistoryController extends Controller
             $this->filterService->order($results, $request->input('order') === 'latest' ? false : true);
         }
 
-        $results = $results->paginate(20);
+        $results = $results->paginate(15);
 
         $exams = Exam::all(['id', 'name']);
         $groups = Group::all(['id', 'name']);
