@@ -14,6 +14,7 @@ export default function Option({ letter = "A", name = "", value = "", checked = 
 
     const radio = document.createElement("input");
     radio.type = "radio";
+    radio.id = id;
     radio.name = name;
     radio.value = value;
     radio.checked = checked;

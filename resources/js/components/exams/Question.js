@@ -5,7 +5,7 @@ import {
     updateQuestionBox,
 } from "../../utils/exam.js";
 
-import { Label, RadioInput, TextArea } from "../ui/form.js";
+import { Label, TextArea } from "../ui/form.js";
 import { Image } from "../ui/content.js";
 import Option from "./Option.js";
 
