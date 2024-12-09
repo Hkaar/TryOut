@@ -20,9 +20,9 @@ export function updateQuestionBox(questionId, state) {
         return;
     }
 
-    const activeStyles = ["bg-primary", "text-white"];
-    const idleStyles = ["bg-gray-100"];
-    const indertiminateStyles = ["bg-caution"];
+    const activeStyles = ["bg-info", "text-white"];
+    const idleStyles = ["text-black"];
+    const indertiminateStyles = ["bg-caution", "text-white"];
 
     if (state === "prev") {
         const prevState = box.getAttribute("data-prev-state");
