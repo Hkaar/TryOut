@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 import { request } from "../utils/network.js";
 import { examAPIRoute } from "../variables.js";
+import { config } from "htmx.org";
 
 /**
  * Bootstraps the exam timer functionality into the app
@@ -64,7 +65,7 @@ function fetchExamTime(timer) {
                 allowOutsideClick: false,
                 backdrop: true,
                 icon: "error",
-            }).then(() => window.location.replace("/logout"));
+            }).then(() => logout());
             return;
         }
 
@@ -91,4 +92,14 @@ function updateTimerDisplay(timer, remaining) {
     } else {
         console.error("Timer element is undefined or null.");
     }
+}
+
+export function logout() {
+    request(async () => {
+        await axios.post('/logout', {}, {
+            headers: {
+                'X-CSRF-TOKEN': csrf,
+            }
+        });
+    })
 }
