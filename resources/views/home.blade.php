@@ -34,7 +34,7 @@
         <div class="mb-8 grid w-full grid-cols-1 gap-y-10 xl:gap-y-14 gap-x-14 xl:gap-x-20 md:grid-cols-2 xl:grid-cols-3">
           @foreach ($exams as $exam)
             <x-card
-              class="rounded-[20px] border-none shadow-dp shadow-[rgba(0,0,0,.25)] transition-all duration-200 ease-in-out hover:-translate-y-3">
+              class="rounded-[20px] border-none shadow-[0_0_35px_0_rgba(0,0,0,.25)] transition-all duration-200 ease-in-out hover:-translate-y-3">
               <x-slot name="header">
                 <div class="rounded-t-[20px] bg-gradient-to-r from-accent to-secondary px-6 py-5 text-white">
                   <h3 class="line-clamp-3 text-xl font-bold">
