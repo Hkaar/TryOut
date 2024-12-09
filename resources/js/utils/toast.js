@@ -21,7 +21,7 @@ export default function notify(type = "default", text, duration = 5000) {
         node: toast,
         duration: duration,
         className: cn(
-            `fixed -top-[150px] md:right-[10px] lg:right-[20px] z-[90] transition-all duration-300 w-[320px] text-sm rounded-xl shadow-lg [&>.toast-close]:hidden`,
+            `fixed -top-[150px] right-[4px] md:right-[10px] lg:right-[20px] z-[90] opacity-[87%] transition-all duration-300 w-[320px] text-sm rounded-xl shadow-lg [&>.toast-close]:hidden`,
             toastStyles(type),
         ),
         close: true,
