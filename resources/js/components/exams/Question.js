@@ -7,6 +7,7 @@ import {
 
 import { Label, RadioInput, TextArea } from "../ui/form.js";
 import { Image } from "../ui/content.js";
+import Option from "./Option.js";
 
 /**
  * The question part of the exam ui
@@ -15,7 +16,7 @@ import { Image } from "../ui/content.js";
  */
 export default function Question(questionData) {
     const root = document.createElement("div");
-    root.classList.add("flex", "flex-col", "gap-6");
+    root.classList.add("flex", "flex-col", "gap-4");
 
     const topContent = document.createElement("div");
     topContent.className = "space-y-2 w-full";
@@ -57,16 +58,19 @@ export default function Question(questionData) {
  * @param {Questions.questionData} questionData - The data of the question that is going to be used
  */
 function createMultipleChoiceOptions(container, questionData) {
-    questionData.choices.forEach(data => {
+    const base = 65; // The ascii code for the letter 'A'
+
+    questionData.choices.forEach((data, i) => {
         const choice = document.createElement("div");
         choice.className = "flex items-center gap-2";
 
-        const radio = RadioInput({
+        const { root, radio } = Option({
+            letter: String.fromCharCode(base+i),
             name: "answer",
-            id: `choice-${uuid()}`,
             value: data.content,
             checked: questionData.answer === data.content,
-        })
+            id: `option-${uuid()}`
+        });
 
         const label = data.is_image
             ? Image({
@@ -91,7 +95,7 @@ function createMultipleChoiceOptions(container, questionData) {
             }
         });
 
-        choice.appendChild(radio);
+        choice.appendChild(root);
         choice.appendChild(label);
 
         container.appendChild(choice);
