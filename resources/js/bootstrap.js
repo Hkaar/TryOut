@@ -38,7 +38,12 @@ import {
     LayoutPanelLeft,
     LogOut,
     History,
-    X
+    CircleChevronLeft,
+    CircleChevronRight,
+    CircleHelp,
+    Send,
+    ChevronLeft,
+    ChevronRight,
 } from "lucide";
 
 createIcons({
@@ -72,7 +77,12 @@ createIcons({
         LayoutPanelLeft,
         LogOut,
         History,
-        X
+        CircleChevronLeft,
+        CircleChevronRight,
+        CircleHelp,
+        Send,
+        ChevronLeft,
+        ChevronRight,
     },
 });
 
