@@ -45,15 +45,6 @@ jobs:
       - name: Run composer install
         run: composer install -n --prefer-dist
 
-      - name: Cache views
-        run: php artisan view:cache
-
-      - name: Cache config
-        run: php artisan config:cache
-
-      - name: Cache routes
-        run: php artisan route:cache
-
       - name: Cache npm modules
         uses: actions/cache@v4
         with:
@@ -69,6 +60,15 @@ jobs:
 
       - name: Build assets
         run: npm run build
+
+      - name: Cache views
+        run: php artisan view:cache
+
+      - name: Cache config
+        run: php artisan config:cache
+
+      - name: Cache routes
+        run: php artisan route:cache
 
       - name: Set directory permissions
         run: chmod -R 777 storage bootstrap/cache
