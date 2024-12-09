@@ -23,8 +23,8 @@
 
     <div id="navbar-collapse-with-animation"
       class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 sm:block">
-      <div class="mt-5 flex flex-col gap-5 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:ps-5">
-        <a class="flex items-center gap-2 rounded-md px-2 py-1 transition-all duration-150 ease-in-out hover:bg-gray-50 hover:text-gray-400 dark:hover:text-neutral-500"
+      <div class="mt-5 flex flex-col gap-1 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:ps-5">
+        <a class="flex items-center gap-2 rounded-md px-3 py-2 transition-all duration-150 ease-in-out hover:bg-gray-50 hover:text-gray-400 dark:hover:text-neutral-500"
           href="{{ route('home') }}">
           <i data-lucide="house" class="size-4 stroke-[1.5]"></i>
 
@@ -32,7 +32,7 @@
         </a>
 
         <a
-          class="flex items-center gap-2 rounded-md bg-gray-50 px-2 py-1 text-gray-400 transition-all duration-150 ease-in-out dark:hover:text-neutral-500">
+          class="flex items-center gap-2 rounded-md bg-gray-50 px-3 py-2 text-gray-400 transition-all duration-150 ease-in-out dark:hover:text-neutral-500">
           <i data-lucide="layout-panel-left" class="size-4 stroke-[1.5]"></i>
 
           Dashboard
@@ -42,7 +42,7 @@
           @csrf
 
           <x-button type="submit"
-            class="flex items-center justify-start gap-x-2 rounded-lg px-2 py-1 w-full text-sm text-danger hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-danger dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 hover:scale-100 active:scale-100">
+            class="flex items-center justify-start gap-x-2 rounded-lg px-3 py-2 w-full text-sm text-danger hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-danger dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 hover:scale-100 active:scale-100">
             <i data-lucide="log-out" class="size-4 stroke-[1.5]"></i>
 
             Logout

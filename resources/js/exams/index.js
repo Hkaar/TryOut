@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 import { getQuestionBoxState, updateQuestionBox } from "../utils/exam.js";
 import { endExam, gotoQuestion, nextQuestion, previousQuestion, saveAsIndertiminate } from "./question.js";
-import setupExamTimer from "./timer.js";
+import setupExamTimer, { logout } from "./timer.js";
 
 /**
  * The setup function for the exam module
@@ -63,7 +63,7 @@ export default function setupExam() {
                 icon: "warning",
             }).then(() => {
                 detectedSwitched = false;
-                window.location.replace("/logout");
+                logout();
             });
         }
     })

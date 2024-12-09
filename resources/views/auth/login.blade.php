@@ -16,7 +16,7 @@
 
             <div class="mt-1 flex flex-col items-center gap-1 text-center">
               <h3 class="text-3xl font-black uppercase tracking-wide text-primary sm:text-4xl">
-                {{ $settings['org_name'] }}
+                Try Out
               </h3>
 
               <span class="font-medium text-gray-500">Masukkan detail akun!</span>
@@ -24,8 +24,8 @@
 
             <div class="flex w-full flex-1 flex-col gap-3">
               <div class="relative flex-1">
-                <input type="text" name="username" class="form-control peer ps-11 shadow-sm focus:shadow focus:ring-accent focus:border-accent focus:shadow-primary"
-                  placeholder="Username atau Email">
+                <input type="text" name="username" class="form-control peer ps-11 border-gray-200 shadow-sm focus:shadow-dp-sm focus:bg-white focus:text-black focus:ring-0 focus:border-none focus:shadow-accent"
+                  placeholder="Username" autocomplete="username">
 
                 <div class="form-control-icon peer-disabled:pointer-events-none stroke-gray-400">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -45,7 +45,7 @@
               <div class="w-full">
                 <div class="relative">
                   <input id="password" type="password"
-                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-accent focus:shadow focus:shadow-primary focus:ring-accent disabled:pointer-events-none disabled:opacity-50" autocomplete="current-password"
+                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-none focus:shadow-dp-sm focus:shadow-accent focus:ring-0 focus:bg-white focus:text-black disabled:pointer-events-none disabled:opacity-50" autocomplete="current-password"
                     placeholder="Password" name="password" required>
 
                   <button type="button"

@@ -21,10 +21,10 @@
           <div data-panel-group="guard-panel" id="intro-panel" class="flex w-full flex-col items-center gap-5">
             <div class="mt-1 flex flex-col items-center gap-2 text-center">
               <h3 class="text-3xl font-black uppercase tracking-wide text-primary sm:text-4xl">
-                {{ $settings['org_name'] }}
+                Konfirmasi Test
               </h3>
 
-              <span class="font-medium text-gray-500">Apakah anda yakin untuk mengerjakan ujian ini?</span>
+              <span class="font-medium text-gray-500 text-sm">Apakah anda yakin untuk mengerjakan ujian ini?</span>
             </div>
 
             <div class="flex w-10/12 flex-col items-center gap-5">
@@ -49,7 +49,7 @@
 
               <div class="flex w-full items-center gap-2">
                 <x-link-button to="{{ route('home') }}"
-                  class="flex-1 bg-danger text-white hover:rounded-none hover:border-danger hover:bg-transparent hover:text-danger">
+                  class="flex-1 bg-danger text-white hover:rounded-none">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -59,7 +59,7 @@
                 </x-link-button>
 
                 <x-button type="button" data-tab="guard-panel" data-tab-target="#token-panel"
-                  class="flex-1 bg-success text-white hover:rounded-none hover:border-success hover:bg-transparent hover:text-success">
+                  class="flex-1 bg-gradient-to-r from-accent to-secondary hover:rounded-none text-white">
                   Berikutnya
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
@@ -73,10 +73,10 @@
           <div data-panel-group="guard-panel" id="token-panel" class="flex w-full flex-col items-center gap-5">
             <div class="mt-1 flex flex-col items-center gap-2 text-center">
               <h3 class="text-3xl font-black uppercase tracking-wide text-primary sm:text-4xl">
-                {{ $settings['org_name'] }}
+                Konfirmasi Test
               </h3>
 
-              <span class="font-medium text-gray-500">Masukkan token ujian!</span>
+              <span class="font-medium text-gray-500 text-sm">Masukkan token ujian!</span>
             </div>
 
             <div class="flex w-10/12 flex-col items-center gap-5">
@@ -84,7 +84,7 @@
                 <div class="relative">
                   <input type="text"
                     class="peer block w-full rounded-lg border border-gray-400 px-4 py-3 ps-11 text-sm shadow-sm focus:border-accent focus:shadow focus:shadow-primary focus:ring-accent disabled:pointer-events-none disabled:opacity-50 dark:border-transparent dark:bg-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    placeholder="Masukkan token..." name="token">
+                    placeholder="Token ujian" name="token">
 
                   <div
                     class="pointer-events-none absolute inset-y-0 start-0 flex items-center stroke-gray-500 ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
@@ -99,7 +99,7 @@
 
               <div class="flex w-full items-center gap-2">
                 <x-button type="button" data-tab="guard-panel" data-tab-target="#intro-panel"
-                  class="active flex-1 bg-danger text-white hover:rounded-none hover:border-danger hover:bg-transparent hover:text-danger">
+                  class="active flex-1 bg-danger text-white hover:rounded-none">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
@@ -108,13 +108,14 @@
                 </x-button>
 
                 <x-button type="submit"
-                  class="flex-1 bg-success text-white hover:rounded-none hover:border-success hover:bg-transparent hover:text-success">
+                  class="flex-1 bg-gradient-to-r from-accent to-secondary hover:rounded-none text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                   </svg>
-                  Kerjakan
+
+                  Mulai ujian
                 </x-button>
               </div>
             </div>
@@ -123,10 +124,10 @@
           <div class="flex w-full flex-col items-center gap-5">
             <div class="mt-1 flex flex-col items-center gap-2 text-center">
               <h3 class="text-3xl font-black uppercase tracking-wide text-primary sm:text-4xl">
-                {{ $settings['org_name'] }}
+                Konfirmasi Test
               </h3>
 
-              <span class="font-medium text-gray-500">Apakah anda yakin untuk mengerjakan ujian ini?</span>
+              <span class="font-medium text-gray-500 text-sm">Apakah anda yakin untuk mengerjakan ujian ini?</span>
             </div>
 
             <div class="flex w-10/12 flex-col items-center gap-5">
@@ -151,7 +152,7 @@
 
               <div class="flex w-full items-center gap-2">
                 <x-link-button to="{{ route('home') }}"
-                  class="flex-1 bg-danger text-white hover:rounded-none hover:border-danger hover:bg-transparent hover:text-danger">
+                  class="flex-1 bg-danger text-white hover:rounded-none">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -162,14 +163,14 @@
                 </x-link-button>
 
                 <x-button type="submit"
-                  class="flex-1 bg-success text-white hover:rounded-none hover:border-success hover:bg-transparent hover:text-success">
+                  class="flex-1 bg-gradient-to-r from-accent to-secondary hover:rounded-none text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                   </svg>
 
-                  Kerjakan
+                  Mulai ujian
                 </x-button>
               </div>
             </div>

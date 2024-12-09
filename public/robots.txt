@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /manage
 Disallow: /api
+Disallow: /wp-admin
+Disallow: /wordpress
 
 User-agent: Baiduspider
 Disallow: /
