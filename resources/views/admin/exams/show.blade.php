@@ -99,7 +99,7 @@ $routes = [
           </div>
         </x-card>
 
-        <x-card class="shadow-lg">
+        <x-card class="hidden lg:block shadow-lg">
           <div class="grid place-items-center h-full">
             <img src="{{ Vite::asset('resources/images/add.svg') }}" alt="Gambar tidak dapat dimuatkan" class="block w-2/3 aspect-square">
           </div>

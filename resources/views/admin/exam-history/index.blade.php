@@ -46,7 +46,7 @@
           </div>
 
           <select
-            class="block w-32 rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+            class="block w-full md:w-32 rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
             name="group">
             <option selected disabled>Pilih group</option>
             <option value="all" {{ request()->input('group') === 'all' ? 'selected' : '' }}>Semua group</option>
@@ -59,7 +59,7 @@
           </select>
 
           <select
-            class="block w-32 rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+            class="block w-full md:w-32 rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
             name="exam">
             <option selected disabled>Pilih ujian</option>
             <option value="all" {{ request()->input('exam') === 'all' ? 'selected' : '' }}>Semua ujian</option>
@@ -71,7 +71,7 @@
           </select>
 
           <div class="flex items-center gap-2">
-            <x-button type="submit" class="bg-secondary px-3 py-2 text-white hover:rounded-none">
+            <x-button type="submit" class="bg-secondary flex-1 px-3 py-2 text-white hover:rounded-none">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-4">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -81,7 +81,7 @@
               Terapkan
             </x-button>
 
-            <x-link-button :to="route('admin.exam-history.download', request()->query())" class="bg-info text-white hover:rounded-none active:rounded-none">
+            <x-link-button :to="route('admin.exam-history.download', request()->query())" class="bg-info flex-1 text-white hover:rounded-none active:rounded-none">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-4">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -133,7 +133,7 @@
             <x-link-button to="{{ route('admin.exam-history.show', $result->id) }}"
               class="border-info hover:bg-info hover:text-white">
               <i data-lucide="info" class="size-5 stroke-[1.5]"></i>
-              
+
               Info
             </x-link-button>
           </td>

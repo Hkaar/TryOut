@@ -13,6 +13,10 @@
 }
 
 @layer components {
+  .container-lg {
+    @apply container max-w-[95rem]
+  }
+  
   .container {
     @apply max-w-[85rem]
   }

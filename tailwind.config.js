@@ -29,6 +29,14 @@ export default {
         "caution": "#eab308",
         "danger": "#ef4444",
         "info": "#60a5fa",
+        "exam-bg": "#AAC8A7",
+      },
+      boxShadow: {
+        "dp-sm": "0px 0px 20px 5px rgba(158, 179, 132, 1)",
+        "dp": "0px 0px 35px 5px rgba(158, 179, 132, 1)",
+        "dp-md": "0px 0px 50px 5px rgba(158, 179, 132, 1)",
+        "dp-lg": "0px 0px 75px 5px rgba(158, 179, 132, 1)",
+        "dp-xl": "0px 0px 100px 5px rgba(158, 179, 132, 1)",
       }
     },
   },
@@ -37,5 +45,10 @@ export default {
   ],
   safelist: [
     "bg-cover",
+    "shadow-dp-sm",
+    "shadow-dp",
+    "shadow-dp-md",
+    "shadow-dp-lg",
+    "shadow-dp-xl"
   ],
 }

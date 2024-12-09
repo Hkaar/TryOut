@@ -1,5 +1,5 @@
 <aside id="sideBar"
-  class="dark:bg-secondary_dark dark:text-black min-w-24 md:max-w-fit fixed top-0 z-20 max-h-screen min-h-screen -translate-x-full overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen xl:relative xl:max-h-none xl:translate-x-0">
+  class="min-w-24 md:max-w-fit fixed top-0 z-20 max-h-screen min-h-screen -translate-x-full overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 shadow-xl transition-all duration-300 ease-in-out md:h-auto md:min-h-screen xl:relative xl:max-h-none xl:translate-x-0">
 
   <!-- This div is here because of tailwind not registering classes properly -->
   <div class="xl:min-w-72 hidden h-screen min-w-full ps-3"></div>
@@ -18,7 +18,7 @@
         @auth
           <a href="{{ route('/') }}" class="menu-text hidden">{{ auth()->user()->name }}</a>
 
-          <span class="menu-text hidden rounded-xl bg-primary px-2 py-1 text-sm font-bold text-white">
+          <span class="menu-text hidden rounded-xl bg-primary px-2 py-1 text-sm font-medium text-white">
             {{ ucfirst(auth()->user()->role->name) }}
           </span>
         @else
@@ -26,14 +26,14 @@
         @endauth
       </div>
 
-      <button class="side-bar-toggle btn xl:hidden">
-        <i data-lucide="x" class="size-5 stroke-[1.5]"></i>
+      <button type="button" class="side-bar-toggle btn xl:hidden border-gray-200 dark:border-neutral-700">
+        <i data-lucide="panel-left-close" class="size-5 stroke-[1.5]"></i>
       </button>
     </div>
 
     <hr>
 
-    <div class="space-y-5 flex-1">
+    <div class="space-y-5 flex-1 min-h-screen md:min-h-fit">
       <a href="{{ $active === 'home' ? '#' : route('admin.home') }}"
         class="side-nav-item {{ $active === 'home' ? 'active' : '' }}">
         <i data-lucide="layout-panel-left" class="size-5 stroke-[1.5]"></i>

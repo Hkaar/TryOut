@@ -1,4 +1,4 @@
-<div {{ $attributes->twMerge(["class" => "dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 flex flex-col rounded-xl border border-gray-200 bg-white shadow-sm"]) }}>
+<div {{ $attributes->twMerge(["class" => "shadow dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 flex flex-col rounded-xl border border-gray-200 bg-white"]) }}>
   @if (isset($header) && !$header->isEmpty())
     {{ $header }}
   @endif

@@ -13,7 +13,7 @@ import { examAPIRoute } from "../variables.js";
  */
 export default function setupExamTimer(timer) {
     let triggered = false;
-    const randomDelay = Math.floor(Math.random() * (120 - 10 + 1)) + 10
+    const randomDelay = Math.floor(Math.random() * (60 - 10 + 1)) + 5
 
     fetchExamTime(timer);
 
@@ -57,14 +57,14 @@ function fetchExamTime(timer) {
 
         const offset = remainingTime - data.remaining;
 
-        if (Math.abs(offset) > 8000) {
+        if (Math.abs(offset) > 50000) {
             Swal.fire({
                 title: "Terdeteksi gangguan",
                 text: "Terdeteksi gangguan saat mengerjakan ujian",
                 allowOutsideClick: false,
                 backdrop: true,
                 icon: "error",
-            }).then(() => window.location.replace("/logout"));
+            }).then(() => logout());
             return;
         }
 
@@ -91,4 +91,14 @@ function updateTimerDisplay(timer, remaining) {
     } else {
         console.error("Timer element is undefined or null.");
     }
+}
+
+export function logout() {
+    request(async () => {
+        await axios.post('/logout', {}, {
+            headers: {
+                'X-CSRF-TOKEN': csrf,
+            }
+        });
+    })
 }

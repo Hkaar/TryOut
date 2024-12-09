@@ -8,7 +8,7 @@
     <h1 class="text-3xl font-bold">Tentang {{ ucfirst($title) }}</h1>
   </div>
 
-  <div class="flex items-center justify-between gap-3">
+  <div class="grid grid-cols-1 lg:flex lg:justify-between lg:items-center">
     <div class="hidden items-center gap-2 lg:flex">
       <div class="flex items-center gap-2 rounded-md border border-gray-200 shadow">
         <span class="fw-medium rounded-l-md bg-secondary p-3 text-white">
@@ -32,10 +32,10 @@
     </div>
 
     @if (isset($routes))
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 lg:min-w-fit">
         @if (isset($routes['edit']))
           <x-link-button to="{{ route($routes['edit'], $item->id) }}"
-            class="border-caution hover:rounded-none hover:bg-caution hover:text-white">
+            class="border-caution hover:rounded-none hover:bg-caution hover:text-white flex-1">
             <i data-lucide="edit" class="size-5 stroke-[1.5]"></i>
             <span class="md:hidden lg:block xl:hidden">
               Edit
@@ -46,7 +46,7 @@
 
         @if (isset($routes['create']))
           <x-link-button to="{{ route($routes['create'], $item->id) }}"
-            class="border-success hover:rounded-none hover:bg-success hover:text-white">
+            class="border-success hover:rounded-none hover:bg-success hover:text-white flex-1 lg:whitespace-nowrap">
             <i data-lucide="plus" class="size-5 stroke-[1.5]"></i>
             <span class="md:hidden lg:block xl:hidden">
               Tambahkan

@@ -125,7 +125,7 @@
                 <x-link-button to="{{ route('admin.students.index') }}"
                   class="border-danger hover:rounded-none hover:bg-danger hover:text-white hover:shadow-lg">
                   <i data-lucide="circle-x" class="size-5 stroke-[1.5]"></i>
-                  
+
                   Batalkan
                 </x-link-button>
               </div>

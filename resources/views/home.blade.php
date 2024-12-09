@@ -3,12 +3,12 @@
 @section('title', 'Beranda')
 
 @section('content')
-  <section class="min-h-screen bg-cover"
+  <main class="min-h-screen space-y-9 bg-cover"
     style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
-    <x-navigation-bar active="home" />
+    <x-navigation-bar active="home" class="shadow-[0_10px_100px_0_rgba(158,179,132,.75)]" />
 
-    <div class="container-sm space-y-5 py-4">
-      <x-card class="bg-secondary text-white shadow-md">
+    <div class="container space-y-9 md:w-[98%] xl:w-10/12">
+      <x-card class="shadow-[0_0_100px_0_rgba(158,179,132,.5)] rounded-[20px] bg-secondary text-white border-none">
         <article class="space-y-3">
           <span class="flex items-center gap-2">
             <h1 class="text-xl font-bold md:text-2xl">Peraturan</h1>
@@ -16,32 +16,34 @@
 
           <ol class="list-decimal space-y-1 ps-8 font-semibold md:text-lg">
             <li>Jika soal belum muncul silahkan refresh saat sudah jam dimulai.</li>
-            <li>Untuk nilai ujian di sistem tidak dimunculkan, karena untuk nilai nanti akan dibagikan secara manual</li>
-            <li>Soal ujian otomatis menghilang selesai waktu ujian berakhir. Silahkan tunggu soal ujian berikutnya sesuai
-              waktu pada jadwal.</li>
+            <li>Untuk nilai ujian di sistem tidak dimunculkan, karena untuk nilai nanti akan dibagikan secara manual.</li>
+            <li>
+              Soal ujian otomatis menghilang selesai waktu ujian berakhir. Silahkan tunggu soal ujian berikutnya sesuai
+              waktu pada jadwal.
+            </li>
           </ol>
         </article>
       </x-card>
 
-      <x-card class="items-center shadow-md">
-        <div class="mb-5 text-center">
-          <h1 class="text-2xl font-bold text-secondary md:text-3xl">Sub Test</h1>
+      <x-card class="shadow-[0_0_100px_0_rgba(158,179,132,.55)] items-center rounded-[20px] px-6 md:px-8 py-3 border-none">
+        <div class="mb-8 text-center">
+          <h1 class="text-3xl font-bold text-secondary md:text-5xl">Sub Test</h1>
           <h4 class="text-lg font-medium text-gray-500">Sub Test yang tersedia untuk anda</h4>
         </div>
 
-        <div class="mb-3 grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mb-8 grid w-full grid-cols-1 gap-y-10 xl:gap-y-14 gap-x-14 xl:gap-x-20 md:grid-cols-2 xl:grid-cols-3">
           @foreach ($exams as $exam)
             <x-card
-              class="transition-all duration-200 ease-in-out hover:-translate-y-3 hover:shadow-lg hover:shadow-accent">
+              class="rounded-[20px] border-none shadow-dp shadow-[rgba(0,0,0,.25)] transition-all duration-200 ease-in-out hover:-translate-y-3">
               <x-slot name="header">
-                <div class="rounded-t-md bg-gradient-to-r from-accent to-secondary px-4 py-3 text-white">
-                  <h3 class="line-clamp-1 text-xl font-bold">
+                <div class="rounded-t-[20px] bg-gradient-to-r from-accent to-secondary px-6 py-5 text-white">
+                  <h3 class="line-clamp-3 text-xl font-bold">
                     {{ $exam->name }}
                   </h3>
                 </div>
               </x-slot>
 
-              <div class="grid h-full grid-cols-2">
+              <div class="grid h-full grid-cols-2 px-2">
                 @if ($exam->examResults->isNotEmpty())
                   @php
                     $examResult = $exam->examResults->first();
@@ -82,38 +84,27 @@
               </div>
 
               <x-slot name="footer">
-                <div class="flex items-center justify-center gap-1 rounded-b-md border-t border-gray-200 px-4 py-3">
+                <div class="flex items-center justify-center gap-1 rounded-b-md px-4 pb-5">
                   @if (
                       $exam->checkValid() &&
                           ($exam->checkFinished(auth()->user()->id) == 0 || $exam->checkFinished(auth()->user()->id) == null))
                     <x-link-button to="{{ route('exams.guard', $exam->id) }}"
                       class="w-10/12 border bg-gradient-to-r from-accent to-secondary text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                          d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                      </svg>
+                      <i data-lucide="edit" class="size-6 stroke-[1.5]"></i>
 
-                      Kerjakan
+                      Mulai ujian
                     </x-link-button>
                   @elseif ($exam->checkFinished(auth()->user()->id) === 1)
-                    <x-link-button to=""
-                      class="w-10/12 border-success bg-opacity-50 text-success hover:scale-100 hover:cursor-not-allowed active:scale-100 active:opacity-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg>
+                    <x-link-button to="#"
+                      class="w-10/12 bg-opacity-50 bg-gradient-to-r from-accent to-secondary text-white hover:scale-100 hover:cursor-not-allowed active:scale-100 active:opacity-100">
+                      <i data-lucide="circle-check" class="size-6 stroke-[1.5]"></i>
 
                       Terselesaikan
                     </x-link-button>
                   @else
-                    <x-link-button to=""
+                    <x-link-button to="#"
                       class="w-10/12 border-danger bg-opacity-50 text-danger hover:scale-100 hover:cursor-not-allowed active:scale-100 active:opacity-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                      </svg>
+                      <i data-lucide="circle-alert" class="size-6 stroke-[1.5]"></i>
 
                       Tidak dapat dikerjakan
                     </x-link-button>
@@ -129,7 +120,7 @@
         </div>
       </x-card>
     </div>
-  </section>
 
-  <x-footer />
+    <x-footer />
+  </main>
 @endsection
