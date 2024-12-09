@@ -36,8 +36,8 @@ return [
             'shadow-dp-sm',
             'shadow-dp-md',
             'shadow-dp-lg',
-            'shadow-dp-xl'
-        ]
+            'shadow-dp-xl',
+        ],
     ],
 
     /*

@@ -133,7 +133,7 @@
             <x-link-button to="{{ route('admin.exam-history.show', $result->id) }}"
               class="border-info hover:bg-info hover:text-white">
               <i data-lucide="info" class="size-5 stroke-[1.5]"></i>
-              
+
               Info
             </x-link-button>
           </td>
