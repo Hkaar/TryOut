@@ -18,5 +18,12 @@ export default [
             },
         },
     },
+    {
+        rules: {
+            "no-unused-vars": "error",
+            // 'quotes': ['warn', 'double'],
+            // semi: "warn",
+        },
+    },
     pluginJs.configs.recommended,
 ];

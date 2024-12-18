@@ -16,8 +16,9 @@ on:
       - master
 
     paths-ignore:
-      - '**.md'
-      - './.github/images'
+      - "**.md"
+      - "**.png"
+      - ".github/images/"
 
 jobs:
   deployment:
@@ -30,7 +31,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: "8.2"
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
@@ -56,7 +57,7 @@ jobs:
             npm-
 
       - name: Run npm install
-        run: npm install 
+        run: npm install
 
       - name: Build assets
         run: npm run build
@@ -90,8 +91,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./ 
-          exclude: '[.git, .git*, .git/**/*, .github/**/*, resources/js/**/*, resources/css/**/*, node_modules, node_modules/**/*, .vscode, vendor, vendor/**/*, databases, databases/**/*, tests, tests/**/*]'
+          local-dir: ./
+          exclude: "[.git, .git*, .git/**/*, .github/**/*, resources/js/**/*, resources/css/**/*, node_modules, node_modules/**/*, .vscode, vendor, vendor/**/*, databases, databases/**/*, tests, tests/**/*]"
           server-dir: ./../tryout/
 
       - name: Deploy public directory to public_html
@@ -100,5 +101,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./public_html/ 
+          local-dir: ./public_html/
           server-dir: ./

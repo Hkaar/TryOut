@@ -5,11 +5,12 @@ on:
     branches:
       - master
       - dev
-      
+
     paths-ignore:
-      - '**.md'
-      - '.github/images/**/*'
-      - '.github/workflows/cd.yaml'
+      - "**.md"
+      - "**.png"
+      - ".github/images/"
+      - ".github/workflows/cd.yaml"
 
 jobs:
   js-lint:
@@ -45,7 +46,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: "8.2"
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
@@ -74,7 +75,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: "8.2"
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
@@ -87,7 +88,7 @@ jobs:
             composer-
 
       - name: Run composer install
-        run: composer install -n --prefer-dist 
+        run: composer install -n --prefer-dist
 
       - name: Run analyser
         run: ./vendor/bin/phpstan analyse
@@ -114,7 +115,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: "8.2"
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
