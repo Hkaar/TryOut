@@ -124,6 +124,7 @@ class GroupController extends Controller
     {
         $group = Group::findOrFail($id);
 
+        $group->users()->detach();
         $group->exams()->delete();
         $group->packets()->delete();
 
