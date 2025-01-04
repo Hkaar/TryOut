@@ -27,12 +27,17 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredentials();
 
-        if (! Auth::validate($credentials)) {
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+
+        if (!$user) {
             return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
+                ->withErrors(['username' => 'Username atau email yang dimasukkan salah!']);
         }
 
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        if (!Auth::validate($credentials)) {
+            return redirect()->to('login')
+                ->withErrors(['password' => 'Password yang dimasukkan salah!']);
+        }
 
         Auth::login($user, $request->get('remember'));
 
