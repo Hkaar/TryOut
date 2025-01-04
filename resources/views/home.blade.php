@@ -7,8 +7,8 @@
     style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
     <x-navigation-bar active="home" class="shadow-[0_10px_100px_0_rgba(158,179,132,.75)]" />
 
-    <div class="container space-y-9 md:w-[98%] xl:w-10/12">
-      <x-card class="shadow-[0_0_100px_0_rgba(158,179,132,.5)] rounded-[20px] bg-secondary text-white border-none">
+    <div class="container min-h-screen space-y-9 md:w-[98%] xl:w-10/12">
+      <x-card class="rounded-[20px] border-none bg-secondary text-white shadow-[0_0_100px_0_rgba(158,179,132,.5)]">
         <article class="space-y-3">
           <span class="flex items-center gap-2">
             <h1 class="text-xl font-bold md:text-2xl">Peraturan</h1>
@@ -25,13 +25,24 @@
         </article>
       </x-card>
 
-      <x-card class="shadow-[0_0_100px_0_rgba(158,179,132,.55)] items-center rounded-[20px] px-6 md:px-8 py-3 border-none">
+      <x-card
+        class="items-center rounded-[20px] border-none px-6 py-3 shadow-[0_0_100px_0_rgba(158,179,132,.55)] md:px-8">
         <div class="mb-8 text-center">
           <h1 class="text-3xl font-bold text-secondary md:text-5xl">Sub Test</h1>
           <h4 class="text-lg font-medium text-gray-500">Sub Test yang tersedia untuk anda</h4>
         </div>
 
-        <div class="mb-8 grid w-full grid-cols-1 gap-y-10 xl:gap-y-14 gap-x-14 xl:gap-x-20 md:grid-cols-2 xl:grid-cols-3">
+        @if (count($exams) < 1)
+          <div class="flex w-full items-center justify-center">
+            <span
+              class="inline-flex items-center gap-x-1.5 rounded-lg bg-info px-3 py-1.5 text-sm font-medium text-white">
+              <i data-lucide="circle-alert" class="stroke-[1.5]"></i>
+              Tidak ada test yang tersedia saat ini
+            </span>
+          </div>
+        @endif
+
+        <div class="mb-8 grid w-full grid-cols-1 gap-x-14 gap-y-10 md:grid-cols-2 xl:grid-cols-3 xl:gap-x-20 xl:gap-y-14">
           @foreach ($exams as $exam)
             <x-card
               class="rounded-[20px] border-none shadow-[0_0_35px_0_rgba(0,0,0,.25)] transition-all duration-200 ease-in-out hover:-translate-y-3">
