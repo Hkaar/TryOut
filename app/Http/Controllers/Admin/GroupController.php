@@ -15,7 +15,8 @@ class GroupController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -124,6 +125,7 @@ class GroupController extends Controller
     {
         $group = Group::findOrFail($id);
 
+        $group->users()->detach();
         $group->exams()->delete();
         $group->packets()->delete();
 
