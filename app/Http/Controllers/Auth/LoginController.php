@@ -29,12 +29,12 @@ class LoginController extends Controller
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->to('login')
                 ->withErrors(['username' => 'Username atau email yang dimasukkan salah!']);
         }
 
-        if (!Auth::validate($credentials)) {
+        if (! Auth::validate($credentials)) {
             return redirect()->to('login')
                 ->withErrors(['password' => 'Password yang dimasukkan salah!']);
         }
