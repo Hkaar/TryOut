@@ -12,7 +12,7 @@
             @csrf
 
             <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
-              class="size-20 absolute -top-10 left-1/2 -translate-x-1/2 rounded-full">
+              class="absolute -top-10 left-1/2 size-20 -translate-x-1/2 rounded-full">
 
             <div class="mt-1 flex flex-col items-center gap-1 text-center">
               <h3 class="text-3xl font-black uppercase tracking-wide text-primary sm:text-4xl">
@@ -24,36 +24,37 @@
 
             <div class="flex w-full flex-1 flex-col gap-3">
               <div class="relative flex-1">
-                <input type="text" name="username" class="form-control peer ps-11 border-gray-200 shadow-sm focus:shadow-dp-sm focus:bg-white focus:text-black focus:ring-0 focus:border-none focus:shadow-accent"
-                  placeholder="Username" autocomplete="username">
+                <input type="text" name="username"
+                  class="form-control peer border-gray-200 ps-11 shadow-sm focus:border-none focus:bg-white focus:text-black focus:shadow-dp-sm focus:shadow-accent focus:ring-0"
+                  placeholder="Username" autocomplete="username" value="{{ old('username') }}">
 
-                <div class="form-control-icon peer-disabled:pointer-events-none stroke-gray-400">
+                <div class="form-control-icon stroke-gray-400 peer-disabled:pointer-events-none">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     class="size-4 stroke-inherit">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                   </svg>
                 </div>
-
-                @error('username')
-                  <p class="dark:text-neutral-500 mt-2 text-sm text-gray-500" id="hs-input-helper-text">
-                    {{ $message }}
-                  </p>
-                @enderror
               </div>
+
+              @error('username')
+                <p class="flex items-center gap-x-1.5 text-start text-sm text-danger" id="hs-input-helper-text">
+                  <i data-lucide="circle-alert" class="size-4 stroke-[1.5]"></i> {{ $message }}
+                </p>
+              @enderror
 
               <div class="w-full">
                 <div class="relative">
                   <input id="password" type="password"
-                    class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-none focus:shadow-dp-sm focus:shadow-accent focus:ring-0 focus:bg-white focus:text-black disabled:pointer-events-none disabled:opacity-50" autocomplete="current-password"
-                    placeholder="Password" name="password" required>
+                    class="form-control peer block w-full rounded-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:border-none focus:bg-white focus:text-black focus:shadow-dp-sm focus:shadow-accent focus:ring-0 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    autocomplete="current-password" placeholder="Password" name="password" required>
 
                   <button type="button"
                     data-hs-toggle-password='{
                       "target": "#password"
                     }'
                     class="absolute end-0 top-0 rounded-e-md p-3.5">
-                    <svg class="size-3.5 dark:text-neutral-600 flex-shrink-0 text-gray-400" width="24" height="24"
+                    <svg class="size-3.5 flex-shrink-0 text-gray-400 dark:text-neutral-600" width="24" height="24"
                       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                       stroke-linejoin="round">
                       <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
@@ -69,7 +70,7 @@
                     </svg>
                   </button>
 
-                  <div class="form-control-icon peer-disabled:pointer-events-none stroke-gray-400">
+                  <div class="form-control-icon stroke-gray-400 peer-disabled:pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                       class="size-4 stroke-inherit">
                       <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,13 +78,13 @@
                     </svg>
                   </div>
                 </div>
-
-                @error('password')
-                  <p class="dark:text-neutral-500 mt-2 text-sm text-gray-500" id="hs-input-helper-text">
-                    {{ $message }}
-                  </p>
-                @enderror
               </div>
+
+              @error('password')
+                <p class="flex items-center gap-x-1.5 text-sm text-danger" id="hs-input-helper-text">
+                  <i data-lucide="circle-alert" class="size-4 stroke-[1.5]"></i> {{ $message }}
+                </p>
+              @enderror
             </div>
 
             <button type="submit"
