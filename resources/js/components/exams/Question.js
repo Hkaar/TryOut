@@ -22,11 +22,15 @@ export default function Question(questionData) {
     topContent.className = "space-y-2 w-full";
 
     questionData.img
-        ? topContent.appendChild(Image({
-            src: questionData.img,
-            alt: "Gambar tidak dapat dimuatkan",
-            className: "h-48 object-cover rounded-md border-gray-200 border",
-        })) : null;
+        ? topContent.appendChild(
+              Image({
+                  src: questionData.img,
+                  alt: "Gambar tidak dapat dimuatkan",
+                  className:
+                      "max-h-72 h-full object-contain rounded-md border-gray-200 border",
+              })
+          )
+        : null;
 
     const questionContent = document.createElement("p");
     questionContent.className = "text-xl font-medium";
@@ -53,7 +57,7 @@ export default function Question(questionData) {
 
 /**
  * Create the multiple choice options and append them to the given container
- * 
+ *
  * @param {Element} container - The container element to contain the options
  * @param {Questions.questionData} questionData - The data of the question that is going to be used
  */
@@ -65,19 +69,19 @@ function createMultipleChoiceOptions(container, questionData) {
         choice.className = "flex items-center gap-2";
 
         const { root, radio } = Option({
-            letter: String.fromCharCode(base+i),
+            letter: String.fromCharCode(base + i),
             name: "answer",
             value: data.content,
             checked: questionData.answer === data.content,
-            id: `option-${uuid()}`
+            id: `option-${uuid()}`,
         });
 
         const label = data.is_image
             ? Image({
-                src: data.content,
-                alt: "Gambar tidak dapat dimuatkan",
-                className: "h-20 rounded-md border-gray-200 border"
-            })
+                  src: data.content,
+                  alt: "Gambar tidak dapat dimuatkan",
+                  className: "h-20 rounded-md border-gray-200 border",
+              })
             : Label({ htmlFor: radio.id });
 
         if (!data.is_image) {
@@ -87,7 +91,9 @@ function createMultipleChoiceOptions(container, questionData) {
         radio.addEventListener("change", () => {
             saveQuestion();
 
-            const isIndertiminate = getQuestionBoxState(questionData.id, "current") === "indertiminate";
+            const isIndertiminate =
+                getQuestionBoxState(questionData.id, "current") ===
+                "indertiminate";
 
             if (radio.checked && !isIndertiminate) {
                 updateQuestionBox(questionData.id, "active");
@@ -104,7 +110,7 @@ function createMultipleChoiceOptions(container, questionData) {
 
 /**
  * Create the essay answer box and append it to the given container
- * 
+ *
  * @param {Element} container - The container element to contain the options
  * @param {Questions.questionData} questionData - The data of the question that is going to be used
  */
@@ -118,11 +124,10 @@ function createEssay(container, questionData) {
         placeholder: "Masukkan jawaban ...",
     });
 
-    answerBox.textContent = questionData.answer
-        ? questionData.answer
-        : "";
+    answerBox.textContent = questionData.answer ? questionData.answer : "";
 
-    const isIndertiminate = getQuestionBoxState(questionData.id, "current") === "indertiminate";
+    const isIndertiminate =
+        getQuestionBoxState(questionData.id, "current") === "indertiminate";
 
     if (answerBox.value.length > 0 && !isIndertiminate) {
         updateQuestionBox(questionData.id, "active");
