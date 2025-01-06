@@ -35,7 +35,7 @@ class SettingsController extends Controller
             'org_slug' => 'nullable|string|max:255',
             'org_slogan' => 'nullable|string|max:255',
             'org_desc' => 'nullable|string',
-            'org_img' => 'nullable|image|max:10240|mimes:jpeg,jpg,png',
+            'org_img' => 'nullable|image|max:10240|mimes:jpeg,png,jpg,webp,gif',
         ]);
 
         if ($request->has('org_img')) {

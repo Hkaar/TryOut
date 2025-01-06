@@ -69,7 +69,7 @@ class UserController extends Controller
             'role_id' => 'required|numeric|exists:roles,id',
             'phone' => 'required|string|max:64',
             'address' => 'required|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
         ]);
 
         $user = new User;
@@ -131,7 +131,7 @@ class UserController extends Controller
             'role_id' => 'required|numeric|exists:roles,id',
             'phone' => 'nullable|string|max:64',
             'address' => 'nullable|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
         ]);
 
         $this->updateModel($user, $validated, ['img']);
