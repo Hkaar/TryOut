@@ -27,7 +27,7 @@ export default function Question(questionData) {
                   src: questionData.img,
                   alt: "Gambar tidak dapat dimuatkan",
                   className:
-                      "h-72 object-contain rounded-md border-gray-200 border",
+                      "max-h-72 h-full object-contain rounded-md border-gray-200 border",
               })
           )
         : null;

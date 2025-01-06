@@ -41,7 +41,7 @@
                 <div class="w-full space-y-2">
                   @if ($question->question->img)
                     <img src="{{ Storage::url($question->question->img) }}" alt="Gambar tidak dapat dimuatkan"
-                      class="h-72 rounded-md border border-gray-200 object-contain" />
+                      class="h-full max-h-72 rounded-md border border-gray-200 object-contain" />
                   @endif
 
                   <p class="mb-3 text-xl font-medium">
