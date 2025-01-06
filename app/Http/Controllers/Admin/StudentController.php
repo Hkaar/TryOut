@@ -70,7 +70,7 @@ class StudentController extends Controller
             'password_confirmation' => 'required|string|min:8',
             'phone' => 'required|string|max:64',
             'address' => 'required|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
         ]);
 
         $student = new User;
@@ -134,7 +134,7 @@ class StudentController extends Controller
             'password_confirmation' => 'nullable|string|min:8',
             'phone' => 'nullable|string|max:64',
             'address' => 'nullable|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
         ]);
 
         $this->updateModel($student, $validated, ['img']);

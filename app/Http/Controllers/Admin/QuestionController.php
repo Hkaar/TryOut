@@ -65,7 +65,7 @@ class QuestionController extends Controller
             'packet_id' => 'required|numeric|exists:packets,id',
             'question_type_id' => 'required|numeric|exists:question_types,id',
             'content' => 'required|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
             'choices' => 'nullable|array',
         ]);
 
