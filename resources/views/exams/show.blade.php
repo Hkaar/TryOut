@@ -13,7 +13,7 @@
 @section('content')
   <main class="flex min-h-screen max-w-full flex-col space-y-5 bg-cover"
     style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
-    <x-navigation-bar class="shadow-[0_10px_100px_0_rgba(158,179,132,.75)]" />
+    <x-navigation-bar class="relative shadow-[0_10px_100px_0_rgba(158,179,132,.75)]" />
 
     <div class="flex flex-1 justify-center">
       <div class="container-lg grid flex-1 justify-items-center gap-x-8 gap-y-4 py-6 lg:gap-y-6">
