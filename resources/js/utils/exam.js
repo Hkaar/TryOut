@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 import axios from "axios";
 
@@ -8,7 +8,7 @@ import notify from "./toast.js";
 
 /**
  * Updates the corresponding question box to the given state
- * 
+ *
  * @param {number} questionId - The id of the question
  * @param {"idle"|"active"|"indertiminate"|"prev"} state - The state to toggle the box into
  */
@@ -16,7 +16,9 @@ export function updateQuestionBox(questionId, state) {
     const box = document.querySelector(`[question-id="${questionId}"]`);
 
     if (!box) {
-        console.error(`Question box with the id of ${questionId} does not exist!`);
+        console.error(
+            `Question box with the id of ${questionId} does not exist!`
+        );
         return;
     }
 
@@ -28,11 +30,15 @@ export function updateQuestionBox(questionId, state) {
         const prevState = box.getAttribute("data-prev-state");
 
         if (!prevState) {
-            console.warn(`Box doesn't have a previous state to return to [id: ${questionId}]!`)
+            console.warn(
+                `Box doesn't have a previous state to return to [id: ${questionId}]!`
+            );
             updateQuestionBoxState(box, "idle");
             state = "idle";
         } else {
-            const prev = /** @type {"idle"|"active"|"indertiminate"} */ (prevState)
+            const prev = /** @type {"idle"|"active"|"indertiminate"} */ (
+                prevState
+            );
             state = prev;
         }
     }
@@ -58,7 +64,7 @@ export function updateQuestionBox(questionId, state) {
 
             updateQuestionBoxState(box, state);
             break;
-    
+
         default:
             console.error(`Invalid state for question box: ${state}!`);
             break;
@@ -67,16 +73,18 @@ export function updateQuestionBox(questionId, state) {
 
 /**
  * Update the state of a question box
- * 
- * @param {Element} questionBox 
- * @param {"idle"|"active"|"indertiminate"} state 
+ *
+ * @param {Element} questionBox
+ * @param {"idle"|"active"|"indertiminate"} state
  */
 export function updateQuestionBoxState(questionBox, state) {
     const prev = questionBox.getAttribute("data-prev-state");
     const current = questionBox.getAttribute("data-state");
 
     if (!prev || !current) {
-        console.error("Question box doesn't have the required prev-state & state attributes!");
+        console.error(
+            "Question box doesn't have the required prev-state & state attributes!"
+        );
         return;
     }
 
@@ -86,15 +94,17 @@ export function updateQuestionBoxState(questionBox, state) {
 
 /**
  * Gets the selected question box's state
- * 
- * @param {number} questionId 
- * @param {"current"|"prev"} type 
+ *
+ * @param {number} questionId
+ * @param {"current"|"prev"} type
  */
 export function getQuestionBoxState(questionId, type) {
     const box = document.querySelector(`[question-id="${questionId}"]`);
 
     if (!box) {
-        console.error(`Question box with the id of ${questionId} does not exist!`);
+        console.error(
+            `Question box with the id of ${questionId} does not exist!`
+        );
         return;
     }
 
@@ -103,11 +113,13 @@ export function getQuestionBoxState(questionId, type) {
     if (type === "current") {
         state = box.getAttribute("data-state");
     } else {
-        state =  box.getAttribute("data-prev-state");
+        state = box.getAttribute("data-prev-state");
     }
 
     if (!state || !["active", "indertiminate", "idle"].includes(state)) {
-        console.error(`Invalid state: ${state} was fetched from the question box of id: ${questionId}!`);
+        console.error(
+            `Invalid state: ${state} was fetched from the question box of id: ${questionId}!`
+        );
         return;
     }
 
@@ -145,9 +157,9 @@ export function saveQuestion() {
 
         switch (response.status) {
             case 200:
-                notify("success", "Berhasil menyimpan jawaban!", 3000)
+                notify("success", "Berhasil menyimpan jawaban!", 900);
                 break;
-        
+
             default:
                 console.warn(
                     `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
