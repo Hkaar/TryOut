@@ -99,14 +99,15 @@ jobs:
             **/.github/**/*
             **/resources/js/**/*
             **/resources/css/**/*
+            **/resources/types/**/*
             **/node_modules*
             **/node_modules/**/*
             **/.vscode*
             **/.vscode/**/*
             **/vendor*
             **/vendor/**/*
-            **/databases*
-            **/databases/**/*
+            **/database*
+            **/database/**/*
             **/tests*
             **/tests/**/*
           server-dir: ./../tryout/
