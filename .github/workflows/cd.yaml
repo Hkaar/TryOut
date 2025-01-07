@@ -96,7 +96,7 @@ jobs:
             **/.git*
             **/.git/**
             **/.github*
-            **/.github/*
+            **/.github/**/*
             **/resources/js/**/*
             **/resources/css/**/*
             **/node_modules*
