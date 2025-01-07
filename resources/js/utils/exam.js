@@ -6,6 +6,10 @@ import { examAPIRoute } from "../variables.js";
 import { request } from "./network.js";
 import notify from "./toast.js";
 
+import { HSOverlay } from "preline";
+import { clearNodeTree } from "./common.js";
+import { Image } from "../components/ui/content.js";
+
 /**
  * Updates the corresponding question box to the given state
  *
@@ -167,4 +171,37 @@ export function saveQuestion() {
                 break;
         }
     });
+}
+
+/**
+ * Previews the question image inside a modal
+ *
+ * @param {string} src
+ */
+export function previewQImage(src) {
+    const modal = document.getElementById("question-image-modal");
+    const modalContent = document.getElementById("question-image-content");
+
+    if (!modalContent || !modal) {
+        console.error("Preview modal and/or content element does not exist!");
+        notify("error", "Tidak dapat melihat gambar!", 1000);
+
+        return;
+    }
+
+    if (globalThis.window.innerWidth > 1024) {
+        return;
+    }
+
+    clearNodeTree(modalContent);
+
+    modalContent.appendChild(
+        Image({
+            src: src,
+            alt: "Gambar tidak dapat dimuatkan!",
+            className: "size-full object-contain",
+        })
+    );
+
+    HSOverlay.open(modal);
 }

@@ -77,6 +77,8 @@ export function gotoQuestion(config) {
 
                 currentQuestionId = Number(questionId);
                 currentQuestionNumber = Number(questionNumber);
+
+                globalThis.scrollTo({ top: 0, behavior: "smooth" });
                 break;
 
             case 204:
@@ -134,6 +136,8 @@ export function nextQuestion() {
 
                 currentQuestionId = Number(newQuestionId);
                 currentQuestionNumber = newQuestionNumber;
+
+                globalThis.scrollTo({ top: 0, behavior: "smooth" });
                 break;
 
             case 204:
@@ -189,6 +193,8 @@ export function previousQuestion() {
 
                 currentQuestionId = Number(newQuestionId);
                 currentQuestionNumber = newQuestionNumber;
+
+                globalThis.scrollTo({ top: 0, behavior: "smooth" });
                 break;
 
             case 204:

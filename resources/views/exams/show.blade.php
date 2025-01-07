@@ -18,8 +18,8 @@
     <div class="flex flex-1 justify-center">
       <div class="container-lg grid flex-1 justify-items-center gap-x-8 gap-y-4 py-6 lg:gap-y-6">
         <div
-          class="grid h-full w-full place-items-center rounded-[30px] bg-exam-bg py-3 shadow-[0_0_100px_0_rgba(158,179,132,.5)] lg:h-fit lg:py-10">
-          <div class="container flex h-full w-full flex-col lg:h-fit">
+          class="grid h-full w-full place-items-center rounded-[30px] bg-exam-bg py-1 shadow-[0_0_100px_0_rgba(158,179,132,.5)] md:py-3 lg:h-fit lg:py-10">
+          <div class="container flex h-full w-full flex-col px-0 lg:h-fit lg:px-4">
             <x-card class="h-full rounded-3xl border-0 bg-transparent shadow-none lg:h-fit">
               <x-slot name="header">
                 <div id="questionHeader">
@@ -37,14 +37,14 @@
               </x-slot>
 
               <form id="questionContainer"
-                class="rounded-[20px] bg-white px-6 py-5 shadow-[0_0_20px_0_rgba(0,0,0,.25)] lg:px-10 lg:py-8">
+                class="rounded-[20px] bg-white px-3 py-3 shadow-[0_0_20px_0_rgba(0,0,0,.25)] lg:px-10 lg:py-8">
                 <div class="w-full space-y-2">
                   @if ($question->question->img)
                     <img src="{{ Storage::url($question->question->img) }}" alt="Gambar tidak dapat dimuatkan"
-                      class="h-full max-h-72 rounded-md border border-gray-200 object-contain" />
+                      class="h-full max-h-72 rounded-md object-contain md:max-h-[24rem] xl:max-h-[36rem]" />
                   @endif
 
-                  <p class="mb-3 text-xl font-medium">
+                  <p class="pointer-events-none mb-3 text-xl font-medium">
                     {{ $question->question->content }}
                   </p>
                 </div>
@@ -150,6 +150,45 @@
 
     <x-footer />
   </main>
+
+  <div id="question-image-modal"
+    class="hs-overlay pointer-events-none fixed start-0 top-0 z-[80] hidden size-full overflow-y-auto overflow-x-hidden"
+    role="dialog" tabindex="-1" aria-labelledby="question-image-modal-label">
+    <div
+      class="mt-10 h-full max-h-full max-w-full opacity-0 transition-all hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 md:mx-auto md:mt-0 md:h-auto md:max-h-none md:max-w-2xl md:hs-overlay-open:mt-10">
+      <div
+        class="pointer-events-auto flex h-full max-h-full max-w-full flex-col bg-white dark:bg-neutral-800 md:h-auto md:max-h-none md:max-w-2xl md:rounded-xl md:border md:shadow-sm md:dark:border-neutral-700">
+        <div class="flex items-center justify-between border-b px-4 py-3 dark:border-neutral-700">
+          <h3 id="question-image-modal-label" class="font-bold text-gray-800 dark:text-white">
+            Lihat gambar
+          </h3>
+          <button type="button"
+            class="inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+            aria-label="Close" data-hs-overlay="#question-image-modal">
+            <span class="sr-only">Close</span>
+            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="h-full overflow-y-auto p-1">
+          <div id="question-image-content" class="grid h-full place-items-center">
+            Loading...
+          </div>
+        </div>
+        <div class="mt-auto flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700 md:mt-0">
+          <button type="button"
+            class="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-accent px-3 py-2 text-sm font-medium text-white shadow-sm focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            data-hs-overlay="#question-image-modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @push('js')

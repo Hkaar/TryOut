@@ -1,6 +1,7 @@
 import { uuid } from "../../utils/common.js";
 import {
     getQuestionBoxState,
+    previewQImage,
     saveQuestion,
     updateQuestionBox,
 } from "../../utils/exam.js";
@@ -21,19 +22,23 @@ export default function Question(questionData) {
     const topContent = document.createElement("div");
     topContent.className = "space-y-2 w-full";
 
-    questionData.img
-        ? topContent.appendChild(
-              Image({
-                  src: questionData.img,
-                  alt: "Gambar tidak dapat dimuatkan",
-                  className:
-                      "max-h-72 h-full object-contain rounded-md border-gray-200 border",
-              })
-          )
-        : null;
+    const imgSrc = questionData.img;
+
+    if (imgSrc) {
+        const topImage = Image({
+            src: imgSrc,
+            alt: "Gambar tidak dapat dimuatkan",
+            className:
+                "h-full max-h-72 md:max-h-[24rem] xl:max-h-[36rem] object-contain rounded-md",
+        });
+
+        topImage.addEventListener("click", () => previewQImage(imgSrc));
+
+        topContent.appendChild(topImage);
+    }
 
     const questionContent = document.createElement("p");
-    questionContent.className = "text-xl font-medium";
+    questionContent.className = "text-xl font-medium pointer-events-none";
     questionContent.textContent = questionData.content
         ? questionData.content
         : "NULL";
