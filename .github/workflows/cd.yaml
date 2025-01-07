@@ -110,6 +110,9 @@ jobs:
             **/database/**/*
             **/tests*
             **/tests/**/*
+            **/public_html/*
+            **/public_html/**/*
+
           server-dir: ./../tryout/
 
       - name: Deploy public directory to public_html
