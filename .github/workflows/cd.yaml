@@ -86,7 +86,7 @@ jobs:
           cp -R public/* public_html/
 
       - name: Deploy Laravel app excluding public folder
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -96,7 +96,7 @@ jobs:
           server-dir: ./../tryout/
 
       - name: Deploy public directory to public_html
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER_URL }}
           username: ${{ secrets.FTP_USERNAME }}
