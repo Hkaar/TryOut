@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -63,9 +63,7 @@ export function gotoQuestion(config) {
         saveQuestion();
 
         const display = Question(response.data);
-        const header = QuestionTopBar(
-            questionNumber,
-        );
+        const header = QuestionTopBar(questionNumber);
 
         switch (response.status) {
             case 200:
@@ -74,10 +72,13 @@ export function gotoQuestion(config) {
                 questionContainer.appendChild(display);
                 questionHeader.appendChild(header);
 
-                notify("success", "Berhasil memperbarui soal!", 3000);
+                // notify("success", "Berhasil memperbarui soal!", 3000);
+                console.debug("Berhasil memperbarui soal!");
 
                 currentQuestionId = Number(questionId);
                 currentQuestionNumber = Number(questionNumber);
+
+                globalThis.scrollTo({ top: 0, behavior: "smooth" });
                 break;
 
             case 204:
@@ -130,10 +131,13 @@ export function nextQuestion() {
                 questionContainer.appendChild(display);
                 questionHeader.appendChild(header);
 
-                notify("success", "Berhasil memperbarui soal!", 3000);
+                // notify("success", "Berhasil memperbarui soal!", 3000);
+                console.debug("Berhasil memperbarui soal!");
 
                 currentQuestionId = Number(newQuestionId);
                 currentQuestionNumber = newQuestionNumber;
+
+                globalThis.scrollTo({ top: 0, behavior: "smooth" });
                 break;
 
             case 204:
@@ -184,10 +188,13 @@ export function previousQuestion() {
                 questionContainer.appendChild(display);
                 questionHeader.appendChild(header);
 
-                notify("success", "Berhasil memperbarui soal!", 3000);
+                // notify("success", "Berhasil memperbarui soal!", 3000);
+                console.debug("Berhasil memperbarui soal!");
 
                 currentQuestionId = Number(newQuestionId);
                 currentQuestionNumber = newQuestionNumber;
+
+                globalThis.scrollTo({ top: 0, behavior: "smooth" });
                 break;
 
             case 204:
@@ -236,33 +243,34 @@ export function saveAsIndertiminate() {
  * Ends the current exam
  */
 export function endExam() {
-    const handleRequest = () => request(async () => {
-        const url = `${examAPIRoute}/${examResult}/finish`;
+    const handleRequest = () =>
+        request(async () => {
+            const url = `${examAPIRoute}/${examResult}/finish`;
 
-        const response = await axios.put(url);
-        /** @type {Exam.ExamEndResponse} */
-        const data = response.data;
+            const response = await axios.put(url);
+            /** @type {Exam.ExamEndResponse} */
+            const data = response.data;
 
-        switch (response.status) {
-            case 200:
-                window.location.assign(data.redirect);
+            switch (response.status) {
+                case 200:
+                    window.location.assign(data.redirect);
 
-                Swal.fire({
-                    title: "Status",
-                    text: "Berhasil mengakhiri ujian!",
-                    icon: "success",
-                    timer: 5000,
-                    timerProgressBar: true,
-                });
-                break;
-        
-            default:
-                console.warn(
-                    `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
-                );
-                break;
-        }
-    });
+                    Swal.fire({
+                        title: "Status",
+                        text: "Berhasil mengakhiri ujian!",
+                        icon: "success",
+                        timer: 5000,
+                        timerProgressBar: true,
+                    });
+                    break;
+
+                default:
+                    console.warn(
+                        `Encountered unexpected status code from response ${response.status}\nData : ${response.data}`
+                    );
+                    break;
+            }
+        });
 
     Swal.fire({
         title: "Konfirmasi",
@@ -277,10 +285,12 @@ export function endExam() {
         confirmButtonText: "Selesaikan",
         backdrop: true,
         allowOutsideClick: false,
-    }).then(response => {
-        if (response.isConfirmed) {handleRequest()}
-    })
-}   
+    }).then((response) => {
+        if (response.isConfirmed) {
+            handleRequest();
+        }
+    });
+}
 
 /**
  * Helper function for handling default status responses from the server
@@ -294,10 +304,10 @@ export function handleStatusResponse(statusCode) {
                 endExam();
                 return;
             }
-            
+
             notify("error", "Maaf tidak ada soal lagi :(", 3000);
             break;
-    
+
         default:
             break;
     }

@@ -3,6 +3,8 @@ import "preline/dist/input-number.mjs";
 import "preline/dist/collapse.mjs";
 import "preline/dist/dropdown.mjs";
 import "preline/dist/accordion.mjs";
+import "preline/dist/overlay.mjs";
+
 import "htmx.org";
 
 import.meta.glob(["../images/**/*"]);
