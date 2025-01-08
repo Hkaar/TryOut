@@ -4,7 +4,7 @@
     <div class="bg-gray flex flex-1 items-center justify-between">
       <a href="{{ route('/') }}">
         <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
-          class="size-12 aspect-square rounded-full object-cover">
+          class="aspect-square size-12 rounded-full object-cover">
       </a>
     </div>
 
@@ -24,7 +24,7 @@
             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
             <img
               src="{{ auth()->user()->img ? Storage::url(auth()->user()->img) : Vite::asset('resources/images/default-avatar.png') }}"
-              alt="Gambar tidak dapat dimuatkan" class="size-10 aspect-square rounded-full object-cover">
+              alt="Gambar tidak dapat dimuatkan" class="aspect-square size-10 rounded-full object-cover">
 
             <svg class="size-4 hs-dropdown-open:rotate-180" xmlns="http://www.w3.org/2000/svg" width="24"
               height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -34,7 +34,7 @@
           </button>
 
           <div
-            class="hs-dropdown-menu duration min-w-60 z-10 mt-2 hidden w-56 rounded-lg bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100 dark:divide-neutral-700 dark:border dark:border-neutral-700 dark:bg-neutral-800"
+            class="hs-dropdown-menu duration z-10 mt-2 hidden w-56 min-w-60 rounded-lg bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100 dark:divide-neutral-700 dark:border dark:border-neutral-700 dark:bg-neutral-800"
             role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-default">
             <span class="mb-2 flex items-center gap-2 px-3 py-2 text-lg">
               <a href="{{ route('/') }}" class="line-clamp-1">{{ auth()->user()->username }}</a>
@@ -47,7 +47,7 @@
             <hr />
 
             <div class="mt-2 space-y-1">
-              <a class="{{ isset($active) && $active === 'home' ? 'bg-gray-100 text-neutral-400' : 'hover:bg-gray-100 focus:bg-gray-100 text-gray-800' }} flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+              <a class="{{ isset($active) && $active === 'home' ? 'bg-gray-100 text-neutral-400' : 'hover:bg-gray-100 focus:bg-gray-100 text-gray-800' }} {{ $active === 'exam' ? 'hidden' : '' }} flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
                 href="{{ isset($active) && $active === 'home' ? '' : route('home') }}">
                 <i data-lucide="house" class="size-4 stroke-[1.5]"></i>
 
@@ -69,7 +69,7 @@
                 @csrf
 
                 <x-button type="submit"
-                  class="flex items-center justify-start gap-x-3.5 rounded-lg px-3 py-2 w-full text-sm text-danger hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-danger dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 hover:scale-100 active:scale-100">
+                  class="flex w-full items-center justify-start gap-x-3.5 rounded-lg px-3 py-2 text-sm text-danger hover:scale-100 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none active:scale-100 dark:text-danger dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700">
                   <i data-lucide="log-out" class="size-4 stroke-[1.5]"></i>
 
                   Logout
