@@ -55,8 +55,10 @@ export default function setupExam() {
 
     setupExamTimer("#examTimer");
 
-    globalThis.window.addEventListener("blur", () => {
-        detectedSwitched = true;
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden" || document.hidden) {
+            detectedSwitched = true;
+        }
 
         if (detectedSwitched) {
             Swal.fire({
