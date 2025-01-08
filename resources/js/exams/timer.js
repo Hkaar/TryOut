@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -13,7 +13,7 @@ import { examAPIRoute } from "../variables.js";
  */
 export default function setupExamTimer(timer) {
     let triggered = false;
-    const randomDelay = Math.floor(Math.random() * (60 - 10 + 1)) + 5
+    const randomDelay = Math.floor(Math.random() * (60 - 10 + 1)) + 5;
 
     fetchExamTime(timer);
 
@@ -29,7 +29,7 @@ export default function setupExamTimer(timer) {
 
     setInterval(() => {
         fetchExamTime(timer);
-    }, ((1 * 60) + randomDelay) * 1000);
+    }, (1 * 60 + randomDelay) * 1000);
 }
 
 /**
@@ -95,10 +95,16 @@ function updateTimerDisplay(timer, remaining) {
 
 export function logout() {
     request(async () => {
-        await axios.post('/logout', {}, {
-            headers: {
-                'X-CSRF-TOKEN': csrf,
+        await axios.post(
+            "/logout",
+            {},
+            {
+                headers: {
+                    "X-CSRF-TOKEN": csrf,
+                },
             }
-        });
-    })
+        );
+
+        globalThis.window.location.reload();
+    });
 }
