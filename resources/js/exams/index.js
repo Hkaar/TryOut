@@ -1,9 +1,15 @@
-'use strict';
+"use strict";
 
 import Swal from "sweetalert2";
 
 import { getQuestionBoxState, updateQuestionBox } from "../utils/exam.js";
-import { endExam, gotoQuestion, nextQuestion, previousQuestion, saveAsIndertiminate } from "./question.js";
+import {
+    endExam,
+    gotoQuestion,
+    nextQuestion,
+    previousQuestion,
+    saveAsIndertiminate,
+} from "./question.js";
 import setupExamTimer, { logout } from "./timer.js";
 
 /**
@@ -24,8 +30,10 @@ export default function setupExam() {
         return;
     }
 
-    questionBoxes.forEach(element => {
-        element.addEventListener("click", () => gotoQuestion({element: element}));
+    questionBoxes.forEach((element) => {
+        element.addEventListener("click", () =>
+            gotoQuestion({ element: element })
+        );
     });
 
     nextBtn.addEventListener("click", nextQuestion);
@@ -44,19 +52,16 @@ export default function setupExam() {
     });
 
     finishBtn.addEventListener("click", endExam);
-    
+
     setupExamTimer("#examTimer");
-    
-    document.addEventListener("visiblitychange", () => {
-        if (document.hidden) {
-            detectedSwitched = true;
-            return;
-        }
+
+    globalThis.window.addEventListener("blur", () => {
+        detectedSwitched = true;
 
         if (detectedSwitched) {
             Swal.fire({
                 title: "Terdeteksi Gangguan",
-                text: "Pengguna pindah aplikasi atau tab saat mengerjakan ujian!",
+                text: "Tidak diperbolehkan keluar dari aplikasi sesaat mengerjakan ujian!",
                 timer: 5000,
                 timerProgressBar: true,
                 allowOutsideClick: false,
@@ -66,7 +71,7 @@ export default function setupExam() {
                 logout();
             });
         }
-    })
+    });
 
     gotoQuestion({
         questionId: currentQuestionId,
