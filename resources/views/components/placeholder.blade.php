@@ -1,0 +1,1 @@
+<div {{ $attributes->twMerge(['class' => 'bg-gray-400 animate-pulse h-64 w-64 rounded-xl']) }}></div>
