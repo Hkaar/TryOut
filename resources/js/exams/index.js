@@ -61,17 +61,26 @@ export default function setupExam() {
         }
 
         if (detectedSwitched) {
+            let triggered = false;
+
             Swal.fire({
                 title: "Terdeteksi Gangguan",
                 text: "Tidak diperbolehkan keluar dari aplikasi sesaat mengerjakan ujian!",
                 timer: 5000,
                 timerProgressBar: true,
+                showConfirmButton: true,
                 allowOutsideClick: false,
                 icon: "warning",
-            }).then(() => {
-                detectedSwitched = false;
-                logout();
-            });
+            })
+                .then((response) => {
+                    if (response.isConfirmed) {
+                        logout();
+                        detectedSwitched = false;
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during modal dismissal:", error);
+                });
         }
     });
 
