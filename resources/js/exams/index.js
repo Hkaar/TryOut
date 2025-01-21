@@ -61,8 +61,6 @@ export default function setupExam() {
         }
 
         if (detectedSwitched) {
-            let triggered = false;
-
             Swal.fire({
                 title: "Terdeteksi Gangguan",
                 text: "Tidak diperbolehkan keluar dari aplikasi sesaat mengerjakan ujian!",
@@ -74,6 +72,7 @@ export default function setupExam() {
             })
                 .then((response) => {
                     if (response.isConfirmed) {
+                        globalThis.window.location.replace("/login");
                         logout();
                         detectedSwitched = false;
                     }
