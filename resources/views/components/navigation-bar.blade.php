@@ -63,9 +63,9 @@
                 </a>
               @endif
 
-              <hr />
+              <hr class="{{ $active === 'exam' ? 'hidden' : '' }}"/>
 
-              <form action="{{ route('logout') }}" method="POST" class="w-full">
+              <form action="{{ route('logout') }}" method="POST" class="w-full {{ $active === 'exam' ? 'hidden' : '' }}">
                 @csrf
 
                 <x-button type="submit"

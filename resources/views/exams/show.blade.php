@@ -24,9 +24,7 @@
               <x-slot name="header">
                 <div id="questionHeader">
                   <div class="line-clamp-1 flex items-center justify-between gap-2 rounded-t-3xl px-4 py-3 text-white">
-                    <h3 class="line-clamp-1 text-4xl font-bold">
-                      Soal 1
-                    </h3>
+                    <x-placeholder class="h-8" />
 
                     <span class="w-20 rounded-full bg-primary px-2 py-1 text-center font-semibold text-white"
                       id="examTimer">
@@ -38,15 +36,10 @@
 
               <form id="questionContainer"
                 class="rounded-[20px] bg-white px-3 py-3 shadow-[0_0_20px_0_rgba(0,0,0,.25)] lg:px-10 lg:py-8">
-                <div class="w-full space-y-2">
-                  @if ($question->question->img)
-                    <img src="{{ Storage::url($question->question->img) }}" alt="Gambar tidak dapat dimuatkan"
-                      class="h-full max-h-72 rounded-md object-contain md:max-h-[24rem] xl:max-h-[36rem]" />
-                  @endif
+                <div class="w-full space-y-2 mb-3">
+                  <x-placeholder class="min-w-full" />
 
-                  <p class="pointer-events-none mb-3 text-xl font-medium">
-                    {{ $question->question->content }}
-                  </p>
+                  <x-placeholder class="h-8 w-1/3" />
                 </div>
 
                 <div class="space-y-3">
@@ -58,20 +51,12 @@
                           id="choice-{{ $i }}" value="{{ $choice->content }}"
                           {{ $question->answer === $choice->content ? 'checked' : '' }}>
 
-                        @if ($choice->is_image)
-                          <img src="{{ Storage::url($choice->content) }}" alt="Gambar tidak dapat dimuatkan"
-                            class="h-20 rounded-md">
-                        @else
-                          <label for="choice-{{ $i }}"
-                            class="ms-2 text-sm text-gray-500 dark:text-neutral-400">{{ $choice->content }}</label>
-                        @endif
+                        <x-placeholder class="h-6 w-16" />
                       </div>
                     @endforeach
                   @else
                     <div class="w-full space-y-3">
-                      <textarea name="answer"
-                        class="block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        rows="3" placeholder="Masukkan jawaban ...">{{ $question->answer ? $question->answer : '' }}</textarea>
+                      <x-placeholder class="w-1/2" />
                     </div>
                   @endif
                 </div>
