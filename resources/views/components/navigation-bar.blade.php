@@ -37,7 +37,7 @@
             class="hs-dropdown-menu duration z-10 mt-2 hidden w-56 min-w-60 rounded-lg bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100 dark:divide-neutral-700 dark:border dark:border-neutral-700 dark:bg-neutral-800"
             role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-default">
             <span class="mb-2 flex items-center gap-2 px-3 py-2 text-lg">
-              <a href="{{ route('/') }}" class="line-clamp-1">{{ auth()->user()->username }}</a>
+              <span class="line-clamp-1">{{ auth()->user()->username }}</span>
 
               <span class="rounded-xl bg-accent px-2 py-1 text-sm font-bold text-white">
                 {{ ucfirst(auth()->user()->role->name) }}
