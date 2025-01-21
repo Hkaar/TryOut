@@ -17,7 +17,8 @@ class UserController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -64,8 +65,8 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|string|min:8',
+            'password' => 'required|string|confirmed',
+            'password_confirmation' => 'required|string',
             'role_id' => 'required|numeric|exists:roles,id',
             'phone' => 'required|string|max:64',
             'address' => 'required|string',
@@ -126,8 +127,8 @@ class UserController extends Controller
             'username' => ['nullable', 'string', 'max:255', Rule::unique('users', 'username')->ignore($user->id)],
             'name' => 'nullable|string|max:255',
             'email' => ['nullable', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-            'password' => 'nullable|string|min:8|confirmed',
-            'password_confirmation' => 'nullable|string|min:8',
+            'password' => 'nullable|string|confirmed',
+            'password_confirmation' => 'nullable|string',
             'role_id' => 'required|numeric|exists:roles,id',
             'phone' => 'nullable|string|max:64',
             'address' => 'nullable|string',

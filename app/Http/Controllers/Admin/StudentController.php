@@ -18,7 +18,8 @@ class StudentController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -66,8 +67,8 @@ class StudentController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|string|min:8',
+            'password' => 'required|string|confirmed',
+            'password_confirmation' => 'required|string',
             'phone' => 'required|string|max:64',
             'address' => 'required|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
@@ -130,8 +131,8 @@ class StudentController extends Controller
             'username' => ['nullable', 'string', 'max:255', Rule::unique('users', 'username')->ignore($student->id)],
             'name' => 'nullable|string|max:255',
             'email' => ['nullable', 'email', Rule::unique('users', 'email')->ignore($student->id)],
-            'password' => 'nullable|string|min:8|confirmed',
-            'password_confirmation' => 'nullable|string|min:8',
+            'password' => 'nullable|string|confirmed',
+            'password_confirmation' => 'nullable|string',
             'phone' => 'nullable|string|max:64',
             'address' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
