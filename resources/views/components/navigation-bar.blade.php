@@ -2,18 +2,35 @@
   {{ $attributes->twMerge(['class' => 'dark:bg-neutral-800 sticky top-0 z-40 mx-auto flex w-full flex-wrap border border-gray-200 bg-white py-3 text-sm shadow sm:flex-nowrap sm:justify-start md:top-2 md:w-[98%] xl:w-10/12 max-w-[85rem] md:rounded-full']) }}>
   <nav class="mx-auto flex w-full max-w-[85rem] items-center justify-between px-4">
     <div class="bg-gray flex flex-1 items-center justify-between">
-      <a href="{{ $active === 'exam' ? route('/') : '' }}">
-        <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
-          class="aspect-square size-12 rounded-full object-cover">
-      </a>
+      @if ($active === 'exam')
+        <div>
+          <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
+            class="aspect-square size-12 rounded-full object-cover">
+        </div>
+      @else
+        <a href="{{ route('/') }}">
+          <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
+            class="aspect-square size-12 rounded-full object-cover">
+        </a>
+      @endif
     </div>
 
-    <a class="hidden items-center gap-2 text-xl font-bold uppercase text-secondary focus:opacity-80 focus:outline-none md:flex md:text-2xl"
-      href="{{ route('/') }}" aria-label="Brand">
-      <span class="hidden md:block">
-        {{ ucwords($settings['org_name']) }}
-      </span>
-    </a>
+    @if ($active === 'exam')
+      <div class="hidden items-center gap-2 text-xl font-bold uppercase text-secondary focus:opacity-80 focus:outline-none md:flex md:text-2xl" aria-label="Brand">
+        <span class="hidden md:block">
+          {{ ucwords($settings['org_name']) }}
+        </span>
+      </div>
+    @else
+      <a class="hidden items-center gap-2 text-xl font-bold uppercase text-secondary focus:opacity-80 focus:outline-none md:flex md:text-2xl"
+        href="{{ route('/') }}" aria-label="Brand">
+        <span class="hidden md:block">
+          {{ ucwords($settings['org_name']) }}
+        </span>
+      </a>
+    @endif
+
+    
 
     <div id="hs-navbar-example" class="flex flex-1 overflow-hidden transition-all duration-300 sm:block"
       aria-labelledby="hs-navbar-example-collapse">
