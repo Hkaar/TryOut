@@ -2,7 +2,7 @@
   {{ $attributes->twMerge(['class' => 'dark:bg-neutral-800 sticky top-0 z-40 mx-auto flex w-full flex-wrap border border-gray-200 bg-white py-3 text-sm shadow sm:flex-nowrap sm:justify-start md:top-2 md:w-[98%] xl:w-10/12 max-w-[85rem] md:rounded-full']) }}>
   <nav class="mx-auto flex w-full max-w-[85rem] items-center justify-between px-4">
     <div class="bg-gray flex flex-1 items-center justify-between">
-      <a href="{{ route('/') }}">
+      <a href="{{ $active === 'exam' ? route('/') : '' }}">
         <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Gambar tidak dapat dimuatkan"
           class="aspect-square size-12 rounded-full object-cover">
       </a>
