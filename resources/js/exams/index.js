@@ -64,7 +64,6 @@ export default function setupExam() {
             Swal.fire({
                 title: "Terdeteksi Gangguan",
                 text: "Tidak diperbolehkan keluar dari aplikasi sesaat mengerjakan ujian!",
-                timer: 5000,
                 timerProgressBar: true,
                 showConfirmButton: true,
                 allowOutsideClick: false,
