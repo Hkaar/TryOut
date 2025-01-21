@@ -29,7 +29,7 @@
               <div class="col-span-1 flex rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
                 Nama
               </div>
-              <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
+              <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3 line-clamp-1">
                 {{ ucwords($student->name) }}
               </div>
             </div>
@@ -38,7 +38,7 @@
               <div class="col-span-1 flex rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
                 Username
               </div>
-              <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
+              <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3 line-clamp-1">
                 {{ ucwords($student->username) }}
               </div>
             </div>
@@ -47,7 +47,7 @@
               <div class="col-span-1 flex rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
                 Email
               </div>
-              <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
+              <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3 line-clamp-1">
                 {{ ucwords($student->email) }}
               </div>
             </div>

@@ -53,7 +53,7 @@ class ExamController extends Controller
                 'duration' => $exam->duration,
             ]);
 
-            $questions = Question::where('packet_id', '=', $exam->packet->id)->inRandomOrder()->get();
+            $questions = Question::where('packet_id', '=', $exam->packet->id)->get();
 
             foreach ($questions as $question) {
                 QuestionResult::create([
