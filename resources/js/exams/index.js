@@ -66,12 +66,20 @@ export default function setupExam() {
                 text: "Tidak diperbolehkan keluar dari aplikasi sesaat mengerjakan ujian!",
                 timer: 5000,
                 timerProgressBar: true,
+                showConfirmButton: true,
                 allowOutsideClick: false,
                 icon: "warning",
-            }).then(() => {
-                detectedSwitched = false;
-                logout();
-            });
+            })
+                .then((response) => {
+                    if (response.isConfirmed) {
+                        globalThis.window.location.replace("/login");
+                        logout();
+                        detectedSwitched = false;
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during modal dismissal:", error);
+                });
         }
     });
 
