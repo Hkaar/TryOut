@@ -17,8 +17,7 @@ class UserController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.
