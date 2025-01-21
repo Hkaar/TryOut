@@ -79,7 +79,7 @@
                   <label for="phone" class="dark:text-white mb-2 block text-sm font-medium">Telepon</label>
                   <input type="text" id="phone" name="phone"
                     class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                    placeholder="Masukkan nama akun ..." value="{{ $student->phone ? $student->phone : '' }}">
+                    placeholder="Masukkan nomor hp ..." value="{{ $student->phone ? $student->phone : '' }}">
 
                   @error('phone')
                     <p>

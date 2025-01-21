@@ -30,7 +30,7 @@
       </a>
     @endif
 
-    
+
 
     <div id="hs-navbar-example" class="flex flex-1 overflow-hidden transition-all duration-300 sm:block"
       aria-labelledby="hs-navbar-example-collapse">
