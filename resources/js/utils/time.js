@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Get the local system timezone
@@ -9,40 +9,66 @@ export function getTimeZone() {
 
 /**
  * Converts the given utc time to the local system time
- * 
- * @param {string} time 
+ *
+ * @param {string} time
+ * @param {boolean} [detailed=false]
  */
-export function UTCtoLocal(time) {
-    const date = new Date(time + 'UTC');
-    return date.toLocaleString("fr", { timeZone: getTimeZone() });
+export function UTCtoLocal(time, detailed = false) {
+    const date = new Date(time + "UTC");
+
+    if (detailed) {
+        return date
+            .toLocaleDateString("id", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                timeZone: getTimeZone(),
+            })
+            .replace("pukul", "")
+            .replace(/\./g, ":");
+    }
+
+    return date.toLocaleDateString("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: getTimeZone(),
+    });
 }
 
 /**
  * Converts a given UTC time to the local system time and returns it in the required format
  * for an HTML <input type="datetime-local">
- * 
+ *
  * @param {string} utcTime - The UTC time string (e.g., "2024-11-18T14:00:00Z")
  * @returns {string} - The local time formatted as 'YYYY-MM-DDTHH:mm'
  */
 export function UTCtoLocalForInput(utcTime) {
-    const date = new Date(utcTime); 
+    const date = new Date(utcTime);
 
     const timezoneOffset = date.getTimezoneOffset();
-    date.setMinutes(date.getMinutes() - timezoneOffset)
+    date.setMinutes(date.getMinutes() - timezoneOffset);
 
-    const localDate = new Date(date.toLocaleString("en-US", { timeZone: getTimeZone() }));
+    const localDate = new Date(
+        date.toLocaleString("en-US", { timeZone: getTimeZone() })
+    );
 
     const year = localDate.getFullYear();
-    const month = String(localDate.getMonth() + 1).padStart(2, '0');  
-    const day = String(localDate.getDate()).padStart(2, '0'); 
-    const hours = String(localDate.getHours()).padStart(2, '0');
-    const minutes = String(localDate.getMinutes()).padStart(2, '0');
+    const month = String(localDate.getMonth() + 1).padStart(2, "0");
+    const day = String(localDate.getDate()).padStart(2, "0");
+    const hours = String(localDate.getHours()).padStart(2, "0");
+    const minutes = String(localDate.getMinutes()).padStart(2, "0");
 
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
 /**
- * Convienient setup wrapper for automatic timezone changes 
+ * Convienient setup wrapper for automatic timezone changes
  * from UTC to other timezones and vice-versa
  */
 export function setupAutoTimezone() {
@@ -52,15 +78,18 @@ export function setupAutoTimezone() {
         }
     });
 
-    document.querySelectorAll('[timezone-change]').forEach((e) => {
+    document.querySelectorAll("[timezone-change]").forEach((e) => {
         if (e instanceof HTMLInputElement && e.type == "datetime-local") {
-            console.log(e.value, UTCtoLocalForInput(e.value))
+            console.log(e.value, UTCtoLocalForInput(e.value));
             e.value = UTCtoLocalForInput(e.value);
             return;
         }
 
         if (e.textContent != null) {
-            e.textContent = UTCtoLocal(e.textContent);
+            e.textContent = UTCtoLocal(
+                e.textContent,
+                e.hasAttribute("detailed")
+            );
         }
     });
 }
