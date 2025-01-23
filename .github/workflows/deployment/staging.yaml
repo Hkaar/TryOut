@@ -1,0 +1,126 @@
+name: Staging Deployment
+
+# --------------------------------------------------
+# INFO NOTICE
+# --------------------------------------------------
+#
+# This workflow is designed to deploy laravel web apps or websites
+# on shared hosting providers with access to ftp, with the need to
+# upload your own .env file and install composer deps on the server
+# with ssh.
+#
+
+on:
+    push:
+      branches:
+        - dev
+  
+      paths-ignore:
+        - "**.md"
+        - "**.png"
+        - ".github/images/"
+  
+  jobs:
+    deployment:
+      name: Deployment
+      runs-on: ubuntu-latest
+  
+      steps:
+        - uses: actions/checkout@v4
+  
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: "8.2"
+            extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
+            coverage: none
+  
+        - name: Cache Composer dependencies
+          uses: actions/cache@v4
+          with:
+            path: vendor
+            key: composer-${{ hashFiles('composer.lock') }}
+            restore-keys: |
+              composer-
+  
+        - name: Run composer install
+          run: composer install -n --prefer-dist
+  
+        - name: Cache npm modules
+          uses: actions/cache@v4
+          with:
+            path: |
+              ~/.npm
+              !~/.npm/_logs
+            key: npm-${{ hashFiles('package-lock.json') }}
+            restore-keys: |
+              npm-
+  
+        - name: Run npm install
+          run: npm install
+  
+        - name: Build assets
+          run: npm run build
+  
+        - name: Cache views
+          run: php artisan view:cache
+  
+        - name: Cache config
+          run: php artisan config:cache
+  
+        - name: Cache routes
+          run: php artisan route:cache
+  
+        - name: Set directory permissions
+          run: chmod -R 777 storage bootstrap/cache
+  
+        - name: Modify public/index.php for external paths
+          run: |
+            sed -i "s|__DIR__ . '/../storage/framework/maintenance.php'|__DIR__ . '/../tryout/storage/framework/maintenance.php'|" ./public/index.php
+            sed -i "s|__DIR__ . '/../vendor/autoload.php'|__DIR__ . '/../tryout/vendor/autoload.php'|" ./public/index.php
+            sed -i "s|__DIR__ . '/../bootstrap/app.php'|__DIR__ . '/../tryout/bootstrap/app.php'|" ./public/index.php
+  
+        - name: Prepare public directory for deployment
+          run: |
+            mkdir -p public_html
+            cp -R public/* public_html/
+  
+        - name: Deploy Laravel app excluding public folder
+          uses: SamKirkland/FTP-Deploy-Action@4.3.0
+          with:
+            server: ${{ secrets.FTP_SERVER_URL }}
+            username: ${{ secrets.FTP_USERNAME }}
+            password: ${{ secrets.FTP_PASSWORD }}
+            local-dir: ./
+            exclude: |
+              **/.git*
+              **/.git/**
+              **/.github*
+              **/.github/**/*
+              **/resources/js/**/*
+              **/resources/css/**/*
+              **/resources/types/**/*
+              **/node_modules*
+              **/node_modules/**/*
+              **/.vscode*
+              **/.vscode/**/*
+              **/vendor*
+              **/vendor/**/*
+              **/database*
+              **/database/**/*
+              **/tests*
+              **/tests/**/*
+              **/public_html/*
+              **/public_html/**/*
+  
+            server-dir: ./../tryout-staging/
+  
+        - name: Deploy public directory to public_html
+          uses: SamKirkland/FTP-Deploy-Action@4.3.0
+          with:
+            server: ${{ secrets.FTP_SERVER_URL }}
+            username: ${{ secrets.FTP_USERNAME }}
+            password: ${{ secrets.FTP_PASSWORD }}
+            local-dir: ./public_html/
+            server-dir: ./preview/
+  
