@@ -106,7 +106,6 @@ jobs:
             **/.vscode/**/*
             **/vendor*
             **/vendor/**/*
-            **/database*
             **/database/**/*
             **/tests*
             **/tests/**/*
