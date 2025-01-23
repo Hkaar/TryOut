@@ -2,6 +2,10 @@
 
 @section('title', 'Ujian - Dashboard')
 
+@section('meta')
+  <meta name="plugins" content="timezone">
+@endsection
+
 @php
 $routes = [
   'edit' => 'admin.exams.edit',
@@ -47,8 +51,9 @@ $routes = [
               <div class="col-span-1 border rounded-s border-b-gray-300 px-4 py-3 flex bg-gray-100 font-semibold">
                 Tanggal Mulai
               </div>
-              <div class="col-span-2 border rounded-e border-b-gray-300 px-4 py-3">
-                {{ Carbon\Carbon::parse($exam->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }}
+              <div class="col-span-2 border rounded-e border-b-gray-300 px-4 py-3" timezone-change detailed>
+                {{-- {{ Carbon\Carbon::parse($exam->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }} --}}
+                {{ $exam->start_date }}
               </div>
             </div>
 
@@ -56,8 +61,9 @@ $routes = [
               <div class="col-span-1 border rounded-s border-b-gray-300 px-4 py-3 flex bg-gray-100 font-semibold">
                 Tanggal Tenggat
               </div>
-              <div class="col-span-2 border rounded-e border-b-gray-300 px-4 py-3">
-                {{ Carbon\Carbon::parse($exam->end_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }}
+              <div class="col-span-2 border rounded-e border-b-gray-300 px-4 py-3" timezone-change detailed>
+                {{-- {{ Carbon\Carbon::parse($exam->end_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }} --}}
+                {{ $exam->end_date }}
               </div>
             </div>
 

@@ -2,6 +2,12 @@
 
 @section('title', 'Riwayat Ujian - Dashboard')
 
+@section('meta')
+  <meta name="plugins" content="timezone">
+@endsection
+
+@props(['exam' => $result->exam])
+
 @section('content')
   <x-dashboard-layout active="riwayat ujian">
     <x-detail-layout title="riwayat ujian" :item="$result">
@@ -63,8 +69,9 @@
                 <div class="col-span-1 flex rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
                   Tanggal tenggat
                 </div>
-                <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
-                  {{ Carbon\Carbon::parse($result->exam->last_date)->locale('id')->translatedFormat('l, j F Y T') }}
+                <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3" timezone-change detailed>
+                  {{-- {{ Carbon\Carbon::parse($result->exam->end_date)->locale('id')->translatedFormat('l, j F Y T') }} --}}
+                  {{ $exam->end_date }}
                 </div>
               </div>
             </div>
@@ -83,8 +90,9 @@
                 <div class="col-span-1 flex rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
                   Mulai dikerjakan
                 </div>
-                <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
-                  {{ Carbon\Carbon::parse($result->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s T') }}
+                <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3" timezone-change detailed>
+                  {{-- {{ Carbon\Carbon::parse($result->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s T') }} --}}
+                  {{ $result->start_date }}
                 </div>
               </div>
 
@@ -92,8 +100,9 @@
                 <div class="col-span-1 flex rounded-s border border-b-gray-300 bg-gray-100 px-4 py-3 font-semibold">
                   Terakhir dikerjakan
                 </div>
-                <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
-                  {{ Carbon\Carbon::parse($result->last_date)->locale('id')->translatedFormat('l, j F Y H:i:s T') }}
+                <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3" timezone-change detailed>
+                  {{-- {{ Carbon\Carbon::parse($result->last_date)->locale('id')->translatedFormat('l, j F Y H:i:s T') }} --}}
+                  {{ $result->last_date }}
                 </div>
               </div>
 
@@ -102,7 +111,16 @@
                   Tanggal submit
                 </div>
                 <div class="col-span-2 rounded-e border border-b-gray-300 px-4 py-3">
-                  {{ $result->finish_date? Carbon\Carbon::parse($result->finish_date)->locale('id')->translatedFormat('l, j F Y H:i:s T'): '-' }}
+                  @if ($result->finish_date)
+                      <span timezone-change detailed>
+                        {{ $result->finish_date }}
+                      </span>
+                  @else
+                      <span>
+                        -
+                      </span>
+                  @endif
+                  {{-- {{ $result->finish_date? Carbon\Carbon::parse($result->finish_date)->locale('id')->translatedFormat('l, j F Y H:i:s T'): '-' }} --}}
                 </div>
               </div>
             </div>
