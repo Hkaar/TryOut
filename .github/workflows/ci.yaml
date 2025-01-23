@@ -10,7 +10,8 @@ on:
       - "**.md"
       - "**.png"
       - ".github/images/"
-      - ".github/workflows/cd.yaml"
+      - ".github/workflows/staging.yaml"
+      - ".github/workflows/prod.yaml"
 
 jobs:
   js-lint:
