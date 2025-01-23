@@ -2,6 +2,10 @@
 
 @section('title', 'Beranda')
 
+@section('meta')
+  <meta name="plugins" content="timezone">
+@endsection
+
 @section('content')
   <main class="min-h-screen space-y-9 bg-cover"
     style="background-image: url({{ Vite::asset('resources/images/background.png') }})">
@@ -81,16 +85,18 @@
                   Mulai
                 </span>
 
-                <span class="flex items-center py-1">
-                  {{ Carbon\Carbon::parse($exam->start_date)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                <span class="flex items-center py-1" timezone-change>
+                  {{-- {{ Carbon\Carbon::parse($exam->start_date)->locale('id')->isoFormat('dddd, D MMMM YYYY') }} --}}
+                  {{ $exam->start_date }}
                 </span>
 
                 <span class="flex items-center rounded-bl-md py-1 font-bold">
                   Tenggat
                 </span>
 
-                <span class="flex items-center rounded-br-md py-1">
-                  {{ Carbon\Carbon::parse($exam->end_date)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                <span class="flex items-center rounded-br-md py-1" timezone-change>
+                  {{-- {{ Carbon\Carbon::parse($exam->end_date)->locale('id')->isoFormat('dddd, D MMMM YYYY') }} --}}
+                  {{ $exam->end_date }}
                 </span>
               </div>
 

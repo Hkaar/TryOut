@@ -3,7 +3,7 @@
 @section('title', 'Beranda - Dashboard')
 
 @section('meta')
-  <meta name="plugins" content="admin-charts-home">
+  <meta name="plugins" content="admin-charts-home | timezone">
 @endsection
 
 @section('content')
@@ -163,14 +163,17 @@
               </x-slot>
 
               <span class="font-medium">
-                Dikerjakan oleh {{ ucfirst($item->user->name ? $item->user->name : $item->user->username) }}
+                Dikerjakan oleh {{ ucfirst($item->user->name ?? $item->user->username) }}
               </span>
 
               <x-slot name="footer">
                 <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
                   <span class="text-gray-500">
                     Waktu mulai :
-                    {{ Carbon\Carbon::parse($item->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }}
+                    {{-- {{ Carbon\Carbon::parse($item->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }} --}}
+                    <span timezone-change detailed>
+                      {{ $item->start_date }}
+                    </span>
                   </span>
                 </div>
               </x-slot>
@@ -212,7 +215,10 @@
                 <div class="flex items-center gap-2 rounded-b-lg border-t border-gray-200 px-4 py-3">
                   <span class="text-gray-500">
                     Waktu selesai :
-                    {{ $item->finish_date? Carbon\Carbon::parse($item->finish_date)->locale('id')->translatedFormat('l, j F Y H:i:s'): Carbon\Carbon::parse($item->last_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }}
+                    {{-- {{ $item->finish_date? Carbon\Carbon::parse($item->finish_date)->locale('id')->translatedFormat('l, j F Y H:i:s'): Carbon\Carbon::parse($item->last_date)->locale('id')->translatedFormat('l, j F Y H:i:s') }} --}}
+                    <span timezone-change detailed>
+                      {{ $item->finish_date }}
+                    </span>
                   </span>
                 </div>
               </x-slot>
