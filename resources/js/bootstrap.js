@@ -46,6 +46,7 @@ import {
     Send,
     ChevronLeft,
     ChevronRight,
+    TriangleAlert,
 } from "lucide";
 
 createIcons({
@@ -85,6 +86,7 @@ createIcons({
         Send,
         ChevronLeft,
         ChevronRight,
+        TriangleAlert,
     },
 });
 
