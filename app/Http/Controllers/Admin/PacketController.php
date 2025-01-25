@@ -34,7 +34,7 @@ class PacketController extends Controller
             $this->filterService->order($packets, $request->input('order') === 'latest' ? false : true);
         }
 
-        $packets = $packets->paginate(15);
+        $packets = $packets->paginate(15)->withQueryString();
 
         return view('admin.packets.index', [
             'packets' => $packets,

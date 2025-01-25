@@ -2,6 +2,10 @@
 
 @section('title', 'Riwayat Ujian - Dashboard')
 
+@section('meta')
+  <meta name="plugins" content="timezone">
+@endsection
+
 @php
   $title = 'riwayat ujian';
 
@@ -108,11 +112,20 @@
           <td class="max-w-72 px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
             {!! nl2br(e(strip_tags($result->exam->name))) !!}
           </td>
-          <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
-            {{ Carbon\Carbon::parse($result->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s T') }}
+          <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200" timezone-change detailed>
+            {{-- {{ Carbon\Carbon::parse($result->start_date)->locale('id')->translatedFormat('l, j F Y H:i:s T') }} --}}
+            {{ $result->start_date }}
           </td>
           <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
-            {{ $result->finish_date? Carbon\Carbon::parse($result->finish_date)->locale('id')->translatedFormat('l, j F Y H:i:s T'): '-' }}
+            @if ($result->finish_date)
+                <span timezone-change detailed>
+                  {{ $result->finish_date }}
+                </span>
+            @else
+                <span>
+                  -
+                </span>
+            @endif
           </td>
           <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
             @if ($result->finished)

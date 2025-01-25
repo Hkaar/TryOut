@@ -79,14 +79,14 @@
           <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
             {{ $exam->duration }} menit
           </td>
-          <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200" timezone-change>
+          <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200" timezone-change detailed>
             {{ $exam->start_date }}
           </td>
-          <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200" timezone-change>
+          <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200" timezone-change detailed>
             {{ $exam->end_date }}
           </td>
           <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
-            {{ $exam->token ? $exam->token : '-' }}
+            {{ $exam->token ?? '-' }}
           </td>
           <td class="flex gap-2 whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
             <x-link-button to="{{ route('admin.exams.edit', $exam->id) }}"

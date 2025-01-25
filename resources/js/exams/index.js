@@ -63,8 +63,7 @@ export default function setupExam() {
         if (detectedSwitched) {
             Swal.fire({
                 title: "Terdeteksi Gangguan",
-                text: "Tidak diperbolehkan keluar dari aplikasi sesaat mengerjakan ujian!",
-                timerProgressBar: true,
+                text: "Tidak diperbolehkan keluar dari aplikasi saat mengerjakan ujian!",
                 showConfirmButton: true,
                 allowOutsideClick: false,
                 icon: "warning",

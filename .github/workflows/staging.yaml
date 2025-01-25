@@ -1,4 +1,4 @@
-name: Deployment
+name: Staging
 
 # --------------------------------------------------
 # INFO NOTICE
@@ -13,7 +13,7 @@ name: Deployment
 on:
   push:
     branches:
-      - master
+      - dev
 
     paths-ignore:
       - "**.md"
@@ -106,14 +106,13 @@ jobs:
             **/.vscode/**/*
             **/vendor*
             **/vendor/**/*
-            **/database*
             **/database/**/*
             **/tests*
             **/tests/**/*
             **/public_html/*
             **/public_html/**/*
 
-          server-dir: ./../tryout/
+          server-dir: ./../tryout-staging/
 
       - name: Deploy public directory to public_html
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -122,4 +121,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public_html/
-          server-dir: ./
+          server-dir: ./preview/
