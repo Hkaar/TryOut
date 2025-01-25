@@ -15,7 +15,8 @@ class SubjectController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class SubjectController extends Controller
             $this->filterService->order($subjects, $request->input('order') === 'latest' ? false : true);
         }
 
-        $subjects = $subjects->paginate(15, ['id', 'name']);
+        $subjects = $subjects->paginate(15, ['id', 'name'])->withQueryString();
 
         return view('admin.subjects.index', [
             'subjects' => $subjects,

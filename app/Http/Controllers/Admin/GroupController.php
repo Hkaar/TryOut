@@ -15,7 +15,8 @@ class GroupController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class GroupController extends Controller
             $this->filterService->order($groups, $request->input('order') === 'latest' ? false : true);
         }
 
-        $groups = $groups->paginate(15, ['id', 'name']);
+        $groups = $groups->paginate(15, ['id', 'name'])->withQueryString();
 
         return view('admin.groups.index', [
             'groups' => $groups,

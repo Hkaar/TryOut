@@ -17,7 +17,8 @@ class UserController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -36,7 +37,7 @@ class UserController extends Controller
             $this->filterService->order($users, $request->input('order') === 'latest' ? false : true);
         }
 
-        $users = $users->paginate(15);
+        $users = $users->paginate(15)->withQueryString();
 
         return view('admin.users.index', [
             'users' => $users,

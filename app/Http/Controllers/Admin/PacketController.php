@@ -15,7 +15,8 @@ class PacketController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class PacketController extends Controller
             $this->filterService->order($packets, $request->input('order') === 'latest' ? false : true);
         }
 
-        $packets = $packets->paginate(15);
+        $packets = $packets->paginate(15)->withQueryString();
 
         return view('admin.packets.index', [
             'packets' => $packets,

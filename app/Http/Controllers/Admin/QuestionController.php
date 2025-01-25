@@ -18,7 +18,8 @@ class QuestionController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -37,7 +38,7 @@ class QuestionController extends Controller
             $this->filterService->order($questions, $request->input('order') === 'latest' ? false : true);
         }
 
-        $questions = $questions->paginate(15);
+        $questions = $questions->paginate(15)->withQueryString();
 
         return view('admin.questions.index', [
             'questions' => $questions,

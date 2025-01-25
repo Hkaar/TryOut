@@ -18,7 +18,8 @@ class StudentController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -38,7 +39,7 @@ class StudentController extends Controller
             $this->filterService->order($students, $request->input('order') === 'latest' ? false : true);
         }
 
-        $students = $students->paginate(15, ['id', 'name', 'email']);
+        $students = $students->paginate(15, ['id', 'name', 'email'])->withQueryString();
 
         return view('admin.students.index', [
             'students' => $students,

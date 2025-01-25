@@ -19,7 +19,8 @@ class ExamHistoryController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -46,7 +47,7 @@ class ExamHistoryController extends Controller
             $this->filterService->order($results, $request->input('order') === 'latest' ? false : true);
         }
 
-        $results = $results->paginate(15);
+        $results = $results->paginate(15)->withQueryString();
 
         $exams = Exam::all(['id', 'name']);
         $groups = Group::all(['id', 'name']);

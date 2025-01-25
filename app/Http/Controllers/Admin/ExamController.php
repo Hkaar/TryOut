@@ -17,7 +17,8 @@ class ExamController extends Controller
 
     public function __construct(
         protected FilterService $filterService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -36,7 +37,7 @@ class ExamController extends Controller
             $this->filterService->order($exams, $request->input('order') === 'latest' ? false : true);
         }
 
-        $exams = $exams->paginate(15);
+        $exams = $exams->paginate(15)->withQueryString();
 
         return view('admin.exams.index', [
             'exams' => $exams,
