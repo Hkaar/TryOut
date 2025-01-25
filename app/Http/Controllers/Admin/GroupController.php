@@ -34,7 +34,7 @@ class GroupController extends Controller
             $this->filterService->order($groups, $request->input('order') === 'latest' ? false : true);
         }
 
-        $groups = $groups->paginate(15, ['id', 'name']);
+        $groups = $groups->paginate(15, ['id', 'name'])->withQueryString();
 
         return view('admin.groups.index', [
             'groups' => $groups,
